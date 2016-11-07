@@ -1,0 +1,126 @@
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" version="2.4">
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <servlet>
+        <servlet-name>FindStudent</servlet-name>
+        <servlet-class>prework.controller.search.FindStudent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FindTeacher</servlet-name>
+        <servlet-class>prework.controller.search.FindTeacher</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FindGroup</servlet-name>
+        <servlet-class>prework.controller.search.FindGroup</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FindGroupByTeacher</servlet-name>
+        <servlet-class>prework.controller.search.FindGroupByTeacher</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TeachersByGroup</servlet-name>
+        <servlet-class>prework.controller.search.FindTeachersByGroup</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>DeleteGroup</servlet-name>
+        <servlet-class>prework.controller.delete.DeleteGroup</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteStudent</servlet-name>
+        <servlet-class>prework.controller.delete.DeleteStudent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteTeacher</servlet-name>
+        <servlet-class>prework.controller.delete.DeleteTeacher</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCurator</servlet-name>
+        <servlet-class>prework.controller.delete.DeleteCurator</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>AddTeacher</servlet-name>
+        <servlet-class>prework.controller.add.AddTeacher</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddStudent</servlet-name>
+        <servlet-class>prework.controller.add.AddStudent</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddGroup</servlet-name>
+        <servlet-class>prework.controller.add.AddGroup</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddCurator</servlet-name>
+        <servlet-class>prework.controller.add.AddCurator</servlet-class>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>ChangeGroup</servlet-name>
+        <servlet-class>prework.controller.update.ChangeGroup</servlet-class>
+    </servlet>
+
+
+    <servlet-mapping>
+        <servlet-name>FindStudent</servlet-name>
+        <url-pattern>/jsp/search/FindStudentServ</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FindTeacher</servlet-name>
+        <url-pattern>/jsp/search/FindTeacherServ</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FindGroup</servlet-name>
+        <url-pattern>/jsp/search/FindGroupServ</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FindGroupByTeacher</servlet-name>
+        <url-pattern>/jsp/search/FindGroupByTeacherServ</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TeachersByGroup</servlet-name>
+        <url-pattern>/jsp/search/TeachersByGroupServ</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>DeleteGroup</servlet-name>
+        <url-pattern>/jsp/delete/DeleteGroupServ</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteStudent</servlet-name>
+        <url-pattern>/jsp/delete/DeleteStudentServ</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteTeacher</servlet-name>
+        <url-pattern>/jsp/delete/DeleteTeacherServ</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCurator</servlet-name>
+        <url-pattern>/jsp/delete/DeleteCuratorServ</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>AddTeacher</servlet-name>
+        <url-pattern>/jsp/add/AddTeacherServ</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddStudent</servlet-name>
+        <url-pattern>/jsp/add/AddStudentServ</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddGroup</servlet-name>
+        <url-pattern>/jsp/add/AddGroupServ</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddCurator</servlet-name>
+        <url-pattern>/jsp/add/AddCuratorServ</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ChangeGroup</servlet-name>
+        <url-pattern>/jsp/update/ChangeGroupServ</url-pattern>
+    </servlet-mapping>
+</web-app>
