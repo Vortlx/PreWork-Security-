@@ -1,6 +1,8 @@
 ﻿CREATE TABLE groups(
 	id INT UNSIGNED AUTO_INCREMENT,
 	name VARCHAR(255) UNIQUE,
+	id_department INT UNSIGNED,
 	
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	FOREIGN KEY (id_department) REFERENCES department(id) ON DELETE CASCADE ON UPDATE CASCADE
 ) CHARACTER SET = utf8 COLLATE utf8_unicode_ci;

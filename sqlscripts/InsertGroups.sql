@@ -1,7 +1,7 @@
-﻿INSERT INTO groups (name) VALUES('111');
-INSERT INTO groups (name) VALUES('112');
-INSERT INTO groups (name) VALUES('113');
-INSERT INTO groups (name) VALUES('121');
-INSERT INTO groups (name) VALUES('122');
-INSERT INTO groups (name) VALUES('131');
-INSERT INTO groups (name) VALUES('141');
+﻿INSERT INTO groups (name, id_department) VALUES('111', 1);
+INSERT INTO groups (name, id_department) VALUES('112', 1);
+INSERT INTO groups (name, id_department) VALUES('113', 1);
+INSERT INTO groups (name, id_department) VALUES('121', 1);
+INSERT INTO groups (name, id_department) VALUES('122', 1);
+INSERT INTO groups (name, id_department) VALUES('131', 1);
+INSERT INTO groups (name, id_department) VALUES('141', 1);

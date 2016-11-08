@@ -4,8 +4,9 @@ source ./sqlscripts/CreateStudents.sql;
 source ./sqlscripts/CreateSubject.sql;
 source ./sqlscripts/group_subject.sql;
 source ./sqlscripts/group_subject_teacher.sql;
+source ./sqlscripts/CreateDepartment.sql;
 
-
+source ./sqlscripts/InsertDepartment.sql;
 source ./sqlscripts/InsertTeachers.sql;
 source ./sqlscripts/InsertGroups.sql;
 source ./sqlscripts/InsertStudents.sql;

@@ -4,3 +4,4 @@ DROP TABLE subject;
 DROP TABLE students;
 DROP TABLE groups;
 DROP TABLE teachers;
+DROP TABLE department;

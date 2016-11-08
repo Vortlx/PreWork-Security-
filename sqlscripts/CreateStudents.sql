@@ -2,6 +2,8 @@
 	id INT UNSIGNED AUTO_INCREMENT,
 	name VARCHAR(255),
 	family_name VARCHAR(255),
+	login VARCHAR(255) UNIQUE,
+	password VARCHAR(255),
 	id_group INT UNSIGNED,
 	
 	PRIMARY KEY (id),

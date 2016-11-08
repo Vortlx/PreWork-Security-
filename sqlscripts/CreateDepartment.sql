@@ -1,0 +1,8 @@
+CREATE TABLE department(
+	id INT UNSIGNED AUTO_INCREMENT,
+	name VARCHAR(255) UNIQUE,
+	login VARCHAR(255) UNIQUE,
+	password VARCHAR(255),
+	
+	PRIMARY KEY(id)
+) CHARACTER SET = utf8 COLLATE utf8_unicode_ci;
