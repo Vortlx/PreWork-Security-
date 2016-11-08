@@ -1,10 +1,8 @@
 package prework.data;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "department")
@@ -22,6 +20,12 @@ public class Department {
 
     @Column(name="password")
     private String password;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "department")
+    private Set<Group> groups;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "department")
+    private Set<Teacher> teachers;
 
     public Department(){
 
@@ -63,5 +67,37 @@ public class Department {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
+    }
+
+    public void addGroup(Group group){
+        groups.add(group);
+    }
+
+    public void deleteGroup(Group group){
+        groups.remove(group);
+    }
+
+    public Set<Teacher> getTeachers() {
+        return teachers;
+    }
+
+    public void setTeachers(Set<Teacher> teachers) {
+        this.teachers = teachers;
+    }
+
+    public void addTeacher(Teacher teacher){
+        teachers.add(teacher);
+    }
+
+    public void deleteTeacher(Teacher teacher){
+        teachers.remove(teacher);
     }
 }

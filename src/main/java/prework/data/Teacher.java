@@ -20,6 +20,13 @@ public class Teacher extends Person {
     @ManyToMany(fetch=FetchType.EAGER, mappedBy="teachers")
     private Set<Group> groups;
 
+    @ManyToMany(mappedBy="teachers")
+    private Set<Subject> subjects;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="id_department")
+    private Department department;
+
     public Teacher(){
         super();
     }

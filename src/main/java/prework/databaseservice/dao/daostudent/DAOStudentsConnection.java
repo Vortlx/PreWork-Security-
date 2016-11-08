@@ -223,7 +223,7 @@ public class DAOStudentsConnection implements DAOStudent{
 			int groupID = rs.getInt(5);
 			
 			Group group = new Group(groupID, groupName);
-			res.add(new Student(studentID, name, familyName, group));
+			res.add(new Student(studentID, name, familyName, familyName + name, "tets", group));
 		}
 
 		rs.close();
@@ -265,7 +265,7 @@ public class DAOStudentsConnection implements DAOStudent{
 			int groupID = rs.getInt(5);
 			
 			Group group = new Group(groupID, groupName);
-			res.add(new Student(studentID, name, familyName, group));
+			res.add(new Student(studentID, name, familyName, familyName + name, "tets", group));
 		}
 
 		rs.close();
@@ -307,7 +307,7 @@ public class DAOStudentsConnection implements DAOStudent{
 			int groupID = rs.getInt(5);
 			
 			Group group = new Group(groupID, groupName);
-			res.add(new Student(studentID, name, familyName, group));
+			res.add(new Student(studentID, name, familyName, familyName + name, "tets", group));
 		}
 
 		rs.close();
@@ -350,7 +350,7 @@ public class DAOStudentsConnection implements DAOStudent{
 			int groupID = rs.getInt(5);
 			
 			Group group = new Group(groupID, groupName);
-			res.add(new Student(studentID, name, familyName, group));
+			res.add(new Student(studentID, name, familyName, familyName + name, "tets", group));
 		}
 
 		rs.close();

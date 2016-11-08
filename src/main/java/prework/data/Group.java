@@ -4,15 +4,7 @@ package prework.data;
 import java.util.Set;
 import java.util.HashSet;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 /**
@@ -34,12 +26,30 @@ public class Group {
     
     @OneToMany(fetch=FetchType.EAGER, mappedBy="group")
 	private Set<Student> students;
-    
+
+    @ManyToMany(fetch=FetchType.EAGER, mappedBy = "groups")
+    private Set<Subject> subjects;
+
+// ??????????????????????????
+    //           [teacher]
+    //                |
+    //                |
+    //      [group_subject_teacher]
+    //                |
+    //                |
+    //                ^
+    //  [group]--<[group_subject]>--[subject]
+    //
     @ManyToMany(fetch=FetchType.EAGER)
-    @JoinTable(name="curator", 
-            joinColumns={@JoinColumn(name="id_group")}, 
+    @JoinTable(name="group_subject_teacher",
+            joinColumns={@JoinColumn(name="id_group_subject")},
             inverseJoinColumns={@JoinColumn(name="id_teacher")})
 	private Set<Teacher> teachers;
+// ??????????????????????????
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="id_department")
+    private Department department;
 	
 	public Group(){
 		
@@ -94,6 +104,26 @@ public class Group {
 
     public void setTeachers(Set<Teacher> teachers) {
         this.teachers = teachers;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
+    }
+
+    public Set<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     @Override

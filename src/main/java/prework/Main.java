@@ -3,6 +3,8 @@ package prework;
 import java.sql.SQLException;
 import java.util.List;
 
+import prework.data.Group;
+import prework.data.Subject;
 import prework.databaseservice.dao.DAOTeacher;
 
 import prework.databaseservice.dao.DAOGroup;
@@ -27,13 +29,18 @@ public class Main{
 		DAOStudent daoStudent = (DAOStudent)context.getBean("daoStudentHibernate");
 
 	    try{
-	        List<Teacher> teachers = daoTeacher.getByGroup("666");
 
-			System.out.println("Test");
+			String groupName = "141";
+			Group group = daoGroup.getByName(groupName);
 
-	        for(Teacher teacher: teachers){
-	            System.out.println(teacher.getName() + " " + teacher.getFamilyName());
-	        }
+			for(Subject subject: group.getSubjects()){
+				System.out.println(subject.getName() + ":	" + subject.getType());
+
+				for(Teacher teacher: subject.getTeachers()){
+					System.out.println("	" + teacher.getFamilyName());
+				}
+				System.out.println();
+			}
 	        
 	    }catch(SQLException e){
 	        e.printStackTrace();
