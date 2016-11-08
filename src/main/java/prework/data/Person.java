@@ -24,15 +24,23 @@ public abstract class Person {
     
     @Column(name="family_name")
 	private String familyName;
-	
+
+    @Column(name="login")
+    private String login;
+
+    @Column(name="password")
+    private String password;
+
 	public Person(){
 		
 	}
 	
-	public Person(int id, String name, String familyName){
+	public Person(int id, String name, String familyName, String login, String password){
 		this.id = id;
 		this.name = name;
 		this.familyName = familyName;
+        this.login = login;
+        this.password = password;
 	}
 
 	public int getId() {
@@ -54,6 +62,22 @@ public abstract class Person {
 	public void setFamilyName(String familyName) {
 		this.familyName = familyName;
 	}
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     @Override
     public int hashCode() {

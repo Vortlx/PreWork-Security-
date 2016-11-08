@@ -24,8 +24,8 @@ public class Teacher extends Person {
         super();
     }
 
-    public Teacher(int id, String name, String familyName, Group... groups){
-        super(id, name, familyName);
+    public Teacher(int id, String name, String familyName, String login, String password, Group... groups){
+        super(id, name, familyName, login, password);
         this.groups.addAll(Arrays.asList(groups));
     }
 

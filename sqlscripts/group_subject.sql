@@ -1,7 +1,7 @@
 CREATE TABLE group_subject(
 	id INT UNSIGNED AUTO_INCREMENT,
-	id_group INT UNSIGNED,
-	id_subject INT UNSIGNED,
+	id_group INT UNSIGNED NOT NULL,
+	id_subject INT UNSIGNED NOT NULL,
 	
 	PRIMARY KEY(id),
 	CONSTRAINT unique_group_subject UNIQUE(id_group, id_subject),
