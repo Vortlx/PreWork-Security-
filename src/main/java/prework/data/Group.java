@@ -42,6 +42,7 @@ public class Group {
 		this.id = id;
 		this.name = name;
 		students = new HashSet<Student>();
+        subjects = new HashSet<Subject>();
 	}
 
 	public int getId() {
