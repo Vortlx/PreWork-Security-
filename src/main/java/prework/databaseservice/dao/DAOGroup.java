@@ -4,6 +4,8 @@ package prework.databaseservice.dao;
 import java.sql.SQLException;
 import java.util.List;
 import prework.data.Group;
+import prework.data.Student;
+import prework.data.Subject;
 
 /**
  * This class define CRUD operation for groups table in database.
@@ -12,7 +14,7 @@ import prework.data.Group;
  * @since 2016-09-19
  * */
 public interface DAOGroup {
-	
+
 	/**
 	 * This method add new group into groups table .
 	 *
@@ -20,40 +22,48 @@ public interface DAOGroup {
 	 * @throw SQLException
 	 * @return Nothing
 	 * */
-	public void add(String name) throws SQLException;
-	
+	void add(String name) throws SQLException;
+
+	void addSubject(int groupID, Subject subject);
+
 	/**
 	 * This method set new name of table.
-	 * 
+	 *
 	 * @param groupID ID of group
 	 * @param newName New name of group
 	 * @throw SQLException
 	 * @return Nothing
 	 * */
-	public void update(int groupID, String newName) throws SQLException;
-	
+	void changeName(int groupID, String newName) throws SQLException;
+
 	/**
 	 * This method delete group with specific name from groups table.
-	 * 
+	 *
 	 * @param name Name of group which must be deleted.
 	 * @throw SQLException
 	 * @return Nothing
 	 * */
-	public void delete(String name) throws SQLException;
-	
+	void delete(int groupID) throws SQLException;
+
+	List<Student> getStudents(int groupID);
+
+	Student getStudent(int groupID, String studentName, String studentFamilyName);
+
+	List<Subject> getSubjects(int groupID);
+
 	/**
 	 * Return group which have specific name
-	 * 
+	 *
 	 * @param name Name of group
 	 * @return Group
 	 * */
-	public Group getByName(String name) throws SQLException;
+	Group getByName(String name) throws SQLException;
 	
 	/**
 	 * This method return list of all existing groups.
-	 * 
+	 *
 	 * @throw SQLException
 	 * @return List of name (String) of all groups
 	 * */
-	public List<Group> getAll() throws SQLException;
+	List<Group> getAll() throws SQLException;
 }

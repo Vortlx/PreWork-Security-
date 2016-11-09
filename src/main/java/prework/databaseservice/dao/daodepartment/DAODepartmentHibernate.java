@@ -102,7 +102,7 @@ public class DAODepartmentHibernate implements DAODepartment{
         String getGroupsQuery = "select groups from Department where id = :id";
         Query query = session.createQuery(getGroupsQuery);
         query.setParameter("id", depID);
-        List<Group> groups = query.getResultList();
+        List<Group> groups = (List<Group>) query.getSingleResult();
 
         session.getTransaction().commit();
 
@@ -116,7 +116,7 @@ public class DAODepartmentHibernate implements DAODepartment{
         String getGroupsQuery = "select groups from Department where id = :id";
         Query query = session.createQuery(getGroupsQuery);
         query.setParameter("id", depID);
-        List<Group> groups = query.getResultList();
+        List<Group> groups = (List<Group>) query.getSingleResult();
 
         session.getTransaction().commit();
 
@@ -137,7 +137,7 @@ public class DAODepartmentHibernate implements DAODepartment{
         Query query = session.createQuery(getTeachersQuery);
         query.setParameter("id", depID);
 
-        List<Teacher> teachers = query.getResultList();
+        List<Teacher> teachers = (List<Teacher>) query.getSingleResult();
 
         session.getTransaction().commit();
 
@@ -151,7 +151,7 @@ public class DAODepartmentHibernate implements DAODepartment{
         String getTeacherByNameQuery = "select teachers from Department where id = :id";
         Query query = session.createQuery(getTeacherByNameQuery);
         query.setParameter("id", depID);
-        List<Teacher> teachers = query.getResultList();
+        List<Teacher> teachers = (List<Teacher>) query.getSingleResult();
 
         session.getTransaction().commit();
 

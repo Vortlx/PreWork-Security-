@@ -36,6 +36,22 @@ public class Subject {
         this.type = type;
     }
 
+    public void addGroup(Group group){
+        groups.add(group);
+    }
+
+    public void deleteGroup(Group group){
+        groups.remove(group);
+    }
+
+    public void addTeacher(Teacher teacher){
+        teachers.add(teacher);
+    }
+
+    public void deleteTeacher(Teacher teacher){
+        teachers.remove(teacher);
+    }
+
     public int getId() {
         return id;
     }

@@ -56,6 +56,14 @@ public class Group {
 	public void addStudent(Student student){
 		students.add(student);
 	}
+
+	public void addSubject(Subject subject){
+        subjects.add(subject);
+    }
+
+    public void deleteSubject(int groupID, Subject subject){
+
+    }
 	
 	public String getName() {
 		return name;

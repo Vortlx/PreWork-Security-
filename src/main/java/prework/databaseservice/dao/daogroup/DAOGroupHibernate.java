@@ -9,6 +9,8 @@ import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import prework.data.Student;
+import prework.data.Subject;
 import prework.databaseservice.dao.DAOGroup;
 import prework.data.Group;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,18 @@ public class DAOGroupHibernate implements DAOGroup {
         session.getTransaction().commit();
     }
 
-    public void update(int groupID, String newName) throws SQLException {
+    public void addSubject(int groupID, Subject subject) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        Group group = session.get(Group.class, groupID);
+        group.addSubject(subject);
+        session.update(group);
+
+        session.getTransaction().commit();
+    }
+
+    public void changeName(int groupID, String newName) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         
         session.beginTransaction();
@@ -46,14 +59,12 @@ public class DAOGroupHibernate implements DAOGroup {
         session.getTransaction().commit();
     }
 
-    public void delete(String name) throws SQLException {
+    public void delete(int groupID) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         
-        String queryString = "delete Group where name=:name";
-        Query query = session.createQuery(queryString);
-        query.setParameter("name", name);
-        query.executeUpdate();
+        Group group = session.get(Group.class, groupID);
+        session.delete(group);
         
         session.getTransaction().commit();
     }
@@ -83,5 +94,54 @@ public class DAOGroupHibernate implements DAOGroup {
         session.getTransaction().commit();
         
         return groups;
+    }
+
+    public List<Student> getStudents(int groupID) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        String getStudentsQuery = "select students from Group where id = :id";
+        Query query = session.createQuery(getStudentsQuery);
+        query.setParameter("id", groupID);
+        List<Student> students = (List<Student>) query.getSingleResult();
+
+        session.getTransaction().commit();
+
+        return students;
+    }
+
+    public Student getStudent(int groupID, String studentName, String studentFamilyName) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        String getStudentsQuery = "select students from Group where id = :id";
+        Query query = session.createQuery(getStudentsQuery);
+        query.setParameter("id", groupID);
+        List<Student> students = (List<Student>) query.getSingleResult();
+
+        session.getTransaction().commit();
+
+        for(Student student: students){
+            if(student.getName().equals(studentName) &&
+                    student.getName().equals(studentFamilyName)){
+                return student;
+            }
+        }
+
+        return new Student();
+    }
+
+    public List<Subject> getSubjects(int groupID) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        String getSubjectsQuery = "select subjects from Group where id = :id";
+        Query query = session.createQuery(getSubjectsQuery);
+        query.setParameter("id", groupID);
+        List<Subject> subjects = (List<Subject>) query.getSingleResult();
+
+        session.getTransaction().commit();
+
+        return subjects;
     }
 }

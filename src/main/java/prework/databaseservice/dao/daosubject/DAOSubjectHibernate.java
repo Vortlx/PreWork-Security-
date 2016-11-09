@@ -56,7 +56,7 @@ public class DAOSubjectHibernate implements DAOSubject {
         String getGroupsQuery = "select groups from Subject where id = :id";
         Query query = session.createQuery(getGroupsQuery);
         query.setParameter("id", subjectID);
-        List<Group> groups = query.getResultList();
+        List<Group> groups = (List<Group>) query.getSingleResult();
 
         session.getTransaction().commit();
 
@@ -70,7 +70,7 @@ public class DAOSubjectHibernate implements DAOSubject {
         String getGroupsQuery = "select groups from Subject where id = :id";
         Query query = session.createQuery(getGroupsQuery);
         query.setParameter("id", subjectID);
-        List<Group> groups = query.getResultList();
+        List<Group> groups = (List<Group>) query.getSingleResult();
 
         session.getTransaction().commit();
 
@@ -90,7 +90,7 @@ public class DAOSubjectHibernate implements DAOSubject {
         String getGroupsQuery = "select teachers from Subject where id = :id";
         Query query = session.createQuery(getGroupsQuery);
         query.setParameter("id", subjectID);
-        List<Teacher> teachers = query.getResultList();
+        List<Teacher> teachers = (List<Teacher>) query.getSingleResult();
 
         session.getTransaction().commit();
 
@@ -104,7 +104,7 @@ public class DAOSubjectHibernate implements DAOSubject {
         String getGroupsQuery = "select teachers from Subject where id = :id";
         Query query = session.createQuery(getGroupsQuery);
         query.setParameter("id", subjectID);
-        List<Teacher> teachers = query.getResultList();
+        List<Teacher> teachers = (List<Teacher>) query.getSingleResult();
 
         session.getTransaction().commit();
 
