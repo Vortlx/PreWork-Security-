@@ -2,7 +2,6 @@ package prework.databaseservice.dao.daodepartment;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import prework.data.Department;
@@ -10,6 +9,7 @@ import prework.data.Group;
 import prework.data.Teacher;
 import prework.databaseservice.dao.DAODepartment;
 
+import javax.persistence.Query;
 import java.util.List;
 
 @Component
@@ -102,7 +102,7 @@ public class DAODepartmentHibernate implements DAODepartment{
         String getGroupsQuery = "select groups from Department where id = :id";
         Query query = session.createQuery(getGroupsQuery);
         query.setParameter("id", depID);
-        List<Group> groups = (List<Group>) query.getSingleResult();
+        List<Group> groups = query.getResultList();
 
         session.getTransaction().commit();
 
@@ -116,7 +116,7 @@ public class DAODepartmentHibernate implements DAODepartment{
         String getGroupsQuery = "select groups from Department where id = :id";
         Query query = session.createQuery(getGroupsQuery);
         query.setParameter("id", depID);
-        List<Group> groups = (List<Group>) query.getSingleResult();
+        List<Group> groups = query.getResultList();
 
         session.getTransaction().commit();
 
@@ -137,7 +137,7 @@ public class DAODepartmentHibernate implements DAODepartment{
         Query query = session.createQuery(getTeachersQuery);
         query.setParameter("id", depID);
 
-        List<Teacher> teachers = (List<Teacher>) query.getSingleResult();
+        List<Teacher> teachers = query.getResultList();
 
         session.getTransaction().commit();
 
@@ -151,7 +151,7 @@ public class DAODepartmentHibernate implements DAODepartment{
         String getTeacherByNameQuery = "select teachers from Department where id = :id";
         Query query = session.createQuery(getTeacherByNameQuery);
         query.setParameter("id", depID);
-        List<Teacher> teachers = (List<Teacher>) query.getSingleResult();
+        List<Teacher> teachers = query.getResultList();
 
         session.getTransaction().commit();
 
