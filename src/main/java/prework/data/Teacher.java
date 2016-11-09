@@ -17,11 +17,9 @@ import javax.persistence.*;
 @Table(name="teachers")
 public class Teacher extends Person {
 
-    @ManyToMany(fetch=FetchType.EAGER, mappedBy="teachers")
-    private Set<Group> groups;
-
-    @ManyToMany(mappedBy="teachers")
-    private Set<Subject> subjects;
+    @ManyToOne()
+    @JoinColumn(name="id_subject")
+    private Subject subject;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="id_department")
@@ -31,25 +29,8 @@ public class Teacher extends Person {
         super();
     }
 
-    public Teacher(int id, String name, String familyName, String login, String password, Group... groups){
+    public Teacher(int id, String name, String familyName, String login, String password){
         super(id, name, familyName, login, password);
-        this.groups.addAll(Arrays.asList(groups));
-    }
-
-    public Set<Group> getGroups() {
-        return groups;
-    }
-
-    public void addGroup(Group newGroup){
-        groups.add(newGroup);
-    }
-    
-    public void deleteGroup(Group group){
-        groups.remove(group);
-    }
-
-    public void setGroup(Set<Group> newGroups){
-        groups = newGroups;
     }
 
     @Override
@@ -67,12 +48,6 @@ public class Teacher extends Person {
         if (!super.equals(obj))
             return false;
         if (getClass() != obj.getClass())
-            return false;
-        Teacher other = (Teacher) obj;
-        if (groups == null) {
-            if (other.groups != null)
-                return false;
-        } else if (!groups.equals(other.groups))
             return false;
         return true;
     }

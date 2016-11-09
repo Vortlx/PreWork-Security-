@@ -24,10 +24,7 @@ public class Subject {
             inverseJoinColumns = @JoinColumn(name="id_group"))
     private Set<Group> groups;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "group_subject_teacher",
-                joinColumns = @JoinColumn(name="id_group_subject"),
-                inverseJoinColumns = @JoinColumn(name="id_teacher"))
+    @OneToMany(mappedBy="subject", fetch = FetchType.EAGER)
     private Set<Teacher> teachers;
 
     public Subject(){

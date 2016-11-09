@@ -66,8 +66,7 @@ public class TestDAOTeacherHibernate {
             Teacher teacher = new Teacher();
             teacher.setName(teacherName);
             teacher.setFamilyName(teacherFamilyName);
-            teacher.setGroup(new HashSet<Group>());
-            
+
             List<Teacher> teachers = daoTeacher.getByName(teacherName);
             
             Assert.assertTrue(teachers.contains(teacher));
@@ -82,8 +81,7 @@ public class TestDAOTeacherHibernate {
             Teacher teacher = new Teacher();
             teacher.setName(teacherName);
             teacher.setFamilyName(teacherFamilyName);
-            teacher.setGroup(new HashSet<Group>());
-            
+
             List<Teacher> teachers = daoTeacher.getByFamilyName(teacherFamilyName);
             
             Assert.assertTrue(teachers.contains(teacher));
@@ -98,8 +96,7 @@ public class TestDAOTeacherHibernate {
             Teacher teacher = new Teacher();
             teacher.setName(teacherName);
             teacher.setFamilyName(teacherFamilyName);
-            teacher.setGroup(new HashSet<Group>());
-            
+
             List<Teacher> teachers = daoTeacher.getTeacher(teacherName, teacherFamilyName);
             
             Assert.assertTrue(teachers.contains(teacher));

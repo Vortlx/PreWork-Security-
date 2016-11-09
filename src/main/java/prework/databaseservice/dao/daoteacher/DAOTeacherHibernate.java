@@ -46,9 +46,6 @@ public class DAOTeacherHibernate implements DAOTeacher{
         Group group = (Group) query.getSingleResult();
 
         Teacher teacher = session.get(Teacher.class, teacherID);
-        
-        teacher.addGroup(group);
-        group.addTeacher(teacher);
 
         session.saveOrUpdate(teacher);
         
@@ -95,8 +92,6 @@ public class DAOTeacherHibernate implements DAOTeacher{
         Group group = (Group) query.getSingleResult();
 
         Teacher teacher = session.get(Teacher.class, teacherID);
-        teacher.deleteGroup(group);
-        group.deleteTeacher(teacher);
 
         session.update(teacher);
 

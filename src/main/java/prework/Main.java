@@ -30,14 +30,14 @@ public class Main{
 
 	    try{
 
-			String groupName = "141";
+			String groupName = "113";
 			Group group = daoGroup.getByName(groupName);
 
 			for(Subject subject: group.getSubjects()){
 				System.out.println(subject.getName() + ":	" + subject.getType());
 
 				for(Teacher teacher: subject.getTeachers()){
-					System.out.println("	" + teacher.getFamilyName());
+					System.out.println("	" + teacher.getName() + " " + teacher.getFamilyName() + " " + teacher.getId());
 				}
 				System.out.println();
 			}

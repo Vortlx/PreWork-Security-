@@ -1,9 +1,8 @@
-DROP TABLE group_subject_teacher;
 DROP TABLE group_subject;
+DROP TABLE teachers;
 DROP TABLE subject;
 DROP TABLE students;
 DROP TABLE groups;
-DROP TABLE teachers;
 DROP TABLE department;
 
 CREATE TABLE department(
@@ -24,21 +23,6 @@ CREATE TABLE groups(
 	FOREIGN KEY (id_department) REFERENCES department(id) ON DELETE CASCADE ON UPDATE CASCADE
 ) CHARACTER SET = utf8 COLLATE utf8_unicode_ci;
 
-CREATE TABLE teachers(
-	id INT UNSIGNED AUTO_INCREMENT,
-	name VARCHAR(255) NOT NULL,
-	family_name  VARCHAR(255) NOT NULL,
-	login  VARCHAR(255) UNIQUE NOT NULL,
-	password VARCHAR(255) NOT NULL ,
-	id_department INT UNSIGNED NOT NULL ,
-	
-	PRIMARY KEY (id),
-	CONSTRAINT unique_teacher UNIQUE(name, family_name),
-	FOREIGN KEY (id_department) REFERENCES department(id) ON DELETE CASCADE ON UPDATE CASCADE
-) CHARACTER SET = utf8 COLLATE utf8_unicode_ci;
-
-
-
 CREATE TABLE subject(
 	id INT UNSIGNED AUTO_INCREMENT,
 	name VARCHAR(255) NOT NULL,
@@ -48,7 +32,20 @@ CREATE TABLE subject(
 	CONSTRAINT unique_subject UNIQUE(name, subject_type)
 ) CHARACTER SET = utf8 COLLATE utf8_unicode_ci;
 
-
+CREATE TABLE teachers(
+	id INT UNSIGNED AUTO_INCREMENT,
+	name VARCHAR(255) NOT NULL,
+	family_name  VARCHAR(255) NOT NULL,
+	login  VARCHAR(255) UNIQUE NOT NULL,
+	password VARCHAR(255) NOT NULL,
+	id_subject INT  UNSIGNED NOT NULL,
+	id_department INT UNSIGNED NOT NULL,
+	
+	PRIMARY KEY (id),
+	CONSTRAINT unique_teacher UNIQUE(name, family_name),
+	FOREIGN KEY (id_subject) REFERENCES subject (id) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (id_department) REFERENCES department (id) ON DELETE CASCADE ON UPDATE CASCADE
+) CHARACTER SET = utf8 COLLATE utf8_unicode_ci;
 
 CREATE TABLE students(
 	id INT UNSIGNED AUTO_INCREMENT,
@@ -75,19 +72,6 @@ CREATE TABLE group_subject(
 
 )  CHARACTER SET = utf8 COLLATE utf8_unicode_ci;
 
-CREATE TABLE group_subject_teacher(
-	id INT UNSIGNED AUTO_INCREMENT,
-	id_teacher INT UNSIGNED NOT NULL,
-	id_group_subject INT UNSIGNED NOT NULL ,
-	
-	PRIMARY KEY(id),
-	CONSTRAINT unique_teacher_subject UNIQUE(id_teacher, id_group_subject),
-	FOREIGN KEY (id_teacher) REFERENCES teachers(id) ON DELETE CASCADE ON UPDATE CASCADE,
-	FOREIGN KEY (id_group_subject) REFERENCES group_subject(id) ON DELETE CASCADE ON UPDATE CASCADE
-
-)  CHARACTER SET = utf8 COLLATE utf8_unicode_ci;
-
-
 INSERT INTO department (name, login, password) VALUES ('SuperDepartment', 'SuperDepartment', 'SuperDepartment');
 
 INSERT INTO groups (name, id_department) VALUES('111', 1);
@@ -97,23 +81,6 @@ INSERT INTO groups (name, id_department) VALUES('121', 1);
 INSERT INTO groups (name, id_department) VALUES('122', 1);
 INSERT INTO groups (name, id_department) VALUES('131', 1);
 INSERT INTO groups (name, id_department) VALUES('141', 1);
-
-INSERT INTO teachers (name, family_name, login, password, id_department) VALUES('Jeannie', 'Reynolds', 'ReynoldsJeannie', 'test', 1);
-INSERT INTO teachers (name, family_name, login, password, id_department) VALUES('Julian', 'Bowers', 'BowersJulian', 'test', 1);
-INSERT INTO teachers (name, family_name, login, password, id_department) VALUES('Maria', 'Graham', 'GrahamMaria', 'test', 1);
-INSERT INTO teachers (name, family_name, login, password, id_department) VALUES('Frank', 'Bryan', 'BryanFrank', 'test', 1);
-INSERT INTO teachers (name, family_name, login, password, id_department) VALUES('Constance', 'Bryant', 'BryantConstance', 'test', 1);
-INSERT INTO teachers (name, family_name, login, password, id_department) VALUES('Cecilia', 'Fleming', 'FlemingCecilia', 'test', 1);
-INSERT INTO teachers (name, family_name, login, password, id_department) VALUES('Lauren', 'Simmons', 'SimmonsLauren', 'test', 1);
-INSERT INTO teachers (name, family_name, login, password, id_department) VALUES('Jackie', 'Doyle', 'DoyleJackie', 'test', 1);
-INSERT INTO teachers (name, family_name, login, password, id_department) VALUES('Leonard', 'Miller', 'MillerLeonard', 'test', 1);
-INSERT INTO teachers (name, family_name, login, password, id_department) VALUES('Lynda', 'Gray', 'GrayLynda', 'test', 1);
-
-INSERT INTO teachers (name, family_name, login, password, id_department) VALUES('Natasha', 'White', 'WhiteNatasha', 'test', 1);
-INSERT INTO teachers (name, family_name, login, password, id_department) VALUES('Eugene', 'Silva', 'SilvaEugene', 'test', 1);
-INSERT INTO teachers (name, family_name, login, password, id_department) VALUES('Lucille', 'Hoffman', 'HoffmanLucille', 'test', 1);
-INSERT INTO teachers (name, family_name, login, password, id_department) VALUES('Darryl', 'Gray', 'GrayDarryl', 'test', 1);
-INSERT INTO teachers (name, family_name, login, password, id_department) VALUES('Tamara', 'Fisher', 'FisherTamara', 'test', 1);
 
 INSERT INTO subject (name, subject_type) VALUES('Mathematical analysis', 'LECTURE');
 INSERT INTO subject (name, subject_type) VALUES('Mathematical analysis', 'PRACTICE');
@@ -136,6 +103,30 @@ INSERT INTO subject (name, subject_type) VALUES('Economics', 'PRACTICE');
 INSERT INTO subject (name, subject_type) VALUES('Social science', 'LECTURE');
 INSERT INTO subject (name, subject_type) VALUES('Math modeling', 'LECTURE');
 INSERT INTO subject (name, subject_type) VALUES('Math modeling', 'PRACTICE');
+
+INSERT INTO teachers (name, family_name, login, password, id_subject, id_department) VALUES('Jeannie', 'Reynolds', 'ReynoldsJeannie', 'test', 1, 1);
+INSERT INTO teachers (name, family_name, login, password, id_subject, id_department) VALUES('Julian', 'Bowers', 'BowersJulian', 'test', 2, 1);
+INSERT INTO teachers (name, family_name, login, password, id_subject, id_department) VALUES('Maria', 'Graham', 'GrahamMaria', 'test', 3, 1);
+INSERT INTO teachers (name, family_name, login, password, id_subject, id_department) VALUES('Frank', 'Bryan', 'BryanFrank', 'test', 4, 1);
+INSERT INTO teachers (name, family_name, login, password, id_subject, id_department) VALUES('Constance', 'Bryant', 'BryantConstance', 'test', 5, 1);
+INSERT INTO teachers (name, family_name, login, password, id_subject, id_department) VALUES('Cecilia', 'Fleming', 'FlemingCecilia', 'test', 6, 1);
+INSERT INTO teachers (name, family_name, login, password, id_subject, id_department) VALUES('Lauren', 'Simmons', 'SimmonsLauren', 'test', 7, 1);
+INSERT INTO teachers (name, family_name, login, password, id_subject, id_department) VALUES('Jackie', 'Doyle', 'DoyleJackie', 'test', 8, 1);
+INSERT INTO teachers (name, family_name, login, password, id_subject, id_department) VALUES('Leonard', 'Miller', 'MillerLeonard', 'test', 9, 1);
+INSERT INTO teachers (name, family_name, login, password, id_subject, id_department) VALUES('Lynda', 'Gray', 'GrayLynda', 'test', 10, 1);
+
+INSERT INTO teachers (name, family_name, login, password, id_subject, id_department) VALUES('Natasha', 'White', 'WhiteNatasha', 'test', 11, 1);
+INSERT INTO teachers (name, family_name, login, password, id_subject, id_department) VALUES('Eugene', 'Silva', 'SilvaEugene', 'test', 12, 1);
+INSERT INTO teachers (name, family_name, login, password, id_subject, id_department) VALUES('Lucille', 'Hoffman', 'HoffmanLucille', 'test', 13, 1);
+INSERT INTO teachers (name, family_name, login, password, id_subject, id_department) VALUES('Darryl', 'Gray', 'GrayDarryl', 'test', 14, 1);
+INSERT INTO teachers (name, family_name, login, password, id_subject, id_department) VALUES('Tamara', 'Fisher', 'FisherTamara', 'test', 15, 1);
+INSERT INTO teachers (name, family_name, login, password, id_subject, id_department) VALUES('Kara', 'Rivera', 'RiveraKara', 'test', 16, 1);
+INSERT INTO teachers (name, family_name, login, password, id_subject, id_department) VALUES('Glenda', 'Walters', 'WaltersGlenda', 'test', 17, 1);
+INSERT INTO teachers (name, family_name, login, password, id_subject, id_department) VALUES('Meghan', 'James', 'JamesMeghan', 'test', 18, 1);
+INSERT INTO teachers (name, family_name, login, password, id_subject, id_department) VALUES('Bobby', 'Riley', 'RileyBobby', 'test', 19, 1);
+INSERT INTO teachers (name, family_name, login, password, id_subject, id_department) VALUES('Shannon', 'Barton', 'BartonShannon', 'test', 20, 1);
+
+INSERT INTO teachers (name, family_name, login, password, id_subject, id_department) VALUES('Donald', 'Hanson', 'HansonDonald', 'test', 21, 1);
 
 
 INSERT INTO students (name, family_name, login, password, id_group) VALUES('Norman', 'Hernandez', 'HernandezNorman', 'test', 1);
@@ -272,59 +263,3 @@ INSERT INTO group_subject (id_group, id_subject) VALUES(7, 4);
 INSERT INTO group_subject (id_group, id_subject) VALUES(7, 8);
 INSERT INTO group_subject (id_group, id_subject) VALUES(7, 10);
 INSERT INTO group_subject (id_group, id_subject) VALUES(7, 19);
-
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(9, 1);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(6, 2);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(3, 3);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(5, 4);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(9, 5);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(6, 6);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(10, 7);
-
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(9, 8);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(4, 9);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(3, 10);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(5, 11);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(9, 12);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(4, 13);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(10, 14);
-
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(9, 15);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(6, 16);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(3, 17);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(5, 18);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(9, 19);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(6, 20);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(10, 21);
-
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(3, 22);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(7, 23);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(1, 24);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(2, 25);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(2, 26);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(3, 27);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(3, 28);
-
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(3, 29);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(7, 30);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(1, 31);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(2, 32);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(2, 33);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(3, 34);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(3, 35);
-
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(9, 36);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(9, 37);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(3, 38);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(7, 39);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(15, 40);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(14, 41);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(14, 42);
-
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(9, 43);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(9, 44);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(3, 45);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(7, 46);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(1, 47);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(15, 48);
-INSERT INTO group_subject_teacher (id_teacher, id_group_subject) VALUES(13, 47);

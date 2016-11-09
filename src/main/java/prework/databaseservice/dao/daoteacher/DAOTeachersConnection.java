@@ -234,7 +234,6 @@ public class DAOTeachersConnection implements DAOTeacher{
 				int groupID = groupRS.getInt(2);
 				
 				Group group = new Group(groupID, groupName);
-				teacher.addGroup(group);
 			}
 			
 			res.add(teacher);
@@ -291,7 +290,6 @@ public class DAOTeachersConnection implements DAOTeacher{
 				int groupID = groupRS.getInt(2);
 				
 				Group group = new Group(groupID, groupName);
-				teacher.addGroup(group);
 			}
 			
 			res.add(teacher);
@@ -349,7 +347,6 @@ public class DAOTeachersConnection implements DAOTeacher{
 				int groupID = groupRS.getInt(2);
 				
 				Group group = new Group(groupID, groupName);
-				teacher.addGroup(group);
 			}
 			
 			res.add(teacher);
@@ -405,7 +402,6 @@ public class DAOTeachersConnection implements DAOTeacher{
 				int groupID = groupRS.getInt(2);
 				
 				Group group = new Group(groupID, groupName);
-				teacher.addGroup(group);
 			}
 			
 			res.add(teacher);

@@ -53,8 +53,7 @@ public class TestDAOGroupHibernate {
         Group group = new Group();
         group.setName(testGroupName);
         group.setStudents(new HashSet<Student>());
-        group.setTeachers(new HashSet<Teacher>());
-        
+
         try{
             Group groupFromTable = daoGroup.getByName(testGroupName);
 

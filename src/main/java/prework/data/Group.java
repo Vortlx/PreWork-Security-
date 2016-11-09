@@ -30,23 +30,6 @@ public class Group {
     @ManyToMany(fetch=FetchType.EAGER, mappedBy = "groups")
     private Set<Subject> subjects;
 
-// ??????????????????????????
-    //           [teacher]
-    //                |
-    //                |
-    //      [group_subject_teacher]
-    //                |
-    //                |
-    //                ^
-    //  [group]--<[group_subject]>--[subject]
-    //
-    @ManyToMany(fetch=FetchType.EAGER)
-    @JoinTable(name="group_subject_teacher",
-            joinColumns={@JoinColumn(name="id_group_subject")},
-            inverseJoinColumns={@JoinColumn(name="id_teacher")})
-	private Set<Teacher> teachers;
-// ??????????????????????????
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="id_department")
     private Department department;
@@ -59,7 +42,6 @@ public class Group {
 		this.id = id;
 		this.name = name;
 		students = new HashSet<Student>();
-		teachers = new HashSet<Teacher>();
 	}
 
 	public int getId() {
@@ -72,14 +54,6 @@ public class Group {
 
 	public void addStudent(Student student){
 		students.add(student);
-	}
-	
-	public void addTeacher(Teacher teacher){
-	    teachers.add(teacher);
-	}
-	
-	public void deleteTeacher(Teacher teacher){
-	    teachers.remove(teacher);
 	}
 	
 	public String getName() {
@@ -97,14 +71,6 @@ public class Group {
 	public void setStudents(HashSet<Student> students) {
 		this.students = students;
 	}
-
-    public Set<Teacher> getTeachers() {
-        return teachers;
-    }
-
-    public void setTeachers(Set<Teacher> teachers) {
-        this.teachers = teachers;
-    }
 
     public void setStudents(Set<Student> students) {
         this.students = students;
@@ -131,8 +97,6 @@ public class Group {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((name == null) ? 0 : name.hashCode());
-        //result = prime * result + ((students == null) ? 0 : students.hashCode());
-        //result = prime * result + ((teachers == null) ? 0 : teachers.hashCode());
         return result;
     }
 
