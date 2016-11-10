@@ -4,6 +4,7 @@ package prework.databaseservice.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import prework.data.Group;
 import prework.data.Student;
 
 /**
@@ -24,7 +25,7 @@ public interface DAOStudent {
 	 *  @throws SQLException
 	 *  @return Nothing.
 	 * */
-	public void add(String name, String familyName, String groupName) throws SQLException;
+	void add(String name, String familyName, String groupName) throws SQLException;
 	
 	/**
 	 * This method update data in students table.
@@ -36,8 +37,11 @@ public interface DAOStudent {
 	 * @throws SQLException
 	 * @return Nothing.
 	 * */
-	public void update(int studentID, String newName, String newFamilyName) throws SQLException;
+	void changeName(int studentID, String newName, String newFamilyName) throws SQLException;
 
+	void changeLogin(int studentID, String newLogin);
+
+	void changePassword(int studentID, String newPassword);
 
 	/**
 	 * Method change current group of student on new group
@@ -48,7 +52,7 @@ public interface DAOStudent {
 	 * @throws SQLException
 	 * @return Nothing
 	 * */
-	public void updateGroup(int studentID, String newGroupName) throws SQLException;
+	void changeGroup(int studentID, String newGroupName) throws SQLException;
 
 	/**
 	 * This method delete student with specific name and family name from students table.
@@ -59,7 +63,9 @@ public interface DAOStudent {
 	 * @throws SQLException
 	 * @return Nothing
 	 * */
-	public void delete(String name, String familyName) throws SQLException;
+	void delete(String name, String familyName) throws SQLException;
+
+	Group getGroup(int studentID);
 
 	/**
 	 * This method return list of all students.
@@ -67,7 +73,7 @@ public interface DAOStudent {
 	 * @throws SQLException
 	 * @return List of persons
 	 * */
-	public List<Student> getAll() throws SQLException;
+	List<Student> getAll() throws SQLException;
 
 	/**
 	 * This method return list of all students who have a specific name.
@@ -76,7 +82,7 @@ public interface DAOStudent {
 	 * @throws SQLException
 	 * @return List of students who have a specific name
 	 * */
-	public List<Student> getByName(String name) throws SQLException;
+	List<Student> getByName(String name) throws SQLException;
 
 	/**
 	 * This method return list of all students who have a specific family name.
@@ -85,7 +91,7 @@ public interface DAOStudent {
 	 * @throws SQLException
 	 * @return List of students who have a specific family name
 	 * */
-	public List<Student> getByFamilyName(String familyName) throws SQLException ;
+	List<Student> getByFamilyName(String familyName) throws SQLException ;
 	
 	/**
 	 * Method return list of students who have specific name and specific family name
@@ -95,5 +101,5 @@ public interface DAOStudent {
 	 * @throws SQLException
 	 * @return List of students who have specific name and specific family name
 	 * */
-	public List<Student> getStudent(String name, String familyName) throws SQLException;
+	List<Student> getStudent(String name, String familyName) throws SQLException;
 }

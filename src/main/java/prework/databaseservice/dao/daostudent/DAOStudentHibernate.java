@@ -42,22 +42,42 @@ public class DAOStudentHibernate implements DAOStudent{
         session.getTransaction().commit();
     }
 
-    public void update(int studentID, String newName, String newFamilyName) throws SQLException {
+    public void changeName(int studentID, String newName, String newFamilyName) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         
         session.beginTransaction();
 
-        String queryString = "update Student set name = :newName, familyName = :newFamilyName where id = :id";
-        Query query = session.createQuery(queryString);
-        query.setParameter("id", studentID);
-        query.setParameter("newName", newName);
-        query.setParameter("newFamilyName", newFamilyName);
-        query.executeUpdate();
+        Student student = session.get(Student.class, studentID);
+        student.setName(newName);
+        student.setFamilyName(newFamilyName);
+        session.update(student);
         
         session.getTransaction().commit();
     }
 
-    public void updateGroup(int studentID, String newGroupName) throws SQLException {
+    public void changeLogin(int studentID, String newLogin) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        Student student = session.get(Student.class, studentID);
+        student.setLogin(newLogin);
+        session.update(student);
+
+        session.getTransaction().commit();
+    }
+
+    public void changePassword(int studentID, String newPassword) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        Student student = session.get(Student.class, studentID);
+        student.setPassword(newPassword);
+        session.update(student);
+
+        session.getTransaction().commit();
+    }
+
+    public void changeGroup(int studentID, String newGroupName) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         
         session.beginTransaction();
@@ -89,6 +109,18 @@ public class DAOStudentHibernate implements DAOStudent{
         query.executeUpdate();
         
         session.getTransaction().commit();
+    }
+
+    public Group getGroup(int studentID) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        Student student = session.get(Student.class, studentID);
+        Group group = student.getGroup();
+
+        session.getTransaction().commit();
+
+        return group;
     }
 
     public List<Student> getAll() throws SQLException {
