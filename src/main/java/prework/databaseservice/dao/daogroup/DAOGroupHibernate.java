@@ -59,13 +59,26 @@ public class DAOGroupHibernate implements DAOGroup {
         session.getTransaction().commit();
     }
 
-    public void delete(int groupID) throws SQLException {
+    public void deleteByID(int groupID) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         
         Group group = session.get(Group.class, groupID);
         session.delete(group);
         
+        session.getTransaction().commit();
+    }
+
+    public void deleteByName(String groupName) throws SQLException{
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        String getGroupByNameQuery = "from Group where name = :name";
+        Query query = session.createQuery(getGroupByNameQuery);
+        query.setParameter("name", groupName);
+        Group group = (Group) query.getSingleResult();
+        session.delete(group);
+
         session.getTransaction().commit();
     }
 

@@ -73,7 +73,17 @@ public class DAOTeacherHibernate implements DAOTeacher{
         session.getTransaction().commit();
     }
 
-    public void delete(String name, String familyName) throws SQLException {
+    public void deleteByID(int teacherID){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        Teacher teacher = session.get(Teacher.class, teacherID);
+        session.delete(teacher);
+
+        session.getTransaction().commit();
+    }
+
+    public void deleteByFullName(String name, String familyName) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         
         session.beginTransaction();

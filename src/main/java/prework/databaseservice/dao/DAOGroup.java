@@ -43,7 +43,9 @@ public interface DAOGroup {
 	 * @throw SQLException
 	 * @return Nothing
 	 * */
-	void delete(int groupID) throws SQLException;
+	void deleteByID(int groupID) throws SQLException;
+
+	void deleteByName(String groupName) throws SQLException;
 
 	List<Student> getStudents(int groupID);
 

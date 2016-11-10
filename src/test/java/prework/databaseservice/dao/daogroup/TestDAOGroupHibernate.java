@@ -36,7 +36,7 @@ public class TestDAOGroupHibernate {
     @AfterClass
     public static void deleteDataFromTable(){
         try{
-            daoGroup.delete(testGroupName);
+            daoGroup.deleteByName(testGroupName);
         }catch(SQLException e){
             e.printStackTrace();
         }

@@ -54,6 +54,8 @@ public interface DAOStudent {
 	 * */
 	void changeGroup(int studentID, String newGroupName) throws SQLException;
 
+	void deleteByID(int studentID);
+
 	/**
 	 * This method delete student with specific name and family name from students table.
 	 * 
@@ -63,7 +65,7 @@ public interface DAOStudent {
 	 * @throws SQLException
 	 * @return Nothing
 	 * */
-	void delete(String name, String familyName) throws SQLException;
+	void deleteByFullName(String name, String familyName) throws SQLException;
 
 	Group getGroup(int studentID);
 

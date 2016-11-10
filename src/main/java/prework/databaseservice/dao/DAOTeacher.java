@@ -43,6 +43,8 @@ public interface DAOTeacher {
 
 	void changePassword(int teacherID, String newPassword);
 
+	void deleteByID(int teacherID);
+
 	/**
 	 * This method delete teacher with specific name and family name from teachers table.
 	 *
@@ -52,7 +54,7 @@ public interface DAOTeacher {
 	 * @throws SQLException
 	 * @return Nothing
 	 * */
-	void delete(String name, String familyName) throws SQLException;
+	void deleteByFullName(String name, String familyName) throws SQLException;
 
 	Subject getSubject(int teacherID);
 

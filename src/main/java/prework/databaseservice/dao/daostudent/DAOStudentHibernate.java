@@ -97,7 +97,17 @@ public class DAOStudentHibernate implements DAOStudent{
         session.getTransaction().commit();
     }
 
-    public void delete(String name, String familyName) throws SQLException {
+    public void deleteByID(int studentID){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        Student student = session.get(Student.class, studentID);
+        session.delete(student);
+
+        session.getTransaction().commit();
+    }
+
+    public void deleteByFullName(String name, String familyName) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         
         session.beginTransaction();
