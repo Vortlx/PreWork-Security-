@@ -177,7 +177,7 @@ public class DAOStudentHibernate implements DAOStudent{
         return students;
     }
 
-    public List<Student> getStudent(String name, String familyName) throws SQLException {
+    public Student getStudent(String name, String familyName) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         
         session.beginTransaction();
@@ -186,10 +186,10 @@ public class DAOStudentHibernate implements DAOStudent{
         Query query = session.createQuery(queryString);
         query.setParameter("name", name);
         query.setParameter("familyName", familyName);
-        List<Student> students = query.getResultList();
+        Student student = (Student) query.getSingleResult();
         
         session.getTransaction().commit();
         
-        return students;
+        return student;
     }
 }

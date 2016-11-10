@@ -36,84 +36,9 @@ public class TestDAOTeacherHibernate {
     @AfterClass
     public static void deleteDataFromTable(){
         try{
-            daoTeacher.delete(teacherName, teacherFamilyName);
+            daoTeacher.deleteByFullName(teacherName, teacherFamilyName);
         }catch(SQLException e){
             e.printStackTrace();
         }
-    }
-    
-    @Ignore("I don't know how testing this method!")
-    @Test
-    public void testAddGroup(){
-        
-    }
-    
-    @Ignore("I don't know how testing this method!")
-    @Test
-    public void testUpdate(){
-        
-    }
-    
-    @Ignore("I don't know how testing this method!")
-    @Test
-    public void testDeleteCurator(){
-        
-    }
-    
-    @Test
-    public void testGetByName(){
-        try{
-            Teacher teacher = new Teacher();
-            teacher.setName(teacherName);
-            teacher.setFamilyName(teacherFamilyName);
-
-            List<Teacher> teachers = daoTeacher.getByName(teacherName);
-            
-            Assert.assertTrue(teachers.contains(teacher));
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
-    }
-    
-    @Test
-    public void testGetByFamilyName(){
-        try{
-            Teacher teacher = new Teacher();
-            teacher.setName(teacherName);
-            teacher.setFamilyName(teacherFamilyName);
-
-            List<Teacher> teachers = daoTeacher.getByFamilyName(teacherFamilyName);
-            
-            Assert.assertTrue(teachers.contains(teacher));
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
-    }
-    
-    @Test
-    public void testGetTeacher(){
-        try{
-            Teacher teacher = new Teacher();
-            teacher.setName(teacherName);
-            teacher.setFamilyName(teacherFamilyName);
-
-            List<Teacher> teachers = daoTeacher.getTeacher(teacherName, teacherFamilyName);
-            
-            Assert.assertTrue(teachers.contains(teacher));
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
-    }
-    
-    @Ignore("I don't know how testing this method!")
-    @Test
-    public void testGetAll(){
-        
-    }
-    
-    @Ignore("Coming soon")
-    @Test
-    public void testGetByGroup(){
-        
     }
 }

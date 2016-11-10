@@ -35,6 +35,17 @@ public class DAOGroupHibernate implements DAOGroup {
         session.getTransaction().commit();
     }
 
+    public void addStudent(int groupID, Student student){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        Group group = session.get(Group.class, groupID);
+        group.addStudent(student);
+        session.update(group);
+
+        session.getTransaction().commit();
+    }
+
     public void addSubject(int groupID, Subject subject) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -80,6 +91,17 @@ public class DAOGroupHibernate implements DAOGroup {
         session.delete(group);
 
         session.getTransaction().commit();
+    }
+
+    public Group getByID(int groupID){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        Group group = session.get(Group.class, groupID);
+
+        session.getTransaction().commit();
+
+        return group;
     }
 
     public Group getByName(String name) throws SQLException {

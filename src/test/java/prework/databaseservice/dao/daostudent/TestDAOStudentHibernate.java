@@ -16,7 +16,7 @@ import prework.data.Student;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-
+@Ignore
 public class TestDAOStudentHibernate {
 
     private static final ApplicationContext context = new ClassPathXmlApplicationContext("spring/Spring.cfg.xml");
@@ -24,13 +24,24 @@ public class TestDAOStudentHibernate {
     private static final DAOStudent daoStudent = (DAOStudent) context.getBean("daoStudentHibernate");
     private static final String studentName = "TestName";
     private static final String studentFamilyName = "TestFamilyName";
-    private static final String groupName = "TestGroupName";
+    private static final String testGroupName1 = "TestGroupName1";
+    private static final String testGroupName2 = "TestGroupName2";
+
+    private static Student testStudent = null;
+    private static Group testGroup1 = null;
+    private static Group testGroup2 = null;
     
     @BeforeClass
     public static void addDataToTable(){
         try{
-            daoGroup.add(groupName);
-            daoStudent.add(studentName, studentFamilyName, groupName);
+            daoGroup.add(testGroupName1);
+            daoGroup.add(testGroupName2);
+            daoStudent.add(studentName, studentFamilyName, testGroupName1);
+
+            testStudent = daoStudent.getStudent(studentName, studentFamilyName);
+            testGroup1 = daoGroup.getByName(testGroupName1);
+            testGroup2 = daoGroup.getByName(testGroupName2);
+
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -39,76 +50,11 @@ public class TestDAOStudentHibernate {
     @AfterClass
     public static void deleteDataFromTable(){
         try{
-            daoGroup.delete(groupName);
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
-    }
-    
-    @Ignore("I don't know how testing this method!")
-    @Test
-    public void testUpdate(){
-        
-    }
-    
-    @Ignore("I don't know how testing this method!")
-    @Test
-    public void testUpdateGroup(){
-        
-    }
-    
-    @Ignore("I don't know how testing this method!")
-    @Test
-    public void testGetAll(){
-        
-    }
-    
-    @Test
-    public void testGetByName(){
-        try{
-            Group group = daoGroup.getByName(groupName);
-            Student student = new Student();
-            student.setName(studentName);
-            student.setFamilyName(studentFamilyName);
-            student.setGroup(group);
-            
-            List<Student> students = daoStudent.getByName(studentName);
 
-            Assert.assertTrue(students.contains(student));
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
-    }
-    
-    @Test
-    public void testGetByFamilyName(){
-        try{
-            Group group = daoGroup.getByName(groupName);
-            Student student = new Student();
-            student.setName(studentName);
-            student.setFamilyName(studentFamilyName);
-            student.setGroup(group);
-            
-            List<Student> students = daoStudent.getByFamilyName(studentFamilyName);
-            
-            Assert.assertTrue(students.contains(student));
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
-    }
-    
-    @Test
-    public void testGetStudent(){
-        try{
-            Group group = daoGroup.getByName(groupName);
-            Student student = new Student();
-            student.setName(studentName);
-            student.setFamilyName(studentFamilyName);
-            student.setGroup(group);
+            daoStudent.deleteByID(testStudent.getId());
 
-            List<Student> students = daoStudent.getStudent(studentName, studentFamilyName);
-            
-            Assert.assertTrue(students.contains(student));
+            daoGroup.deleteByID(testGroup1.getId());
+            daoGroup.deleteByID(testGroup2.getId());
         }catch(SQLException e){
             e.printStackTrace();
         }

@@ -103,5 +103,5 @@ public interface DAOStudent {
 	 * @throws SQLException
 	 * @return List of students who have specific name and specific family name
 	 * */
-	List<Student> getStudent(String name, String familyName) throws SQLException;
+	Student getStudent(String name, String familyName) throws SQLException;
 }

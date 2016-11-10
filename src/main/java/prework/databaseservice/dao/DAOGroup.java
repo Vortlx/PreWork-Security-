@@ -24,6 +24,8 @@ public interface DAOGroup {
 	 * */
 	void add(String name) throws SQLException;
 
+	void addStudent(int groupID, Student student);
+
 	void addSubject(int groupID, Subject subject);
 
 	/**
@@ -52,6 +54,8 @@ public interface DAOGroup {
 	Student getStudent(int groupID, String studentName, String studentFamilyName);
 
 	List<Subject> getSubjects(int groupID);
+
+	Group getByID(int groupID);
 
 	/**
 	 * Return group which have specific name
