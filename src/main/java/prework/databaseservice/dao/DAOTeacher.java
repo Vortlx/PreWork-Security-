@@ -4,6 +4,7 @@ package prework.databaseservice.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import prework.data.Subject;
 import prework.data.Teacher;
 
 /**
@@ -24,20 +25,8 @@ public interface DAOTeacher {
 	 *  @throws SQLException
 	 *  @return Nothing.
 	 * */
-	public void add(String name, String familyName) throws SQLException;
+	void add(String name, String familyName) throws SQLException;
 
-
-	/**
-	 * Method make teacher with specific name and family name curator of group with specific name
-	 *
-	 * @param teacherID ID of teacher
-	 * @param groupName Name of group
-	 *
-	 * @throws SQLException
-	 * @return Nothing
-	 * */
-	public void addGroup(int teacherID, String groupName) throws SQLException;
-	
 	/**
 	 * This method update data into teachers table.
 	 *
@@ -48,7 +37,11 @@ public interface DAOTeacher {
 	 * @throws SQLException
 	 * @return Nothing.
 	 * */
-	public void update(int teacherID, String newName, String newFamilyName) throws SQLException;
+	void changeFullName(int teacherID, String newName, String newFamilyName) throws SQLException;
+
+	void changeLogin(int teacherID, String newLogin);
+
+	void changePassword(int teacherID, String newPassword);
 
 	/**
 	 * This method delete teacher with specific name and family name from teachers table.
@@ -59,19 +52,9 @@ public interface DAOTeacher {
 	 * @throws SQLException
 	 * @return Nothing
 	 * */
-	public void delete(String name, String familyName) throws SQLException;
+	void delete(String name, String familyName) throws SQLException;
 
-
-	/**
-	 * Method delete teacher with specific name and family name as curator from group with specific name
-	 *
-	 * @param teacherID ID of teacher
-	 * @param groupName Name of group
-	 *
-	 * @throws SQLException
-	 * @return Nothing
-	 * */
-	public void deleteCurator(int teacherID, String groupName) throws SQLException;
+	Subject getSubject(int teacherID);
 
 	/**
 	 * This method return list of all teachers who have a specific name.
@@ -80,16 +63,16 @@ public interface DAOTeacher {
 	 * @throws SQLException
 	 * @return List of teachers who have a specific name
 	 * */
-	public List<Teacher> getByName(String name) throws SQLException;
+	List<Teacher> getByName(String name) throws SQLException;
 
 	/**
 	 * This method return list of all teachers who have a specific family name.
-	 * 
+	 *
 	 * @param familyName Family name of teacher for whom there is a search
-	 * @throws SQLException
 	 * @return List of teachers who have a specific family name
-	 * */
-	public List<Teacher> getByFamilyName(String familyName) throws SQLException;
+	 * @throws SQLException
+	 */
+	List<Teacher> getByFamilyName(String familyName) throws SQLException;
 
 	/**
 	 * Method return list of teachers who have specific name and specific family name
@@ -99,8 +82,7 @@ public interface DAOTeacher {
 	 * @throws SQLException
 	 * @return List of teachers who have specific name and specific family name
 	 * */
-	public List<Teacher> getTeacher(String name, String familyName) throws SQLException;
-	
+	List<Teacher> getTeacher(String name, String familyName) throws SQLException;
 
 	/**
 	 * This method return list of all teachers.
@@ -108,15 +90,5 @@ public interface DAOTeacher {
 	 * @throws SQLException
 	 * @return List of teachers
 	 * */
-	public List<Teacher> getAll() throws SQLException;
-
-	/**
-	 * Method return list of teachers by group's name
-	 *
-	 * @param groupName Name of group
-	 *
-	 * @throws SQLException
-	 * @return List List of teacher
-	 * */
-	public List<Teacher> getByGroup(String groupName) throws SQLException;
+	List<Teacher> getAll() throws SQLException;
 }

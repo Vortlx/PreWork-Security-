@@ -33,6 +33,22 @@ public class Teacher extends Person {
         super(id, name, familyName, login, password);
     }
 
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;

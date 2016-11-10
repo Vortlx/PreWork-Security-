@@ -42,7 +42,7 @@ public class DAOStudentHibernate implements DAOStudent{
         session.getTransaction().commit();
     }
 
-    public void changeName(int studentID, String newName, String newFamilyName) throws SQLException {
+    public void changeFullName(int studentID, String newName, String newFamilyName) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         
         session.beginTransaction();

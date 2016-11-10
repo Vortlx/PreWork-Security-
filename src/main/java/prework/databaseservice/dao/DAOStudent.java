@@ -37,7 +37,7 @@ public interface DAOStudent {
 	 * @throws SQLException
 	 * @return Nothing.
 	 * */
-	void changeName(int studentID, String newName, String newFamilyName) throws SQLException;
+	void changeFullName(int studentID, String newName, String newFamilyName) throws SQLException;
 
 	void changeLogin(int studentID, String newLogin);
 

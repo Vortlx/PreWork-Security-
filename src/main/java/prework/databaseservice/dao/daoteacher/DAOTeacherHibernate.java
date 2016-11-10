@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import prework.data.Subject;
 import prework.databaseservice.dao.DAOTeacher;
 import prework.data.Group;
 import prework.data.Teacher;
@@ -35,24 +36,7 @@ public class DAOTeacherHibernate implements DAOTeacher{
         session.getTransaction().commit();
     }
 
-    public void addGroup(int teacherID, String groupName) throws SQLException {
-        Session session = sessionFactory.getCurrentSession();
-
-        session.beginTransaction();
-        
-        String getGroupQuery = "from Group where name = :name";
-        Query query = session.createQuery(getGroupQuery);
-        query.setParameter("name", groupName);
-        Group group = (Group) query.getSingleResult();
-
-        Teacher teacher = session.get(Teacher.class, teacherID);
-
-        session.saveOrUpdate(teacher);
-        
-        session.getTransaction().commit();
-    }
-
-    public void update(int teacherID, String newName, String newFamilyName) throws SQLException {
+    public void changeFullName(int teacherID, String newName, String newFamilyName) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         
         session.beginTransaction();
@@ -66,7 +50,29 @@ public class DAOTeacherHibernate implements DAOTeacher{
         
         session.getTransaction().commit();
     }
-    
+
+    public void changeLogin(int teacherID, String newLogin) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        Teacher teacher = session.get(Teacher.class, teacherID);
+        teacher.setLogin(newLogin);
+        session.update(teacher);
+
+        session.getTransaction().commit();
+    }
+
+    public void changePassword(int teacherID, String newPassword) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        Teacher teacher = session.get(Teacher.class, teacherID);
+        teacher.setPassword(newPassword);
+        session.update(teacher);
+
+        session.getTransaction().commit();
+    }
+
     public void delete(String name, String familyName) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         
@@ -81,21 +87,16 @@ public class DAOTeacherHibernate implements DAOTeacher{
         session.getTransaction().commit();
     }
 
-    public void deleteCurator(int teacherID, String groupName) throws SQLException {
+    public Subject getSubject(int teacherID) {
         Session session = sessionFactory.getCurrentSession();
-        
         session.beginTransaction();
 
-        String queryString = "from Group where name = :name";
-        Query query = session.createQuery(queryString);
-        query.setParameter("name", groupName);
-        Group group = (Group) query.getSingleResult();
-
         Teacher teacher = session.get(Teacher.class, teacherID);
-
-        session.update(teacher);
+        Subject subject = teacher.getSubject();
 
         session.getTransaction().commit();
+
+        return subject;
     }
 
     public List<Teacher> getByName(String name) throws SQLException {
@@ -154,21 +155,6 @@ public class DAOTeacherHibernate implements DAOTeacher{
         String queryString = "from Teacher";
         Query query = session.createQuery(queryString);
         List<Teacher> teachers = query.getResultList();
-        
-        session.getTransaction().commit();
-        
-        return teachers;
-    }
-
-    public List<Teacher> getByGroup(String groupName) throws SQLException {
-        Session session = sessionFactory.getCurrentSession();
-        
-        session.beginTransaction();
-        
-        String queryString = "select teachers from Group group where group.name = :groupName";
-        Query query = session.createQuery(queryString);
-        query.setParameter("groupName", groupName);
-        List<Teacher> teachers = (List<Teacher>) query.getResultList();
         
         session.getTransaction().commit();
         
