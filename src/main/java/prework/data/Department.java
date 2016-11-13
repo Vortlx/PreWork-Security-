@@ -26,6 +26,13 @@ public class Department {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "department")
     private Set<Teacher> teachers;
+    
+    @Column(name="enabled")
+    private int enabled;
+    
+    @ManyToOne()
+    @JoinColumn(name="id_role")
+    private Role role;
 
     public Department(){
 
@@ -99,5 +106,21 @@ public class Department {
 
     public void deleteTeacher(Teacher teacher){
         teachers.remove(teacher);
+    }
+
+    public int getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

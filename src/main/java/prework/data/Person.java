@@ -3,6 +3,8 @@ package prework.data;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 
@@ -30,6 +32,13 @@ public abstract class Person {
 
     @Column(name="password")
     private String password;
+    
+    @Column(name="enabled")
+    private int enabled;
+    
+    @ManyToOne()
+    @JoinColumn(name="id_role")
+    private Role role;
 
 	public Person(){
 		
@@ -86,6 +95,22 @@ public abstract class Person {
         result = prime * result + ((familyName == null) ? 0 : familyName.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         return result;
+    }
+
+    public int getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override
