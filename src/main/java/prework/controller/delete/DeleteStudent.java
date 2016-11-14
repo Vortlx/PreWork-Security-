@@ -33,9 +33,9 @@ public class DeleteStudent extends HttpServlet{
 		String familyName = req.getParameter("familyName");
 		String mes = "";
 		try{
-			daoStudent.delete(name, familyName);
+			//daoStudent.delete(name, familyName);
 			mes = "Operation was success";
-		}catch(SQLException e){
+		}catch(Exception e){
 			mes = "Can't do this operation.";
 			e.printStackTrace();
 		}

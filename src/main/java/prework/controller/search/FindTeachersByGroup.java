@@ -33,11 +33,11 @@ public class FindTeachersByGroup extends HttpServlet{
 
     	try{
     		String groupName = req.getParameter("groupName");
-    		List<Teacher> teachers = daoTeacher.getByGroup(groupName);
+    		//List<Teacher> teachers = daoTeacher.getByGroup(groupName);
     		
     		req.setAttribute("groupName", groupName);
-    		req.setAttribute("teachers", teachers);
-    	}catch(SQLException e){
+    		//req.setAttribute("teachers", teachers);
+    	}catch(Exception e){
     		e.printStackTrace();
     	}
     	

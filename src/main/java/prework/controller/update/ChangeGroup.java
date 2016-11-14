@@ -32,8 +32,8 @@ public class ChangeGroup extends HttpServlet{
     		int studentID = Integer.parseInt(req.getParameter("studentID"));
     		String newGroupName = req.getParameter("newGroupName");
 
-            daoStudent.updateGroup(studentID, newGroupName);
-    	}catch(SQLException e){
+            //daoStudent.updateGroup(studentID, newGroupName);
+    	}catch(Exception e){
     		e.printStackTrace();
             String message = "Can't do this operation.";
             req.setAttribute("message", message);

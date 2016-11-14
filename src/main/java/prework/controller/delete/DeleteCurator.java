@@ -33,8 +33,8 @@ public class DeleteCurator extends HttpServlet {
             int teacherID = Integer.parseInt(req.getParameter("teacherID"));
             String groupName= req.getParameter("groupName");
 
-            daoTeacher.deleteCurator(teacherID, groupName);
-        }catch(SQLException e){
+            //daoTeacher.deleteCurator(teacherID, groupName);
+        }catch(Exception e){
             e.printStackTrace();
         }
 

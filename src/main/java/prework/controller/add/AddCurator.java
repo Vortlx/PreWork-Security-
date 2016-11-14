@@ -32,9 +32,9 @@ public class AddCurator extends HttpServlet {
             int teacherID = Integer.parseInt(req.getParameter("teacherID"));
             String groupName = req.getParameter("groupName");
 
-            daoTeacher.addGroup(teacherID, groupName);
+            //daoTeacher.addGroup(teacherID, groupName);
 
-        }catch(SQLException e){
+        }catch(Exception e){
         	e.printStackTrace();
             String message = "Can't do this operation.";
             req.setAttribute("message", message);

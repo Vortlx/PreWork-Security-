@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+import prework.data.Subject;
 import prework.databaseservice.dao.DAOTeacher;
 import prework.data.Group;
 import prework.data.Teacher;
@@ -454,5 +455,29 @@ public class DAOTeachersConnection implements DAOTeacher{
 		conn.close();
 
 		return res;
+	}
+
+	public void changeFullName(int teacherID, String newName, String newFamilyName) throws SQLException {
+
+	}
+
+	public void changeLogin(int teacherID, String newLogin) {
+
+	}
+
+	public void changePassword(int teacherID, String newPassword) {
+
+	}
+
+	public void deleteByID(int teacherID) {
+
+	}
+
+	public void deleteByFullName(String name, String familyName) throws SQLException {
+
+	}
+
+	public Subject getSubject(int teacherID) {
+		return null;
 	}
 }

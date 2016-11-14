@@ -32,9 +32,9 @@ public class DeleteGroup extends HttpServlet{
 		String name = req.getParameter("name");
 		String mes = "";
 		try{
-			daoGroup.delete(name);
+			//daoGroup.delete(name);
 			mes = "Operation was success";
-		}catch(SQLException e){
+		}catch(Exception e){
 			mes = "Can't do this operation.";
 			e.printStackTrace();
 		}

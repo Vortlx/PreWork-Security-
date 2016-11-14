@@ -3,14 +3,11 @@ package prework;
 import java.sql.SQLException;
 import java.util.List;
 
-import prework.data.Group;
-import prework.data.Student;
-import prework.data.Subject;
+import prework.data.*;
 import prework.databaseservice.dao.DAOTeacher;
 
 import prework.databaseservice.dao.DAOGroup;
 import prework.databaseservice.dao.DAOStudent;
-import prework.data.Teacher;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -31,23 +28,28 @@ public class Main{
 
 	    try{
 
-			String groupName = "113";
-			Group group = daoGroup.getByName(groupName);
-/*
-			for(Subject subject: group.getSubjects()){
-				System.out.println(subject.getName() + ":	" + subject.getType());
+            Student student = daoStudent.getAll().get(25);
+            UserInfo userInfo = student.getUserInfo();
 
-				for(Teacher teacher: subject.getTeachers()){
-					System.out.println("	" + teacher.getName() + " " + teacher.getFamilyName() + " " + teacher.getRole().getName());
-				}
-				System.out.println();
-			}
-*/	        
-			
-			for(Student student: group.getStudents()){
-			    System.out.println(student.getName() + " " + student.getFamilyName());
-			}
-	    }catch(SQLException e){
+            for(Teacher teacher: userInfo.getTeachers()){
+                System.out.println(teacher.getName() + " " + teacher.getFamilyName());
+            }
+
+            System.out.println();
+
+            for(Student studentTest: userInfo.getStudents()){
+                System.out.println(studentTest.getName() + " " + studentTest.getFamilyName());
+            }
+
+
+            System.out.println();
+
+            for(Department dep: userInfo.getDepartments()){
+                System.out.println(dep.getName());
+            }
+
+
+	    }catch(Exception e){
 	        e.printStackTrace();
 	    }finally{
 	    	//HibernateUtil.closeSessionFactory();

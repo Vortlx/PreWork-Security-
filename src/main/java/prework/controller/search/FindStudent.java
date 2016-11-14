@@ -44,7 +44,7 @@ public class FindStudent extends HttpServlet{
 			} else if("".equals(name) && !"".equals(familyName)){
 				list = daoStudent.getByFamilyName(familyName);
 			}else{
-				list = daoStudent.getStudent(name, familyName);
+				//list = daoStudent.getStudent(name, familyName);
 			}
 		
 			req.setAttribute("students", list);

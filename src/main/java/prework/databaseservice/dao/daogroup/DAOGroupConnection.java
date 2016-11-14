@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.ArrayList;
 
+import prework.data.Subject;
 import prework.databaseservice.dao.DAOGroup;
 import prework.data.Group;
 import prework.data.Student;
@@ -204,5 +205,41 @@ public class DAOGroupConnection implements DAOGroup {
 		conn.close();
 		
 		return res;
+	}
+
+	public void addStudent(int groupID, Student student) {
+
+	}
+
+	public void addSubject(int groupID, Subject subject) {
+
+	}
+
+	public void changeName(int groupID, String newName) throws SQLException {
+
+	}
+
+	public void deleteByID(int groupID) throws SQLException {
+
+	}
+
+	public void deleteByName(String groupName) throws SQLException {
+
+	}
+
+	public List<Student> getStudents(int groupID) {
+		return null;
+	}
+
+	public Student getStudent(int groupID, String studentName, String studentFamilyName) {
+		return null;
+	}
+
+	public List<Subject> getSubjects(int groupID) {
+		return null;
+	}
+
+	public Group getByID(int groupID) {
+		return null;
 	}
 }

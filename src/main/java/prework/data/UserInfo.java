@@ -2,13 +2,7 @@ package prework.data;
 
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="user_info")
@@ -18,7 +12,7 @@ public class UserInfo {
     @Column(name="id")
     private int id;
     
-    @Column(name="usetname")
+    @Column(name="username")
     private String username;
     
     @Column(name="password")
@@ -31,14 +25,14 @@ public class UserInfo {
     @JoinColumn(name="id_role")
     private Role role;
     
-    @OneToMany(mappedBy="userInfo")
-    private Set<Department> department;
+    @OneToMany(mappedBy="userInfo", fetch= FetchType.EAGER)
+    private Set<Department> departments;
     
-    @OneToMany(mappedBy="userInfo")
-    private Set<Teacher> teacher;
+    @OneToMany(mappedBy="userInfo", fetch= FetchType.EAGER)
+    private Set<Teacher> teachers;
     
-    @OneToMany(mappedBy="userInfo")
-    private Set<Student> student;
+    @OneToMany(mappedBy="userInfo", fetch= FetchType.EAGER)
+    private Set<Student> students;
 
     public int getId() {
         return id;
@@ -80,27 +74,27 @@ public class UserInfo {
         this.role = role;
     }
 
-    public Set<Department> getDepartment() {
-        return department;
+    public Set<Department> getDepartments() {
+        return departments;
     }
 
-    public void setDepartment(Set<Department> department) {
-        this.department = department;
+    public void setDepartments(Set<Department> departments) {
+        this.departments = departments;
     }
 
-    public Set<Teacher> getTeacher() {
-        return teacher;
+    public Set<Teacher> getTeachers() {
+        return teachers;
     }
 
-    public void setTeacher(Set<Teacher> teacher) {
-        this.teacher = teacher;
+    public void setTeachers(Set<Teacher> teachers) {
+        this.teachers = teachers;
     }
 
-    public Set<Student> getStudent() {
-        return student;
+    public Set<Student> getStudents() {
+        return students;
     }
 
-    public void setStudent(Set<Student> student) {
-        this.student = student;
+    public void setStudents(Set<Student> students) {
+        this.students = students;
     }
 }

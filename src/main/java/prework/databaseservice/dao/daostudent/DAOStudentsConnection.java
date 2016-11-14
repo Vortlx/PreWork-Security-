@@ -327,7 +327,7 @@ public class DAOStudentsConnection implements DAOStudent{
 	 * @throws SQLException
 	 * @return List of students who have specific name and specific family name
 	 * */
-	public List<Student> getStudent(String name, String familyName) throws SQLException{
+	public Student getStudent(String name, String familyName) throws SQLException{
 
 		Connection conn = DriverManager.getConnection(getProperty("URL"));
 
@@ -357,6 +357,34 @@ public class DAOStudentsConnection implements DAOStudent{
 		statement.close();
 		conn.close();
 
-		return res;
+		return null;
+	}
+
+	public void changeFullName(int studentID, String newName, String newFamilyName) throws SQLException {
+
+	}
+
+	public void changeLogin(int studentID, String newLogin) {
+
+	}
+
+	public void changePassword(int studentID, String newPassword) {
+
+	}
+
+	public void changeGroup(int studentID, String newGroupName) throws SQLException {
+
+	}
+
+	public void deleteByID(int studentID) {
+
+	}
+
+	public void deleteByFullName(String name, String familyName) throws SQLException {
+
+	}
+
+	public Group getGroup(int studentID) {
+		return null;
 	}
 }
