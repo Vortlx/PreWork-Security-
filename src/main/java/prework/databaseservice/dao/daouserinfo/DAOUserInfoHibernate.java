@@ -16,9 +16,13 @@ public class DAOUserInfoHibernate implements DAOUserInfo {
     @Autowired
     SessionFactory sessionFactory;
 
-    public void add(UserInfo userInfo) {
+    public void add(UserInfo userInfo) throws Exception{
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
+
+        UserInfo existingUser = session.get(UserInfo.class, userInfo.getId());
+        if(existingUser != null)
+            throw new Exception();
 
         session.save(userInfo);
 
@@ -49,7 +53,7 @@ public class DAOUserInfoHibernate implements DAOUserInfo {
         session.getTransaction().commit();
     }
 
-    public void changePasswor(int userInfoID, String newPassword) {
+    public void changePassword(int userInfoID, String newPassword) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
