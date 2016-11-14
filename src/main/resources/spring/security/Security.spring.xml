@@ -8,11 +8,11 @@
     http://www.springframework.org/schema/security/spring-security-4.1.xsd">
     
     <security:http create-session="never" use-expressions="true">
-        <security:intercept-url pattern="/welcome**" access="hasAnyRole('ROLE_STUDENT', 'ROLE_TEACHER', 'ROLE_DEPARTMENT')"/>
+        <security:intercept-url pattern="/jsp**" access="hasAnyRole('ROLE_STUDENT', 'ROLE_TEACHER', 'ROLE_DEPARTMENT')"/>
         <security:form-login
-            login-page="/jsp/login.jsp"
-            default-target-url="/jsp/welcome.jsp"
-            authentication-failure-url="/jsp/login.jsp"
+            login-page="/login"
+            default-target-url="/jsp/welcome"
+            authentication-failure-url="/login"
             login-processing-url="/jsp/j_spring_security_check"
             username-parameter="username"
             password-parameter="password"

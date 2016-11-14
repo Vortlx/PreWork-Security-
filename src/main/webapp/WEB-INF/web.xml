@@ -9,17 +9,12 @@
         <param-value>WEB-INF/classes/spring/Spring.cfg.xml, WEB-INF/classes/spring/security/Security.spring.xml</param-value>
     </context-param>
 
-    <!-- context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>WEB-INF/classes/spring/security/Security.spring.xml</param-value>
-    </context-param-->
-
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
     <welcome-file-list>
-        <welcome-file>/jsp/login.jsp</welcome-file>
+        <welcome-file>/login.jsp</welcome-file>
     </welcome-file-list>
 
     <servlet>

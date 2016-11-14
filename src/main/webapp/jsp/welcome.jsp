@@ -9,16 +9,22 @@
 <title>Welcome</title>
 </head>
 <body>
+    <!-- Greeting user (Department, Teacher ot Student) -->
     <div>
-        <h3>Hello Dude</h3>
-        <c:if test="${userInfo.departments.size()} > 0">
-
+        <c:if test="${userInfo.departments.size() > 0}">
+            <c:forEach items="${userInfo.departments}" var="department">
+                <h3>${department.name}</h3>
+            </c:forEach>
         </c:if>
-        <c:if test="${userInfo.teachers.size()} > 0">
-
+        <c:if test="${userInfo.teachers.size() > 0}">
+            <c:forEach items="${userInfo.teachers}" var="teacher">
+                <h3>Hello ${teacher.name} ${teacher.familyName}</h3>
+            </c:forEach>
         </c:if>
-        <c:if test="${userInfo.students.size()} > 0">
-
+        <c:if test="${userInfo.students.size() > 0}">
+            <c:forEach items="${userInfo.students}" var="studnet">
+                <h3>Hello ${studnet.name} ${studnet.familyName}</h3>
+            </c:forEach>
         </c:if>
     </div>
 
