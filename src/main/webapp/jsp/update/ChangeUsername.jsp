@@ -11,15 +11,16 @@
     <title>ChangeUsername</title>
 </head>
 <body>
-<form action="./ChangeUsername" method="POST">
-    Enter your password <input name="password" type="password"/>
-    <br>
-    Enter your new username <input name="username" type="text"/>
-    <br>
-    <input name="userID" type="hidden" value="${id}"/>
-    <input name="change" type="submit" value="Change"/>
-</form>
-<br>
-${message}
+	<form action="./ChangeUsername" method="POST">
+	    Enter your password <input name="password" type="password"/>
+	    <br>
+	    Enter your new username <input name="username" type="text"/>
+	    <br>
+	    <input name="userID" type="hidden" value="${id}"/>
+	    <input name="change" type="submit" value="Change"/>
+	</form>
+	<a href="../welcome" name="Back">Back</a>
+	<br>
+	${message}
 </body>
 </html>

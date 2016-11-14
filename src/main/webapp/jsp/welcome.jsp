@@ -69,7 +69,7 @@
 
     <div>
         <br>
-        <a href="./update/ChangeLogin.jsp?id=${userInfo.id}" name="changeLogin">Change login</a>
+        <a href="./update/ChangeUsername.jsp?id=${userInfo.id}" name="changeLogin">Change login</a>
         <br>
         <a href="./update/ChangePassword.jsp?id=${userInfo.id}" name="changePassword">Change password</a>
     </div>
