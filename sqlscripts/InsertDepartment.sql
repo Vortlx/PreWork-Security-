@@ -1,1 +1,1 @@
-INSERT INTO department (name, login, password, id_role) VALUES ('SuperDepartment', 'SuperDepartment', 'SuperDepartment', 3);
+INSERT INTO department (name, id_user_info) VALUES ('SuperDepartment', 1);

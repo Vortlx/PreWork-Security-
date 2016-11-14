@@ -1,12 +1,14 @@
-﻿source ./sqlscripts/CreateRoles.sql;
-source ./sqlscripts/CreateDepartment.sql;
-source ./sqlscripts/CreateGroups.sql;
-source ./sqlscripts/CreateSubject.sql;
-source ./sqlscripts/CreateTeachers.sql;
-source ./sqlscripts/CreateStudents.sql;
+﻿source ./sqlscripts/Roles.sql;
+source ./sqlscripts/UserInfo.sql;
+source ./sqlscripts/Department.sql;
+source ./sqlscripts/Groups.sql;
+source ./sqlscripts/Subject.sql;
+source ./sqlscripts/Teachers.sql;
+source ./sqlscripts/Students.sql;
 source ./sqlscripts/group_subject.sql;
 
 source ./sqlscripts/InsertRoles.sql;
+source ./sqlscripts/InsertUserInfo.sql;
 source ./sqlscripts/InsertDepartment.sql;
 source ./sqlscripts/InsertGroups.sql;
 source ./sqlscripts/InsertSubject.sql;
