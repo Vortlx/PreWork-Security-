@@ -78,7 +78,7 @@ public class SearchController {
             } else if("".equals(name) && !"".equals(familyName)){
                 students = daoStudent.getByFamilyName(familyName);
             }else{
-                students = daoStudent.getStudent(name, familyName);
+                
             }
 
             model.addAttribute("students", students);
@@ -120,7 +120,7 @@ public class SearchController {
         List<Teacher> teachers = new ArrayList<Teacher>();
 
         try{
-            teachers = daoTeacher.getByGroup(groupName);
+            
 
             model.addAttribute("groupName", groupName);
             model.addAttribute("teachers", teachers);

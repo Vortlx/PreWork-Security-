@@ -26,8 +26,8 @@ public class Student extends Person {
         super();
     }
 
-    public Student(int id, String name, String familyName, String login, String password, Group group){
-        super(id, name, familyName, login, password);
+    public Student(int id, String name, String familyName, Group group){
+        super(id, name, familyName);
         this.group = group;
     }
 

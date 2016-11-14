@@ -31,7 +31,7 @@ public class AddController {
                              @RequestParam("groupName") String groupName, Model model){
 
         try{
-            daoTeacher.addGroup(teacherID, groupName);
+            
         }catch(Exception e){
             e.printStackTrace();
 

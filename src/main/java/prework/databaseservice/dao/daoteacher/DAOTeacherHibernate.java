@@ -56,7 +56,6 @@ public class DAOTeacherHibernate implements DAOTeacher{
         session.beginTransaction();
 
         Teacher teacher = session.get(Teacher.class, teacherID);
-        teacher.setLogin(newLogin);
         session.update(teacher);
 
         session.getTransaction().commit();
@@ -67,7 +66,6 @@ public class DAOTeacherHibernate implements DAOTeacher{
         session.beginTransaction();
 
         Teacher teacher = session.get(Teacher.class, teacherID);
-        teacher.setPassword(newPassword);
         session.update(teacher);
 
         session.getTransaction().commit();

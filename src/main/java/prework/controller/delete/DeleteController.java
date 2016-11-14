@@ -31,7 +31,7 @@ public class DeleteController {
         String message = null;
 
         try{
-            daoTeacher.deleteCurator(teacherID, groupName);
+            
         }catch(Exception e){
             e.printStackTrace();
         }finally{
@@ -45,7 +45,7 @@ public class DeleteController {
         String message = null;
 
         try{
-            daoGroup.delete(groupName);
+            
             message = "Operation was success";
         }catch(Exception e){
             e.printStackTrace();
@@ -64,7 +64,7 @@ public class DeleteController {
         String message = null;
 
         try{
-            daoStudent.delete(name, familyName);
+            
             message = "Operation was success";
         }catch(Exception e){
             e.printStackTrace();
@@ -83,7 +83,7 @@ public class DeleteController {
         String message = null;
 
         try{
-            daoTeacher.delete(name, familyName);
+            
             message = "Operation was success";
         }catch(Exception e){
             e.printStackTrace();

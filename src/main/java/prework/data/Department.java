@@ -15,33 +15,18 @@ public class Department {
     @Column(name="name")
     private String name;
 
-    @Column(name="login")
-    private String login;
-
-    @Column(name="password")
-    private String password;
-
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "department")
     private Set<Group> groups;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "department")
     private Set<Teacher> teachers;
-    
-    @Column(name="enabled")
-    private int enabled;
-    
+
     @ManyToOne()
-    @JoinColumn(name="id_role")
-    private Role role;
+    @JoinColumn(name="id_user_info")
+    private UserInfo userInfo;
 
     public Department(){
 
-    }
-
-    public Department(String name, String login, String password){
-        this.name = name;
-        this.login = login;
-        this.password = password;
     }
 
     public int getId() {
@@ -58,22 +43,6 @@ public class Department {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public Set<Group> getGroups() {
@@ -108,19 +77,11 @@ public class Department {
         teachers.remove(teacher);
     }
 
-    public int getEnabled() {
-        return enabled;
+    public UserInfo getUserInfo() {
+        return userInfo;
     }
 
-    public void setEnabled(int enabled) {
-        this.enabled = enabled;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
 }

@@ -43,7 +43,6 @@ public class DAODepartmentHibernate implements DAODepartment{
         session.beginTransaction();
 
         Department department = session.get(Department.class, depID);
-        department.setLogin(newLogin);
         session.update(department);
 
         session.getTransaction().commit();
@@ -54,7 +53,6 @@ public class DAODepartmentHibernate implements DAODepartment{
         session.beginTransaction();
 
         Department department = session.get(Department.class, depID);
-        department.setPassword(newPassword);
         session.update(department);
 
         session.getTransaction().commit();

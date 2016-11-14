@@ -8,8 +8,12 @@
 <title>Welcome</title>
 </head>
 <body>
-    <h1>
-        Welcome!!!
-    </h1>
+    <form action="./jsp/j_spring_security_check" method="POST">
+        Login: <input name="username" type="text"/>
+        <br>
+        Password: <input name="password" type="password">
+        <br>
+        <input name="login" type="submit" value="Login"/>
+    </form>
 </body>
 </html>

@@ -23,7 +23,7 @@ public class UpdateController {
         String message = null;
 
         try{
-            daoStudent.updateGroup(studentID, newGroupName);
+            
         }catch(Exception e){
             e.printStackTrace();
 

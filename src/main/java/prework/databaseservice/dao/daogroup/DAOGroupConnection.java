@@ -156,8 +156,7 @@ public class DAOGroupConnection implements DAOGroup {
 				String studentName = studentsRS.getString(2);
 				String studentFamilyName = studentsRS.getString(3);
 
-				res.addStudent(new Student(studentID, studentName, studentFamilyName
-						, studentFamilyName + studentName, "tets", res));
+				res.addStudent(new Student(studentID, studentName, studentFamilyName, res));
 			}
 
 			studentsRS.close();

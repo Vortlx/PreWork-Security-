@@ -27,29 +27,18 @@ public abstract class Person {
     @Column(name="family_name")
 	private String familyName;
 
-    @Column(name="login")
-    private String login;
-
-    @Column(name="password")
-    private String password;
-    
-    @Column(name="enabled")
-    private int enabled;
-    
     @ManyToOne()
-    @JoinColumn(name="id_role")
-    private Role role;
+    @JoinColumn(name="id_user_info")
+    private UserInfo userInfo;
 
 	public Person(){
 		
 	}
 	
-	public Person(int id, String name, String familyName, String login, String password){
+	public Person(int id, String name, String familyName){
 		this.id = id;
 		this.name = name;
 		this.familyName = familyName;
-        this.login = login;
-        this.password = password;
 	}
 
 	public int getId() {
@@ -71,21 +60,13 @@ public abstract class Person {
 	public void setFamilyName(String familyName) {
 		this.familyName = familyName;
 	}
-
-    public String getLogin() {
-        return login;
+	
+    public UserInfo getUserInfo() {
+        return userInfo;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
     }
 
     @Override
@@ -95,22 +76,6 @@ public abstract class Person {
         result = prime * result + ((familyName == null) ? 0 : familyName.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         return result;
-    }
-
-    public int getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(int enabled) {
-        this.enabled = enabled;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 
     @Override

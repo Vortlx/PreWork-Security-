@@ -43,11 +43,9 @@ public class Main{
 				System.out.println();
 			}
 */	        
-			System.out.println(group.getDepartment().getName() + " " + group.getDepartment().getRole().getName());
-			System.out.println();
-			System.out.println();
+			
 			for(Student student: group.getStudents()){
-			    System.out.println(student.getName() + " " + student.getFamilyName() + " " + student.getRole().getName());
+			    System.out.println(student.getName() + " " + student.getFamilyName());
 			}
 	    }catch(SQLException e){
 	        e.printStackTrace();

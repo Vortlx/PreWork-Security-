@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/security"
-    xmlns:beans="http://www.springframework.org/schema/beans"
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:security="http://www.springframework.org/schema/security"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
     http://www.springframework.org/schema/security
-    http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+    http://www.springframework.org/schema/security/spring-security-4.1.xsd">
     
-    <http auto-config="true">
-        <intercept-url pattern="/welcome**" access="ROLE_STUDENT, ROLE_TEACHER, ROLE_DEPARTMENT"/>
-        <form-login
+    <security:http auto-config="true" use-expressions="true">
+        <security:intercept-url pattern="/welcome**" access="hasAnyRole('ROLE_STUDENT', 'ROLE_TEACHER', 'ROLE_DEPARTMENT')"/>
+        <security:form-login
             login-page="/login"
             default-target-url="/welcome"
             authentication-failure-url="/login"
             username-parameter="username"
             password-parameter="password"
         />
-        <csrf/>
-    </http>
+    </security:http>
     
-    <authentication-manager>
-        <authentication-provider>
-            <jdbc-user-service data-source-ref="dataSource"
-             users-by-username-query="SELECT login, password, enabled FROM user_info WHERE login = ? " 
+    <security:authentication-manager>
+        <security:authentication-provider>
+            <security:jdbc-user-service data-source-ref="dataSource"
+             users-by-username-query="SELECT username, password, enabled FROM user_info WHERE username = ? " 
              authorities-by-username-query = "SELECT user_info.username, roles.name FROM user_info, roles
-                                                 WHERE user_info.id_role = roles.id and user_info.username = ?"/>
-        </authentication-provider>
-    </authentication-manager>
+                                                 WHERE user_info.id_role = roles.id AND user_info.username = ?"/>
+        </security:authentication-provider>
+    </security:authentication-manager>
 
-</beans:beans>
+</beans>

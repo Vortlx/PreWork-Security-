@@ -17,6 +17,7 @@
         <property name="annotatedClasses">
             <list>
                 <value>prework.data.Role</value>
+                <value>prework.data.UserInfo</value>
                 <value>prework.data.Department</value>
                 <value>prework.data.Subject</value>
                 <value>prework.data.Group</value>

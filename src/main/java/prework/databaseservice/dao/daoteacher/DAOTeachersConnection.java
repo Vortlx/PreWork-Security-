@@ -219,7 +219,7 @@ public class DAOTeachersConnection implements DAOTeacher{
 			int teacherID = rs.getInt(1);
 			String familyName = rs.getString(3);
 			
-			Teacher teacher = new Teacher(teacherID, name, familyName, familyName + name, "test");
+			Teacher teacher = new Teacher(teacherID, name, familyName);
 			
 			String getGroupQuery = "SELECT groups.name, groups.id "
 									+ "FROM groups INNER JOIN curator "
@@ -275,7 +275,7 @@ public class DAOTeachersConnection implements DAOTeacher{
 			int teacherID = rs.getInt(1);
 			String name = rs.getString(2);
 			
-			Teacher teacher = new Teacher(teacherID, name, familyName, familyName + name, "tets");
+			Teacher teacher = new Teacher(teacherID, name, familyName);
 			
 			String getGroupQuery = "SELECT groups.name, groups.id "
 									+ "FROM groups INNER JOIN curator "
@@ -332,7 +332,7 @@ public class DAOTeachersConnection implements DAOTeacher{
 		while(rs.next()){
 			int teacherID = rs.getInt(1);
 			
-			Teacher teacher = new Teacher(teacherID, name, familyName, familyName + name, "tets");
+			Teacher teacher = new Teacher(teacherID, name, familyName);
 			
 			String getGroupQuery = "SELECT groups.name, groups.id "
 									+ "FROM groups INNER JOIN curator "
@@ -387,7 +387,7 @@ public class DAOTeachersConnection implements DAOTeacher{
 			int teacherID = rs.getInt(1);
 			String name = rs.getString(2);
 			String familyName = rs.getString(3);
-			Teacher teacher = new Teacher(teacherID, name, familyName, familyName + name, "tets");
+			Teacher teacher = new Teacher(teacherID, name, familyName);
 			
 			String getGroupQuery = "SELECT groups.name, groups.id "
 									+ "FROM groups INNER JOIN curator "
@@ -446,7 +446,7 @@ public class DAOTeachersConnection implements DAOTeacher{
 			String teacherName = rs.getString(2);
 			String teacherFamilyName = rs.getString(3);
 
-			res.add(new Teacher(teacherID, teacherName, teacherFamilyName, teacherFamilyName + teacherName, "tets"));
+			res.add(new Teacher(teacherID, teacherName, teacherFamilyName));
 		}
 
 		rs.close();

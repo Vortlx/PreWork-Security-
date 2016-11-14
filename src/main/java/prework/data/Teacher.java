@@ -29,8 +29,8 @@ public class Teacher extends Person {
         super();
     }
 
-    public Teacher(int id, String name, String familyName, String login, String password){
-        super(id, name, familyName, login, password);
+    public Teacher(int id, String name, String familyName){
+        super(id, name, familyName);
     }
 
     public Subject getSubject() {

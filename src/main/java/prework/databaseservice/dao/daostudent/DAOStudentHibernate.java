@@ -60,7 +60,6 @@ public class DAOStudentHibernate implements DAOStudent{
         session.beginTransaction();
 
         Student student = session.get(Student.class, studentID);
-        student.setLogin(newLogin);
         session.update(student);
 
         session.getTransaction().commit();
@@ -71,7 +70,6 @@ public class DAOStudentHibernate implements DAOStudent{
         session.beginTransaction();
 
         Student student = session.get(Student.class, studentID);
-        student.setPassword(newPassword);
         session.update(student);
 
         session.getTransaction().commit();
