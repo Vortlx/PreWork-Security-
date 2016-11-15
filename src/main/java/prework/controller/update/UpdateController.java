@@ -28,7 +28,7 @@ public class UpdateController {
         }else{
             String message = "Passwords don't match";
             model.addAttribute("message", message);
-            return "./";
+            return "./ChangePassword";
         }
 
         return "../welcome";
@@ -47,12 +47,12 @@ public class UpdateController {
             }else{
                 message = "Passwords don't match";
                 model.addAttribute("message", message);
-                return "./";
+                return "./ChangeUsername";
             }
         }catch(Exception e){
             message = "User with that username exist";
             model.addAttribute("message", message);
-            return "./";
+            return "./ChangeUsername";
         }
 
         return "../welcome";

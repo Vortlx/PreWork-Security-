@@ -4,11 +4,14 @@ package prework.controller.search;
 import prework.data.Group;
 import prework.data.Student;
 import prework.data.Teacher;
+import prework.data.UserInfo;
 import prework.databaseservice.dao.DAOGroup;
 import prework.databaseservice.dao.DAOStudent;
 import prework.databaseservice.dao.DAOTeacher;
+import prework.databaseservice.dao.DAOUserInfo;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +33,24 @@ public class SearchController {
     @Autowired
     private DAOTeacher daoTeacher;
     
+    @Autowired
+    private DAOUserInfo daoUserInfo;
+    
+    @RequestMapping(value = "/MyGroup", method = RequestMethod.GET)
+    public String findMyGroup(@RequestParam("userId") String userId, Model model){
+
+        try{
+            UserInfo userInfo = daoUserInfo.getByID(Integer.parseInt(userId));
+            Iterator<Student> iterator = userInfo.getStudents().iterator();
+            Student student = iterator.next();
+            
+            model.addAttribute("group", student.getGroup());
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            return "./MyGroup";
+        }
+    }
 
     @RequestMapping(value = "/FindGroupServ", method = RequestMethod.POST)
     public String findGroup(@RequestParam("name") String groupName, Model model){
@@ -48,19 +69,6 @@ public class SearchController {
             e.printStackTrace();
         }finally{
             return "GroupsSearch";
-        }
-    }
-
-    @RequestMapping(value = "/FindGroupByTeacherServ", method = RequestMethod.GET)
-    public String findGroupByTeacher(@RequestParam("groupName") String groupName, Model model){
-
-        try{
-            Group group = daoGroup.getByName(groupName);
-            model.addAttribute("group", group);
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally{
-            return "GroupsSearchByTeacher";
         }
     }
 

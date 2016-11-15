@@ -30,9 +30,9 @@
 
     <sec:authorize access="hasRole('ROLE_STUDENT')">
         <div>
-            <a href="./" name="toMyGroup">My Group</a>
+            <a href="./search/MyGroup?userId=${userInfo.id}" name="toMyGroup">My Group</a>
             <br>
-            <a href="./" name="toMySubjects">My Subjects</a>
+            <a href="./search/MySubjects?userId=${userInfo.id}" name="toMySubjects">My Subjects</a>
         </div>
     </sec:authorize>
     <sec:authorize access="hasAnyRole('ROLE_TEACHER', 'ROLE_DEPARTMENT')">

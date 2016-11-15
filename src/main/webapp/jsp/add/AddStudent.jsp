@@ -7,12 +7,12 @@
 <title>Add Group</title>
 </head>
 <body>
-    <form action="AddStudentServ" method="POST">
+    <form action="AddStudent" method="POST">
         Name: <input name="name" type="text" required>
         <br>
         Family Name: <input name="familyName" type="text" required>
         <br>
-        Group: <input name="group" type="text" required>
+        <input name="groupID" type="hidden" value="${id}">
         <br>
         <input name="add" type="submit" value="Add">
     </form>

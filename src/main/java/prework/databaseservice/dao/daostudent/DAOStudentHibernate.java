@@ -22,15 +22,12 @@ public class DAOStudentHibernate implements DAOStudent{
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void add(String name, String familyName, String groupName) throws SQLException {
+    public void add(String name, String familyName, int groupID) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         
         session.beginTransaction();
         
-        String getGroupQuery = "from Group where name = :name";
-        Query query = session.createQuery(getGroupQuery);
-        query.setParameter("name", groupName);
-        Group group = (Group) query.getSingleResult();
+        Group group = session.get(Group.class, groupID);
         
         Student student = new Student();
         student.setName(name);

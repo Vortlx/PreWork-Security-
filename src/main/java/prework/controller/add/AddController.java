@@ -25,6 +25,22 @@ public class AddController {
     @Autowired
     private DAOTeacher daoTeacher;
 
+    @RequestMapping(value = "/AddStudent", method = RequestMethod.POST)
+    public String addStudent(@RequestParam("name") String name, @RequestParam("familyName") String familyName,
+                             @RequestParam("groupID") int groupID, Model model){
+
+        try{
+            daoStudent.add(name, familyName, groupID);
+        }catch(Exception e){
+            e.printStackTrace();
+            String message = "Can't do this operation.";
+            model.addAttribute("message", message);
+            
+            return "./AddStudent";
+        }
+
+        return "../search/MyGroup";
+    }
     
     @RequestMapping(value = "/AddCuratorServ", method = RequestMethod.POST)
     public String addCurator(@RequestParam("teacherID") int teacherID,
@@ -60,25 +76,6 @@ public class AddController {
         }finally{
             model.addAttribute("message", message);
             return "AddGroup";
-        }
-    }
-
-    @RequestMapping(value = "/AddStudentServ", method = RequestMethod.POST)
-    public String addStudent(@RequestParam("name") String name, @RequestParam("familyName") String familyName,
-                             @RequestParam("group") String groupName, Model model){
-
-        String message = null;
-
-        try{
-            daoStudent.add(name, familyName, groupName);
-            message = "Operation was success";
-        }catch(Exception e){
-            e.printStackTrace();
-
-            message = "Can't do this operation.";
-        }finally{
-            model.addAttribute("message", message);
-            return "AddStudent";
         }
     }
 

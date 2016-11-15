@@ -25,7 +25,7 @@ public interface DAOStudent {
 	 *  @throws SQLException
 	 *  @return Nothing.
 	 * */
-	void add(String name, String familyName, String groupName) throws SQLException;
+	void add(String name, String familyName, int groupID) throws SQLException;
 	
 	/**
 	 * This method update data in students table.

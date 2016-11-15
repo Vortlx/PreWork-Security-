@@ -22,7 +22,18 @@ public class DeleteController {
     
     @Autowired
     private DAOTeacher daoTeacher;
+    
+    @RequestMapping(value = "/DeleteStudent", method = RequestMethod.POST)
+    public String deleteStudent(@RequestParam("studentId") int studentId, Model model){
 
+        try{
+            daoStudent.deleteByID(studentId);
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            return "../search/MyGroup";            
+        }
+    }
     
     @RequestMapping(value = "/DeleteCuratorServ", method = RequestMethod.POST)
     public String deleteCurator(@RequestParam("teacherID") int teacherID, @RequestParam("groupName") String groupName,
@@ -54,25 +65,6 @@ public class DeleteController {
         }finally{
             model.addAttribute("message", message);
             return "DeleteGroup";
-        }
-    }
-
-    @RequestMapping(value = "/DeleteStudentServ", method = RequestMethod.POST)
-    public String deleteStudent(@RequestParam("name") String name, @RequestParam("familyName") String familyName,
-                                Model model){
-
-        String message = null;
-
-        try{
-            
-            message = "Operation was success";
-        }catch(Exception e){
-            e.printStackTrace();
-
-            message = "Can't do this operation.";
-        }finally{
-            model.addAttribute("message", message);
-            return "DeleteStudent";
         }
     }
 
