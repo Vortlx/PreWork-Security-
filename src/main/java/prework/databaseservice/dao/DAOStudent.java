@@ -2,7 +2,7 @@ package prework.databaseservice.dao;
 
 
 import java.sql.SQLException;
-import java.util.List;
+import java.util.Set;
 
 import prework.data.Group;
 import prework.data.Student;
@@ -39,10 +39,6 @@ public interface DAOStudent {
 	 * */
 	void changeFullName(int studentID, String newName, String newFamilyName) throws SQLException;
 
-	void changeLogin(int studentID, String newLogin);
-
-	void changePassword(int studentID, String newPassword);
-
 	/**
 	 * Method change current group of student on new group
 	 *
@@ -75,7 +71,7 @@ public interface DAOStudent {
 	 * @throws SQLException
 	 * @return List of persons
 	 * */
-	List<Student> getAll() throws SQLException;
+	Set<Student> getAll() throws SQLException;
 
 	/**
 	 * This method return list of all students who have a specific name.
@@ -84,7 +80,7 @@ public interface DAOStudent {
 	 * @throws SQLException
 	 * @return List of students who have a specific name
 	 * */
-	List<Student> getByName(String name) throws SQLException;
+	Set<Student> getByName(String name) throws SQLException;
 
 	/**
 	 * This method return list of all students who have a specific family name.
@@ -93,7 +89,7 @@ public interface DAOStudent {
 	 * @throws SQLException
 	 * @return List of students who have a specific family name
 	 * */
-	List<Student> getByFamilyName(String familyName) throws SQLException ;
+	Set<Student> getByFamilyName(String familyName) throws SQLException ;
 	
 	/**
 	 * Method return list of students who have specific name and specific family name
@@ -103,5 +99,5 @@ public interface DAOStudent {
 	 * @throws SQLException
 	 * @return List of students who have specific name and specific family name
 	 * */
-	Student getStudent(String name, String familyName) throws SQLException;
+	Set<Student> getStudent(String name, String familyName) throws SQLException;
 }

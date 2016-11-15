@@ -2,7 +2,9 @@ package prework.databaseservice.dao.daoteacher;
 
 
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Query;
 
@@ -107,7 +109,7 @@ public class DAOTeacherHibernate implements DAOTeacher{
         return subject;
     }
 
-    public List<Teacher> getByName(String name) throws SQLException {
+    public Set<Teacher> getByName(String name) throws SQLException {
         
         Session session = sessionFactory.getCurrentSession();
         
@@ -116,14 +118,15 @@ public class DAOTeacherHibernate implements DAOTeacher{
         String queryString = "from Teacher where name = :name";
         Query query = session.createQuery(queryString);
         query.setParameter("name", name);
-        List<Teacher> teachers = query.getResultList();
+        Set<Teacher> teachers = new HashSet<Teacher>();
+        teachers.addAll(query.getResultList());
         
         session.getTransaction().commit();
         
         return teachers;
     }
 
-    public List<Teacher> getByFamilyName(String familyName) throws SQLException {
+    public Set<Teacher> getByFamilyName(String familyName) throws SQLException {
 
         Session session = sessionFactory.getCurrentSession();
         
@@ -132,14 +135,15 @@ public class DAOTeacherHibernate implements DAOTeacher{
         String queryString = "from Teacher where familyName = :familyName";
         Query query = session.createQuery(queryString);
         query.setParameter("familyName", familyName);
-        List<Teacher> teachers = query.getResultList();
+        Set<Teacher> teachers = new HashSet<Teacher>();
+        teachers.addAll(query.getResultList());
         
         session.getTransaction().commit();
         
         return teachers;
     }
 
-    public List<Teacher> getTeacher(String name, String familyName) throws SQLException {
+    public Set<Teacher> getTeacher(String name, String familyName) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         
         session.beginTransaction();
@@ -148,21 +152,23 @@ public class DAOTeacherHibernate implements DAOTeacher{
         Query query = session.createQuery(queryString);
         query.setParameter("name", name);
         query.setParameter("familyName", familyName);
-        List<Teacher> teachers = query.getResultList();
+        Set<Teacher> teachers = new HashSet<Teacher>();
+        teachers.addAll(query.getResultList());
         
         session.getTransaction().commit();
         
         return teachers;
     }
 
-    public List<Teacher> getAll() throws SQLException {
+    public Set<Teacher> getAll() throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         
         session.beginTransaction();
         
         String queryString = "from Teacher";
         Query query = session.createQuery(queryString);
-        List<Teacher> teachers = query.getResultList();
+        Set<Teacher> teachers = new HashSet<Teacher>();
+        teachers.addAll(query.getResultList());
         
         session.getTransaction().commit();
         

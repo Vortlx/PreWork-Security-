@@ -5,24 +5,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8">
-<title>Search Students</title>
+<title>Students</title>
 </head>
 <body>
-    <form action="../search/FindStudentServ" method="POST">
+    <a href="../welcome" name="back">Back</a>
+    <form action="./Students" method="POST">
         Name: <input name="name" type="text">
         <br>
         Family name: <input name="familyName" type="text">
         <br>
         <input name="send" type="submit" value="Find">
     </form>
-    <form action="../search/Search.jsp" method="POST">
-        <input name="back" type="submit" value="Back">
-    </form>
     <table border="1">
         <tr>
             <th>Name</th>
             <th>Family Name</th>
             <th>Group</th>
+            <th> </th>
         </tr>
         <c:forEach items="${students}" var="student">
            <tr>      
@@ -31,10 +30,11 @@
                <td>
                    ${student.group.name}
                    <br>
-                   <form action="../update/ChangeGroup.jsp" method="POST">
-                       <input name="studentID" type="hidden" value="${student.id}">
-                       <input name="change" type="submit" value="Change">
-                   </form>
+                   <a href="../update/ChangeGroup.jsp?depId=${department.id}&studentId=${student.id}"
+                      name="changeGroup">Change group</a>
+               </td>
+               <td>
+                   <a href="./" name="deleteStudent"></a>
                </td>
            </tr>
         </c:forEach>

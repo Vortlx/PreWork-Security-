@@ -37,16 +37,16 @@
     </sec:authorize>
     <sec:authorize access="hasAnyRole('ROLE_TEACHER', 'ROLE_DEPARTMENT')">
         <div>
-            <a href="./" name="toMyGroups">Groups</a>
+            <a href="./search/Groups?userId=${userInfo.id}" name="toGroups">Groups</a>
         </div>
     </sec:authorize>
     <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
         <div>
-            <a href="./" name="toMyStudents">Students</a>
+            <a href="./search/Students?userId=${userInfo.id}" name="toStudents">Students</a>
             <br>
-            <a href="./" name="toMySubjects">Subjects</a>
+            <a href="./search/Subjects?userId=${userInfo.id}" name="toSubjects">Subjects</a>
             <br>
-            <a href="./" name="toMyTeachers">Teachers</a>
+            <a href="./search/Teachers?userId=${userInfo.id}" name="toTeachers">Teachers</a>
         </div>
         <div>
             <br>

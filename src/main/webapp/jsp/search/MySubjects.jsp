@@ -19,7 +19,7 @@
             <th>Type</th>
             <th>Teacher</th>
             <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
-                <th>Delete</th>
+                <th> </th>
             </sec:authorize>
         </tr>
         <c:forEach items="${subjects}" var="subject">

@@ -14,7 +14,7 @@
         <br>
         <input name="add" type="submit" value="Add">
     </form>
-    <form action="../search/TeachersSearch.jsp" method="POST">
+    <form action="../search/Teachers.jsp" method="POST">
         <input name="back" type="submit" value="Back">
     </form>
     <br>

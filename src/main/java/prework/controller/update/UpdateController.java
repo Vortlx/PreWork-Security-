@@ -36,7 +36,7 @@ public class UpdateController {
         return "../welcome";
     }
 
-    @RequestMapping(value="/Changeusername", method = RequestMethod.POST)
+    @RequestMapping(value="/ChangeUsername", method = RequestMethod.POST)
     public String changeUsername(@RequestParam("userId") String userId, @RequestParam("password") String password,
                                 @RequestParam("username") String username, Model model){
 
@@ -60,5 +60,13 @@ public class UpdateController {
         }
 
         return "../welcome";
+    }
+
+    @RequestMapping(value="/ChangeGroup", method=RequestMethod.GET)
+    public String changeGroupForStudent(@RequestParam("studentId") String studentId, Model model){
+
+
+
+        return "";
     }
 }

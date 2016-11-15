@@ -28,27 +28,6 @@ public class Main{
 
 	    try{
 
-            Student student = daoStudent.getAll().get(25);
-            UserInfo userInfo = student.getUserInfo();
-
-            for(Teacher teacher: userInfo.getTeachers()){
-                System.out.println(teacher.getName() + " " + teacher.getFamilyName());
-            }
-
-            System.out.println();
-
-            for(Student studentTest: userInfo.getStudents()){
-                System.out.println(studentTest.getName() + " " + studentTest.getFamilyName());
-            }
-
-
-            System.out.println();
-
-            for(Department dep: userInfo.getDepartments()){
-                System.out.println(dep.getName());
-            }
-
-
 	    }catch(Exception e){
 	        e.printStackTrace();
 	    }finally{

@@ -36,11 +36,13 @@ public class TestDAOStudentHibernate {
         try{
             daoGroup.add(testGroupName1);
             daoGroup.add(testGroupName2);
-            daoStudent.add(studentName, studentFamilyName, testGroupName1);
 
-            testStudent = daoStudent.getStudent(studentName, studentFamilyName);
             testGroup1 = daoGroup.getByName(testGroupName1);
             testGroup2 = daoGroup.getByName(testGroupName2);
+
+            daoStudent.add(studentName, studentFamilyName, testGroup1.getId());
+            testStudent = daoStudent.getStudent(studentName, studentFamilyName).iterator().next();
+
 
         }catch(SQLException e){
             e.printStackTrace();

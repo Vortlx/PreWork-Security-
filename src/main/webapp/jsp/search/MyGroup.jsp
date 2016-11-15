@@ -9,32 +9,27 @@
 <title>My Group</title>
 </head>
 <body>
-    <a href="../welcome" name="Back">Back</a>
+    <sec:authorize access="hasRole('ROLE_STUDENT')">
+        <a href="../welcome" name="Back">Back</a>
+    </sec:authorize>
+    <sec:authorize access="hasAnyRole('ROLE_TEACHER', 'ROLE_DEPARTMENT')">
+        <a href="./Groups?userId=${param.userId}" name="Back">Back</a>
+    </sec:authorize>
+
     <table border="1">
         <tr>
-            <th colspan="3">${group.name}</th>
+            <th colspan="2">${group.name}</th>
         </tr>
         <tr>
             <th>Name</th>
             <th>Family Name</th>
-            <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
-                <th>Delete</th>
-            </sec:authorize>
         </tr>
         <c:forEach items="${group.students}" var="student">
             <tr>
                 <td>${student.name}</td>
                 <td>${student.familyName}</td>
-                <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
-                    <a href="../delete/DeleteStudent?studentId=${student.id}" name="deleteStudent">Delete</a>
-                </sec:authorize>
             </tr>
         </c:forEach>
-        <sec:authorize  access="hasRole('ROLE_DEPARTMENT')">
-            <tr colspan="3">
-                <a href="../add/AddStudent.jsp?groupId=${group.id}" name="addStudent">Add</a>
-            </tr>
-        </sec:authorize>
     </table>
 </body>
 </html>

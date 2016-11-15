@@ -2,7 +2,9 @@ package prework.databaseservice.dao.daostudent;
 
 
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Query;
 
@@ -49,26 +51,6 @@ public class DAOStudentHibernate implements DAOStudent{
         student.setFamilyName(newFamilyName);
         session.update(student);
         
-        session.getTransaction().commit();
-    }
-
-    public void changeLogin(int studentID, String newLogin) {
-        Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
-
-        Student student = session.get(Student.class, studentID);
-        session.update(student);
-
-        session.getTransaction().commit();
-    }
-
-    public void changePassword(int studentID, String newPassword) {
-        Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
-
-        Student student = session.get(Student.class, studentID);
-        session.update(student);
-
         session.getTransaction().commit();
     }
 
@@ -128,21 +110,22 @@ public class DAOStudentHibernate implements DAOStudent{
         return group;
     }
 
-    public List<Student> getAll() throws SQLException {
+    public Set<Student> getAll() throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         
         session.beginTransaction();
         
         String queryString = "from Student";
         Query query = session.createQuery(queryString);
-        List<Student> students = query.getResultList();
+        Set<Student> students = new HashSet<Student>();
+        students.addAll(query.getResultList());
         
         session.getTransaction().commit();
         
         return students;
     }
 
-    public List<Student> getByName(String name) throws SQLException {
+    public Set<Student> getByName(String name) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         
         session.beginTransaction();
@@ -150,14 +133,15 @@ public class DAOStudentHibernate implements DAOStudent{
         String queryString = "from Student where name = :name";
         Query query = session.createQuery(queryString);
         query.setParameter("name", name);
-        List<Student> students = query.getResultList();
+        Set<Student> students = new HashSet<Student>();
+        students.addAll(query.getResultList());
         
         session.getTransaction().commit();
         
         return students;
     }
 
-    public List<Student> getByFamilyName(String familyName) throws SQLException {
+    public Set<Student> getByFamilyName(String familyName) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         
         session.beginTransaction();
@@ -165,14 +149,15 @@ public class DAOStudentHibernate implements DAOStudent{
         String queryString = "from Student where familyName = :familyName";
         Query query = session.createQuery(queryString);
         query.setParameter("familyName", familyName);
-        List<Student> students = query.getResultList();
+        Set<Student> students = new HashSet<Student>();
+        students.addAll(query.getResultList());
         
         session.getTransaction().commit();
         
         return students;
     }
 
-    public Student getStudent(String name, String familyName) throws SQLException {
+    public Set<Student> getStudent(String name, String familyName) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         
         session.beginTransaction();
@@ -181,10 +166,11 @@ public class DAOStudentHibernate implements DAOStudent{
         Query query = session.createQuery(queryString);
         query.setParameter("name", name);
         query.setParameter("familyName", familyName);
-        Student student = (Student) query.getSingleResult();
+        Set<Student> students = new HashSet<Student>();
+        students.addAll(query.getResultList());
         
         session.getTransaction().commit();
         
-        return student;
+        return students;
     }
 }
