@@ -56,16 +56,12 @@ public class DAOStudentHibernate implements DAOStudent{
         session.getTransaction().commit();
     }
 
-    public void changeGroup(int studentID, String newGroupName) throws SQLException {
+    public void changeGroup(int studentID, int newGroupId) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         
         session.beginTransaction();
 
-        String getGroupQuery = "from Group where name = :groupName";
-        Query query = session.createQuery(getGroupQuery);
-        query.setParameter("groupName", newGroupName);
-        Group newGroup = (Group) query.getSingleResult();
-        
+        Group newGroup = session.get(Group.class, newGroupId);
         Student student = session.get(Student.class, studentID);
 
         if(!student.getGroup().equals(newGroup)){
@@ -81,7 +77,9 @@ public class DAOStudentHibernate implements DAOStudent{
         session.beginTransaction();
 
         Student student = session.get(Student.class, studentID);
+        UserInfo userInfo = student.getUserInfo();
         session.delete(student);
+        session.delete(userInfo);
 
         session.getTransaction().commit();
     }
@@ -91,11 +89,16 @@ public class DAOStudentHibernate implements DAOStudent{
         
         session.beginTransaction();
 
-        String queryString = "delete Student where name = :name and familyName = :familyName";
+        String queryString = "from Student where name = :name and familyName = :familyName";
         Query query = session.createQuery(queryString);
         query.setParameter("name", name);
         query.setParameter("familyName", familyName);
-        query.executeUpdate();
+        
+        Student student = (Student) query.getSingleResult();
+        UserInfo userInfo = student.getUserInfo();
+        
+        session.delete(student);
+        session.delete(userInfo);
         
         session.getTransaction().commit();
     }

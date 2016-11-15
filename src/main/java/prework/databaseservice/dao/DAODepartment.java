@@ -18,7 +18,7 @@ public interface DAODepartment {
 
     void delete(int depID);
 
-    Department getBiID(int depID);
+    Department getByID(int depID);
 
     Department getByName(String name);
 

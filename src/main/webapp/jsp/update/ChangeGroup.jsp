@@ -8,14 +8,17 @@
 <title>Add Group</title>
 </head>
 <body>
-    <form action="./ChangeGroupServ" method="POST">
-        <input name="studentID" type="hidden" value="${param.studentID}">
-        Group Name: <input name="newGroupName" type="text" required>
+    <a href="../search/Students" name="back">Back</a>
+    <form action="./ChangeGroup" method="POST">
+        Group Name: 
+        <select name="newGroupId">
+            <c:forEach items="${groups}" var="group">
+                <option value="${group.id}">${group.name}</option>
+            </c:forEach>
+        </select>
         <br>
+        <input name="studentID" type="hidden" value="${studentID}">
         <input name="add" type="submit" value="Change">
-    </form>
-    <form action="../search/Students" method="POST">
-        <input name="back" type="submit" value="Back">
     </form>
     <br>
     ${requestScope.message}

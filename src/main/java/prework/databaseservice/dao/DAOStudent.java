@@ -49,7 +49,7 @@ public interface DAOStudent {
 	 * @throws SQLException
 	 * @return Nothing
 	 * */
-	void changeGroup(int studentID, String newGroupName) throws SQLException;
+	void changeGroup(int studentID, int newGroupId) throws SQLException;
 
 	void deleteByID(int studentID);
 

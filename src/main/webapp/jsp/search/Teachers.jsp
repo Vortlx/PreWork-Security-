@@ -29,7 +29,7 @@
                 <td>${teacher.familyName}</td>
                 <td>${teacher.subject.name}:    ${teacher.subject.type}</td>
                 <td>
-                    <a href="../delete/deleteTeacher" name="deleteTeacher">Delete</a>
+                    <a href="../delete/deleteTeacher?teacherId=${teacher.id}" name="deleteTeacher">Delete</a>
                 </td>
             </tr>
         </c:forEach>

@@ -61,7 +61,10 @@ public class DAOTeacherHibernate implements DAOTeacher{
         session.beginTransaction();
 
         Teacher teacher = session.get(Teacher.class, teacherID);
+        UserInfo userInfo = teacher.getUserInfo();
+        
         session.delete(teacher);
+        session.delete(userInfo);
 
         session.getTransaction().commit();
     }
@@ -71,11 +74,16 @@ public class DAOTeacherHibernate implements DAOTeacher{
         
         session.beginTransaction();
         
-        String queryString = "delete Teacher where name = :name and familyName = :familyName";
+        String queryString = "from Teacher where name = :name and familyName = :familyName";
         Query query = session.createQuery(queryString);
         query.setParameter("name", name);
         query.setParameter("familyName", familyName);
-        query.executeUpdate();
+        
+        Teacher teacher = (Teacher) query.getSingleResult();
+        UserInfo userInfo = teacher.getUserInfo();
+        
+        session.delete(teacher);
+        session.delete(userInfo);
         
         session.getTransaction().commit();
     }

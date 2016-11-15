@@ -68,7 +68,7 @@ public class DAODepartmentHibernate implements DAODepartment{
         session.getTransaction().commit();
     }
 
-    public Department getBiID(int depID) {
+    public Department getByID(int depID) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 

@@ -30,11 +30,11 @@
                <td>
                    ${student.group.name}
                    <br>
-                   <a href="../update/ChangeGroup.jsp?depId=${department.id}&studentId=${student.id}"
+                   <a href="../update/ChangeGroupPage?depId=${department.id}&studentId=${student.id}"
                       name="changeGroup">Change group</a>
                </td>
                <td>
-                   <a href="../delete/DeleteStudent" name="deleteStudent">Delete</a>
+                   <a href="../delete/DeleteStudent?studentId=${student.id}" name="deleteStudent">Delete</a>
                </td>
            </tr>
         </c:forEach>

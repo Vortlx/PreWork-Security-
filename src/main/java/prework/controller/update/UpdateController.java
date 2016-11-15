@@ -7,7 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import prework.data.Department;
 import prework.data.UserInfo;
+import prework.databaseservice.dao.DAODepartment;
+import prework.databaseservice.dao.DAOStudent;
 import prework.databaseservice.dao.DAOUserInfo;
 
 @Controller
@@ -16,6 +20,12 @@ public class UpdateController {
 
     @Autowired
     private DAOUserInfo daoUserInfo;
+    
+    @Autowired
+    private DAOStudent daoStudent;
+    
+    @Autowired
+    private DAODepartment daoDepartment; 
 
     @RequestMapping(value="/ChangePassword", method = RequestMethod.POST)
     public String changePasswor(@RequestParam("userId") String userId, @RequestParam("oldPassword") String oldPassword,
@@ -62,11 +72,33 @@ public class UpdateController {
         return "../welcome";
     }
 
-    @RequestMapping(value="/ChangeGroup", method=RequestMethod.GET)
-    public String changeGroupForStudent(@RequestParam("studentId") String studentId, Model model){
-
-
-
-        return "";
+    @RequestMapping(value="/ChangeGroup", method=RequestMethod.POST)
+    public String changeGroupForStudent(@RequestParam("studentId") String studentId,
+                                        @RequestParam("newGroupId") String newGroupId,
+                                        Model model){
+        try{
+            daoStudent.changeGroup(Integer.parseInt(studentId), Integer.parseInt(newGroupId));
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            return "../search/Students";
+        }
+    }
+    
+    @RequestMapping(value="/ChangeGroupPage", method=RequestMethod.GET)
+    public String changeGroupPage(@RequestParam("depId") String depId, 
+                                  @RequestParam("studentId") String studentId,
+                                  Model model){
+        
+        try{
+            Department department = daoDepartment.getByID(Integer.parseInt(depId));
+            
+            model.addAttribute("groups", department.getGroups());
+            model.addAttribute("studentID", studentId);
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            return "./ChangeGroup";
+        }
     }
 }

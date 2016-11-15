@@ -23,7 +23,7 @@ public class DeleteController {
     @Autowired
     private DAOTeacher daoTeacher;
     
-    @RequestMapping(value = "/DeleteStudent", method = RequestMethod.POST)
+    @RequestMapping(value = "/DeleteStudent", method = RequestMethod.GET)
     public String deleteStudent(@RequestParam("studentId") int studentId, Model model){
 
         try{
@@ -34,56 +34,29 @@ public class DeleteController {
             return "../search/MyGroup";            
         }
     }
-    
-    @RequestMapping(value = "/DeleteCuratorServ", method = RequestMethod.POST)
-    public String deleteCurator(@RequestParam("teacherID") int teacherID, @RequestParam("groupName") String groupName,
-                                Model model){
 
-        String message = null;
+    @RequestMapping(value = "/DeleteGroup", method = RequestMethod.GET)
+    public String deleteGroup(@RequestParam("groupId") String groupId, Model model){
 
         try{
-            
+            daoGroup.deleteByID(Integer.parseInt(groupId));
         }catch(Exception e){
             e.printStackTrace();
+
         }finally{
-            return "../search/TeachersSearch";
+            return "../search/Groups";            
         }
     }
 
-    @RequestMapping(value = "/DeleteGroupServ", method = RequestMethod.POST)
-    public String deleteGroup(@RequestParam("name") String groupName, Model model){
-
-        String message = null;
+    @RequestMapping(value = "/DeleteTeacher", method = RequestMethod.GET)
+    public String deleteTeacher(@RequestParam("teacherId") String teacherId, Model model){
 
         try{
-            
-            message = "Operation was success";
+            daoTeacher.deleteByID(Integer.parseInt(teacherId));
         }catch(Exception e){
             e.printStackTrace();
-
-            message = "Can't do this operation.";
         }finally{
-            model.addAttribute("message", message);
-            return "DeleteGroup";
-        }
-    }
-
-    @RequestMapping(value = "/DeleteTeacherServ", method = RequestMethod.POST)
-    public String deleteTeacher(@RequestParam("name") String name, @RequestParam("familyName") String familyName,
-                                Model model){
-
-        String message = null;
-
-        try{
-            
-            message = "Operation was success";
-        }catch(Exception e){
-            e.printStackTrace();
-
-            message = "Can't do this operation.";
-        }finally{
-            model.addAttribute("message", message);
-            return "DeleteTeacher";
+            return "../search/Teachers";
         }
     }
 }

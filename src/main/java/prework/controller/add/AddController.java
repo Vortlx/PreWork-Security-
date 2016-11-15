@@ -95,7 +95,7 @@ public class AddController {
                            @RequestParam("departmentId") String depId,
                            Model model){
        try{
-           Department department = daoDepartment.getBiID(Integer.parseInt(depId));
+           Department department = daoDepartment.getByID(Integer.parseInt(depId));
            daoGroup.add(groupName, department);
         }catch(Exception e){
            e.printStackTrace();
@@ -115,7 +115,7 @@ public class AddController {
                              @RequestParam("departmentId") String depId,
                              Model model){
         try{
-            Department department = daoDepartment.getBiID(Integer.parseInt(depId));
+            Department department = daoDepartment.getByID(Integer.parseInt(depId));
 
             Subject newSubject = new Subject();
             newSubject.setName(subjectName);

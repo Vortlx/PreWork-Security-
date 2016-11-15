@@ -21,7 +21,7 @@
                     </td>
                     <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
                         <td>
-                            <a href="../delete/DeleteGroup" name="deleteGroup">Delete</a>
+                            <a href="../delete/DeleteGroup?groupId=${group.id}" name="deleteGroup">Delete</a>
                         </td>
                     </sec:authorize>
                 </tr>
