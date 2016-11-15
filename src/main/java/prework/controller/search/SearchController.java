@@ -51,6 +51,22 @@ public class SearchController {
             return "./MyGroup";
         }
     }
+    
+    @RequestMapping(value = "/MySubjects", method = RequestMethod.GET)
+    public String findMySubjects(@RequestParam("userId") String userId, Model model){
+
+        try{
+            UserInfo userInfo = daoUserInfo.getByID(Integer.parseInt(userId));
+            Iterator<Student> iterator = userInfo.getStudents().iterator();
+            Student student = iterator.next();
+            
+            model.addAttribute("subjects", student.getGroup().getSubjects());
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            return "./MySubjects";
+        }
+    }
 
     @RequestMapping(value = "/FindGroupServ", method = RequestMethod.POST)
     public String findGroup(@RequestParam("name") String groupName, Model model){
