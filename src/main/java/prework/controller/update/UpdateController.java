@@ -17,14 +17,16 @@ public class UpdateController {
     @Autowired
     private DAOUserInfo daoUserInfo;
 
-    @RequestMapping(value="/jsp/update/ChangePassword", method = RequestMethod.POST)
-    public String changePasswor(@RequestParam("id") int id, @RequestParam("oldPassword") String oldPassword,
+    @RequestMapping(value="/ChangePassword", method = RequestMethod.POST)
+    public String changePasswor(@RequestParam("userId") String userId, @RequestParam("oldPassword") String oldPassword,
                                 @RequestParam("newPassword") String newPassword, Model model){
 
-        UserInfo userInfo = daoUserInfo.getByID(id);
+        int userIdInt = Integer.parseInt(userId);
+        UserInfo userInfo = daoUserInfo.getByID(userIdInt);
 
         if(userInfo.getPassword().equals(oldPassword)){
-            daoUserInfo.changePassword(id, newPassword);
+            daoUserInfo.changePassword(userIdInt, newPassword);
+            model.addAttribute("userInfo", userInfo);
         }else{
             String message = "Passwords don't match";
             model.addAttribute("message", message);
@@ -34,16 +36,18 @@ public class UpdateController {
         return "../welcome";
     }
 
-    @RequestMapping(value="/jsp/update/Changeusername", method = RequestMethod.POST)
-    public String changeUsername(@RequestParam("id") int id, @RequestParam("password") String password,
+    @RequestMapping(value="/Changeusername", method = RequestMethod.POST)
+    public String changeUsername(@RequestParam("userId") String userId, @RequestParam("password") String password,
                                 @RequestParam("username") String username, Model model){
 
-        UserInfo userInfo = daoUserInfo.getByID(id);
+        int userIdInt = Integer.parseInt(userId);
+        UserInfo userInfo = daoUserInfo.getByID(userIdInt);
         String message = null;
 
         try{
             if(userInfo.getPassword().equals(password)){
-                daoUserInfo.changeUsername(id, username);
+                daoUserInfo.changeUsername(userIdInt, username);
+                model.addAttribute("userInfo", userInfo);
             }else{
                 message = "Passwords don't match";
                 model.addAttribute("message", message);
