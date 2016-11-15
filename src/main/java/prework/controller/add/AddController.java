@@ -73,10 +73,11 @@ public class AddController {
             UserInfo newUser = new UserInfo();
             newUser.setUsername(familyName + name);
             newUser.setPassword("test");
+            newUser.setEnabled(1);
             newUser.setRole(role);
 
             daoUserInfo.add(newUser);
-            daoStudent.add(name, familyName, groupIdInt, newUser);
+            daoStudent.add(name, familyName, groupIdInt, daoUserInfo.getByUsername(familyName + name));
 
         }catch(Exception e){
             e.printStackTrace();
@@ -125,11 +126,12 @@ public class AddController {
             UserInfo newUser = new UserInfo();
             newUser.setUsername(familyName + name);
             newUser.setPassword("test");
+            newUser.setEnabled(1);
             newUser.setRole(role);
 
             daoUserInfo.add(newUser);
 
-            daoTeacher.add(name, familyName, newSubject, department, newUser);
+            daoTeacher.add(name, familyName, newSubject, department, daoUserInfo.getByUsername(familyName + name));
         }catch(Exception e){
             e.printStackTrace();
             String message = "Can't do this operation.";
