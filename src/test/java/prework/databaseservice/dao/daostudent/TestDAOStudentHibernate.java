@@ -34,13 +34,13 @@ public class TestDAOStudentHibernate {
     @BeforeClass
     public static void addDataToTable(){
         try{
-            daoGroup.add(testGroupName1);
-            daoGroup.add(testGroupName2);
+            //daoGroup.add(testGroupName1);
+            //daoGroup.add(testGroupName2);
 
             testGroup1 = daoGroup.getByName(testGroupName1);
             testGroup2 = daoGroup.getByName(testGroupName2);
 
-            daoStudent.add(studentName, studentFamilyName, testGroup1.getId());
+            //daoStudent.add(studentName, studentFamilyName, testGroup1.getId());
             testStudent = daoStudent.getStudent(studentName, studentFamilyName).iterator().next();
 
 

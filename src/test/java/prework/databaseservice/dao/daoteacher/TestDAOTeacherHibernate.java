@@ -27,8 +27,8 @@ public class TestDAOTeacherHibernate {
     @BeforeClass
     public static void addDataToTable(){
         try{
-            daoTeacher.add(teacherName, teacherFamilyName);
-        }catch(SQLException e){
+            //daoTeacher.add(teacherName, teacherFamilyName);
+        }catch(Exception e){
             e.printStackTrace();
         }
     }

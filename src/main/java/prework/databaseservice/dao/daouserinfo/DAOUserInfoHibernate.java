@@ -21,8 +21,11 @@ public class DAOUserInfoHibernate implements DAOUserInfo {
         session.beginTransaction();
 
         UserInfo existingUser = session.get(UserInfo.class, userInfo.getId());
-        if(existingUser != null)
+
+        if(existingUser != null) {
+            session.getTransaction().commit();
             throw new Exception();
+        }
 
         session.save(userInfo);
 

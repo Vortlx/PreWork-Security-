@@ -3,6 +3,8 @@ package prework.databaseservice.dao;
 
 import java.sql.SQLException;
 import java.util.List;
+
+import prework.data.Department;
 import prework.data.Group;
 import prework.data.Student;
 import prework.data.Subject;
@@ -22,7 +24,7 @@ public interface DAOGroup {
 	 * @throw SQLException
 	 * @return Nothing
 	 * */
-	void add(String name) throws SQLException;
+	void add(String name, Department department) throws SQLException;
 
 	void addStudent(int groupID, Student student);
 

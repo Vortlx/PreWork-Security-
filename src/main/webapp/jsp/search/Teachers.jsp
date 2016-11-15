@@ -29,10 +29,15 @@
                 <td>${teacher.familyName}</td>
                 <td>${teacher.subject.name}:    ${teacher.subject.type}</td>
                 <td>
-                    <a href="./" name="deleteStudent"></a>
+                    <a href="../delete/deleteTeacher" name="deleteTeacher">Delete</a>
                 </td>
             </tr>
         </c:forEach>
+        <tr>
+            <td colspan="4">
+                <a href="../add/AddTeacher.jsp" name="addTeacher">Add</a>
+            </td>
+        </tr>
     </table>
 </body>
 </html>

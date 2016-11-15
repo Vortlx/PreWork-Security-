@@ -21,7 +21,7 @@
                     </td>
                     <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
                         <td>
-                            <a href="./" name="deleteGroup">Delete</a>
+                            <a href="../delete/DeleteGroup" name="deleteGroup">Delete</a>
                         </td>
                     </sec:authorize>
                 </tr>
@@ -29,7 +29,7 @@
         <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
             <tr>
                 <td colspan="2">
-                    <a href="./" name="addGroup">Add</a>
+                    <a href="../add/AddGroup.jsp" name="addGroup">Add</a>
                 </td>
             </tr>
         </sec:authorize>

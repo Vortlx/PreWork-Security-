@@ -34,10 +34,15 @@
                       name="changeGroup">Change group</a>
                </td>
                <td>
-                   <a href="./" name="deleteStudent"></a>
+                   <a href="../delete/DeleteStudent" name="deleteStudent">Delete</a>
                </td>
            </tr>
         </c:forEach>
+        <tr>
+            <td colspan="4">
+                <a href="../add/AddStudent.jsp" name="addStudent">Add</a>
+            </td>
+        </tr>
     </table>
 </body>
 </html>

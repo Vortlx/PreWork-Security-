@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import prework.data.Department;
 import prework.data.Student;
 import prework.data.Subject;
 import prework.databaseservice.dao.DAOGroup;
@@ -23,13 +24,14 @@ public class DAOGroupHibernate implements DAOGroup {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void add(String name) throws SQLException {
+    public void add(String name, Department department) throws SQLException {
         
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        
+
         Group group = new Group();
         group.setName(name);
+        group.setDepartment(department);
         session.save(group);
         
         session.getTransaction().commit();

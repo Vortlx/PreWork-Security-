@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import prework.data.UserInfo;
 import prework.databaseservice.dao.DAOStudent;
 import prework.data.Group;
 import prework.data.Student;
@@ -24,7 +25,7 @@ public class DAOStudentHibernate implements DAOStudent{
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void add(String name, String familyName, int groupID) throws SQLException {
+    public void add(String name, String familyName, int groupID, UserInfo userInfo) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         
         session.beginTransaction();
@@ -35,7 +36,8 @@ public class DAOStudentHibernate implements DAOStudent{
         student.setName(name);
         student.setFamilyName(familyName);
         student.setGroup(group);
-        
+        student.setUserInfo(userInfo);
+
         session.save(student);
         
         session.getTransaction().commit();

@@ -44,26 +44,19 @@
         <div>
             <a href="./search/Students?userId=${userInfo.id}" name="toStudents">Students</a>
             <br>
-            <a href="./search/Subjects?userId=${userInfo.id}" name="toSubjects">Subjects</a>
-            <br>
             <a href="./search/Teachers?userId=${userInfo.id}" name="toTeachers">Teachers</a>
         </div>
         <div>
             <br>
-            Add <select>
-                <option>
-                    <a href="./" name="addGroup">Group</a>
-                </option>
-                <option>
-                    <a href="./" name="addStudent">Student</a>
-                </option>
-                <option>
-                    <a href="./" name="addSubject">Subject</a>
-                </option>
-                <option>
-                    <a href="./" name="addTeacher">Teacher</a>
-                </option>
-            </select>
+            <form action="./add/Add" method="POST">
+                <select name="whatAdd">
+                    <option value="GROUP">Group</option>
+                    <option value="STUDENT">Student</option>
+                    <option value="TEACHER">Teacher</option>
+                </select>
+                <input name="userId" type="hidden" value="${userInfo.id}">
+                <input name="add" type="submit" value="Add"/>
+            </form>
         </div>
     </sec:authorize>
 

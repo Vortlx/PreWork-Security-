@@ -33,7 +33,7 @@ public class TestDAOGroupHibernate {
     @BeforeClass
     public static void addDataToTable(){
         try{
-            daoGroup.add(testGroupName);
+            //daoGroup.add(testGroupName,);
             testGroup = daoGroup.getByName(testGroupName);
 
         }catch(SQLException e){

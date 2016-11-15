@@ -16,10 +16,10 @@ public class EnterWelcomeController {
     @Autowired
     DAOUserInfo daoUserInfo;
 
-    @RequestMapping(value="login")
+    @RequestMapping(value="/login")
     public String login(){
 
-        return "login";
+        return "./login";
     }
 
     @RequestMapping(value="/jsp/welcome")

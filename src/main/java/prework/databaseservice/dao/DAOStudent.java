@@ -6,6 +6,7 @@ import java.util.Set;
 
 import prework.data.Group;
 import prework.data.Student;
+import prework.data.UserInfo;
 
 /**
  * This class define CRUD operation for students table.
@@ -25,7 +26,7 @@ public interface DAOStudent {
 	 *  @throws SQLException
 	 *  @return Nothing.
 	 * */
-	void add(String name, String familyName, int groupID) throws SQLException;
+	void add(String name, String familyName, int groupID, UserInfo userInfo) throws SQLException;
 	
 	/**
 	 * This method update data in students table.

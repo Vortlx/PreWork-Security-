@@ -11,10 +11,8 @@ import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import prework.data.Subject;
+import prework.data.*;
 import prework.databaseservice.dao.DAOTeacher;
-import prework.data.Group;
-import prework.data.Teacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +23,8 @@ public class DAOTeacherHibernate implements DAOTeacher{
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void add(String name, String familyName) throws SQLException {
+    public void add(String name, String familyName,
+                    Subject subject, Department department, UserInfo userInfo) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         
         session.beginTransaction();
@@ -33,6 +32,10 @@ public class DAOTeacherHibernate implements DAOTeacher{
         Teacher teacher = new Teacher();
         teacher.setName(name);
         teacher.setFamilyName(familyName);
+        teacher.setSubject(subject);
+        teacher.setDepartment(department);
+        teacher.setUserInfo(userInfo);
+
         session.save(teacher);
         
         session.getTransaction().commit();
@@ -50,26 +53,6 @@ public class DAOTeacherHibernate implements DAOTeacher{
         query.setParameter("newFamilyName", newFamilyName);
         query.executeUpdate();
         
-        session.getTransaction().commit();
-    }
-
-    public void changeLogin(int teacherID, String newLogin) {
-        Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
-
-        Teacher teacher = session.get(Teacher.class, teacherID);
-        session.update(teacher);
-
-        session.getTransaction().commit();
-    }
-
-    public void changePassword(int teacherID, String newPassword) {
-        Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
-
-        Teacher teacher = session.get(Teacher.class, teacherID);
-        session.update(teacher);
-
         session.getTransaction().commit();
     }
 
