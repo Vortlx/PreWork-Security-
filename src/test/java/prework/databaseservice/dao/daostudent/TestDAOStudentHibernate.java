@@ -57,7 +57,7 @@ public class TestDAOStudentHibernate {
 
             daoGroup.deleteByID(testGroup1.getId());
             daoGroup.deleteByID(testGroup2.getId());
-        }catch(SQLException e){
+        }catch(Exception e){
             e.printStackTrace();
         }
     }

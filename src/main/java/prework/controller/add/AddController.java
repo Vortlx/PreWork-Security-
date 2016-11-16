@@ -88,7 +88,9 @@ public class AddController {
         }catch(Exception e){
             e.printStackTrace();
             String message = "Can't do this operation.";
+
             model.addAttribute("message", message);
+            model.addAttribute("groupID", daoGroup.getAll());
             
             return "./add/AddStudent";
         }
@@ -110,6 +112,8 @@ public class AddController {
 
            String message = "Can't do this operation.";
            model.addAttribute("message", message);
+           model.addAttribute("departmentId", depId);
+
            return "./add/AddGroup";
         }
 
@@ -144,14 +148,16 @@ public class AddController {
             
             model.addAttribute("userInfo", department.getUserInfo());
         }catch(Exception e){
+
             e.printStackTrace();
             String message = "Can't do this operation.";
+
             model.addAttribute("message", message);
+            model.addAttribute("departmentId", depId);
 
             return "./add/AddTeacher";
-        }finally{
-
-            return "./welcome";
         }
+
+        return "./welcome";
     }
 }

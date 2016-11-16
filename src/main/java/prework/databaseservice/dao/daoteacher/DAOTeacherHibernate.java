@@ -61,10 +61,8 @@ public class DAOTeacherHibernate implements DAOTeacher{
         session.beginTransaction();
 
         Teacher teacher = session.get(Teacher.class, teacherID);
-        UserInfo userInfo = teacher.getUserInfo();
-        
+
         session.delete(teacher);
-        session.delete(userInfo);
 
         session.getTransaction().commit();
     }
@@ -74,17 +72,13 @@ public class DAOTeacherHibernate implements DAOTeacher{
         
         session.beginTransaction();
         
-        String queryString = "from Teacher where name = :name and familyName = :familyName";
+        String queryString = "delete Teacher where name = :name and familyName = :familyName";
         Query query = session.createQuery(queryString);
         query.setParameter("name", name);
         query.setParameter("familyName", familyName);
         
-        Teacher teacher = (Teacher) query.getSingleResult();
-        UserInfo userInfo = teacher.getUserInfo();
-        
-        session.delete(teacher);
-        session.delete(userInfo);
-        
+        query.executeUpdate();
+
         session.getTransaction().commit();
     }
 
@@ -98,6 +92,17 @@ public class DAOTeacherHibernate implements DAOTeacher{
         session.getTransaction().commit();
 
         return subject;
+    }
+
+    public Teacher getById(int teacherID){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        Teacher teacher = session.get(Teacher.class, teacherID);
+
+        session.getTransaction().commit();
+
+        return teacher;
     }
 
     public Set<Teacher> getByName(String name) throws SQLException {

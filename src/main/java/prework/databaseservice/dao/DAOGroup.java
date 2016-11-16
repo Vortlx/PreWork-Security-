@@ -24,7 +24,7 @@ public interface DAOGroup {
 	 * @throw SQLException
 	 * @return Nothing
 	 * */
-	void add(String name, Department department) throws SQLException;
+	void add(String name, Department department);
 
 	void addStudent(int groupID, Student student);
 
@@ -38,7 +38,7 @@ public interface DAOGroup {
 	 * @throw SQLException
 	 * @return Nothing
 	 * */
-	void changeName(int groupID, String newName) throws SQLException;
+	void changeName(int groupID, String newName);
 
 	/**
 	 * This method delete group with specific name from groups table.
@@ -47,9 +47,9 @@ public interface DAOGroup {
 	 * @throw SQLException
 	 * @return Nothing
 	 * */
-	void deleteByID(int groupID) throws SQLException;
+	void deleteByID(int groupID);
 
-	void deleteByName(String groupName) throws SQLException;
+	void deleteByName(String groupName);
 
 	List<Student> getStudents(int groupID);
 
@@ -65,7 +65,7 @@ public interface DAOGroup {
 	 * @param name Name of group
 	 * @return Group
 	 * */
-	Group getByName(String name) throws SQLException;
+	Group getByName(String name);
 	
 	/**
 	 * This method return list of all existing groups.
@@ -73,5 +73,5 @@ public interface DAOGroup {
 	 * @throw SQLException
 	 * @return List of name (String) of all groups
 	 * */
-	List<Group> getAll() throws SQLException;
+	List<Group> getAll();
 }

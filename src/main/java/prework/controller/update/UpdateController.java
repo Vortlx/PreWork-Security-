@@ -16,7 +16,7 @@ import prework.databaseservice.dao.DAOStudent;
 import prework.databaseservice.dao.DAOUserInfo;
 
 @Controller
-@RequestMapping(value="/jsp")
+@RequestMapping(value="/jsp/update")
 public class UpdateController {
 
     @Autowired
@@ -44,7 +44,7 @@ public class UpdateController {
             return "./ChangePassword";
         }
 
-        return "./welcome";
+        return "../welcome";
     }
 
     @RequestMapping(value="/ChangeUsername", method = RequestMethod.POST)
@@ -60,7 +60,7 @@ public class UpdateController {
                 daoUserInfo.changeUsername(userIdInt, username);
                 model.addAttribute("userInfo", userInfo);
             }else{
-                message = "Passwords don't match";
+                message = "Wrong password";
                 model.addAttribute("message", message);
                 return "./ChangeUsername";
             }
@@ -70,7 +70,7 @@ public class UpdateController {
             return "./ChangeUsername";
         }
 
-        return "./welcome";
+        return "../welcome";
     }
 
     @RequestMapping(value="/ChangeGroup", method=RequestMethod.POST)
@@ -86,7 +86,7 @@ public class UpdateController {
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            return "./search/Students";
+            return "../search/Students";
         }
     }
     
@@ -103,7 +103,7 @@ public class UpdateController {
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            return "./update/ChangeGroup";
+            return "./ChangeGroup";
         }
     }
 }

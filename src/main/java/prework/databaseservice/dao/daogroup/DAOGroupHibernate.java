@@ -24,7 +24,7 @@ public class DAOGroupHibernate implements DAOGroup {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void add(String name, Department department) throws SQLException {
+    public void add(String name, Department department) {
         
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -59,7 +59,7 @@ public class DAOGroupHibernate implements DAOGroup {
         session.getTransaction().commit();
     }
 
-    public void changeName(int groupID, String newName) throws SQLException {
+    public void changeName(int groupID, String newName) {
         Session session = sessionFactory.getCurrentSession();
         
         session.beginTransaction();
@@ -72,7 +72,7 @@ public class DAOGroupHibernate implements DAOGroup {
         session.getTransaction().commit();
     }
 
-    public void deleteByID(int groupID) throws SQLException {
+    public void deleteByID(int groupID) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         
@@ -82,7 +82,7 @@ public class DAOGroupHibernate implements DAOGroup {
         session.getTransaction().commit();
     }
 
-    public void deleteByName(String groupName) throws SQLException{
+    public void deleteByName(String groupName){
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
 
@@ -106,7 +106,7 @@ public class DAOGroupHibernate implements DAOGroup {
         return group;
     }
 
-    public Group getByName(String name) throws SQLException {
+    public Group getByName(String name) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         
@@ -120,7 +120,7 @@ public class DAOGroupHibernate implements DAOGroup {
         return group;
     }
 
-    public List<Group> getAll() throws SQLException {
+    public List<Group> getAll() {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         

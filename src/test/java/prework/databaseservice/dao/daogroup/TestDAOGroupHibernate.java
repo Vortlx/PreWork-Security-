@@ -3,11 +3,6 @@ package prework.databaseservice.dao.daogroup;
 
 import org.junit.Test;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -36,7 +31,7 @@ public class TestDAOGroupHibernate {
             //daoGroup.add(testGroupName,);
             testGroup = daoGroup.getByName(testGroupName);
 
-        }catch(SQLException e){
+        }catch(Exception e){
             e.printStackTrace();
         }
     }
@@ -45,7 +40,7 @@ public class TestDAOGroupHibernate {
     public static void deleteDataFromTable(){
         try{
             daoGroup.deleteByName(testGroupName);
-        }catch(SQLException e){
+        }catch(Exception e){
             e.printStackTrace();
         }
     }

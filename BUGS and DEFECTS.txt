@@ -9,3 +9,5 @@
 5. Exception Transaction already active
 
 6. not handled code 500
+
+7. Need rename class UserInfo to User

@@ -25,13 +25,13 @@ public class UserInfo {
     @JoinColumn(name="id_role")
     private Role role;
     
-    @OneToMany(mappedBy="userInfo", fetch= FetchType.EAGER)
+    @OneToMany(mappedBy="userInfo", fetch= FetchType.EAGER, cascade={CascadeType.REFRESH, CascadeType.REMOVE})
     private Set<Department> departments;
     
-    @OneToMany(mappedBy="userInfo", fetch= FetchType.EAGER)
+    @OneToMany(mappedBy="userInfo", fetch= FetchType.EAGER, cascade={CascadeType.REFRESH, CascadeType.REMOVE})
     private Set<Teacher> teachers;
     
-    @OneToMany(mappedBy="userInfo", fetch= FetchType.EAGER)
+    @OneToMany(mappedBy="userInfo", fetch= FetchType.EAGER, cascade={CascadeType.REFRESH, CascadeType.REMOVE})
     private Set<Student> students;
 
     public int getId() {

@@ -12,7 +12,7 @@
 </head>
 <body>
     <a href="../welcome" name="Back">Back</a>
-	<form action="../ChangeUsername" method="POST">
+	<form action="./ChangeUsername" method="POST">
 	    Enter your password <input name="password" type="password"/>
 	    <br>
 	    Enter your new username <input name="username" type="text"/>

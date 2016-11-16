@@ -56,6 +56,8 @@ public interface DAOTeacher {
 
 	Subject getSubject(int teacherID);
 
+	Teacher getById(int teacherId);
+
 	/**
 	 * This method return list of all teachers who have a specific name.
 	 * 

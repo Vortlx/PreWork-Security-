@@ -24,7 +24,7 @@ public class Subject {
             inverseJoinColumns = @JoinColumn(name="id_group"))
     private Set<Group> groups;
 
-    @OneToMany(mappedBy="subject", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="subject", fetch = FetchType.EAGER, cascade={CascadeType.REFRESH, CascadeType.REMOVE})
     private Set<Teacher> teachers;
 
     public Subject(){

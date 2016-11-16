@@ -33,11 +33,6 @@
                 </td>
             </tr>
         </c:forEach>
-        <tr>
-            <td colspan="4">
-                <a href="./AddTeacher.jsp" name="addTeacher">Add</a>
-            </td>
-        </tr>
     </table>
 </body>
 </html>

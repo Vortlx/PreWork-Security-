@@ -38,11 +38,6 @@
                </td>
            </tr>
         </c:forEach>
-        <tr>
-            <td colspan="4">
-                <a href="./AddStudent.jsp" name="addStudent">Add</a>
-            </td>
-        </tr>
     </table>
 </body>
 </html>

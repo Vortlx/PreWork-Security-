@@ -26,13 +26,6 @@
                     </sec:authorize>
                 </tr>
             </c:forEach>
-        <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
-            <tr>
-                <td colspan="2">
-                    <a href="./AddGroup.jsp" name="addGroup">Add</a>
-                </td>
-            </tr>
-        </sec:authorize>
     </table>
 </body>
 </html>
