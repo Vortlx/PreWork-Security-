@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import prework.data.Department;
+import prework.data.Student;
 import prework.data.UserInfo;
 import prework.databaseservice.dao.DAODepartment;
 import prework.databaseservice.dao.DAOStudent;
 import prework.databaseservice.dao.DAOUserInfo;
 
 @Controller
-@RequestMapping(value="/jsp/update")
+@RequestMapping(value="/jsp")
 public class UpdateController {
 
     @Autowired
@@ -43,7 +44,7 @@ public class UpdateController {
             return "./ChangePassword";
         }
 
-        return "../welcome";
+        return "./welcome";
     }
 
     @RequestMapping(value="/ChangeUsername", method = RequestMethod.POST)
@@ -69,19 +70,23 @@ public class UpdateController {
             return "./ChangeUsername";
         }
 
-        return "../welcome";
+        return "./welcome";
     }
 
     @RequestMapping(value="/ChangeGroup", method=RequestMethod.POST)
-    public String changeGroupForStudent(@RequestParam("studentId") String studentId,
+    public String changeGroupForStudent(@RequestParam("studentID") String studentId,
                                         @RequestParam("newGroupId") String newGroupId,
                                         Model model){
         try{
-            daoStudent.changeGroup(Integer.parseInt(studentId), Integer.parseInt(newGroupId));
+            Student student = daoStudent.getById(Integer.parseInt(studentId));
+            Department department = student.getGroup().getDepartment();
+            daoStudent.changeGroup(student.getId(), Integer.parseInt(newGroupId));
+            
+            model.addAttribute("userId", department.getId());
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            return "../search/Students";
+            return "./search/Students";
         }
     }
     
@@ -98,7 +103,7 @@ public class UpdateController {
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            return "./ChangeGroup";
+            return "./update/ChangeGroup";
         }
     }
 }

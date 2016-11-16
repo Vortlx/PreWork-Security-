@@ -115,6 +115,17 @@ public class DAOStudentHibernate implements DAOStudent{
         return group;
     }
 
+    public Student getById(int studentId){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        Student student = session.get(Student.class, studentId);
+        
+        session.getTransaction().commit();
+        
+        return student;
+    }
+    
     public Set<Student> getAll() throws SQLException {
         Session session = sessionFactory.getCurrentSession();
         

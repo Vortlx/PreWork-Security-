@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import prework.data.Group;
 import prework.data.Subject;
+import prework.data.SubjectType;
 import prework.data.Teacher;
 import prework.databaseservice.dao.DAOSubject;
 
@@ -49,6 +50,21 @@ public class DAOSubjectHibernate implements DAOSubject {
         session.getTransaction().commit();
     }
 
+    public Subject getByNameAndType(String name, SubjectType subjectType){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        
+        String getSubjectQuery = "from Subject where name = :name and type = :subjectType";
+        Query query = session.createQuery(getSubjectQuery);
+        query.setParameter("name", name);
+        query.setParameter("subjectType", subjectType);
+        Subject subject = (Subject) query.getSingleResult();
+        
+        session.getTransaction().commit();
+        
+        return subject;
+    }
+    
     public List<Group> getGroups(int subjectID) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();

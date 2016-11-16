@@ -14,7 +14,7 @@ import java.util.Iterator;
 
 
 @Controller
-@RequestMapping(value="/jsp/add")
+@RequestMapping(value="/jsp")
 public class AddController {
 
     @Autowired
@@ -34,6 +34,9 @@ public class AddController {
 
     @Autowired
     private DAORole daoRole;
+    
+    @Autowired
+    private DAOSubject daoSubject;
 
 
     // Rewrite via Enam
@@ -48,24 +51,24 @@ public class AddController {
 
         if("GROUP".equals(whatAdd)){
             model.addAttribute("departmentId", department.getId());
-            return "./AddGroup";
+            return "./add/AddGroup";
         }else if("STUDENT".equals(whatAdd)){
             model.addAttribute("groups", department.getGroups());
-            return "./AddStudent";
+            return "./add/AddStudent";
         }else if("TEACHER".equals(whatAdd)){
             model.addAttribute("departmentId", department.getId());
-            return "./AddTeacher";
+            return "./add/AddTeacher";
         }else{
-            return "../welcome";
+            return "./welcome";
         }
     }
 
     @RequestMapping(value = "/AddStudent", method = RequestMethod.POST)
     public String addStudent(@RequestParam("name") String name, @RequestParam("familyName") String familyName,
-                             @RequestParam("groupID") String groupId,
+                             @RequestParam("groupID") int groupId,
                              Model model){
 
-        int groupIdInt = Integer.parseInt(groupId);
+        int groupIdInt = groupId;
 
         try{
             Role role = daoRole.getByName("ROLE_STUDENT");
@@ -77,35 +80,40 @@ public class AddController {
             newUser.setRole(role);
 
             daoUserInfo.add(newUser);
-            daoStudent.add(name, familyName, groupIdInt, daoUserInfo.getByUsername(familyName + name));
+            
+            Group group = daoGroup.getByID(groupId);
+            daoStudent.add(name, familyName, group.getId(), daoUserInfo.getByUsername(familyName + name));
 
+            model.addAttribute("userInfo", group.getDepartment().getUserInfo());
         }catch(Exception e){
             e.printStackTrace();
             String message = "Can't do this operation.";
             model.addAttribute("message", message);
             
-            return "./AddStudent";
+            return "./add/AddStudent";
         }
 
-        return "../welcome";
+        return "./welcome";
     }
     
     @RequestMapping(value = "/AddGroup", method = RequestMethod.POST)
     public String addGroup(@RequestParam("name") String groupName,
-                           @RequestParam("departmentId") String depId,
+                           @RequestParam("departmentId") int depId,
                            Model model){
        try{
-           Department department = daoDepartment.getByID(Integer.parseInt(depId));
+           Department department = daoDepartment.getByID(depId);
            daoGroup.add(groupName, department);
+           
+           model.addAttribute("userInfo", department.getUserInfo());
         }catch(Exception e){
            e.printStackTrace();
 
            String message = "Can't do this operation.";
            model.addAttribute("message", message);
-           return "./AddGroup";
+           return "./add/AddGroup";
         }
 
-        return "../welcome";
+        return "./welcome";
     }
 
     @RequestMapping(value = "/AddTeacher", method = RequestMethod.POST)
@@ -120,6 +128,7 @@ public class AddController {
             Subject newSubject = new Subject();
             newSubject.setName(subjectName);
             newSubject.setType(SubjectType.valueOf(subjectType));
+            daoSubject.add(newSubject);
 
             Role role = daoRole.getByName("ROLE_TEACHER");
 
@@ -128,19 +137,21 @@ public class AddController {
             newUser.setPassword("test");
             newUser.setEnabled(1);
             newUser.setRole(role);
-
             daoUserInfo.add(newUser);
-
-            daoTeacher.add(name, familyName, newSubject, department, daoUserInfo.getByUsername(familyName + name));
+            
+            daoTeacher.add(name, familyName, daoSubject.getByNameAndType(newSubject.getName(), newSubject.getType()),
+                    department, daoUserInfo.getByUsername(familyName + name));
+            
+            model.addAttribute("userInfo", department.getUserInfo());
         }catch(Exception e){
             e.printStackTrace();
             String message = "Can't do this operation.";
             model.addAttribute("message", message);
 
-            return "./AddTeacher";
+            return "./add/AddTeacher";
         }finally{
 
-            return "../welcome";
+            return "./welcome";
         }
     }
 }

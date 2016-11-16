@@ -9,7 +9,7 @@
 <title>My Subjects</title>
 </head>
 <body>
-    <a href="../welcome" name="Back">Back</a>
+    <a href="./welcome" name="Back">Back</a>
     <table border="1">
         <tr>
             <th colspan="4">Subjects</th>

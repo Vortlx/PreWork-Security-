@@ -7,13 +7,13 @@
 <title>Welcome</title>
 </head>
 <body>
-    <form action="AddStudent.jsp" method="POST">
+    <form action="/jsp/search/AddStudent.jsp" method="POST">
         <input name="toStudentsSearch" type="submit" value="Add a student">
     </form>
-    <form action="AddTeacher.jsp" method="POST">
+    <form action="/jsp/search/AddTeacher.jsp" method="POST">
         <input name="toTeachersSearch" type="submit" value="Add a teacher">
     </form>
-    <form action="AddGroup.jsp" method="POST">
+    <form action="/jsp/search/AddGroup.jsp" method="POST">
         <input name="toGroupsSearch" type="submit" value="Add a group">
     </form>
     <form action="../../" method="POST">

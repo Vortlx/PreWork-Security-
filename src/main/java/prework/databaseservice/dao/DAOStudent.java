@@ -65,6 +65,8 @@ public interface DAOStudent {
 	void deleteByFullName(String name, String familyName) throws SQLException;
 
 	Group getGroup(int studentID);
+	
+	Student getById(int studentId);
 
 	/**
 	 * This method return list of all students.

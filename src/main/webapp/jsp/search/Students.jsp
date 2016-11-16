@@ -8,7 +8,7 @@
 <title>Students</title>
 </head>
 <body>
-    <a href="../welcome" name="back">Back</a>
+    <a href="./welcome" name="back">Back</a>
     <form action="./Students" method="POST">
         Name: <input name="name" type="text">
         <br>
@@ -30,17 +30,17 @@
                <td>
                    ${student.group.name}
                    <br>
-                   <a href="../update/ChangeGroupPage?depId=${department.id}&studentId=${student.id}"
+                   <a href="./ChangeGroupPage?depId=${department.id}&studentId=${student.id}"
                       name="changeGroup">Change group</a>
                </td>
                <td>
-                   <a href="../delete/DeleteStudent?studentId=${student.id}" name="deleteStudent">Delete</a>
+                   <a href="./DeleteStudent?studentId=${student.id}" name="deleteStudent">Delete</a>
                </td>
            </tr>
         </c:forEach>
         <tr>
             <td colspan="4">
-                <a href="../add/AddStudent.jsp" name="addStudent">Add</a>
+                <a href="./AddStudent.jsp" name="addStudent">Add</a>
             </td>
         </tr>
     </table>

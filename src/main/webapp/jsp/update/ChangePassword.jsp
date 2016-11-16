@@ -11,8 +11,8 @@
     <title>ChangePassword</title>
 </head>
 <body>
-    ${message}
-    <form action="./ChangePassword" method="POST">
+    <a href="../welcome" name="Back">Back</a>
+    <form action="../ChangePassword" method="POST">
         Enter your old password <input name="oldPassword" type="password"/>
         <br>
         Enter your new password <input name="newPassword" type="password"/>
@@ -20,7 +20,7 @@
         <input name="userId" type="hidden" value="${param.userId}"/>
         <input name="change" type="submit" value="Change"/>
     </form>
-    <a href="../welcome" name="Back">Back</a>
-    
+    <br>
+    ${message}
 </body>
 </html>

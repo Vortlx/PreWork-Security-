@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping(value="/jsp/search")
+@RequestMapping(value="/jsp")
 public class SearchController {
 
     @Autowired
@@ -53,7 +53,7 @@ public class SearchController {
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            return "./MyGroup";
+            return "./search/MyGroup";
         }
     }
     
@@ -69,7 +69,7 @@ public class SearchController {
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            return "./MySubjects";
+            return "./search/MySubjects";
         }
     }
 
@@ -99,7 +99,7 @@ public class SearchController {
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            return "./Groups";
+            return "./search/Groups";
         }
     }
 
@@ -128,7 +128,7 @@ public class SearchController {
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            return "./Students";
+            return "./search/Students";
         }
     }
 
@@ -161,7 +161,7 @@ public class SearchController {
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            return "./Students";
+            return "./search/Students";
         }
     }
 
@@ -185,7 +185,7 @@ public class SearchController {
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            return "./Teachers";
+            return "./search/Teachers";
         }
     }
 
@@ -218,24 +218,7 @@ public class SearchController {
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            return "./Teachers";
-        }
-    }
-
-    @RequestMapping(value = "/TeachersByGroupServ", method = RequestMethod.GET)
-    public String findTeacherByGroup(@RequestParam("groupName") String groupName, Model model){
-
-        List<Teacher> teachers = new ArrayList<Teacher>();
-
-        try{
-            
-
-            model.addAttribute("groupName", groupName);
-            model.addAttribute("teachers", teachers);
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally{
-            return "TeachersByGroup";
+            return "./search/Teachers";
         }
     }
 }

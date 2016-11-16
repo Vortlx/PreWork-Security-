@@ -10,10 +10,10 @@
     <security:http create-session="never" use-expressions="true">
         <security:intercept-url pattern="/jsp**" access="hasAnyRole('ROLE_STUDENT', 'ROLE_TEACHER', 'ROLE_DEPARTMENT')"/>
         <security:form-login
-            login-page="/login"
+            login-page="/"
             default-target-url="/jsp/welcome"
-            authentication-failure-url="/login"
-            login-processing-url="/jsp/j_spring_security_check"
+            authentication-failure-url="/"
+            login-processing-url="/j_spring_security_check"
             username-parameter="username"
             password-parameter="password"
         />

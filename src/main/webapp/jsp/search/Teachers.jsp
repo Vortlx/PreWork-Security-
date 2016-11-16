@@ -8,7 +8,7 @@
 <title>Teachers</title>
 </head>
 <body>
-    <a href="../welcome" name="back">Back</a>
+    <a href="./welcome" name="back">Back</a>
     <form action="./Teachers" method="POST">
         Name: <input name="name" type="text">
         <br>
@@ -29,13 +29,13 @@
                 <td>${teacher.familyName}</td>
                 <td>${teacher.subject.name}:    ${teacher.subject.type}</td>
                 <td>
-                    <a href="../delete/deleteTeacher?teacherId=${teacher.id}" name="deleteTeacher">Delete</a>
+                    <a href="./DeleteTeacher?teacherId=${teacher.id}" name="deleteTeacher">Delete</a>
                 </td>
             </tr>
         </c:forEach>
         <tr>
             <td colspan="4">
-                <a href="../add/AddTeacher.jsp" name="addTeacher">Add</a>
+                <a href="./AddTeacher.jsp" name="addTeacher">Add</a>
             </td>
         </tr>
     </table>

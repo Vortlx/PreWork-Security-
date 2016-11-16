@@ -1,5 +1,6 @@
 package prework.controller.delete;
 
+import prework.data.Student;
 import prework.databaseservice.dao.DAOGroup;
 import prework.databaseservice.dao.DAOStudent;
 import prework.databaseservice.dao.DAOTeacher;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping(value="/jsp/delete")
+@RequestMapping(value="/jsp")
 public class DeleteController {
 
     @Autowired
@@ -27,36 +28,37 @@ public class DeleteController {
     public String deleteStudent(@RequestParam("studentId") int studentId, Model model){
 
         try{
+            Student student = daoStudent.getById(studentId); 
             daoStudent.deleteByID(studentId);
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            return "../search/MyGroup";            
+            return "./search/Students";            
         }
     }
 
     @RequestMapping(value = "/DeleteGroup", method = RequestMethod.GET)
-    public String deleteGroup(@RequestParam("groupId") String groupId, Model model){
+    public String deleteGroup(@RequestParam("groupId") int groupId, Model model){
 
         try{
-            daoGroup.deleteByID(Integer.parseInt(groupId));
+            daoGroup.deleteByID(groupId);
         }catch(Exception e){
             e.printStackTrace();
 
         }finally{
-            return "../search/Groups";            
+            return "./search/Groups";            
         }
     }
 
     @RequestMapping(value = "/DeleteTeacher", method = RequestMethod.GET)
-    public String deleteTeacher(@RequestParam("teacherId") String teacherId, Model model){
+    public String deleteTeacher(@RequestParam("teacherId") int teacherId, Model model){
 
         try{
-            daoTeacher.deleteByID(Integer.parseInt(teacherId));
+            daoTeacher.deleteByID(teacherId);
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            return "../search/Teachers";
+            return "./search/Teachers";
         }
     }
 }

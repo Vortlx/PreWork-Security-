@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Table(name="students")
 public class Student extends Person {
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name="id_group")
     private Group group;
 

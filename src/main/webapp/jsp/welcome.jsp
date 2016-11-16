@@ -30,25 +30,25 @@
 
     <sec:authorize access="hasRole('ROLE_STUDENT')">
         <div>
-            <a href="./search/MyGroup?userId=${userInfo.id}" name="toMyGroup">My Group</a>
+            <a href="./MyGroup?userId=${userInfo.id}" name="toMyGroup">My Group</a>
             <br>
-            <a href="./search/MySubjects?userId=${userInfo.id}" name="toMySubjects">My Subjects</a>
+            <a href="./MySubjects?userId=${userInfo.id}" name="toMySubjects">My Subjects</a>
         </div>
     </sec:authorize>
     <sec:authorize access="hasAnyRole('ROLE_TEACHER', 'ROLE_DEPARTMENT')">
         <div>
-            <a href="./search/Groups?userId=${userInfo.id}" name="toGroups">Groups</a>
+            <a href="./Groups?userId=${userInfo.id}" name="toGroups">Groups</a>
         </div>
     </sec:authorize>
     <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
         <div>
-            <a href="./search/Students?userId=${userInfo.id}" name="toStudents">Students</a>
+            <a href="./Students?userId=${userInfo.id}" name="toStudents">Students</a>
             <br>
-            <a href="./search/Teachers?userId=${userInfo.id}" name="toTeachers">Teachers</a>
+            <a href="./Teachers?userId=${userInfo.id}" name="toTeachers">Teachers</a>
         </div>
         <div>
             <br>
-            <form action="./add/Add" method="POST">
+            <form action="./Add" method="POST">
                 <select name="whatAdd">
                     <option value="GROUP">Group</option>
                     <option value="STUDENT">Student</option>
