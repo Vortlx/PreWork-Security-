@@ -9,7 +9,12 @@
 <title>My Subjects</title>
 </head>
 <body>
-    <a href="./welcome" name="Back">Back</a>
+    <sec:authorize access="hasRole('ROLE_STUDENT')">
+        <a href="./welcome" name="Back">Back</a>
+    </sec:authorize>
+    <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
+        <a href="./Groups?userId=${userId}" name="Back">Back</a>
+    </sec:authorize>
     <table border="1">
         <tr>
             <th colspan="4">Subjects</th>
@@ -32,13 +37,18 @@
                     </c:forEach>
                 </td>
                 <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
-                    <a href="./" name="deleteSubject">Delete</a>
+                    <td>
+                        <a href="./DeleteSubject?groupId=${groupId}&subjectId=${subject.id}&userId=${userId}"
+                           name="deleteSubject">Delete</a>
+                    </td>
                 </sec:authorize>
             </tr>
         </c:forEach>
         <sec:authorize  access="hasRole('ROLE_DEPARTMENT')">
-            <tr colspan="4">
-                <a href="./" name="addSubject">Add</a>
+            <tr>
+                <td colspan="3">
+                    <a href="./AddSubjectPage?groupId=${groupId}&userId=${userId}" name="addSubject">Add</a>
+                </td>
             </tr>
         </sec:authorize>
     </table>

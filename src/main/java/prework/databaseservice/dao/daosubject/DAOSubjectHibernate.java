@@ -11,7 +11,9 @@ import prework.data.Teacher;
 import prework.databaseservice.dao.DAOSubject;
 
 import javax.persistence.Query;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class DAOSubjectHibernate implements DAOSubject {
@@ -50,6 +52,17 @@ public class DAOSubjectHibernate implements DAOSubject {
         session.getTransaction().commit();
     }
 
+    public Subject getById(int subjectId){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        Subject subject = session.get(Subject.class, subjectId);
+
+        session.getTransaction().commit();
+
+        return subject;
+    }
+
     public Subject getByNameAndType(String name, SubjectType subjectType){
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
@@ -64,7 +77,21 @@ public class DAOSubjectHibernate implements DAOSubject {
         
         return subject;
     }
-    
+
+    public Set<Subject> getAll(){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        String getSubjectQuery = "from Subject";
+        Query query = session.createQuery(getSubjectQuery);
+        Set<Subject> subjects = new HashSet<Subject>();
+        subjects.addAll(query.getResultList());
+
+        session.getTransaction().commit();
+
+        return subjects;
+    }
+
     public List<Group> getGroups(int subjectID) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();

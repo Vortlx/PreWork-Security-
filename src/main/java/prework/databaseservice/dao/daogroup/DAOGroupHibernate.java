@@ -54,6 +54,8 @@ public class DAOGroupHibernate implements DAOGroup {
 
         Group group = session.get(Group.class, groupID);
         group.addSubject(subject);
+        subject.addGroup(group);
+
         session.update(group);
 
         session.getTransaction().commit();
@@ -91,6 +93,21 @@ public class DAOGroupHibernate implements DAOGroup {
         query.setParameter("name", groupName);
         Group group = (Group) query.getSingleResult();
         session.delete(group);
+
+        session.getTransaction().commit();
+    }
+
+    public void deleteSubject(int groupId, int subjectId){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        Subject subject = session.get(Subject.class, subjectId);
+        Group group = session.get(Group.class, groupId);
+
+        subject.deleteGroup(group);
+        group.deleteSubject(subject);
+
+        session.update(group);
 
         session.getTransaction().commit();
     }

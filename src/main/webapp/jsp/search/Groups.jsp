@@ -12,6 +12,7 @@
             <th>Name</th>
             <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
                 <th> </th>
+                <th> </th>
             </sec:authorize>
         </tr>
             <c:forEach items="${groups}" var="group">
@@ -20,6 +21,9 @@
                         <a href="./MyGroup?groupId=${group.id}&userId=${param.userId}" name="toGroups">${group.name}</a>
                     </td>
                     <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
+                        <td>
+                            <a href="./MySubjects?userId=${userId}&groupId=${group.id}" name="subjects">Subjects</a>
+                        </td>
                         <td>
                             <a href="./DeleteGroup?groupId=${group.id}" name="deleteGroup">Delete</a>
                         </td>

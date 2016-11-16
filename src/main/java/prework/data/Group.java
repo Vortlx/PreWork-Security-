@@ -61,8 +61,8 @@ public class Group {
         subjects.add(subject);
     }
 
-    public void deleteSubject(int groupID, Subject subject){
-
+    public void deleteSubject(Subject subject){
+        subjects.remove(subject);
     }
 	
 	public String getName() {

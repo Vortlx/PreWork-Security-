@@ -1,6 +1,7 @@
 package prework.controller.search;
 
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import prework.data.*;
 import prework.databaseservice.dao.DAOGroup;
 import prework.databaseservice.dao.DAOStudent;
@@ -58,14 +59,25 @@ public class SearchController {
     }
     
     @RequestMapping(value = "/MySubjects", method = RequestMethod.GET)
-    public String findMySubjects(@RequestParam("userId") String userId, Model model){
+    public String findMySubjects(@RequestParam(name = "userId", required = false) int userId,
+                                 @RequestParam(name = "groupId", required = false) String groupId,
+                                 Model model){
 
         try{
-            UserInfo userInfo = daoUserInfo.getByID(Integer.parseInt(userId));
-            Iterator<Student> iterator = userInfo.getStudents().iterator();
-            Student student = iterator.next();
-            
-            model.addAttribute("subjects", student.getGroup().getSubjects());
+            if(groupId != null){
+                Group group = daoGroup.getByID(Integer.parseInt(groupId));
+
+                model.addAttribute("subjects", group.getSubjects());
+                model.addAttribute("userId", userId);
+                model.addAttribute("groupId", groupId);
+            }else{
+                UserInfo userInfo = daoUserInfo.getByID(userId);
+                Iterator<Student> iterator = userInfo.getStudents().iterator();
+                Student student = iterator.next();
+
+                model.addAttribute("subjects", student.getGroup().getSubjects());
+            }
+
         }catch(Exception e){
             e.printStackTrace();
         }finally{
@@ -74,6 +86,7 @@ public class SearchController {
     }
 
     @RequestMapping(value = "/Groups", method = RequestMethod.GET)
+    @PreAuthorize("hasAnyRole('ROLE_DEPARTMENT', 'ROLE_TEACHER')")
     public String findGroups(@RequestParam("userId") String userId, Model model){
 
         int userInfoIdInt = Integer.parseInt(userId);
@@ -105,6 +118,7 @@ public class SearchController {
 
     // Need rewrite
     @RequestMapping(value = "/Students", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String findStudents(@RequestParam(name = "userId", required=false) String userId,
                                Model model){
 
@@ -133,6 +147,7 @@ public class SearchController {
     }
 
     @RequestMapping(value = "/Students", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String findStudents(@RequestParam(name="name", required=false) String name,
                                @RequestParam(name="familyName", required = false) String familyName,
                                Model model){
@@ -166,6 +181,7 @@ public class SearchController {
     }
 
     @RequestMapping(value = "/Teachers", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String findTeachers(@RequestParam(name = "userId", required=false) String userId,
                               Model model){
 
@@ -190,6 +206,7 @@ public class SearchController {
     }
 
     @RequestMapping(value = "/Teachers", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String findTeachers(@RequestParam(name="name", required=false) String name,
                                @RequestParam(name="familyName", required = false) String familyName,
                                Model model){

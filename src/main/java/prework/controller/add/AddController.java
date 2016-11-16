@@ -1,6 +1,7 @@
 package prework.controller.add;
 
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import prework.data.*;
 import prework.databaseservice.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Iterator;
+import java.util.Set;
 
 
 @Controller
@@ -41,6 +43,7 @@ public class AddController {
 
     // Rewrite via Enam
     @RequestMapping(value="/Add", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String add(@RequestParam("whatAdd") String whatAdd,
                       @RequestParam("userId") String userId, Model model){
 
@@ -64,6 +67,7 @@ public class AddController {
     }
 
     @RequestMapping(value = "/AddStudent", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String addStudent(@RequestParam("name") String name, @RequestParam("familyName") String familyName,
                              @RequestParam("groupID") int groupId,
                              Model model){
@@ -99,6 +103,7 @@ public class AddController {
     }
     
     @RequestMapping(value = "/AddGroup", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String addGroup(@RequestParam("name") String groupName,
                            @RequestParam("departmentId") int depId,
                            Model model){
@@ -121,6 +126,7 @@ public class AddController {
     }
 
     @RequestMapping(value = "/AddTeacher", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String addTeacher(@RequestParam("name") String name, @RequestParam("familyName") String familyName,
                              @RequestParam("subjectName") String subjectName,
                              @RequestParam("subjectType") String subjectType,
@@ -159,5 +165,46 @@ public class AddController {
         }
 
         return "./welcome";
+    }
+
+    @RequestMapping(value="/AddSubject", method=RequestMethod.POST)
+    public String addSubject(@RequestParam("subjectName") String subjectName,
+                             @RequestParam("subjectType") String subjectType,
+                             @RequestParam("groupId") int groupId,
+                             @RequestParam("userId") int userId,
+                             Model model){
+        try{
+            Subject subject = daoSubject.getByNameAndType(subjectName, SubjectType.valueOf(subjectType));
+            daoGroup.addSubject(groupId, subject);
+        }catch(Exception e){
+            e.printStackTrace();
+
+            String message = "Can't do this operation.";
+            model.addAttribute("message", message);
+
+            return "./AddSubject";
+        }finally{
+            model.addAttribute("groupId", groupId);
+            model.addAttribute("userId", userId);
+        }
+
+        return "./search/MySubjects";
+    }
+
+    @RequestMapping(value="/AddSubjectPage", method=RequestMethod.GET)
+    public String addSubjectPage(@RequestParam("groupId") int groupId,
+                                 @RequestParam("userId") int userId,
+                                 Model model){
+        try{
+            Set<Subject> subjects = daoSubject.getAll();
+
+            model.addAttribute("subjects", subjects);
+            model.addAttribute("groupId", groupId);
+            model.addAttribute("userId", userId);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return "./add/AddSubject";
     }
 }

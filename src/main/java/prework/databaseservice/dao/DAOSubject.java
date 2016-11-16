@@ -6,6 +6,7 @@ import prework.data.SubjectType;
 import prework.data.Teacher;
 
 import java.util.List;
+import java.util.Set;
 
 public interface DAOSubject {
 
@@ -14,8 +15,12 @@ public interface DAOSubject {
     void changeName(int subjectID, String newName);
 
     void delete(int subjectID);
+
+    Subject getById(int subjectId);
     
     Subject getByNameAndType(String name, SubjectType subjectType);
+
+    Set<Subject> getAll();
 
     List<Group> getGroups(int subjectID);
 

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8">
-<title>Add Group</title>
+<title>Add Subject</title>
 </head>
 <body>
     <a href="./welcome" name="back">Back</a>

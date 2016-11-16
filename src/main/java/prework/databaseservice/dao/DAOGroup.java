@@ -51,6 +51,8 @@ public interface DAOGroup {
 
 	void deleteByName(String groupName);
 
+	void deleteSubject(int groupId, int subjectId);
+
 	List<Student> getStudents(int groupID);
 
 	Student getStudent(int groupID, String studentName, String studentFamilyName);
