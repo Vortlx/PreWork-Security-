@@ -44,13 +44,15 @@ public class DeleteController {
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            return "./search/Students";            
+            return "./search/Students.jsp";            
         }
     }
 
     @RequestMapping(value = "/DeleteGroup", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
-    public String deleteGroup(@RequestParam("groupId") int groupId, Model model){
+    public String deleteGroup(@RequestParam("groupId") int groupId,
+                              @RequestParam("userId") int userId,
+                              Model model){
 
         try{
             Group group = daoGroup.getByID(groupId);
@@ -59,11 +61,12 @@ public class DeleteController {
             }
 
             daoGroup.deleteByID(groupId);
+            model.addAttribute("userId", userId);
         }catch(Exception e){
             e.printStackTrace();
 
         }finally{
-            return "./search/Groups";            
+            return "./Groups";            
         }
     }
 
@@ -80,7 +83,7 @@ public class DeleteController {
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            return "./search/Teachers";
+            return "./search/Teachers.jsp";
         }
     }
 
@@ -98,6 +101,6 @@ public class DeleteController {
             e.printStackTrace();
         }
 
-        return "./welcome";
+        return "./MySubjects";
     }
 }

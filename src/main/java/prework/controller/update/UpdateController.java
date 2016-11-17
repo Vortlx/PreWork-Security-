@@ -17,7 +17,7 @@ import prework.databaseservice.dao.DAOStudent;
 import prework.databaseservice.dao.DAOUserInfo;
 
 @Controller
-@RequestMapping(value="/jsp/update")
+@RequestMapping(value="/jsp")
 public class UpdateController {
 
     @Autowired
@@ -29,7 +29,7 @@ public class UpdateController {
     @Autowired
     private DAODepartment daoDepartment; 
 
-    @RequestMapping(value="/ChangePassword", method = RequestMethod.POST)
+    @RequestMapping(value="/update/ChangePassword", method = RequestMethod.POST)
     public String changePasswor(@RequestParam("userId") String userId, @RequestParam("oldPassword") String oldPassword,
                                 @RequestParam("newPassword") String newPassword, Model model){
 
@@ -42,13 +42,13 @@ public class UpdateController {
         }else{
             String message = "Passwords don't match";
             model.addAttribute("message", message);
-            return "./ChangePassword";
+            return "./ChangePassword.jsp";
         }
 
         return "../welcome";
     }
 
-    @RequestMapping(value="/ChangeUsername", method = RequestMethod.POST)
+    @RequestMapping(value="/update/ChangeUsername", method = RequestMethod.POST)
     public String changeUsername(@RequestParam("userId") String userId, @RequestParam("password") String password,
                                 @RequestParam("username") String username, Model model){
 
@@ -63,12 +63,12 @@ public class UpdateController {
             }else{
                 message = "Wrong password";
                 model.addAttribute("message", message);
-                return "./ChangeUsername";
+                return "./ChangeUsername.jsp";
             }
         }catch(Exception e){
             message = "User with that username exist";
             model.addAttribute("message", message);
-            return "./ChangeUsername";
+            return "./ChangeUsername.jsp";
         }
 
         return "../welcome";
@@ -88,7 +88,7 @@ public class UpdateController {
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            return "../search/Students";
+            return "./Students";
         }
     }
     
@@ -105,7 +105,7 @@ public class UpdateController {
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            return "./ChangeGroup";
+            return "./update/ChangeGroup.jsp";
         }
     }
 }

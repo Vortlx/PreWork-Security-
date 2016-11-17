@@ -31,6 +31,19 @@ public class DAOSubjectHibernate implements DAOSubject {
         session.getTransaction().commit();
     }
 
+    public void addGroup(int subjectId, Group group){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+
+        Subject subject = session.get(Subject.class, subjectId);
+        subject.addGroup(group);
+        group.addSubject(subject);
+        
+        session.update(subject);
+
+        session.getTransaction().commit();
+    }
+    
     public void changeName(int subjectID, String newName) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();

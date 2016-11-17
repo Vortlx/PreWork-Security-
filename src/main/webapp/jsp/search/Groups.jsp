@@ -25,7 +25,7 @@
                             <a href="./MySubjects?userId=${userId}&groupId=${group.id}" name="subjects">Subjects</a>
                         </td>
                         <td>
-                            <a href="./DeleteGroup?groupId=${group.id}" name="deleteGroup">Delete</a>
+                            <a href="./DeleteGroup?userId=${userId}&groupId=${group.id}" name="deleteGroup">Delete</a>
                         </td>
                     </sec:authorize>
                 </tr>

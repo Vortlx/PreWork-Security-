@@ -54,13 +54,13 @@ public class AddController {
 
         if("GROUP".equals(whatAdd)){
             model.addAttribute("departmentId", department.getId());
-            return "./add/AddGroup";
+            return "./add/AddGroup.jsp";
         }else if("STUDENT".equals(whatAdd)){
             model.addAttribute("groups", department.getGroups());
-            return "./add/AddStudent";
+            return "./add/AddStudent.jsp";
         }else if("TEACHER".equals(whatAdd)){
             model.addAttribute("departmentId", department.getId());
-            return "./add/AddTeacher";
+            return "./add/AddTeacher.jsp";
         }else{
             return "./welcome";
         }
@@ -96,7 +96,7 @@ public class AddController {
             model.addAttribute("message", message);
             model.addAttribute("groupID", daoGroup.getAll());
             
-            return "./add/AddStudent";
+            return "./add/AddStudent.jsp";
         }
 
         return "./welcome";
@@ -119,7 +119,7 @@ public class AddController {
            model.addAttribute("message", message);
            model.addAttribute("departmentId", depId);
 
-           return "./add/AddGroup";
+           return "./add/AddGroup.jsp";
         }
 
         return "./welcome";
@@ -161,7 +161,7 @@ public class AddController {
             model.addAttribute("message", message);
             model.addAttribute("departmentId", depId);
 
-            return "./add/AddTeacher";
+            return "./add/AddTeacher.jsp";
         }
 
         return "./welcome";
@@ -173,22 +173,29 @@ public class AddController {
                              @RequestParam("groupId") int groupId,
                              @RequestParam("userId") int userId,
                              Model model){
+        
+        Set<Subject> subjects = null;
         try{
+            subjects = daoSubject.getAll();
+            Group group = daoGroup.getByID(groupId);
             Subject subject = daoSubject.getByNameAndType(subjectName, SubjectType.valueOf(subjectType));
-            daoGroup.addSubject(groupId, subject);
+            daoSubject.addGroup(subject.getId(), group);
+
         }catch(Exception e){
             e.printStackTrace();
 
             String message = "Can't do this operation.";
+            
             model.addAttribute("message", message);
+            model.addAttribute("subjects", subjects);
 
-            return "./AddSubject";
+            return "./add/AddSubject.jsp";
         }finally{
             model.addAttribute("groupId", groupId);
-            model.addAttribute("userId", userId);
+            model.addAttribute("userId", userId);            
         }
 
-        return "./search/MySubjects";
+        return "./MySubjects";
     }
 
     @RequestMapping(value="/AddSubjectPage", method=RequestMethod.GET)
@@ -205,6 +212,6 @@ public class AddController {
             e.printStackTrace();
         }
 
-        return "./add/AddSubject";
+        return "./add/AddSubject.jsp";
     }
 }

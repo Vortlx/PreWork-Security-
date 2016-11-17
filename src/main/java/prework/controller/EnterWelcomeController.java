@@ -18,7 +18,7 @@ public class EnterWelcomeController {
     @RequestMapping(value="/login")
     public String login(){
 
-        return "./login";
+        return "./login.jsp";
     }
 
     @RequestMapping(value="/jsp/welcome")
@@ -28,6 +28,6 @@ public class EnterWelcomeController {
         UserInfo userInfo = daoUserInfo.getByUsername(auth.getName());
         model.addAttribute("userInfo", userInfo);
 
-        return "./welcome";
+        return "./welcome.jsp";
     }
 }

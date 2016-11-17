@@ -11,6 +11,8 @@ import java.util.Set;
 public interface DAOSubject {
 
     void add(Subject subject);
+    
+    void addGroup(int subjectsId, Group group);
 
     void changeName(int subjectID, String newName);
 

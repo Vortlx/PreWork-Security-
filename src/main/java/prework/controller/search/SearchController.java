@@ -54,11 +54,11 @@ public class SearchController {
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            return "./search/MyGroup";
+            return "./search/MyGroup.jsp";
         }
     }
     
-    @RequestMapping(value = "/MySubjects", method = RequestMethod.GET)
+    @RequestMapping(value = "/MySubjects", method = {RequestMethod.GET, RequestMethod.POST})
     public String findMySubjects(@RequestParam(name = "userId", required = false) int userId,
                                  @RequestParam(name = "groupId", required = false) String groupId,
                                  Model model){
@@ -81,7 +81,7 @@ public class SearchController {
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            return "./search/MySubjects";
+            return "./search/MySubjects.jsp";
         }
     }
 
@@ -112,7 +112,8 @@ public class SearchController {
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            return "./search/Groups";
+            model.addAttribute("userId", userId);
+            return "./search/Groups.jsp";
         }
     }
 
@@ -142,7 +143,7 @@ public class SearchController {
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            return "./search/Students";
+            return "./search/Students.jsp";
         }
     }
 
@@ -176,7 +177,7 @@ public class SearchController {
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            return "./search/Students";
+            return "./search/Students.jsp";
         }
     }
 
@@ -201,7 +202,7 @@ public class SearchController {
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            return "./search/Teachers";
+            return "./search/Teachers.jsp";
         }
     }
 
@@ -235,7 +236,7 @@ public class SearchController {
         }catch(Exception e){
             e.printStackTrace();
         }finally{
-            return "./search/Teachers";
+            return "./search/Teachers.jsp";
         }
     }
 }
