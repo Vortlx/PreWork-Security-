@@ -12,24 +12,24 @@ import javax.persistence.*;
  *
  * @author Lebedev Alexander
  * @since 2016-09-19
- * */
+ */
 @Entity
-@Table(name="teachers")
+@Table(name = "teachers")
 public class Teacher extends Person {
 
     @ManyToOne()
-    @JoinColumn(name="id_subject")
+    @JoinColumn(name = "id_subject")
     private Subject subject;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="id_department")
+    @JoinColumn(name = "id_department")
     private Department department;
 
-    public Teacher(){
+    public Teacher() {
         super();
     }
 
-    public Teacher(int id, String name, String familyName){
+    public Teacher(int id, String name, String familyName) {
         super(id, name, familyName);
     }
 

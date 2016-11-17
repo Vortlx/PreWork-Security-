@@ -16,15 +16,15 @@ import java.util.Set;
 
 
 @Controller
-@RequestMapping(value="/jsp")
+@RequestMapping(value = "/jsp")
 public class AddController {
 
     @Autowired
     private DAOGroup daoGroup;
-    
+
     @Autowired
     private DAOStudent daoStudent;
-    
+
     @Autowired
     private DAOTeacher daoTeacher;
 
@@ -36,32 +36,32 @@ public class AddController {
 
     @Autowired
     private DAORole daoRole;
-    
+
     @Autowired
     private DAOSubject daoSubject;
 
 
     // Rewrite via Enam
-    @RequestMapping(value="/Add", method = RequestMethod.POST)
+    @RequestMapping(value = "/Add", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String add(@RequestParam("whatAdd") String whatAdd,
-                      @RequestParam("userId") String userId, Model model){
+                      @RequestParam("userId") String userId, Model model) {
 
         UserInfo userInfo = daoUserInfo.getByID(Integer.parseInt(userId));
 
         Iterator<Department> iterator = userInfo.getDepartments().iterator();
         Department department = iterator.next();
 
-        if("GROUP".equals(whatAdd)){
+        if ("GROUP".equals(whatAdd)) {
             model.addAttribute("departmentId", department.getId());
             return "./add/AddGroup.jsp";
-        }else if("STUDENT".equals(whatAdd)){
+        } else if ("STUDENT".equals(whatAdd)) {
             model.addAttribute("groups", department.getGroups());
             return "./add/AddStudent.jsp";
-        }else if("TEACHER".equals(whatAdd)){
+        } else if ("TEACHER".equals(whatAdd)) {
             model.addAttribute("departmentId", department.getId());
             return "./add/AddTeacher.jsp";
-        }else{
+        } else {
             return "./welcome";
         }
     }
@@ -70,11 +70,11 @@ public class AddController {
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String addStudent(@RequestParam("name") String name, @RequestParam("familyName") String familyName,
                              @RequestParam("groupID") int groupId,
-                             Model model){
+                             Model model) {
 
         int groupIdInt = groupId;
 
-        try{
+        try {
             Role role = daoRole.getByName("ROLE_STUDENT");
 
             UserInfo newUser = new UserInfo();
@@ -84,42 +84,42 @@ public class AddController {
             newUser.setRole(role);
 
             daoUserInfo.add(newUser);
-            
+
             Group group = daoGroup.getByID(groupId);
             daoStudent.add(name, familyName, group.getId(), daoUserInfo.getByUsername(familyName + name));
 
             model.addAttribute("userInfo", group.getDepartment().getUserInfo());
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             String message = "Can't do this operation.";
 
             model.addAttribute("message", message);
             model.addAttribute("groupID", daoGroup.getAll());
-            
+
             return "./add/AddStudent.jsp";
         }
 
         return "./welcome";
     }
-    
+
     @RequestMapping(value = "/AddGroup", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String addGroup(@RequestParam("name") String groupName,
                            @RequestParam("departmentId") int depId,
-                           Model model){
-       try{
-           Department department = daoDepartment.getByID(depId);
-           daoGroup.add(groupName, department);
-           
-           model.addAttribute("userInfo", department.getUserInfo());
-        }catch(Exception e){
-           e.printStackTrace();
+                           Model model) {
+        try {
+            Department department = daoDepartment.getByID(depId);
+            daoGroup.add(groupName, department);
 
-           String message = "Can't do this operation.";
-           model.addAttribute("message", message);
-           model.addAttribute("departmentId", depId);
+            model.addAttribute("userInfo", department.getUserInfo());
+        } catch (Exception e) {
+            e.printStackTrace();
 
-           return "./add/AddGroup.jsp";
+            String message = "Can't do this operation.";
+            model.addAttribute("message", message);
+            model.addAttribute("departmentId", depId);
+
+            return "./add/AddGroup.jsp";
         }
 
         return "./welcome";
@@ -131,8 +131,8 @@ public class AddController {
                              @RequestParam("subjectName") String subjectName,
                              @RequestParam("subjectType") String subjectType,
                              @RequestParam("departmentId") String depId,
-                             Model model){
-        try{
+                             Model model) {
+        try {
             Department department = daoDepartment.getByID(Integer.parseInt(depId));
 
             Subject newSubject = new Subject();
@@ -148,12 +148,12 @@ public class AddController {
             newUser.setEnabled(1);
             newUser.setRole(role);
             daoUserInfo.add(newUser);
-            
+
             daoTeacher.add(name, familyName, daoSubject.getByNameAndType(newSubject.getName(), newSubject.getType()),
                     department, daoUserInfo.getByUsername(familyName + name));
-            
+
             model.addAttribute("userInfo", department.getUserInfo());
-        }catch(Exception e){
+        } catch (Exception e) {
 
             e.printStackTrace();
             String message = "Can't do this operation.";
@@ -167,48 +167,48 @@ public class AddController {
         return "./welcome";
     }
 
-    @RequestMapping(value="/AddSubject", method=RequestMethod.POST)
+    @RequestMapping(value = "/AddSubject", method = RequestMethod.POST)
     public String addSubject(@RequestParam("subjectName") String subjectName,
                              @RequestParam("subjectType") String subjectType,
                              @RequestParam("groupId") int groupId,
                              @RequestParam("userId") int userId,
-                             Model model){
-        
+                             Model model) {
+
         Set<Subject> subjects = null;
-        try{
+        try {
             subjects = daoSubject.getAll();
             Group group = daoGroup.getByID(groupId);
             Subject subject = daoSubject.getByNameAndType(subjectName, SubjectType.valueOf(subjectType));
             daoSubject.addGroup(subject.getId(), group);
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
 
             String message = "Can't do this operation.";
-            
+
             model.addAttribute("message", message);
             model.addAttribute("subjects", subjects);
 
             return "./add/AddSubject.jsp";
-        }finally{
+        } finally {
             model.addAttribute("groupId", groupId);
-            model.addAttribute("userId", userId);            
+            model.addAttribute("userId", userId);
         }
 
         return "./MySubjects";
     }
 
-    @RequestMapping(value="/AddSubjectPage", method=RequestMethod.GET)
+    @RequestMapping(value = "/AddSubjectPage", method = RequestMethod.GET)
     public String addSubjectPage(@RequestParam("groupId") int groupId,
                                  @RequestParam("userId") int userId,
-                                 Model model){
-        try{
+                                 Model model) {
+        try {
             Set<Subject> subjects = daoSubject.getAll();
 
             model.addAttribute("subjects", subjects);
             model.addAttribute("groupId", groupId);
             model.addAttribute("userId", userId);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

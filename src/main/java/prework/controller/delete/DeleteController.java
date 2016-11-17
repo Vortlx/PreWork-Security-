@@ -14,15 +14,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping(value="/jsp")
+@RequestMapping(value = "/jsp")
 public class DeleteController {
 
     @Autowired
     private DAOGroup daoGroup;
-    
+
     @Autowired
     private DAOStudent daoStudent;
-    
+
     @Autowired
     private DAOTeacher daoTeacher;
 
@@ -31,20 +31,20 @@ public class DeleteController {
 
     @Autowired
     private DAOSubject daoSubject;
-    
+
     @RequestMapping(value = "/DeleteStudent", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
-    public String deleteStudent(@RequestParam("studentId") int studentId, Model model){
+    public String deleteStudent(@RequestParam("studentId") int studentId, Model model) {
 
-        try{
-            Student student = daoStudent.getById(studentId); 
+        try {
+            Student student = daoStudent.getById(studentId);
 
             daoUserInfo.deleteByID(student.getUserInfo().getId());
             daoStudent.deleteByID(studentId);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally{
-            return "./search/Students.jsp";            
+        } finally {
+            return "./search/Students.jsp";
         }
     }
 
@@ -52,52 +52,52 @@ public class DeleteController {
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String deleteGroup(@RequestParam("groupId") int groupId,
                               @RequestParam("userId") int userId,
-                              Model model){
+                              Model model) {
 
-        try{
+        try {
             Group group = daoGroup.getByID(groupId);
-            for(Student student: group.getStudents()){
+            for (Student student : group.getStudents()) {
                 daoUserInfo.deleteByID(student.getUserInfo().getId());
             }
 
             daoGroup.deleteByID(groupId);
             model.addAttribute("userId", userId);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
 
-        }finally{
-            return "./Groups";            
+        } finally {
+            return "./Groups";
         }
     }
 
     @RequestMapping(value = "/DeleteTeacher", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
-    public String deleteTeacher(@RequestParam("teacherId") int teacherId, Model model){
+    public String deleteTeacher(@RequestParam("teacherId") int teacherId, Model model) {
 
-        try{
+        try {
             Teacher teacher = daoTeacher.getById(teacherId);
 
             daoUserInfo.deleteByID(teacher.getUserInfo().getId());
             daoSubject.delete(teacher.getSubject().getId());
             daoTeacher.deleteByID(teacher.getId());
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             return "./search/Teachers.jsp";
         }
     }
 
-    @RequestMapping(value="/DeleteSubject", method=RequestMethod.GET)
+    @RequestMapping(value = "/DeleteSubject", method = RequestMethod.GET)
     public String deleteSubjectFromGroup(@RequestParam("groupId") int groupId,
                                          @RequestParam("subjectId") int subjectId,
                                          @RequestParam("userId") int userId,
-                                         Model model){
-        try{
+                                         Model model) {
+        try {
             daoGroup.deleteSubject(groupId, subjectId);
 
             model.addAttribute("groupId", groupId);
             model.addAttribute("userId", userId);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

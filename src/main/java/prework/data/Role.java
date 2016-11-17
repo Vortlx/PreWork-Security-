@@ -6,16 +6,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="roles")
+@Table(name = "roles")
 public class Role {
-    
+
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     private int id;
-    
-    @Column(name="name")
+
+    @Column(name = "name")
     private String name;
-    
+
     public int getId() {
         return id;
     }

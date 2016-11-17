@@ -11,44 +11,44 @@ public class Subject {
     @Column(name = "id")
     private int id;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name="subject_type")
+    @Column(name = "subject_type")
     @Enumerated(EnumType.STRING)
     private SubjectType type;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="group_subject",
-            joinColumns = @JoinColumn(name="id_subject"),
-            inverseJoinColumns = @JoinColumn(name="id_group"))
+    @JoinTable(name = "group_subject",
+            joinColumns = @JoinColumn(name = "id_subject"),
+            inverseJoinColumns = @JoinColumn(name = "id_group"))
     private Set<Group> groups;
 
-    @OneToMany(mappedBy="subject", fetch = FetchType.EAGER, cascade={CascadeType.REFRESH, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "subject", fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
     private Set<Teacher> teachers;
 
-    public Subject(){
+    public Subject() {
 
     }
 
-    public Subject(String name, SubjectType type){
+    public Subject(String name, SubjectType type) {
         this.name = name;
         this.type = type;
     }
 
-    public void addGroup(Group group){
+    public void addGroup(Group group) {
         groups.add(group);
     }
 
-    public void deleteGroup(Group group){
+    public void deleteGroup(Group group) {
         groups.remove(group);
     }
 
-    public void addTeacher(Teacher teacher){
+    public void addTeacher(Teacher teacher) {
         teachers.add(teacher);
     }
 
-    public void deleteTeacher(Teacher teacher){
+    public void deleteTeacher(Teacher teacher) {
         teachers.remove(teacher);
     }
 

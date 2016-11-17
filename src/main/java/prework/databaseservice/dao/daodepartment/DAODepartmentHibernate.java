@@ -4,6 +4,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import prework.data.Department;
 import prework.data.Group;
 import prework.data.Teacher;
@@ -13,113 +15,92 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Component
-public class DAODepartmentHibernate implements DAODepartment{
+public class DAODepartmentHibernate implements DAODepartment {
 
     @Autowired
     private SessionFactory sessionFactory;
 
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public void add(Department department) {
         Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
-
         session.save(department);
-
-        session.getTransaction().commit();
     }
 
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public void changeName(int depID, String newName) {
         Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
 
         Department department = session.get(Department.class, depID);
         department.setName(newName);
         session.update(department);
-
-        session.getTransaction().commit();
     }
 
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public void changeLogin(int depID, String newLogin) {
         Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
 
         Department department = session.get(Department.class, depID);
         session.update(department);
-
-        session.getTransaction().commit();
     }
 
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public void changePassword(int depID, String newPassword) {
         Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
 
         Department department = session.get(Department.class, depID);
         session.update(department);
-
-        session.getTransaction().commit();
     }
 
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public void delete(int depID) {
         Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
 
         Department department = session.get(Department.class, depID);
-        session.delete(department);
-
-        session.getTransaction().commit();
     }
 
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
     public Department getByID(int depID) {
         Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
-
         Department department = session.get(Department.class, depID);
-
-        session.getTransaction().commit();
-
         return department;
     }
 
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
     public Department getByName(String depName) {
         Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
 
         String getDepByNameQuery = "from Department where name = :name";
         Query query = session.createQuery(getDepByNameQuery);
         query.setParameter("name", depName);
 
         Department department = (Department) query.getSingleResult();
-        session.getTransaction().commit();
 
         return department;
     }
 
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Group> getGroups(int depID) {
         Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
 
         String getGroupsQuery = "select groups from Department where id = :id";
         Query query = session.createQuery(getGroupsQuery);
         query.setParameter("id", depID);
         List<Group> groups = (List<Group>) query.getSingleResult();
-
-        session.getTransaction().commit();
 
         return groups;
     }
 
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
     public Group getGroup(int depID, String groupName) {
         Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
 
         String getGroupsQuery = "select groups from Department where id = :id";
         Query query = session.createQuery(getGroupsQuery);
         query.setParameter("id", depID);
         List<Group> groups = (List<Group>) query.getSingleResult();
 
-        session.getTransaction().commit();
-
-        for(Group group: groups){
-            if(group.getName().equals(groupName)){
+        for (Group group : groups) {
+            if (group.getName().equals(groupName)) {
                 return group;
             }
         }
@@ -127,9 +108,9 @@ public class DAODepartmentHibernate implements DAODepartment{
         return new Group();
     }
 
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Teacher> getTeachers(int depID) {
         Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
 
         String getTeachersQuery = "select teachers from Department where id = :id";
         Query query = session.createQuery(getTeachersQuery);
@@ -137,25 +118,21 @@ public class DAODepartmentHibernate implements DAODepartment{
 
         List<Teacher> teachers = (List<Teacher>) query.getSingleResult();
 
-        session.getTransaction().commit();
-
         return teachers;
     }
 
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
     public Teacher getTeacher(int depID, String teacherName, String teacherFamilyName) {
         Session session = sessionFactory.getCurrentSession();
-        session.beginTransaction();
 
         String getTeacherByNameQuery = "select teachers from Department where id = :id";
         Query query = session.createQuery(getTeacherByNameQuery);
         query.setParameter("id", depID);
         List<Teacher> teachers = (List<Teacher>) query.getSingleResult();
 
-        session.getTransaction().commit();
-
-        for(Teacher teacher: teachers){
-            if(teacher.getName().equals(teacherName) &&
-                    teacher.getName().equals(teacherFamilyName)){
+        for (Teacher teacher : teachers) {
+            if (teacher.getName().equals(teacherName) &&
+                    teacher.getName().equals(teacherFamilyName)) {
                 return teacher;
             }
         }

@@ -9,10 +9,10 @@ import java.util.Set;
 public class Department {
 
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     private int id;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "department")
@@ -22,10 +22,10 @@ public class Department {
     private Set<Teacher> teachers;
 
     @ManyToOne()
-    @JoinColumn(name="id_user_info")
+    @JoinColumn(name = "id_user_info")
     private UserInfo userInfo;
 
-    public Department(){
+    public Department() {
 
     }
 
@@ -53,11 +53,11 @@ public class Department {
         this.groups = groups;
     }
 
-    public void addGroup(Group group){
+    public void addGroup(Group group) {
         groups.add(group);
     }
 
-    public void deleteGroup(Group group){
+    public void deleteGroup(Group group) {
         groups.remove(group);
     }
 
@@ -69,11 +69,11 @@ public class Department {
         this.teachers = teachers;
     }
 
-    public void addTeacher(Teacher teacher){
+    public void addTeacher(Teacher teacher) {
         teachers.add(teacher);
     }
 
-    public void deleteTeacher(Teacher teacher){
+    public void deleteTeacher(Teacher teacher) {
         teachers.remove(teacher);
     }
 

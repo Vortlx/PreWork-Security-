@@ -12,74 +12,74 @@ import javax.persistence.*;
  *
  * @author Lebedev Alexander
  * @since 2016-09-19
- * */
+ */
 @Entity
-@Table(name="groups")
+@Table(name = "groups")
 public class Group {
 
     @Id
-    @Column(name="id")
-	int id;
-    
-    @Column(name="name")
-	private String name;
-    
-    @OneToMany(fetch=FetchType.EAGER, mappedBy="group")
-	private Set<Student> students;
+    @Column(name = "id")
+    int id;
 
-    @ManyToMany(fetch=FetchType.EAGER, mappedBy = "groups")
+    @Column(name = "name")
+    private String name;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "group")
+    private Set<Student> students;
+
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "groups")
     private Set<Subject> subjects;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="id_department")
+    @JoinColumn(name = "id_department")
     private Department department;
-	
-	public Group(){
-		
-	}
-	
-	public Group(int id, String name){
-		this.id = id;
-		this.name = name;
-		students = new HashSet<Student>();
+
+    public Group() {
+
+    }
+
+    public Group(int id, String name) {
+        this.id = id;
+        this.name = name;
+        students = new HashSet<Student>();
         subjects = new HashSet<Subject>();
-	}
+    }
 
-	public int getId() {
-		return id;
-	}
-	
-	public void setId(int id) {
-	    this.id = id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void addStudent(Student student){
-		students.add(student);
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void addSubject(Subject subject){
+    public void addStudent(Student student) {
+        students.add(student);
+    }
+
+    public void addSubject(Subject subject) {
         subjects.add(subject);
     }
 
-    public void deleteSubject(Subject subject){
+    public void deleteSubject(Subject subject) {
         subjects.remove(subject);
     }
-	
-	public String getName() {
-		return name;
-	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public Set<Student> getStudents() {
-		return students;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setStudents(HashSet<Student> students) {
-		this.students = students;
-	}
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(HashSet<Student> students) {
+        this.students = students;
+    }
 
     public void setStudents(Set<Student> students) {
         this.students = students;

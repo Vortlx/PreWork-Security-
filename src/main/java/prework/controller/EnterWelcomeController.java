@@ -15,14 +15,14 @@ public class EnterWelcomeController {
     @Autowired
     DAOUserInfo daoUserInfo;
 
-    @RequestMapping(value="/login")
-    public String login(){
+    @RequestMapping(value = "/login")
+    public String login() {
 
         return "./login.jsp";
     }
 
-    @RequestMapping(value="/jsp/welcome")
-    public String welcome(Model model){
+    @RequestMapping(value = "/jsp/welcome")
+    public String welcome(Model model) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         UserInfo userInfo = daoUserInfo.getByUsername(auth.getName());

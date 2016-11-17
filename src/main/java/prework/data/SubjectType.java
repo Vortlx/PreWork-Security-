@@ -1,13 +1,13 @@
 package prework.data;
 
 public enum SubjectType {
-    LECTURE{
+    LECTURE {
         @Override
         public String toString() {
             return "Lecture";
         }
     },
-    PRACTICE{
+    PRACTICE {
         @Override
         public String toString() {
             return "Practice";

@@ -48,20 +48,5 @@ public class TestDAOGroupHibernate {
     @Test
     public void testChangeName(){
 
-        try{
-            String newGroupTestName = "newGroupName";
-            daoGroup.changeName(testGroup.getId(), newGroupTestName);
-
-            Group newTestGroup = daoGroup.getByID(testGroup.getId());
-            Assert.assertFalse(newTestGroup.getName().equals(testGroupName));
-            Assert.assertTrue(newTestGroup.getName().equals(newGroupTestName));
-
-            daoGroup.changeName(testGroup.getId(), testGroupName);
-            Assert.assertTrue(testGroup.getName().equals(testGroupName));
-            Assert.assertFalse(testGroup.getName().equals(newGroupTestName));
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
     }
 }

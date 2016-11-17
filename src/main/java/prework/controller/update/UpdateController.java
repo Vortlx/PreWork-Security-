@@ -17,29 +17,29 @@ import prework.databaseservice.dao.DAOStudent;
 import prework.databaseservice.dao.DAOUserInfo;
 
 @Controller
-@RequestMapping(value="/jsp")
+@RequestMapping(value = "/jsp")
 public class UpdateController {
 
     @Autowired
     private DAOUserInfo daoUserInfo;
-    
+
     @Autowired
     private DAOStudent daoStudent;
-    
-    @Autowired
-    private DAODepartment daoDepartment; 
 
-    @RequestMapping(value="/update/ChangePassword", method = RequestMethod.POST)
+    @Autowired
+    private DAODepartment daoDepartment;
+
+    @RequestMapping(value = "/update/ChangePassword", method = RequestMethod.POST)
     public String changePasswor(@RequestParam("userId") String userId, @RequestParam("oldPassword") String oldPassword,
-                                @RequestParam("newPassword") String newPassword, Model model){
+                                @RequestParam("newPassword") String newPassword, Model model) {
 
         int userIdInt = Integer.parseInt(userId);
         UserInfo userInfo = daoUserInfo.getByID(userIdInt);
 
-        if(userInfo.getPassword().equals(oldPassword)){
+        if (userInfo.getPassword().equals(oldPassword)) {
             daoUserInfo.changePassword(userIdInt, newPassword);
             model.addAttribute("userInfo", userInfo);
-        }else{
+        } else {
             String message = "Passwords don't match";
             model.addAttribute("message", message);
             return "./ChangePassword.jsp";
@@ -48,24 +48,24 @@ public class UpdateController {
         return "../welcome";
     }
 
-    @RequestMapping(value="/update/ChangeUsername", method = RequestMethod.POST)
+    @RequestMapping(value = "/update/ChangeUsername", method = RequestMethod.POST)
     public String changeUsername(@RequestParam("userId") String userId, @RequestParam("password") String password,
-                                @RequestParam("username") String username, Model model){
+                                 @RequestParam("username") String username, Model model) {
 
         int userIdInt = Integer.parseInt(userId);
         UserInfo userInfo = daoUserInfo.getByID(userIdInt);
         String message = null;
 
-        try{
-            if(userInfo.getPassword().equals(password)){
+        try {
+            if (userInfo.getPassword().equals(password)) {
                 daoUserInfo.changeUsername(userIdInt, username);
                 model.addAttribute("userInfo", userInfo);
-            }else{
+            } else {
                 message = "Wrong password";
                 model.addAttribute("message", message);
                 return "./ChangeUsername.jsp";
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             message = "User with that username exist";
             model.addAttribute("message", message);
             return "./ChangeUsername.jsp";
@@ -74,37 +74,37 @@ public class UpdateController {
         return "../welcome";
     }
 
-    @RequestMapping(value="/ChangeGroup", method=RequestMethod.POST)
+    @RequestMapping(value = "/ChangeGroup", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String changeGroupForStudent(@RequestParam("studentID") String studentId,
                                         @RequestParam("newGroupId") String newGroupId,
-                                        Model model){
-        try{
+                                        Model model) {
+        try {
             Student student = daoStudent.getById(Integer.parseInt(studentId));
             Department department = student.getGroup().getDepartment();
             daoStudent.changeGroup(student.getId(), Integer.parseInt(newGroupId));
-            
+
             model.addAttribute("userId", department.getId());
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             return "./Students";
         }
     }
-    
-    @RequestMapping(value="/ChangeGroupPage", method=RequestMethod.GET)
-    public String changeGroupPage(@RequestParam("depId") String depId, 
+
+    @RequestMapping(value = "/ChangeGroupPage", method = RequestMethod.GET)
+    public String changeGroupPage(@RequestParam("depId") String depId,
                                   @RequestParam("studentId") String studentId,
-                                  Model model){
-        
-        try{
+                                  Model model) {
+
+        try {
             Department department = daoDepartment.getByID(Integer.parseInt(depId));
-            
+
             model.addAttribute("groups", department.getGroups());
             model.addAttribute("studentID", studentId);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             return "./update/ChangeGroup.jsp";
         }
     }

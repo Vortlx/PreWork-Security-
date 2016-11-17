@@ -5,33 +5,33 @@ import java.util.Set;
 import javax.persistence.*;
 
 @Entity
-@Table(name="user_info")
+@Table(name = "user_info")
 public class UserInfo {
-    
+
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     private int id;
-    
-    @Column(name="username")
+
+    @Column(name = "username")
     private String username;
-    
-    @Column(name="password")
+
+    @Column(name = "password")
     private String password;
-    
-    @Column(name="enabled")
+
+    @Column(name = "enabled")
     private int enabled;
-    
+
     @ManyToOne()
-    @JoinColumn(name="id_role")
+    @JoinColumn(name = "id_role")
     private Role role;
-    
-    @OneToMany(mappedBy="userInfo", fetch= FetchType.EAGER, cascade={CascadeType.REFRESH, CascadeType.REMOVE})
+
+    @OneToMany(mappedBy = "userInfo", fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
     private Set<Department> departments;
-    
-    @OneToMany(mappedBy="userInfo", fetch= FetchType.EAGER, cascade={CascadeType.REFRESH, CascadeType.REMOVE})
+
+    @OneToMany(mappedBy = "userInfo", fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
     private Set<Teacher> teachers;
-    
-    @OneToMany(mappedBy="userInfo", fetch= FetchType.EAGER, cascade={CascadeType.REFRESH, CascadeType.REMOVE})
+
+    @OneToMany(mappedBy = "userInfo", fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
     private Set<Student> students;
 
     public int getId() {
