@@ -13,7 +13,7 @@
     <form action="jsp/add/Add.jsp" method="POST">
         <input name="toAdd" type="submit" value="Add">
     </form>
-    <form action="jsp/delete/Delete.jsp" method="POST">
+    <form action="jsp/delete/Deprecated_Delete.jsp" method="POST">
         <input name="toDelete" type="submit" value="Delete">
     </form>
 </body>
