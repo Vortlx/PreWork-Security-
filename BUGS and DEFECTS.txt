@@ -6,8 +6,6 @@
 
 4. Hibernate n + 1 problem
 
-5. Exception Transaction already active
+5. not handled code 500
 
-6. not handled code 500
-
-7. Need rename class UserInfo to User
+6. Need rename class UserInfo to User
