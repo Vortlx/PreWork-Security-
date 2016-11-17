@@ -13,6 +13,7 @@
         <br>
         Password: <input name="password" type="password">
         <br>
+        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
         <input name="login" type="submit" value="Login"/>
     </form>
 </body>

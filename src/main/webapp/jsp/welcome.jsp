@@ -66,6 +66,14 @@
         <br>
         <a href="./update/ChangePassword.jsp?userId=${userInfo.id}" name="changePassword">Change password</a>
     </div>
+    <div>
+        <br>
+        <!--a href="../logout" name="logout">Logout</a-->
+        <form action="../j_spring_security_logout" method="POST">
+            <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+            <input name="logout" type="submit" value="Logout"/>
+        </form>
+    </div>
 
 </body>
 </html>

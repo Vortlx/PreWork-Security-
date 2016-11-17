@@ -17,7 +17,8 @@
             username-parameter="username"
             password-parameter="password"
         />
-        <security:csrf disabled="true"/>
+        <security:logout logout-success-url="/login" logout-url="/j_spring_security_logout"/>
+        <security:csrf/>
     </security:http>
     
     <security:authentication-manager>
