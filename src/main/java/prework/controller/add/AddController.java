@@ -174,9 +174,7 @@ public class AddController {
                              @RequestParam("userId") int userId,
                              Model model) {
 
-        Set<Subject> subjects = null;
         try {
-            subjects = daoSubject.getAll();
             Group group = daoGroup.getByID(groupId);
             Subject subject = daoSubject.getByNameAndType(subjectName, SubjectType.valueOf(subjectType));
             daoSubject.addGroup(subject.getId(), group);
@@ -187,7 +185,7 @@ public class AddController {
             String message = "Can't do this operation.";
 
             model.addAttribute("message", message);
-            model.addAttribute("subjects", subjects);
+            model.addAttribute("subjects", daoSubject.getAll());
 
             return "./add/AddSubject.jsp";
         } finally {
