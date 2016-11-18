@@ -28,7 +28,7 @@ public class AddController {
     private DAOTeacher daoTeacher;
 
     @Autowired
-    private DAOUserInfo daoUserInfo;
+    private DAOUser daoUser;
 
     @Autowired
     private DAODepartment daoDepartment;
@@ -46,9 +46,9 @@ public class AddController {
     public String add(@RequestParam("whatAdd") String whatAdd,
                       @RequestParam("userId") String userId, Model model) {
 
-        UserInfo userInfo = daoUserInfo.getByID(Integer.parseInt(userId));
+        User user = daoUser.getByID(Integer.parseInt(userId));
 
-        Department department = userInfo.getDepartment();
+        Department department = user.getDepartment();
 
         if ("GROUP".equals(whatAdd)) {
             model.addAttribute("departmentId", department.getId());
@@ -75,18 +75,18 @@ public class AddController {
         try {
             Role role = daoRole.getByName("ROLE_STUDENT");
 
-            UserInfo newUser = new UserInfo();
+            User newUser = new User();
             newUser.setUsername(familyName + name);
             newUser.setPassword("test");
             newUser.setEnabled(1);
             newUser.setRole(role);
 
-            daoUserInfo.add(newUser);
+            daoUser.add(newUser);
 
             Group group = daoGroup.getByID(groupId);
-            daoStudent.add(name, familyName, group.getId(), daoUserInfo.getByUsername(familyName + name));
+            daoStudent.add(name, familyName, group.getId(), daoUser.getByUsername(familyName + name));
 
-            model.addAttribute("userInfo", group.getDepartment().getUserInfo());
+            model.addAttribute("user", group.getDepartment().getUser());
         } catch (Exception e) {
             e.printStackTrace();
             String message = "Can't do this operation.";
@@ -109,7 +109,7 @@ public class AddController {
             Department department = daoDepartment.getByID(depId);
             daoGroup.add(groupName, department);
 
-            model.addAttribute("userInfo", department.getUserInfo());
+            model.addAttribute("user", department.getUser());
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -140,17 +140,17 @@ public class AddController {
 
             Role role = daoRole.getByName("ROLE_TEACHER");
 
-            UserInfo newUser = new UserInfo();
+            User newUser = new User();
             newUser.setUsername(familyName + name);
             newUser.setPassword("test");
             newUser.setEnabled(1);
             newUser.setRole(role);
-            daoUserInfo.add(newUser);
+            daoUser.add(newUser);
 
             daoTeacher.add(name, familyName, daoSubject.getByNameAndType(newSubject.getName(), newSubject.getType()),
-                    department, daoUserInfo.getByUsername(familyName + name));
+                    department, daoUser.getByUsername(familyName + name));
 
-            model.addAttribute("userInfo", department.getUserInfo());
+            model.addAttribute("user", department.getUser());
         } catch (Exception e) {
 
             e.printStackTrace();

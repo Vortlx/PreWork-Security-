@@ -12,7 +12,7 @@ import org.hibernate.SessionFactory;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import prework.entities.UserInfo;
+import prework.entities.User;
 import prework.databaseservice.dao.DAOStudent;
 import prework.entities.Group;
 import prework.entities.Student;
@@ -27,7 +27,7 @@ public class DAOStudentHibernate implements DAOStudent {
     private SessionFactory sessionFactory;
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void add(String name, String familyName, int groupID, UserInfo userInfo) throws SQLException {
+    public void add(String name, String familyName, int groupID, User user) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
 
         Group group = session.get(Group.class, groupID);
@@ -36,7 +36,7 @@ public class DAOStudentHibernate implements DAOStudent {
         student.setName(name);
         student.setFamilyName(familyName);
         student.setGroup(group);
-        student.setUserInfo(userInfo);
+        student.setUser(user);
 
         session.save(student);
     }

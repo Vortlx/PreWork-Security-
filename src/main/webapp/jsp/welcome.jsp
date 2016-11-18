@@ -11,34 +11,34 @@
 <body>
     <!-- Greeting user (Department, Teacher ot Student) -->
     <div>
-        <c:if test="${userInfo.department != null}">
-            <h3>${userInfo.department.name}</h3>
+        <c:if test="${user.department != null}">
+            <h3>${user.department.name}</h3>
         </c:if>
-        <c:if test="${userInfo.teacher != null}">
-            <h3>Hello ${userInfo.teacher.name} ${userInfo.teacher.familyName}</h3>
+        <c:if test="${user.teacher != null}">
+            <h3>Hello ${user.teacher.name} ${user.teacher.familyName}</h3>
         </c:if>
-        <c:if test="${userInfo.student != null}">
-            <h3>Hello ${userInfo.student.name} ${userInfo.student.familyName}</h3>
+        <c:if test="${user.student != null}">
+            <h3>Hello ${user.student.name} ${user.student.familyName}</h3>
         </c:if>
     </div>
 
     <sec:authorize access="hasRole('ROLE_STUDENT')">
         <div>
-            <a href="./MyGroup?userId=${userInfo.id}" name="toMyGroup">My Group</a>
+            <a href="./MyGroup?userId=${user.id}" name="toMyGroup">My Group</a>
             <br>
-            <a href="./MySubjects?userId=${userInfo.id}" name="toMySubjects">My Subjects</a>
+            <a href="./MySubjects?userId=${user.id}" name="toMySubjects">My Subjects</a>
         </div>
     </sec:authorize>
     <sec:authorize access="hasAnyRole('ROLE_TEACHER', 'ROLE_DEPARTMENT')">
         <div>
-            <a href="./Groups?userId=${userInfo.id}" name="toGroups">Groups</a>
+            <a href="./Groups?userId=${user.id}" name="toGroups">Groups</a>
         </div>
     </sec:authorize>
     <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
         <div>
-            <a href="./Students?userId=${userInfo.id}" name="toStudents">Students</a>
+            <a href="./Students?userId=${user.id}" name="toStudents">Students</a>
             <br>
-            <a href="./Teachers?userId=${userInfo.id}" name="toTeachers">Teachers</a>
+            <a href="./Teachers?userId=${user.id}" name="toTeachers">Teachers</a>
         </div>
         <div>
             <br>
@@ -48,7 +48,7 @@
                     <option value="STUDENT">Student</option>
                     <option value="TEACHER">Teacher</option>
                 </select>
-                <input name="userId" type="hidden" value="${userInfo.id}">
+                <input name="userId" type="hidden" value="${user.id}">
                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
                 <input name="add" type="submit" value="Add"/>
             </form>
@@ -57,9 +57,9 @@
 
     <div>
         <br>
-        <a href="./ChangeUsername?userId=${userInfo.id}" name="changeLogin">Change login</a>
+        <a href="./ChangeUsername?userId=${user.id}" name="changeLogin">Change login</a>
         <br>
-        <a href="./ChangePassword?userId=${userInfo.id}" name="changePassword">Change password</a>
+        <a href="./ChangePassword?userId=${user.id}" name="changePassword">Change password</a>
     </div>
     <div>
         <br>

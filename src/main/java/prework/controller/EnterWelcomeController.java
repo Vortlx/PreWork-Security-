@@ -8,14 +8,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import prework.entities.UserInfo;
-import prework.databaseservice.dao.DAOUserInfo;
+import prework.entities.User;
+import prework.databaseservice.dao.DAOUser;
 
 @Controller
 public class EnterWelcomeController {
 
     @Autowired
-    DAOUserInfo daoUserInfo;
+    DAOUser daoUser;
 
     @RequestMapping(value = "/login")
     public String login() {
@@ -24,14 +24,14 @@ public class EnterWelcomeController {
     }
 
     @RequestMapping(value = "/jsp/welcome", method={RequestMethod.GET, RequestMethod.POST})
-    public String welcome(@RequestParam(name = "userInfo", required = false) UserInfo userInfo,
+    public String welcome(@RequestParam(name = "user", required = false) User user,
                           Model model) {
-        if(userInfo == null){
+        if(user == null){
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            userInfo = daoUserInfo.getByUsername(auth.getName());
+            user = daoUser.getByUsername(auth.getName());
         }
 
-        model.addAttribute("userInfo", userInfo);
+        model.addAttribute("user", user);
 
         return "./welcome.jsp";
     }

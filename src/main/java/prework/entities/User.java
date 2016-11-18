@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "user_info")
-public class UserInfo {
+public class User {
 
     @Id
     @Column(name = "id")
@@ -23,13 +23,13 @@ public class UserInfo {
     @JoinColumn(name = "id_role")
     private Role role;
 
-    @OneToOne(mappedBy = "userInfo", fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
     private Department department;
 
-    @OneToOne(mappedBy = "userInfo", fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
     private Teacher teacher;
 
-    @OneToOne(mappedBy = "userInfo", fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
     private Student student;
 
     public int getId() {

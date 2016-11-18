@@ -23,7 +23,7 @@ public class Department {
 
     @OneToOne()
     @JoinColumn(name = "id_user_info")
-    private UserInfo userInfo;
+    private User user;
 
     public Department() {
 
@@ -77,11 +77,11 @@ public class Department {
         teachers.remove(teacher);
     }
 
-    public UserInfo getUserInfo() {
-        return userInfo;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

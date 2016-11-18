@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import prework.entities.Department;
 import prework.entities.Student;
-import prework.entities.UserInfo;
+import prework.entities.User;
 import prework.databaseservice.dao.DAODepartment;
 import prework.databaseservice.dao.DAOStudent;
-import prework.databaseservice.dao.DAOUserInfo;
+import prework.databaseservice.dao.DAOUser;
 
 @Controller
 @RequestMapping(value = "/jsp")
 public class UpdateController {
 
     @Autowired
-    private DAOUserInfo daoUserInfo;
+    private DAOUser daoUser;
 
     @Autowired
     private DAOStudent daoStudent;
@@ -48,11 +48,11 @@ public class UpdateController {
                                 @RequestParam("newPassword") String newPassword, Model model) {
 
         int userIdInt = Integer.parseInt(userId);
-        UserInfo userInfo = daoUserInfo.getByID(userIdInt);
+        User user = daoUser.getByID(userIdInt);
 
-        if (userInfo.getPassword().equals(oldPassword)) {
-            daoUserInfo.changePassword(userIdInt, newPassword);
-            model.addAttribute("userInfo", userInfo);
+        if (user.getPassword().equals(oldPassword)) {
+            daoUser.changePassword(userIdInt, newPassword);
+            model.addAttribute("user", user);
         } else {
             String message = "Passwords don't match";
             model.addAttribute("message", message);
@@ -66,17 +66,17 @@ public class UpdateController {
     public String changeUsername(@RequestParam("userId") int userId, @RequestParam("password") String password,
                                  @RequestParam("username") String username, Model model) {
 
-        UserInfo userInfo = daoUserInfo.getByID(userId);
+        User user = daoUser.getByID(userId);
         String message = null;
 
         try {
-            if (userInfo.getPassword().equals(password)) {
-                daoUserInfo.changeUsername(userId, username);
+            if (user.getPassword().equals(password)) {
+                daoUser.changeUsername(userId, username);
 
                 System.out.println();
-                System.out.println(userInfo);
+                System.out.println(user);
                 System.out.println();
-                model.addAttribute("userInfo", userInfo);
+                model.addAttribute("user", user);
             } else {
                 message = "Wrong password";
                 model.addAttribute("message", message);
@@ -110,18 +110,20 @@ public class UpdateController {
     }
 
     @RequestMapping(value = "/ChangeGroupPage", method = RequestMethod.GET)
-    public String changeGroupPage(@RequestParam("depId") String depId,
+    public String changeGroupPage(@RequestParam("depId") int depId,
                                   @RequestParam("studentId") String studentId,
+                                  @RequestParam("userId") int userId,
                                   Model model) {
 
         try {
-            Department department = daoDepartment.getByID(Integer.parseInt(depId));
+            Department department = daoDepartment.getByID(depId);
 
             model.addAttribute("groups", department.getGroups());
             model.addAttribute("studentID", studentId);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            model.addAttribute("userId", userId);
             return "./update/ChangeGroup.jsp";
         }
     }

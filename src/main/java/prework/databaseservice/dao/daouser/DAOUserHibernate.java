@@ -1,4 +1,4 @@
-package prework.databaseservice.dao.daouserinfo;
+package prework.databaseservice.dao.daouser;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -7,107 +7,107 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import prework.entities.Role;
-import prework.entities.UserInfo;
-import prework.databaseservice.dao.DAOUserInfo;
+import prework.entities.User;
+import prework.databaseservice.dao.DAOUser;
 
 import javax.persistence.Query;
 
 @Component
-public class DAOUserInfoHibernate implements DAOUserInfo {
+public class DAOUserHibernate implements DAOUser {
 
     @Autowired
     SessionFactory sessionFactory;
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void add(UserInfo userInfo) throws Exception {
+    public void add(User user) throws Exception {
         Session session = sessionFactory.getCurrentSession();
 
-        UserInfo existingUser = session.get(UserInfo.class, userInfo.getId());
+        User existingUser = session.get(User.class, user.getId());
 
         if (existingUser != null) {
             session.getTransaction().commit();
             throw new Exception();
         }
 
-        session.save(userInfo);
+        session.save(user);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void deleteByID(int userInfoID) {
+    public void deleteByID(int userID) {
         Session session = sessionFactory.getCurrentSession();
 
-        UserInfo userInfo = session.get(UserInfo.class, userInfoID);
-        session.delete(userInfo);
+        User user = session.get(User.class, userID);
+        session.delete(user);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public void delelteByUsername(String username) {
         Session session = sessionFactory.getCurrentSession();
 
-        String getUserInfoByUsernameQuery = "from UserInfo where username = :username";
-        Query query = session.createQuery(getUserInfoByUsernameQuery);
+        String getUserByUsernameQuery = "from User where username = :username";
+        Query query = session.createQuery(getUserByUsernameQuery);
         query.setParameter("username", username);
-        UserInfo userInfo = (UserInfo) query.getSingleResult();
-        session.delete(userInfo);
+        User user = (User) query.getSingleResult();
+        session.delete(user);
 
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void changePassword(int userInfoID, String newPassword) {
+    public void changePassword(int userID, String newPassword) {
         Session session = sessionFactory.getCurrentSession();
 
-        UserInfo userInfo = session.get(UserInfo.class, userInfoID);
-        userInfo.setPassword(newPassword);
-        session.update(userInfo);
+        User user = session.get(User.class, userID);
+        user.setPassword(newPassword);
+        session.update(user);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void changeUsername(int userInfoID, String newUsername) throws Exception {
+    public void changeUsername(int userID, String newUsername) throws Exception {
         Session session = sessionFactory.getCurrentSession();
 
-        UserInfo userInfo = session.get(UserInfo.class, userInfoID);
-        userInfo.setUsername(newUsername);
-        session.update(userInfo);
+        User user = session.get(User.class, userID);
+        user.setUsername(newUsername);
+        session.update(user);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void changeEnabled(int userInfoID, int newEnabled) {
+    public void changeEnabled(int userID, int newEnabled) {
         Session session = sessionFactory.getCurrentSession();
 
-        UserInfo userInfo = session.get(UserInfo.class, userInfoID);
-        userInfo.setEnabled(newEnabled);
-        session.update(userInfo);
+        User user = session.get(User.class, userID);
+        user.setEnabled(newEnabled);
+        session.update(user);
 
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void changeRole(int userInfoID, Role newRole) {
+    public void changeRole(int userID, Role newRole) {
         Session session = sessionFactory.getCurrentSession();
 
-        UserInfo userInfo = session.get(UserInfo.class, userInfoID);
-        userInfo.setRole(newRole);
-        session.update(userInfo);
+        User user = session.get(User.class, userID);
+        user.setRole(newRole);
+        session.update(user);
 
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public UserInfo getByID(int userInfoID) {
+    public User getByID(int userID) {
         Session session = sessionFactory.getCurrentSession();
 
-        UserInfo userInfo = session.get(UserInfo.class, userInfoID);
+        User user = session.get(User.class, userID);
 
-        return userInfo;
+        return user;
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public UserInfo getByUsername(String username) {
+    public User getByUsername(String username) {
         Session session = sessionFactory.getCurrentSession();
 
-        String getUserInfoByUsernameQuery = "from UserInfo where username = :username";
-        Query query = session.createQuery(getUserInfoByUsernameQuery);
+        String getUserByUsernameQuery = "from User where username = :username";
+        Query query = session.createQuery(getUserByUsernameQuery);
         query.setParameter("username", username);
-        UserInfo userInfo = (UserInfo) query.getSingleResult();
+        User user = (User) query.getSingleResult();
 
-        return userInfo;
+        return user;
     }
 }

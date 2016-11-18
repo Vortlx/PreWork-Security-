@@ -7,7 +7,7 @@ import java.util.Set;
 import prework.entities.Department;
 import prework.entities.Subject;
 import prework.entities.Teacher;
-import prework.entities.UserInfo;
+import prework.entities.User;
 
 /**
  * This class define CRUD operation for teachers table.
@@ -26,7 +26,7 @@ public interface DAOTeacher {
      * @return Nothing.
      * @throws SQLException
      */
-    void add(String name, String familyName, Subject subject, Department department, UserInfo userInfo) throws SQLException;
+    void add(String name, String familyName, Subject subject, Department department, User user) throws SQLException;
 
     /**
      * This method update entities into teachers table.

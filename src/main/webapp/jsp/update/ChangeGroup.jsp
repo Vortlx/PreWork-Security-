@@ -8,7 +8,7 @@
 <title>Add Group</title>
 </head>
 <body>
-    <a href="./Students" name="back">Back</a>
+    <a href="./Students?userId=${userId}" name="back">Back</a>
     <form action="./ChangeGroup" method="POST">
         Group Name: 
         <select name="newGroupId">

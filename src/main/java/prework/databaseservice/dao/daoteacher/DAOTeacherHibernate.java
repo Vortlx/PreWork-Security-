@@ -26,7 +26,7 @@ public class DAOTeacherHibernate implements DAOTeacher {
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public void add(String name, String familyName,
-                    Subject subject, Department department, UserInfo userInfo) throws SQLException {
+                    Subject subject, Department department, User user) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
 
         Teacher teacher = new Teacher();
@@ -34,7 +34,7 @@ public class DAOTeacherHibernate implements DAOTeacher {
         teacher.setFamilyName(familyName);
         teacher.setSubject(subject);
         teacher.setDepartment(department);
-        teacher.setUserInfo(userInfo);
+        teacher.setUser(user);
 
         session.save(teacher);
     }

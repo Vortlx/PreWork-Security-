@@ -26,7 +26,7 @@ public class DeleteController {
     private DAOTeacher daoTeacher;
 
     @Autowired
-    private DAOUserInfo daoUserInfo;
+    private DAOUser daoUser;
 
     @Autowired
     private DAOSubject daoSubject;
@@ -38,7 +38,7 @@ public class DeleteController {
         try {
             Student student = daoStudent.getById(studentId);
 
-            daoUserInfo.deleteByID(student.getUserInfo().getId());
+            daoUser.deleteByID(student.getUser().getId());
             daoStudent.deleteByID(studentId);
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,7 +56,7 @@ public class DeleteController {
         try {
             Group group = daoGroup.getByID(groupId);
             for (Student student : group.getStudents()) {
-                daoUserInfo.deleteByID(student.getUserInfo().getId());
+                daoUser.deleteByID(student.getUser().getId());
             }
 
             daoGroup.deleteByID(groupId);
@@ -76,7 +76,7 @@ public class DeleteController {
         try {
             Teacher teacher = daoTeacher.getById(teacherId);
 
-            daoUserInfo.deleteByID(teacher.getUserInfo().getId());
+            daoUser.deleteByID(teacher.getUser().getId());
             daoSubject.delete(teacher.getSubject().getId());
             daoTeacher.deleteByID(teacher.getId());
         } catch (Exception e) {

@@ -22,7 +22,7 @@
         <property name="annotatedClasses">
             <list>
                 <value>prework.entities.Role</value>
-                <value>prework.entities.UserInfo</value>
+                <value>prework.entities.User</value>
                 <value>prework.entities.Department</value>
                 <value>prework.entities.Subject</value>
                 <value>prework.entities.Group</value>

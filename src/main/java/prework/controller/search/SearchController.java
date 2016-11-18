@@ -6,7 +6,7 @@ import prework.entities.*;
 import prework.databaseservice.dao.DAOGroup;
 import prework.databaseservice.dao.DAOStudent;
 import prework.databaseservice.dao.DAOTeacher;
-import prework.databaseservice.dao.DAOUserInfo;
+import prework.databaseservice.dao.DAOUser;
 
 import java.util.*;
 
@@ -31,7 +31,7 @@ public class SearchController {
     private DAOTeacher daoTeacher;
 
     @Autowired
-    private DAOUserInfo daoUserInfo;
+    private DAOUser daoUser;
 
     @RequestMapping(value = "/MyGroup", method = RequestMethod.GET)
     public String findMyGroup(@RequestParam(name = "userId", required = false) String userId,
@@ -44,8 +44,8 @@ public class SearchController {
                 model.addAttribute("group", group);
 
             } else {
-                UserInfo userInfo = daoUserInfo.getByID(Integer.parseInt(userId));
-                Student student = userInfo.getStudent();
+                User user = daoUser.getByID(Integer.parseInt(userId));
+                Student student = user.getStudent();
 
                 model.addAttribute("group", student.getGroup());
             }
@@ -70,8 +70,8 @@ public class SearchController {
                 model.addAttribute("userId", userId);
                 model.addAttribute("groupId", groupId);
             } else {
-                UserInfo userInfo = daoUserInfo.getByID(userId);
-                Student student = userInfo.getStudent();
+                User user = daoUser.getByID(userId);
+                Student student = user.getStudent();
 
                 model.addAttribute("subjects", student.getGroup().getSubjects());
             }
@@ -87,23 +87,23 @@ public class SearchController {
     @PreAuthorize("hasAnyRole('ROLE_DEPARTMENT', 'ROLE_TEACHER')")
     public String findGroups(@RequestParam("userId") String userId, Model model) {
 
-        int userInfoIdInt = Integer.parseInt(userId);
+        int userIdInt = Integer.parseInt(userId);
         Set<Group> groups = null;
         Department department = null;
         Teacher teacher = null;
 
         try {
-            UserInfo userInfo = daoUserInfo.getByID(userInfoIdInt);
+            User user = daoUser.getByID(userIdInt);
 
-            if (userInfo.getDepartment() != null) {
-                department = userInfo.getDepartment();
+            if (user.getDepartment() != null) {
+                department = user.getDepartment();
                 groups = department.getGroups();
             } else {
-                teacher = userInfo.getTeacher();
+                teacher = user.getTeacher();
                 groups = teacher.getSubject().getGroups();
             }
 
-            model.addAttribute("userId", userInfoIdInt);
+            model.addAttribute("userId", userIdInt);
             model.addAttribute("groups", groups);
         } catch (Exception e) {
             e.printStackTrace();
@@ -125,8 +125,8 @@ public class SearchController {
 
         try {
 
-            UserInfo userInfo = daoUserInfo.getByID(userIdInt);
-            department = userInfo.getDepartment();
+            User user = daoUser.getByID(userIdInt);
+            department = user.getDepartment();
 
             students = new HashSet<Student>();
             for (Group group : department.getGroups()) {
@@ -138,6 +138,7 @@ public class SearchController {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            model.addAttribute("userId", userId);
             return "./search/Students.jsp";
         }
     }
@@ -186,8 +187,8 @@ public class SearchController {
         Department department;
 
         try {
-            UserInfo userInfo = daoUserInfo.getByID(userIdInt);
-            department = userInfo.getDepartment();
+            User user = daoUser.getByID(userIdInt);
+            department = user.getDepartment();
 
             teachers = department.getTeachers();
 
