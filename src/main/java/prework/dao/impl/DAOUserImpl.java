@@ -13,7 +13,7 @@ import prework.dao.DAOUser;
 import javax.persistence.Query;
 
 @Component
-public class DAOUserHibernate implements DAOUser {
+public class DAOUserImpl implements DAOUser {
 
     @Autowired
     SessionFactory sessionFactory;

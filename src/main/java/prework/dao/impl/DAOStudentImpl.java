@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component("daoStudentHibernate")
-public class DAOStudentHibernate implements DAOStudent {
+public class DAOStudentImpl implements DAOStudent {
 
     @Autowired
     private SessionFactory sessionFactory;

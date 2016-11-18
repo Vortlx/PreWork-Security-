@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component("daoTeacherHibernate")
-public class DAOTeacherHibernate implements DAOTeacher {
+public class DAOTeacherImpl implements DAOTeacher {
 
     @Autowired
     private SessionFactory sessionFactory;

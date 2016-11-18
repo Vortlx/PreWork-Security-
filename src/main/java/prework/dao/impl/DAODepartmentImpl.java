@@ -15,7 +15,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Component
-public class DAODepartmentHibernate implements DAODepartment {
+public class DAODepartmentImpl implements DAODepartment {
 
     @Autowired
     private SessionFactory sessionFactory;

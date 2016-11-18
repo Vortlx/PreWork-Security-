@@ -13,7 +13,7 @@ import prework.dao.DAORole;
 import javax.persistence.Query;
 
 @Component
-public class DAORoleHibernate implements DAORole {
+public class DAORoleImpl implements DAORole {
 
     @Autowired
     SessionFactory sessionFactory;

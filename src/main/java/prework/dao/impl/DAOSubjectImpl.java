@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Set;
 
 @Component
-public class DAOSubjectHibernate implements DAOSubject {
+public class DAOSubjectImpl implements DAOSubject {
 
     @Autowired
     SessionFactory sessionFactory;

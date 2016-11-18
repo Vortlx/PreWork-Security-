@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component("daoGroupHibernate")
-public class DAOGroupHibernate implements DAOGroup {
+public class DAOGroupImpl implements DAOGroup {
 
     @Autowired
     private SessionFactory sessionFactory;
