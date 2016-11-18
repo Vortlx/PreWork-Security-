@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import prework.entities.Department;
 import prework.entities.Student;
 import prework.entities.User;
-import prework.databaseservice.dao.DAODepartment;
-import prework.databaseservice.dao.DAOStudent;
-import prework.databaseservice.dao.DAOUser;
+import prework.dao.DAODepartment;
+import prework.dao.DAOStudent;
+import prework.dao.DAOUser;
 
 @Controller
 @RequestMapping(value = "/jsp")

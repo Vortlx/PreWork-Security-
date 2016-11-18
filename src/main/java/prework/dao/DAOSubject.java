@@ -1,4 +1,4 @@
-package prework.databaseservice.dao;
+package prework.dao;
 
 import prework.entities.Group;
 import prework.entities.Subject;

@@ -1,4 +1,4 @@
-package prework.databaseservice.dao.daorole;
+package prework.dao.impl;
 
 
 import org.hibernate.Session;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import prework.entities.Role;
-import prework.databaseservice.dao.DAORole;
+import prework.dao.DAORole;
 
 import javax.persistence.Query;
 

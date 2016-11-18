@@ -1,4 +1,4 @@
-package prework.databaseservice.dao.daostudent;
+package prework.dao.impl;
 
 
 import java.sql.SQLException;
@@ -13,7 +13,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import prework.entities.User;
-import prework.databaseservice.dao.DAOStudent;
+import prework.dao.DAOStudent;
 import prework.entities.Group;
 import prework.entities.Student;
 import org.springframework.beans.factory.annotation.Autowired;

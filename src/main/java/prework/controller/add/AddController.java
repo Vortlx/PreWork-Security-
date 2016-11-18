@@ -3,7 +3,7 @@ package prework.controller.add;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import prework.entities.*;
-import prework.databaseservice.dao.*;
+import prework.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

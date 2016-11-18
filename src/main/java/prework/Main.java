@@ -1,9 +1,9 @@
 package prework;
 
-import prework.databaseservice.dao.DAOTeacher;
+import prework.dao.DAOTeacher;
 
-import prework.databaseservice.dao.DAOGroup;
-import prework.databaseservice.dao.DAOStudent;
+import prework.dao.DAOGroup;
+import prework.dao.DAOStudent;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

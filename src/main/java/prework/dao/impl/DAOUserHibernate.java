@@ -1,4 +1,4 @@
-package prework.databaseservice.dao.daouser;
+package prework.dao.impl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import prework.entities.Role;
 import prework.entities.User;
-import prework.databaseservice.dao.DAOUser;
+import prework.dao.DAOUser;
 
 import javax.persistence.Query;
 

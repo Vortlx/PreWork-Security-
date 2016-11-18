@@ -4,7 +4,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import prework.entities.Group;
 import prework.entities.Student;
 import prework.entities.Teacher;
-import prework.databaseservice.dao.*;
+import prework.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

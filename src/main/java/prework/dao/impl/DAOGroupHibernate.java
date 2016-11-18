@@ -1,4 +1,4 @@
-package prework.databaseservice.dao.daogroup;
+package prework.dao.impl;
 
 
 import java.util.List;
@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import prework.entities.Department;
 import prework.entities.Student;
 import prework.entities.Subject;
-import prework.databaseservice.dao.DAOGroup;
+import prework.dao.DAOGroup;
 import prework.entities.Group;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

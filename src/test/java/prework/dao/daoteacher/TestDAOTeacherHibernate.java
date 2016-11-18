@@ -1,33 +1,27 @@
-package prework.databaseservice.dao.daogroup;
+package prework.dao.daoteacher;
 
-
-import org.junit.Test;
+import java.sql.SQLException;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 
-import prework.databaseservice.dao.DAOGroup;
-import prework.entities.Group;
+import prework.dao.DAOTeacher;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-
 @Ignore
-public class TestDAOGroupHibernate {
+public class TestDAOTeacherHibernate {
 
     private static final ApplicationContext context = new ClassPathXmlApplicationContext("spring/Spring.cfg.xml");
-    private static final DAOGroup daoGroup = (DAOGroup) context.getBean("daoGroupHibernate");
-    private static final String testGroupName = "TestGroup";
-
-    private static Group testGroup = null;
+    private static final DAOTeacher daoTeacher = (DAOTeacher) context.getBean("daoTeacherHibernate");
+    private static final String teacherName = "TestName";
+    private static final String teacherFamilyName = "TestFamilyName";
     
     @BeforeClass
     public static void addDataToTable(){
         try{
-            //daoGroup.add(testGroupName,);
-            testGroup = daoGroup.getByName(testGroupName);
-
+            //daoTeacher.add(teacherName, teacherFamilyName);
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -36,14 +30,9 @@ public class TestDAOGroupHibernate {
     @AfterClass
     public static void deleteDataFromTable(){
         try{
-            daoGroup.deleteByName(testGroupName);
-        }catch(Exception e){
+            daoTeacher.deleteByFullName(teacherName, teacherFamilyName);
+        }catch(SQLException e){
             e.printStackTrace();
         }
-    }
-
-    @Test
-    public void testChangeName(){
-
     }
 }

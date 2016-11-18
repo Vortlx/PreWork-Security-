@@ -1,4 +1,4 @@
-package prework.databaseservice.dao.daosubject;
+package prework.dao.impl;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -6,111 +6,97 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import prework.entities.Department;
 import prework.entities.Group;
-import prework.entities.Subject;
-import prework.entities.SubjectType;
 import prework.entities.Teacher;
-import prework.databaseservice.dao.DAOSubject;
+import prework.dao.DAODepartment;
 
 import javax.persistence.Query;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Component
-public class DAOSubjectHibernate implements DAOSubject {
+public class DAODepartmentHibernate implements DAODepartment {
 
     @Autowired
-    SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void add(Subject subject) {
+    public void add(Department department) {
         Session session = sessionFactory.getCurrentSession();
-
-        session.save(subject);
-    }
-
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void addGroup(int subjectId, Group group) {
-        Session session = sessionFactory.getCurrentSession();
-
-        Subject subject = session.get(Subject.class, subjectId);
-        subject.addGroup(group);
-        group.addSubject(subject);
-
-        session.update(subject);
+        session.save(department);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void changeName(int subjectID, String newName) {
+    public void changeName(int depID, String newName) {
         Session session = sessionFactory.getCurrentSession();
 
-        Subject subject = session.get(Subject.class, subjectID);
-        subject.setName(newName);
-        session.update(subject);
+        Department department = session.get(Department.class, depID);
+        department.setName(newName);
+        session.update(department);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void delete(int subjectID) {
+    public void changeLogin(int depID, String newLogin) {
         Session session = sessionFactory.getCurrentSession();
 
-        Subject subject = session.get(Subject.class, subjectID);
-        session.delete(subject);
+        Department department = session.get(Department.class, depID);
+        session.update(department);
+    }
+
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
+    public void changePassword(int depID, String newPassword) {
+        Session session = sessionFactory.getCurrentSession();
+
+        Department department = session.get(Department.class, depID);
+        session.update(department);
+    }
+
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
+    public void delete(int depID) {
+        Session session = sessionFactory.getCurrentSession();
+
+        Department department = session.get(Department.class, depID);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Subject getById(int subjectId) {
+    public Department getByID(int depID) {
         Session session = sessionFactory.getCurrentSession();
-
-        Subject subject = session.get(Subject.class, subjectId);
-
-        return subject;
+        Department department = session.get(Department.class, depID);
+        return department;
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Subject getByNameAndType(String name, SubjectType subjectType) {
+    public Department getByName(String depName) {
         Session session = sessionFactory.getCurrentSession();
 
-        String getSubjectQuery = "from Subject where name = :name and type = :subjectType";
-        Query query = session.createQuery(getSubjectQuery);
-        query.setParameter("name", name);
-        query.setParameter("subjectType", subjectType);
-        Subject subject = (Subject) query.getSingleResult();
+        String getDepByNameQuery = "from Department where name = :name";
+        Query query = session.createQuery(getDepByNameQuery);
+        query.setParameter("name", depName);
 
-        return subject;
+        Department department = (Department) query.getSingleResult();
+
+        return department;
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Set<Subject> getAll() {
+    public List<Group> getGroups(int depID) {
         Session session = sessionFactory.getCurrentSession();
 
-        String getSubjectQuery = "from Subject";
-        Query query = session.createQuery(getSubjectQuery);
-        Set<Subject> subjects = new HashSet<Subject>();
-        subjects.addAll(query.getResultList());
-
-        return subjects;
-    }
-
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public List<Group> getGroups(int subjectID) {
-        Session session = sessionFactory.getCurrentSession();
-
-        String getGroupsQuery = "select groups from Subject where id = :id";
+        String getGroupsQuery = "select groups from Department where id = :id";
         Query query = session.createQuery(getGroupsQuery);
-        query.setParameter("id", subjectID);
+        query.setParameter("id", depID);
         List<Group> groups = (List<Group>) query.getSingleResult();
 
         return groups;
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Group getGroup(int subjectID, String groupName) {
+    public Group getGroup(int depID, String groupName) {
         Session session = sessionFactory.getCurrentSession();
 
-        String getGroupsQuery = "select groups from Subject where id = :id";
+        String getGroupsQuery = "select groups from Department where id = :id";
         Query query = session.createQuery(getGroupsQuery);
-        query.setParameter("id", subjectID);
+        query.setParameter("id", depID);
         List<Group> groups = (List<Group>) query.getSingleResult();
 
         for (Group group : groups) {
@@ -123,24 +109,25 @@ public class DAOSubjectHibernate implements DAOSubject {
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public List<Teacher> getTeachers(int subjectID) {
+    public List<Teacher> getTeachers(int depID) {
         Session session = sessionFactory.getCurrentSession();
 
-        String getGroupsQuery = "select teachers from Subject where id = :id";
-        Query query = session.createQuery(getGroupsQuery);
-        query.setParameter("id", subjectID);
+        String getTeachersQuery = "select teachers from Department where id = :id";
+        Query query = session.createQuery(getTeachersQuery);
+        query.setParameter("id", depID);
+
         List<Teacher> teachers = (List<Teacher>) query.getSingleResult();
 
         return teachers;
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Teacher getTeacher(int subjectID, String teacherName, String teacherFamilyName) {
+    public Teacher getTeacher(int depID, String teacherName, String teacherFamilyName) {
         Session session = sessionFactory.getCurrentSession();
 
-        String getGroupsQuery = "select teachers from Subject where id = :id";
-        Query query = session.createQuery(getGroupsQuery);
-        query.setParameter("id", subjectID);
+        String getTeacherByNameQuery = "select teachers from Department where id = :id";
+        Query query = session.createQuery(getTeacherByNameQuery);
+        query.setParameter("id", depID);
         List<Teacher> teachers = (List<Teacher>) query.getSingleResult();
 
         for (Teacher teacher : teachers) {
