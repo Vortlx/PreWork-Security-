@@ -1,0 +1,73 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>lebedevas - Велиев Вугар Мамедович - Пандион</title>
+<style type="text/css">
+<!--
+html, body { background-color: #fff; color: #000; }
+td { font-size: small; font-family: Arial; }
+hr { margin-top: 20px; margin-bottom: 20px; }
+h4 { margin-left: 20px; }
+-->
+</style>
+</head>
+<body>
+<h1>Пандион</h1>
+<h3>lebedevas</h3>
+<h4>lebedevas@jvc</h5>
+<h3>Велиев Вугар Мамедович</h3>
+<h4>velievvm@jvc</h5>
+<table width="100%" style="table-layout: fixed">
+<col width="100" /><col width="60" /><col />
+<tr><td colspan="3"><hr /></tr>
+<tr><td colspan="3"><h2>18 ноября 2016 г.</h2></td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:29</td><td>@Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)<BR> &nbsp; &nbsp;public Group getGroup(int depID, String groupName) {<BR> &nbsp; &nbsp; &nbsp; &nbsp;Session session = sessionFactory.getCurrentSession();<BR><BR> &nbsp; &nbsp; &nbsp; &nbsp;String getGroupsQuery = "select groups from Department where id = :id";<BR> &nbsp; &nbsp; &nbsp; &nbsp;Query query = session.createQuery(getGroupsQuery);<BR> &nbsp; &nbsp; &nbsp; &nbsp;query.setParameter("id", depID);<BR> &nbsp; &nbsp; &nbsp; &nbsp;List&lt;Group&gt; groups = (List&lt;Group&gt;) query.getSingleResult();<BR><BR> &nbsp; &nbsp; &nbsp; &nbsp;for (Group group : groups) {<BR> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (group.getName().equals(groupName)) {<BR> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return group;<BR> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<BR> &nbsp; &nbsp; &nbsp; &nbsp;}<BR><BR> &nbsp; &nbsp; &nbsp; &nbsp;return new Group();<BR> &nbsp; &nbsp;}</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:30</td><td>нагрузка на сервер, решать через запрос</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:30</td><td>List&lt;Teacher&gt; teachers = (List&lt;Teacher&gt;) query.getSingleResult();<BR><BR> &nbsp; &nbsp; &nbsp; &nbsp;return teachers;</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:30</td><td>можно сразу вернуть результат, если не собираешься использовать данные в этом же методе</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:31</td><td>@Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)<BR> &nbsp; &nbsp;public Teacher getTeacher(int depID, String teacherName, String teacherFamilyName) {<BR> &nbsp; &nbsp; &nbsp; &nbsp;Session session = sessionFactory.getCurrentSession();<BR><BR> &nbsp; &nbsp; &nbsp; &nbsp;String getTeacherByNameQuery = "select teachers from Department where id = :id";<BR> &nbsp; &nbsp; &nbsp; &nbsp;Query query = session.createQuery(getTeacherByNameQuery);<BR> &nbsp; &nbsp; &nbsp; &nbsp;query.setParameter("id", depID);<BR> &nbsp; &nbsp; &nbsp; &nbsp;List&lt;Teacher&gt; teachers = (List&lt;Teacher&gt;) query.getSingleResult();<BR><BR> &nbsp; &nbsp; &nbsp; &nbsp;for (Teacher teacher : teachers) {<BR> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if (teacher.getName().equals(teacherName) &amp;&amp;<BR> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;teacher.getName().equals(teacherFamilyName)) {<BR> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return teacher;<BR> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}<BR> &nbsp; &nbsp; &nbsp; &nbsp;}<BR><BR> &nbsp; &nbsp; &nbsp; &nbsp;return new Teacher();<BR> &nbsp; &nbsp;}</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:31</td><td>аналогично</td></tr>
+<tr valign="top"><td>lebedevas</td><td>13:31</td><td>Я это уже поправил</td></tr>
+<tr valign="top"><td>lebedevas</td><td>13:31</td><td>Set&lt;Teacher&gt; teachers = new HashSet&lt;Teacher&gt;();<BR> &nbsp; &nbsp; &nbsp; &nbsp;teachers.addAll(query.getResultList());</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:32</td><td>зачем? верни просто результат</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:32</td><td>return query.getResultList</td></tr>
+<tr valign="top"><td>lebedevas</td><td>13:33</td><td>OK</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:33</td><td>вместо SessionFactory sessionFactory</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:33</td><td>переписать проект через EntityManager</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:33</td><td>и соответсвенно убрать реализацию всех crud &nbsp;методов</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:34</td><td>@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)<BR> &nbsp; &nbsp;public void add(Department department) {<BR> &nbsp; &nbsp; &nbsp; &nbsp;Session session = sessionFactory.getCurrentSession();<BR> &nbsp; &nbsp; &nbsp; &nbsp;session.save(department);<BR> &nbsp; &nbsp;}</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:34</td><td>вот этого метода не должно быть - только интерфейс</td></tr>
+<tr valign="top"><td>lebedevas</td><td>13:37</td><td>Я поправил класс UserInfo</td></tr>
+<tr valign="top"><td>lebedevas</td><td>13:37</td><td>Еще не успел закоммитит</td></tr>
+<tr valign="top"><td>lebedevas</td><td>13:37</td><td>там</td></tr>
+<tr valign="top"><td>lebedevas</td><td>13:37</td><td>@OneToOne &nbsp; &nbsp;private Department department;</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:37</td><td>Переименовать пакет Data в Entities</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:38</td><td>familyName))</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:41</td><td>В department не совсем вяжется &nbsp;UserInfo</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:41</td><td>по идее нужно было делать прослойку через декана, но в плане учебного проекта и так сойдет</td></tr>
+<tr valign="top"><td>lebedevas</td><td>13:42</td><td>Нужно еще класс UserInfo переименовать просто в User</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:45</td><td>databaseservice переименовать в DAO</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:45</td><td>DAO и hibernateutil убрать</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:47</td><td>вместо всех пакетов внутри DAO положить тelf один Impl и сложить туда все реализации</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:49</td><td>У всех реализаций убрать слово хибернейт вместо него приставка Impl</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:49</td><td>вместо @Component("daoGroupHibernate") просто @Repository</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:52</td><td>@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)<BR> &nbsp; &nbsp;public void add(String name, String familyName, int groupID, UserInfo userInfo) throws SQLException {<BR> &nbsp; &nbsp; &nbsp; &nbsp;Session session = sessionFactory.getCurrentSession();<BR><BR> &nbsp; &nbsp; &nbsp; &nbsp;Group group = session.get(Group.class, groupID);<BR><BR> &nbsp; &nbsp; &nbsp; &nbsp;Student student = new Student();<BR> &nbsp; &nbsp; &nbsp; &nbsp;student.setName(name);<BR> &nbsp; &nbsp; &nbsp; &nbsp;student.setFamilyName(familyName);<BR> &nbsp; &nbsp; &nbsp; &nbsp;student.setGroup(group);<BR> &nbsp; &nbsp; &nbsp; &nbsp;student.setUserInfo(userInfo);<BR><BR> &nbsp; &nbsp; &nbsp; &nbsp;session.save(student);<BR> &nbsp; &nbsp;}</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:52</td><td>вместо полей отдай туда собранного студента</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:52</td><td>данные лучше собирать на самом первом этапе как они появляются, например, на контроллере</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:53</td><td>@Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)<BR> &nbsp; &nbsp;public void changeGroup(int studentID, int newGroupId) throws SQLException {<BR> &nbsp; &nbsp; &nbsp; &nbsp;Session session = sessionFactory.getCurrentSession();<BR><BR> &nbsp; &nbsp; &nbsp; &nbsp;Group newGroup = session.get(Group.class, newGroupId);<BR> &nbsp; &nbsp; &nbsp; &nbsp;Student student = session.get(Student.class, studentID);<BR><BR> &nbsp; &nbsp; &nbsp; &nbsp;if (!student.getGroup().equals(newGroup)) {<BR> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;student.setGroup(newGroup);<BR> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;session.update(student);<BR> &nbsp; &nbsp; &nbsp; &nbsp;}<BR> &nbsp; &nbsp;}</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:53</td><td>не понял что здесь происходит</td></tr>
+<tr valign="top"><td>lebedevas</td><td>13:55</td><td>Если уже находится в данной группе то ничего не делать</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:55</td><td>этой проверке в дао нечего делать</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>13:55</td><td>ты должен знать это заранее</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>14:08</td><td>Контроллеры должны быть по сущностям а не по методам</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>14:08</td><td>@RequestMapping(value = "/Add", method = RequestMethod.POST)<BR> &nbsp; &nbsp;@PreAuthorize("hasRole('ROLE_DEPARTMENT')")<BR> &nbsp; &nbsp;public String add(@RequestParam("whatAdd") String whatAdd,<BR> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;@RequestParam("userId") String userId, Model model) {<BR><BR> &nbsp; &nbsp; &nbsp; &nbsp;UserInfo userInfo = daoUserInfo.getByID(Integer.parseInt(userId));<BR><BR> &nbsp; &nbsp; &nbsp; &nbsp;Department department = userInfo.getDepartment();<BR><BR> &nbsp; &nbsp; &nbsp; &nbsp;if ("GROUP".equals(whatAdd)) {<BR> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;model.addAttribute("departmentId", department.getId());<BR> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return "./add/AddGroup.jsp";<BR> &nbsp; &nbsp; &nbsp; &nbsp;} else if ("STUDENT".equals(whatAdd)) {<BR> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;model.addAttribute("groups", department.getGroups());<BR> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return "./add/AddStudent.jsp";<BR> &nbsp; &nbsp; &nbsp; &nbsp;} else if ("TEACHER".equals(whatAdd)) {<BR> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;model.addAttribute("departmentId", department.getId());<BR> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return "./add/AddTeacher.jsp";<BR> &nbsp; &nbsp; &nbsp; &nbsp;} else {<BR> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;return "./welcome";<BR> &nbsp; &nbsp; &nbsp; &nbsp;}<BR> &nbsp; &nbsp;}</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>14:08</td><td>убрать относительные пути к файлам</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>14:09</td><td>Добавить в проект пакет Servicers и вынести туда всю &nbsp;бизнес логику из контроллеров</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>14:10</td><td>Контроллер должен выполнять только обработку путей, данных и делегировать бизнес логику сервисам</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>14:13</td><td>&lt;body&gt;<BR> &nbsp; &nbsp;&lt;form action="./FindStudentServ" method="POST"&gt;<BR> &nbsp; &nbsp; &nbsp; &nbsp;&lt;input name="name" type="hidden" value=""&gt;<BR> &nbsp; &nbsp; &nbsp; &nbsp;&lt;input name="familyName" type="hidden" value=""&gt;<BR> &nbsp; &nbsp; &nbsp; &nbsp;&lt;input name="toStudents" type="submit" value="Find a student"&gt;<BR> &nbsp; &nbsp;&lt;/form&gt;<BR> &nbsp; &nbsp;&lt;form action="./FindTeacherServ" method="POST"&gt;<BR> &nbsp; &nbsp; &nbsp; &nbsp;&lt;input name="name" type="hidden" value=""&gt;<BR> &nbsp; &nbsp; &nbsp; &nbsp;&lt;input name="familyName" type="hidden" value=""&gt;<BR> &nbsp; &nbsp; &nbsp; &nbsp;&lt;input name="toTeachers" type="submit" value="Find a teacher"&gt;<BR> &nbsp; &nbsp;&lt;/form&gt;<BR> &nbsp; &nbsp;&lt;form action="./FindGroupServ" method="POST"&gt;<BR> &nbsp; &nbsp; &nbsp; &nbsp;&lt;input name="name" type="hidden" value=""&gt;<BR> &nbsp; &nbsp; &nbsp; &nbsp;&lt;input name="toGroups" type="submit" value="Find a group"&gt;<BR> &nbsp; &nbsp;&lt;/form&gt;<BR> &nbsp; &nbsp;&lt;form action="../../" method="POST"&gt;<BR> &nbsp; &nbsp; &nbsp; &nbsp;&lt;input name="back" type="submit" value="Back"&gt;<BR> &nbsp; &nbsp;&lt;/form&gt;<BR>&lt;/body&gt;</td></tr>
+<tr valign="top"><td>Велиев Вугар Мамедович</td><td>14:13</td><td>убрать все относительные пути</td></tr>
+</table>
+<hr />
+<p align="right">45 messages</p>
+</body>
+</html>

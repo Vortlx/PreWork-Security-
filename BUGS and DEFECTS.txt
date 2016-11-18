@@ -8,4 +8,4 @@
 
 5. not handled code 500
 
-6. Need rename class UserInfo to User
+6. After changing username can't find user and request return code 500
