@@ -54,15 +54,13 @@ public class DAODepartmentImpl implements DAODepartment {
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public void delete(int depID) {
         Session session = sessionFactory.getCurrentSession();
-
         Department department = session.get(Department.class, depID);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
     public Department getByID(int depID) {
         Session session = sessionFactory.getCurrentSession();
-        Department department = session.get(Department.class, depID);
-        return department;
+        return session.get(Department.class, depID);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
@@ -73,9 +71,7 @@ public class DAODepartmentImpl implements DAODepartment {
         Query query = session.createQuery(getDepByNameQuery);
         query.setParameter("name", depName);
 
-        Department department = (Department) query.getSingleResult();
-
-        return department;
+        return (Department) query.getSingleResult();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
@@ -85,9 +81,8 @@ public class DAODepartmentImpl implements DAODepartment {
         String getGroupsQuery = "select groups from Department where id = :id";
         Query query = session.createQuery(getGroupsQuery);
         query.setParameter("id", depID);
-        List<Group> groups = (List<Group>) query.getSingleResult();
 
-        return groups;
+        return query.getResultList();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
@@ -116,9 +111,7 @@ public class DAODepartmentImpl implements DAODepartment {
         Query query = session.createQuery(getTeachersQuery);
         query.setParameter("id", depID);
 
-        List<Teacher> teachers = (List<Teacher>) query.getSingleResult();
-
-        return teachers;
+        return query.getResultList();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)

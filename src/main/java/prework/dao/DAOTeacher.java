@@ -2,7 +2,7 @@ package prework.dao;
 
 
 import java.sql.SQLException;
-import java.util.Set;
+import java.util.List;
 
 import prework.entities.Department;
 import prework.entities.Subject;
@@ -62,7 +62,7 @@ public interface DAOTeacher {
      * @return List of teachers who have a specific name
      * @throws SQLException
      */
-    Set<Teacher> getByName(String name) throws SQLException;
+    List<Teacher> getByName(String name) throws SQLException;
 
     /**
      * This method return list of all teachers who have a specific family name.
@@ -71,7 +71,7 @@ public interface DAOTeacher {
      * @return List of teachers who have a specific family name
      * @throws SQLException
      */
-    Set<Teacher> getByFamilyName(String familyName) throws SQLException;
+    List<Teacher> getByFamilyName(String familyName) throws SQLException;
 
     /**
      * Method return list of teachers who have specific name and specific family name
@@ -81,7 +81,7 @@ public interface DAOTeacher {
      * @return List of teachers who have specific name and specific family name
      * @throws SQLException
      */
-    Set<Teacher> getTeacher(String name, String familyName) throws SQLException;
+    List<Teacher> getTeacher(String name, String familyName) throws SQLException;
 
     /**
      * This method return list of all teachers.
@@ -89,5 +89,5 @@ public interface DAOTeacher {
      * @return List of teachers
      * @throws SQLException
      */
-    Set<Teacher> getAll() throws SQLException;
+    List<Teacher> getAll() throws SQLException;
 }

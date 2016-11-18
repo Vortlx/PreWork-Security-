@@ -3,6 +3,7 @@ package prework.dao.impl;
 
 import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Query;
@@ -77,71 +78,58 @@ public class DAOTeacherImpl implements DAOTeacher {
         Session session = sessionFactory.getCurrentSession();
 
         Teacher teacher = session.get(Teacher.class, teacherID);
-        Subject subject = teacher.getSubject();
 
-        return subject;
+        return teacher.getSubject();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
     public Teacher getById(int teacherID) {
         Session session = sessionFactory.getCurrentSession();
 
-        Teacher teacher = session.get(Teacher.class, teacherID);
-
-        return teacher;
+        return session.get(Teacher.class, teacherID);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Set<Teacher> getByName(String name) throws SQLException {
+    public List<Teacher> getByName(String name) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
 
         String queryString = "from Teacher where name = :name";
         Query query = session.createQuery(queryString);
         query.setParameter("name", name);
-        Set<Teacher> teachers = new HashSet<Teacher>();
-        teachers.addAll(query.getResultList());
 
-        return teachers;
+        return query.getResultList();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Set<Teacher> getByFamilyName(String familyName) throws SQLException {
-
+    public List<Teacher> getByFamilyName(String familyName) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
-
 
         String queryString = "from Teacher where familyName = :familyName";
         Query query = session.createQuery(queryString);
         query.setParameter("familyName", familyName);
-        Set<Teacher> teachers = new HashSet<Teacher>();
-        teachers.addAll(query.getResultList());
 
-        return teachers;
+        return query.getResultList();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Set<Teacher> getTeacher(String name, String familyName) throws SQLException {
+    public List<Teacher> getTeacher(String name, String familyName) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
 
         String queryString = "from Teacher where name = :name and familyName = :familyName";
         Query query = session.createQuery(queryString);
         query.setParameter("name", name);
         query.setParameter("familyName", familyName);
-        Set<Teacher> teachers = new HashSet<Teacher>();
-        teachers.addAll(query.getResultList());
 
-        return teachers;
+        return query.getResultList();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Set<Teacher> getAll() throws SQLException {
+    public List<Teacher> getAll() throws SQLException {
         Session session = sessionFactory.getCurrentSession();
 
         String queryString = "from Teacher";
         Query query = session.createQuery(queryString);
-        Set<Teacher> teachers = new HashSet<Teacher>();
-        teachers.addAll(query.getResultList());
 
-        return teachers;
+        return query.getResultList();
     }
 }

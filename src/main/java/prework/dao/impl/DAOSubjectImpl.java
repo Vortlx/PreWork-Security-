@@ -62,9 +62,7 @@ public class DAOSubjectImpl implements DAOSubject {
     public Subject getById(int subjectId) {
         Session session = sessionFactory.getCurrentSession();
 
-        Subject subject = session.get(Subject.class, subjectId);
-
-        return subject;
+        return session.get(Subject.class, subjectId);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
@@ -75,21 +73,18 @@ public class DAOSubjectImpl implements DAOSubject {
         Query query = session.createQuery(getSubjectQuery);
         query.setParameter("name", name);
         query.setParameter("subjectType", subjectType);
-        Subject subject = (Subject) query.getSingleResult();
 
-        return subject;
+        return (Subject) query.getSingleResult();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Set<Subject> getAll() {
+    public List<Subject> getAll() {
         Session session = sessionFactory.getCurrentSession();
 
         String getSubjectQuery = "from Subject";
         Query query = session.createQuery(getSubjectQuery);
-        Set<Subject> subjects = new HashSet<Subject>();
-        subjects.addAll(query.getResultList());
 
-        return subjects;
+        return query.getResultList();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
@@ -99,9 +94,8 @@ public class DAOSubjectImpl implements DAOSubject {
         String getGroupsQuery = "select groups from Subject where id = :id";
         Query query = session.createQuery(getGroupsQuery);
         query.setParameter("id", subjectID);
-        List<Group> groups = (List<Group>) query.getSingleResult();
 
-        return groups;
+        return query.getResultList();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
@@ -111,7 +105,7 @@ public class DAOSubjectImpl implements DAOSubject {
         String getGroupsQuery = "select groups from Subject where id = :id";
         Query query = session.createQuery(getGroupsQuery);
         query.setParameter("id", subjectID);
-        List<Group> groups = (List<Group>) query.getSingleResult();
+        List<Group> groups = query.getResultList();
 
         for (Group group : groups) {
             if (group.getName().equals(groupName)) {
@@ -129,9 +123,8 @@ public class DAOSubjectImpl implements DAOSubject {
         String getGroupsQuery = "select teachers from Subject where id = :id";
         Query query = session.createQuery(getGroupsQuery);
         query.setParameter("id", subjectID);
-        List<Teacher> teachers = (List<Teacher>) query.getSingleResult();
 
-        return teachers;
+        return query.getResultList();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
@@ -141,7 +134,7 @@ public class DAOSubjectImpl implements DAOSubject {
         String getGroupsQuery = "select teachers from Subject where id = :id";
         Query query = session.createQuery(getGroupsQuery);
         query.setParameter("id", subjectID);
-        List<Teacher> teachers = (List<Teacher>) query.getSingleResult();
+        List<Teacher> teachers = query.getResultList();
 
         for (Teacher teacher : teachers) {
             if (teacher.getName().equals(teacherName) &&

@@ -149,7 +149,7 @@ public class SearchController {
                                @RequestParam(name = "familyName", required = false) String familyName,
                                Model model) {
 
-        Set<Student> students;
+        List<Student> students;
         Department department;
 
         try {
@@ -163,10 +163,8 @@ public class SearchController {
                 students = daoStudent.getAll();
             }
 
-            // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-            Iterator<Student> iterator = students.iterator();
-            department = iterator.next().getGroup().getDepartment();
+            Group group = students.get(0).getGroup();
+            department = group.getDepartment();
 
             model.addAttribute("department", department);
             model.addAttribute("students", students);
@@ -207,7 +205,7 @@ public class SearchController {
                                @RequestParam(name = "familyName", required = false) String familyName,
                                Model model) {
 
-        Set<Teacher> teachers;
+        List<Teacher> teachers;
         Department department;
 
         try {
@@ -222,9 +220,7 @@ public class SearchController {
                 teachers = daoTeacher.getAll();
             }
 
-            Iterator<Teacher> iterator = teachers.iterator();
-            department = iterator.next().getDepartment();
-
+            department = teachers.get(0).getDepartment();
 
             model.addAttribute("department", department);
             model.addAttribute("teachers", teachers);

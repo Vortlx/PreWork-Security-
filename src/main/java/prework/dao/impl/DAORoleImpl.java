@@ -40,8 +40,6 @@ public class DAORoleImpl implements DAORole {
         Query query = session.createQuery(getRoleByNameQuery);
         query.setParameter("name", name);
 
-        Role role = (Role) query.getSingleResult();
-
-        return role;
+        return (Role) query.getSingleResult();
     }
 }

@@ -2,8 +2,7 @@ package prework.dao.impl;
 
 
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Query;
 
@@ -89,9 +88,8 @@ public class DAOStudentImpl implements DAOStudent {
         Session session = sessionFactory.getCurrentSession();
 
         Student student = session.get(Student.class, studentID);
-        Group group = student.getGroup();
 
-        return group;
+        return student.getGroup();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
@@ -104,54 +102,46 @@ public class DAOStudentImpl implements DAOStudent {
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Set<Student> getAll() throws SQLException {
+    public List<Student> getAll() throws SQLException {
         Session session = sessionFactory.getCurrentSession();
 
         String queryString = "from Student";
         Query query = session.createQuery(queryString);
-        Set<Student> students = new HashSet<Student>();
-        students.addAll(query.getResultList());
 
-        return students;
+        return query.getResultList();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Set<Student> getByName(String name) throws SQLException {
+    public List<Student> getByName(String name) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
 
         String queryString = "from Student where name = :name";
         Query query = session.createQuery(queryString);
         query.setParameter("name", name);
-        Set<Student> students = new HashSet<Student>();
-        students.addAll(query.getResultList());
 
-        return students;
+        return query.getResultList();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Set<Student> getByFamilyName(String familyName) throws SQLException {
+    public List<Student> getByFamilyName(String familyName) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
 
         String queryString = "from Student where familyName = :familyName";
         Query query = session.createQuery(queryString);
         query.setParameter("familyName", familyName);
-        Set<Student> students = new HashSet<Student>();
-        students.addAll(query.getResultList());
 
-        return students;
+        return query.getResultList();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Set<Student> getStudent(String name, String familyName) throws SQLException {
+    public List<Student> getStudent(String name, String familyName) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
 
         String queryString = "from Student where name = :name and familyName = :familyName";
         Query query = session.createQuery(queryString);
         query.setParameter("name", name);
         query.setParameter("familyName", familyName);
-        Set<Student> students = new HashSet<Student>();
-        students.addAll(query.getResultList());
 
-        return students;
+        return query.getResultList();
     }
 }

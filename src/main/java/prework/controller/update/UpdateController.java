@@ -80,12 +80,12 @@ public class UpdateController {
             } else {
                 message = "Wrong password";
                 model.addAttribute("message", message);
-                return "./ChangeUsername.jsp";
+                return "./update/ChangeUsername.jsp";
             }
         } catch (Exception e) {
             message = "User with that username exist";
             model.addAttribute("message", message);
-            return "./ChangeUsername.jsp";
+            return "./update/ChangeUsername.jsp";
         }
 
         return "./welcome";

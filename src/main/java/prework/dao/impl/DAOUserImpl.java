@@ -94,9 +94,7 @@ public class DAOUserImpl implements DAOUser {
     public User getByID(int userID) {
         Session session = sessionFactory.getCurrentSession();
 
-        User user = session.get(User.class, userID);
-
-        return user;
+        return session.get(User.class, userID);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
@@ -106,8 +104,7 @@ public class DAOUserImpl implements DAOUser {
         String getUserByUsernameQuery = "from User where username = :username";
         Query query = session.createQuery(getUserByUsernameQuery);
         query.setParameter("username", username);
-        User user = (User) query.getSingleResult();
 
-        return user;
+        return (User) query.getSingleResult();
     }
 }

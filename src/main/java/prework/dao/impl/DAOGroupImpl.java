@@ -27,7 +27,6 @@ public class DAOGroupImpl implements DAOGroup {
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public void add(String name, Department department) {
-
         Session session = sessionFactory.getCurrentSession();
 
         Group group = new Group();
@@ -91,10 +90,7 @@ public class DAOGroupImpl implements DAOGroup {
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
     public Group getByID(int groupID) {
         Session session = sessionFactory.getCurrentSession();
-
-        Group group = session.get(Group.class, groupID);
-
-        return group;
+        return session.get(Group.class, groupID);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
@@ -104,9 +100,8 @@ public class DAOGroupImpl implements DAOGroup {
         String queryString = "from Group where name=:name";
         Query query = session.createQuery(queryString);
         query.setParameter("name", name);
-        Group group = (Group) query.getSingleResult();
 
-        return group;
+        return (Group) query.getSingleResult();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
@@ -115,9 +110,8 @@ public class DAOGroupImpl implements DAOGroup {
 
         String queryString = "from Group";
         Query query = session.createQuery(queryString);
-        List<Group> groups = query.getResultList();
 
-        return groups;
+        return query.getResultList();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
@@ -127,9 +121,8 @@ public class DAOGroupImpl implements DAOGroup {
         String getStudentsQuery = "select students from Group where id = :id";
         Query query = session.createQuery(getStudentsQuery);
         query.setParameter("id", groupID);
-        List<Student> students = (List<Student>) query.getSingleResult();
 
-        return students;
+        return query.getResultList();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
@@ -158,8 +151,7 @@ public class DAOGroupImpl implements DAOGroup {
         String getSubjectsQuery = "select subjects from Group where id = :id";
         Query query = session.createQuery(getSubjectsQuery);
         query.setParameter("id", groupID);
-        List<Subject> subjects = (List<Subject>) query.getSingleResult();
 
-        return subjects;
+        return query.getResultList();
     }
 }

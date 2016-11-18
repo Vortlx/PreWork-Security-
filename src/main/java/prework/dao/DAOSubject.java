@@ -6,7 +6,6 @@ import prework.entities.SubjectType;
 import prework.entities.Teacher;
 
 import java.util.List;
-import java.util.Set;
 
 public interface DAOSubject {
 
@@ -22,7 +21,7 @@ public interface DAOSubject {
 
     Subject getByNameAndType(String name, SubjectType subjectType);
 
-    Set<Subject> getAll();
+    List<Subject> getAll();
 
     List<Group> getGroups(int subjectID);
 
