@@ -17,7 +17,7 @@ import prework.dao.DAOStudent;
 import prework.dao.DAOUser;
 
 @Controller
-@RequestMapping(value = "/jsp")
+@RequestMapping(value = "jsp")
 public class UpdateController {
 
     @Autowired
@@ -29,21 +29,21 @@ public class UpdateController {
     @Autowired
     private DAODepartment daoDepartment;
 
-    @RequestMapping(value="/ChangePassword", method=RequestMethod.GET)
+    @RequestMapping(value="ChangePassword", method=RequestMethod.GET)
     public String toChangePasswordPage(@RequestParam("userId") int userId,
                                        Model model){
         model.addAttribute("userId", userId);
-        return "./update/ChangePassword.jsp";
+        return "update/ChangePassword.jsp";
     }
 
-    @RequestMapping(value="/ChangeUsername", method=RequestMethod.GET)
+    @RequestMapping(value="ChangeUsername", method=RequestMethod.GET)
     public String toChangeUsernamePage(@RequestParam("userId") int userId,
                                        Model model){
         model.addAttribute("userId", userId);
-        return "./update/ChangeUsername.jsp";
+        return "update/ChangeUsername.jsp";
     }
 
-    @RequestMapping(value = "/ChangePassword", method = RequestMethod.POST)
+    @RequestMapping(value = "ChangePassword", method = RequestMethod.POST)
     public String changePasswor(@RequestParam("userId") String userId, @RequestParam("oldPassword") String oldPassword,
                                 @RequestParam("newPassword") String newPassword, Model model) {
 
@@ -56,13 +56,13 @@ public class UpdateController {
         } else {
             String message = "Passwords don't match";
             model.addAttribute("message", message);
-            return "./update/ChangePassword.jsp";
+            return "update/ChangePassword.jsp";
         }
 
-        return "./welcome";
+        return "welcome";
     }
 
-    @RequestMapping(value = "/ChangeUsername", method = RequestMethod.POST)
+    @RequestMapping(value = "ChangeUsername", method = RequestMethod.POST)
     public String changeUsername(@RequestParam("userId") int userId, @RequestParam("password") String password,
                                  @RequestParam("username") String username, Model model) {
 
@@ -80,18 +80,18 @@ public class UpdateController {
             } else {
                 message = "Wrong password";
                 model.addAttribute("message", message);
-                return "./update/ChangeUsername.jsp";
+                return "update/ChangeUsername.jsp";
             }
         } catch (Exception e) {
             message = "User with that username exist";
             model.addAttribute("message", message);
-            return "./update/ChangeUsername.jsp";
+            return "update/ChangeUsername.jsp";
         }
 
-        return "./welcome";
+        return "welcome";
     }
 
-    @RequestMapping(value = "/ChangeGroup", method = RequestMethod.POST)
+    @RequestMapping(value = "ChangeGroup", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String changeGroupForStudent(@RequestParam("studentID") String studentId,
                                         @RequestParam("newGroupId") String newGroupId,
@@ -105,11 +105,11 @@ public class UpdateController {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            return "./Students";
+            return "Students";
         }
     }
 
-    @RequestMapping(value = "/ChangeGroupPage", method = RequestMethod.GET)
+    @RequestMapping(value = "ChangeGroupPage", method = RequestMethod.GET)
     public String changeGroupPage(@RequestParam("depId") int depId,
                                   @RequestParam("studentId") String studentId,
                                   @RequestParam("userId") int userId,
@@ -124,7 +124,7 @@ public class UpdateController {
             e.printStackTrace();
         } finally {
             model.addAttribute("userId", userId);
-            return "./update/ChangeGroup.jsp";
+            return "update/ChangeGroup.jsp";
         }
     }
 }

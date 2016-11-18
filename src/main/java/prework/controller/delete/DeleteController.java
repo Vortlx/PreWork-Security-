@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping(value = "/jsp")
+@RequestMapping(value = "jsp")
 public class DeleteController {
 
     @Autowired
@@ -31,7 +31,7 @@ public class DeleteController {
     @Autowired
     private DAOSubject daoSubject;
 
-    @RequestMapping(value = "/DeleteStudent", method = RequestMethod.GET)
+    @RequestMapping(value = "DeleteStudent", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String deleteStudent(@RequestParam("studentId") int studentId, Model model) {
 
@@ -43,11 +43,11 @@ public class DeleteController {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            return "./search/Students.jsp";
+            return "search/Students.jsp";
         }
     }
 
-    @RequestMapping(value = "/DeleteGroup", method = RequestMethod.GET)
+    @RequestMapping(value = "DeleteGroup", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String deleteGroup(@RequestParam("groupId") int groupId,
                               @RequestParam("userId") int userId,
@@ -65,11 +65,11 @@ public class DeleteController {
             e.printStackTrace();
 
         } finally {
-            return "./Groups";
+            return "Groups";
         }
     }
 
-    @RequestMapping(value = "/DeleteTeacher", method = RequestMethod.GET)
+    @RequestMapping(value = "DeleteTeacher", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String deleteTeacher(@RequestParam("teacherId") int teacherId, Model model) {
 
@@ -82,11 +82,11 @@ public class DeleteController {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            return "./search/Teachers.jsp";
+            return "search/Teachers.jsp";
         }
     }
 
-    @RequestMapping(value = "/DeleteSubject", method = RequestMethod.GET)
+    @RequestMapping(value = "DeleteSubject", method = RequestMethod.GET)
     public String deleteSubjectFromGroup(@RequestParam("groupId") int groupId,
                                          @RequestParam("subjectId") int subjectId,
                                          @RequestParam("userId") int userId,
@@ -100,6 +100,6 @@ public class DeleteController {
             e.printStackTrace();
         }
 
-        return "./MySubjects";
+        return "MySubjects";
     }
 }

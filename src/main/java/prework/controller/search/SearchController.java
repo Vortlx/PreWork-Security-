@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping(value = "/jsp")
+@RequestMapping(value = "jsp")
 public class SearchController {
 
     @Autowired
@@ -33,7 +33,7 @@ public class SearchController {
     @Autowired
     private DAOUser daoUser;
 
-    @RequestMapping(value = "/MyGroup", method = RequestMethod.GET)
+    @RequestMapping(value = "MyGroup", method = RequestMethod.GET)
     public String findMyGroup(@RequestParam(name = "userId", required = false) String userId,
                               @RequestParam(name = "groupId", required = false) String groupId, Model model) {
 
@@ -53,11 +53,11 @@ public class SearchController {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            return "./search/MyGroup.jsp";
+            return "search/MyGroup.jsp";
         }
     }
 
-    @RequestMapping(value = "/MySubjects", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "MySubjects", method = {RequestMethod.GET, RequestMethod.POST})
     public String findMySubjects(@RequestParam(name = "userId", required = false) int userId,
                                  @RequestParam(name = "groupId", required = false) String groupId,
                                  Model model) {
@@ -79,21 +79,20 @@ public class SearchController {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            return "./search/MySubjects.jsp";
+            return "search/MySubjects.jsp";
         }
     }
 
-    @RequestMapping(value = "/Groups", method = RequestMethod.GET)
+    @RequestMapping(value = "Groups", method = RequestMethod.GET)
     @PreAuthorize("hasAnyRole('ROLE_DEPARTMENT', 'ROLE_TEACHER')")
-    public String findGroups(@RequestParam("userId") String userId, Model model) {
+    public String findGroups(@RequestParam("userId") int userId, Model model) {
 
-        int userIdInt = Integer.parseInt(userId);
         Set<Group> groups = null;
         Department department = null;
         Teacher teacher = null;
 
         try {
-            User user = daoUser.getByID(userIdInt);
+            User user = daoUser.getByID(userId);
 
             if (user.getDepartment() != null) {
                 department = user.getDepartment();
@@ -103,18 +102,17 @@ public class SearchController {
                 groups = teacher.getSubject().getGroups();
             }
 
-            model.addAttribute("userId", userIdInt);
             model.addAttribute("groups", groups);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             model.addAttribute("userId", userId);
-            return "./search/Groups.jsp";
+            return "search/Groups.jsp";
         }
     }
 
     // Need rewrite
-    @RequestMapping(value = "/Students", method = RequestMethod.GET)
+    @RequestMapping(value = "Students", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String findStudents(@RequestParam(name = "userId", required = false) String userId,
                                Model model) {
@@ -139,11 +137,11 @@ public class SearchController {
             e.printStackTrace();
         } finally {
             model.addAttribute("userId", userId);
-            return "./search/Students.jsp";
+            return "search/Students.jsp";
         }
     }
 
-    @RequestMapping(value = "/Students", method = RequestMethod.POST)
+    @RequestMapping(value = "Students", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String findStudents(@RequestParam(name = "name", required = false) String name,
                                @RequestParam(name = "familyName", required = false) String familyName,
@@ -171,11 +169,11 @@ public class SearchController {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            return "./search/Students.jsp";
+            return "search/Students.jsp";
         }
     }
 
-    @RequestMapping(value = "/Teachers", method = RequestMethod.GET)
+    @RequestMapping(value = "Teachers", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String findTeachers(@RequestParam(name = "userId", required = false) String userId,
                                Model model) {
@@ -195,11 +193,11 @@ public class SearchController {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            return "./search/Teachers.jsp";
+            return "search/Teachers.jsp";
         }
     }
 
-    @RequestMapping(value = "/Teachers", method = RequestMethod.POST)
+    @RequestMapping(value = "Teachers", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String findTeachers(@RequestParam(name = "name", required = false) String name,
                                @RequestParam(name = "familyName", required = false) String familyName,
@@ -227,7 +225,7 @@ public class SearchController {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            return "./search/Teachers.jsp";
+            return "search/Teachers.jsp";
         }
     }
 }

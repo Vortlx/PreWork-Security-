@@ -8,7 +8,7 @@
 <title>Welcome</title>
 </head>
 <body>
-    <form action="./j_spring_security_check" method="POST">
+    <form action="j_spring_security_check" method="POST">
         Login: <input name="username" type="text"/>
         <br>
         Password: <input name="password" type="password">

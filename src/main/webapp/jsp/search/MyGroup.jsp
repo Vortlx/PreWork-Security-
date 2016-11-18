@@ -10,10 +10,10 @@
 </head>
 <body>
     <sec:authorize access="hasRole('ROLE_STUDENT')">
-        <a href="./welcome" name="Back">Back</a>
+        <a href="welcome" name="Back">Back</a>
     </sec:authorize>
     <sec:authorize access="hasAnyRole('ROLE_TEACHER', 'ROLE_DEPARTMENT')">
-        <a href="./Groups?userId=${param.userId}" name="Back">Back</a>
+        <a href="Groups?userId=${param.userId}" name="Back">Back</a>
     </sec:authorize>
 
     <table border="1">

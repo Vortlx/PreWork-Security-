@@ -8,8 +8,8 @@
     <title>Add Subject</title>
 </head>
 <body>
-<a href="./MySubjects?groupId=${groupId}&userId=${userId}" name="back">Back</a>
-<form action="./AddSubject" method="POST">
+<a href="MySubjects?groupId=${groupId}&userId=${userId}" name="back">Back</a>
+<form action="AddSubject" method="POST">
     Subject: <select name="subjectName">
         <c:forEach items="${subjects}" var="subject">
             <option value="${subject.name}">${subject.name}</option>

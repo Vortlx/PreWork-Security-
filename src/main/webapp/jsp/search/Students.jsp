@@ -8,8 +8,8 @@
 <title>Students</title>
 </head>
 <body>
-    <a href="./welcome" name="back">Back</a>
-    <form action="./Students" method="POST">
+    <a href="welcome" name="back">Back</a>
+    <form action="Students" method="POST">
         Name: <input name="name" type="text">
         <br>
         Family name: <input name="familyName" type="text">
@@ -31,11 +31,11 @@
                <td>
                    ${student.group.name}
                    <br>
-                   <a href="./ChangeGroupPage?userId=${userId}&depId=${department.id}&studentId=${student.id}"
+                   <a href="ChangeGroupPage?userId=${userId}&depId=${department.id}&studentId=${student.id}"
                       name="changeGroup">Change group</a>
                </td>
                <td>
-                   <a href="./DeleteStudent?studentId=${student.id}" name="deleteStudent">Delete</a>
+                   <a href="DeleteStudent?studentId=${student.id}" name="deleteStudent">Delete</a>
                </td>
            </tr>
         </c:forEach>

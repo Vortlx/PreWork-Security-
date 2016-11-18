@@ -11,8 +11,8 @@
     <title>ChangePassword</title>
 </head>
 <body>
-    <a href="./welcome" name="Back">Back</a>
-    <form action="./ChangePassword" method="POST">
+    <a href="welcome" name="Back">Back</a>
+    <form action="ChangePassword" method="POST">
         Enter your old password <input name="oldPassword" type="password"/>
         <br>
         Enter your new password <input name="newPassword" type="password"/>

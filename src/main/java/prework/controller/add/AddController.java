@@ -15,7 +15,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping(value = "/jsp")
+@RequestMapping(value = "jsp")
 public class AddController {
 
     @Autowired
@@ -41,7 +41,7 @@ public class AddController {
 
 
     // Rewrite via Enam
-    @RequestMapping(value = "/Add", method = RequestMethod.POST)
+    @RequestMapping(value = "Add", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String add(@RequestParam("whatAdd") String whatAdd,
                       @RequestParam("userId") String userId, Model model) {
@@ -52,19 +52,19 @@ public class AddController {
 
         if ("GROUP".equals(whatAdd)) {
             model.addAttribute("departmentId", department.getId());
-            return "./add/AddGroup.jsp";
+            return "add/AddGroup.jsp";
         } else if ("STUDENT".equals(whatAdd)) {
             model.addAttribute("groups", department.getGroups());
-            return "./add/AddStudent.jsp";
+            return "add/AddStudent.jsp";
         } else if ("TEACHER".equals(whatAdd)) {
             model.addAttribute("departmentId", department.getId());
-            return "./add/AddTeacher.jsp";
+            return "add/AddTeacher.jsp";
         } else {
-            return "./welcome";
+            return "welcome";
         }
     }
 
-    @RequestMapping(value = "/AddStudent", method = RequestMethod.POST)
+    @RequestMapping(value = "AddStudent", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String addStudent(@RequestParam("name") String name, @RequestParam("familyName") String familyName,
                              @RequestParam("groupID") int groupId,
@@ -94,13 +94,13 @@ public class AddController {
             model.addAttribute("message", message);
             model.addAttribute("groupID", daoGroup.getAll());
 
-            return "./add/AddStudent.jsp";
+            return "add/AddStudent.jsp";
         }
 
-        return "./welcome";
+        return "welcome";
     }
 
-    @RequestMapping(value = "/AddGroup", method = RequestMethod.POST)
+    @RequestMapping(value = "AddGroup", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String addGroup(@RequestParam("name") String groupName,
                            @RequestParam("departmentId") int depId,
@@ -117,13 +117,13 @@ public class AddController {
             model.addAttribute("message", message);
             model.addAttribute("departmentId", depId);
 
-            return "./add/AddGroup.jsp";
+            return "add/AddGroup.jsp";
         }
 
-        return "./welcome";
+        return "welcome";
     }
 
-    @RequestMapping(value = "/AddTeacher", method = RequestMethod.POST)
+    @RequestMapping(value = "AddTeacher", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String addTeacher(@RequestParam("name") String name, @RequestParam("familyName") String familyName,
                              @RequestParam("subjectName") String subjectName,
@@ -159,13 +159,13 @@ public class AddController {
             model.addAttribute("message", message);
             model.addAttribute("departmentId", depId);
 
-            return "./add/AddTeacher.jsp";
+            return "add/AddTeacher.jsp";
         }
 
-        return "./welcome";
+        return "welcome";
     }
 
-    @RequestMapping(value = "/AddSubject", method = RequestMethod.POST)
+    @RequestMapping(value = "AddSubject", method = RequestMethod.POST)
     public String addSubject(@RequestParam("subjectName") String subjectName,
                              @RequestParam("subjectType") String subjectType,
                              @RequestParam("groupId") int groupId,
@@ -185,16 +185,16 @@ public class AddController {
             model.addAttribute("message", message);
             model.addAttribute("subjects", daoSubject.getAll());
 
-            return "./add/AddSubject.jsp";
+            return "add/AddSubject.jsp";
         } finally {
             model.addAttribute("groupId", groupId);
             model.addAttribute("userId", userId);
         }
 
-        return "./MySubjects";
+        return "MySubjects";
     }
 
-    @RequestMapping(value = "/AddSubjectPage", method = RequestMethod.GET)
+    @RequestMapping(value = "AddSubjectPage", method = RequestMethod.GET)
     public String addSubjectPage(@RequestParam("groupId") int groupId,
                                  @RequestParam("userId") int userId,
                                  Model model) {
@@ -208,6 +208,6 @@ public class AddController {
             e.printStackTrace();
         }
 
-        return "./add/AddSubject.jsp";
+        return "add/AddSubject.jsp";
     }
 }

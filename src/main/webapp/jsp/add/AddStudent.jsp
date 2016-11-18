@@ -8,8 +8,8 @@
 <title>Add Group</title>
 </head>
 <body>
-    <a href="./welcome" name="back">Back</a>
-    <form action="./AddStudent" method="POST">
+    <a href="welcome" name="back">Back</a>
+    <form action="AddStudent" method="POST">
         Name: <input name="name" type="text" required>
         <br>
         Family Name: <input name="familyName" type="text" required>

@@ -8,8 +8,8 @@
 <title>Teachers</title>
 </head>
 <body>
-    <a href="./welcome" name="back">Back</a>
-    <form action="./Teachers" method="POST">
+    <a href="welcome" name="back">Back</a>
+    <form action="Teachers" method="POST">
         Name: <input name="name" type="text">
         <br>
         Family name: <input name="familyName" type="text">
@@ -30,7 +30,7 @@
                 <td>${teacher.familyName}</td>
                 <td>${teacher.subject.name}:    ${teacher.subject.type}</td>
                 <td>
-                    <a href="./DeleteTeacher?teacherId=${teacher.id}" name="deleteTeacher">Delete</a>
+                    <a href="DeleteTeacher?teacherId=${teacher.id}" name="deleteTeacher">Delete</a>
                 </td>
             </tr>
         </c:forEach>

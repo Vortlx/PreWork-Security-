@@ -17,13 +17,13 @@ public class EnterWelcomeController {
     @Autowired
     DAOUser daoUser;
 
-    @RequestMapping(value = "/login")
+    @RequestMapping(value = "login")
     public String login() {
 
-        return "./login.jsp";
+        return "login.jsp";
     }
 
-    @RequestMapping(value = "/jsp/welcome", method={RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "jsp/welcome", method={RequestMethod.GET, RequestMethod.POST})
     public String welcome(@RequestParam(name = "user", required = false) User user,
                           Model model) {
         if(user == null){
@@ -33,6 +33,6 @@ public class EnterWelcomeController {
 
         model.addAttribute("user", user);
 
-        return "./welcome.jsp";
+        return "welcome.jsp";
     }
 }

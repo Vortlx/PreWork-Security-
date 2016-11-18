@@ -24,25 +24,25 @@
 
     <sec:authorize access="hasRole('ROLE_STUDENT')">
         <div>
-            <a href="./MyGroup?userId=${user.id}" name="toMyGroup">My Group</a>
+            <a href="MyGroup?userId=${user.id}" name="toMyGroup">My Group</a>
             <br>
-            <a href="./MySubjects?userId=${user.id}" name="toMySubjects">My Subjects</a>
+            <a href="MySubjects?userId=${user.id}" name="toMySubjects">My Subjects</a>
         </div>
     </sec:authorize>
     <sec:authorize access="hasAnyRole('ROLE_TEACHER', 'ROLE_DEPARTMENT')">
         <div>
-            <a href="./Groups?userId=${user.id}" name="toGroups">Groups</a>
+            <a href="Groups?userId=${user.id}" name="toGroups">Groups</a>
         </div>
     </sec:authorize>
     <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
         <div>
-            <a href="./Students?userId=${user.id}" name="toStudents">Students</a>
+            <a href="Students?userId=${user.id}" name="toStudents">Students</a>
             <br>
-            <a href="./Teachers?userId=${user.id}" name="toTeachers">Teachers</a>
+            <a href="Teachers?userId=${user.id}" name="toTeachers">Teachers</a>
         </div>
         <div>
             <br>
-            <form action="./Add" method="POST">
+            <form action="Add" method="POST">
                 <select name="whatAdd">
                     <option value="GROUP">Group</option>
                     <option value="STUDENT">Student</option>
@@ -57,18 +57,17 @@
 
     <div>
         <br>
-        <a href="./ChangeUsername?userId=${user.id}" name="changeLogin">Change login</a>
+        <a href="ChangeUsername?userId=${user.id}" name="changeLogin">Change login</a>
         <br>
-        <a href="./ChangePassword?userId=${user.id}" name="changePassword">Change password</a>
+        <a href="ChangePassword?userId=${user.id}" name="changePassword">Change password</a>
     </div>
     <div>
         <br>
         <!--a href="../logout" name="logout">Logout</a-->
-        <form action="./j_spring_security_logout" method="POST">
+        <form action="j_spring_security_logout" method="POST">
             <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
             <input name="logout" type="submit" value="Logout"/>
         </form>
     </div>
-
 </body>
 </html>

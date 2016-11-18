@@ -8,8 +8,8 @@
 <title>Add Group</title>
 </head>
 <body>
-    <a href="./Students?userId=${userId}" name="back">Back</a>
-    <form action="./ChangeGroup" method="POST">
+    <a href="Students?userId=${userId}" name="back">Back</a>
+    <form action="ChangeGroup" method="POST">
         Group Name: 
         <select name="newGroupId">
             <c:forEach items="${groups}" var="group">
