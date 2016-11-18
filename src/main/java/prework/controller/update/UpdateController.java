@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import prework.data.Department;
-import prework.data.Student;
-import prework.data.UserInfo;
+import prework.entities.Department;
+import prework.entities.Student;
+import prework.entities.UserInfo;
 import prework.databaseservice.dao.DAODepartment;
 import prework.databaseservice.dao.DAOStudent;
 import prework.databaseservice.dao.DAOUserInfo;
@@ -72,7 +72,11 @@ public class UpdateController {
         try {
             if (userInfo.getPassword().equals(password)) {
                 daoUserInfo.changeUsername(userId, username);
-                model.addAttribute("userInfo", daoUserInfo.getByID(userId));
+
+                System.out.println();
+                System.out.println(userInfo);
+                System.out.println();
+                model.addAttribute("userInfo", userInfo);
             } else {
                 message = "Wrong password";
                 model.addAttribute("message", message);
@@ -81,7 +85,7 @@ public class UpdateController {
         } catch (Exception e) {
             message = "User with that username exist";
             model.addAttribute("message", message);
-            return "./update/ChangeUsername.jsp";
+            return "./ChangeUsername.jsp";
         }
 
         return "./welcome";

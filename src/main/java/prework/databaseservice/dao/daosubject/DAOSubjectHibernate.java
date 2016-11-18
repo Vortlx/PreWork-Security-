@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import prework.data.Group;
-import prework.data.Subject;
-import prework.data.SubjectType;
-import prework.data.Teacher;
+import prework.entities.Group;
+import prework.entities.Subject;
+import prework.entities.SubjectType;
+import prework.entities.Teacher;
 import prework.databaseservice.dao.DAOSubject;
 
 import javax.persistence.Query;

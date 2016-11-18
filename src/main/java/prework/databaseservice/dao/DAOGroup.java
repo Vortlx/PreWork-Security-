@@ -1,13 +1,12 @@
 package prework.databaseservice.dao;
 
 
-import java.sql.SQLException;
 import java.util.List;
 
-import prework.data.Department;
-import prework.data.Group;
-import prework.data.Student;
-import prework.data.Subject;
+import prework.entities.Department;
+import prework.entities.Group;
+import prework.entities.Student;
+import prework.entities.Subject;
 
 /**
  * This class define CRUD operation for groups table in database.

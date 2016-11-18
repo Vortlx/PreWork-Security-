@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * This class have access to property file with data for database. For example URL.
+ * This class have access to property file with entities for database. For example URL.
  *
  * @author Lebedev Alexander
  * @since 2016-09-19

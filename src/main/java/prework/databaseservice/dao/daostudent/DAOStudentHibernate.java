@@ -3,7 +3,6 @@ package prework.databaseservice.dao.daostudent;
 
 import java.sql.SQLException;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Query;
@@ -13,10 +12,10 @@ import org.hibernate.SessionFactory;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import prework.data.UserInfo;
+import prework.entities.UserInfo;
 import prework.databaseservice.dao.DAOStudent;
-import prework.data.Group;
-import prework.data.Student;
+import prework.entities.Group;
+import prework.entities.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

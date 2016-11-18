@@ -1,18 +1,12 @@
 package prework.databaseservice.dao.daoteacher;
 
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.List;
 
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
-import org.junit.Test;
 
 import prework.databaseservice.dao.DAOTeacher;
-import prework.data.Group;
-import prework.data.Teacher;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

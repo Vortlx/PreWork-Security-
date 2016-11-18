@@ -12,9 +12,9 @@
 		<property name="hibernate.current_session_context_class">thread</property>
 		<property name="show_sql">true</property>
 
-		<mapping class="prework.data.Group" />
-		<mapping class="prework.data.Student" />
-		<mapping class="prework.data.Teacher" />
+		<mapping class="prework.entities.Group" />
+		<mapping class="prework.entities.Student" />
+		<mapping class="prework.entities.Teacher" />
   
 	</session-factory>
 </hibernate-configuration>

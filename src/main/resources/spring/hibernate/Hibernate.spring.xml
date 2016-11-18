@@ -21,13 +21,13 @@
 
         <property name="annotatedClasses">
             <list>
-                <value>prework.data.Role</value>
-                <value>prework.data.UserInfo</value>
-                <value>prework.data.Department</value>
-                <value>prework.data.Subject</value>
-                <value>prework.data.Group</value>
-                <value>prework.data.Student</value>
-                <value>prework.data.Teacher</value>
+                <value>prework.entities.Role</value>
+                <value>prework.entities.UserInfo</value>
+                <value>prework.entities.Department</value>
+                <value>prework.entities.Subject</value>
+                <value>prework.entities.Group</value>
+                <value>prework.entities.Student</value>
+                <value>prework.entities.Teacher</value>
             </list>
         </property>
     </bean>

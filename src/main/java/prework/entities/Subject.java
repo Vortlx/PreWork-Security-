@@ -1,4 +1,4 @@
-package prework.data;
+package prework.entities;
 
 import javax.persistence.*;
 import java.util.Set;

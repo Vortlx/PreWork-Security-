@@ -1,8 +1,8 @@
 package prework.databaseservice.dao;
 
-import prework.data.Department;
-import prework.data.Group;
-import prework.data.Teacher;
+import prework.entities.Department;
+import prework.entities.Group;
+import prework.entities.Teacher;
 
 import java.util.List;
 

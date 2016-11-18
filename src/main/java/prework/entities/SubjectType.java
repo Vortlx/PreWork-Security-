@@ -1,4 +1,4 @@
-package prework.data;
+package prework.entities;
 
 public enum SubjectType {
     LECTURE {

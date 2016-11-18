@@ -1,7 +1,7 @@
 package prework.databaseservice.dao;
 
 
-import prework.data.Role;
+import prework.entities.Role;
 
 public interface DAORole {
 

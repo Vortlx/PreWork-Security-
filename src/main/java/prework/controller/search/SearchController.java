@@ -2,7 +2,7 @@ package prework.controller.search;
 
 
 import org.springframework.security.access.prepost.PreAuthorize;
-import prework.data.*;
+import prework.entities.*;
 import prework.databaseservice.dao.DAOGroup;
 import prework.databaseservice.dao.DAOStudent;
 import prework.databaseservice.dao.DAOTeacher;

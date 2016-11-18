@@ -1,18 +1,15 @@
 package prework.databaseservice.dao.daostudent;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
-import org.junit.Test;
 
 import prework.databaseservice.dao.DAOGroup;
 import prework.databaseservice.dao.DAOStudent;
-import prework.data.Group;
-import prework.data.Student;
+import prework.entities.Group;
+import prework.entities.Student;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

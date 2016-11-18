@@ -1,7 +1,6 @@
 package prework.databaseservice.dao.daogroup;
 
 
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -11,11 +10,11 @@ import org.hibernate.SessionFactory;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import prework.data.Department;
-import prework.data.Student;
-import prework.data.Subject;
+import prework.entities.Department;
+import prework.entities.Student;
+import prework.entities.Subject;
 import prework.databaseservice.dao.DAOGroup;
-import prework.data.Group;
+import prework.entities.Group;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

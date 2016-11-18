@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import prework.data.Department;
-import prework.data.Group;
-import prework.data.Teacher;
+import prework.entities.Department;
+import prework.entities.Group;
+import prework.entities.Teacher;
 import prework.databaseservice.dao.DAODepartment;
 
 import javax.persistence.Query;

@@ -4,14 +4,11 @@ package prework.databaseservice.dao.daogroup;
 import org.junit.Test;
 
 import org.junit.AfterClass;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 
 import prework.databaseservice.dao.DAOGroup;
-import prework.data.Group;
-import prework.data.Student;
-import prework.data.Teacher;
+import prework.entities.Group;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

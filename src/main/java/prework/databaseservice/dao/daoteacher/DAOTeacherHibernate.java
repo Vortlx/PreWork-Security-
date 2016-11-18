@@ -3,7 +3,6 @@ package prework.databaseservice.dao.daoteacher;
 
 import java.sql.SQLException;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Query;
@@ -13,7 +12,7 @@ import org.hibernate.SessionFactory;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import prework.data.*;
+import prework.entities.*;
 import prework.databaseservice.dao.DAOTeacher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

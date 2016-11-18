@@ -1,9 +1,9 @@
 package prework.databaseservice.dao;
 
-import prework.data.Group;
-import prework.data.Subject;
-import prework.data.SubjectType;
-import prework.data.Teacher;
+import prework.entities.Group;
+import prework.entities.Subject;
+import prework.entities.SubjectType;
+import prework.entities.Teacher;
 
 import java.util.List;
 import java.util.Set;

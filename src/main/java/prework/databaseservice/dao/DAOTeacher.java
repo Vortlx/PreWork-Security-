@@ -4,10 +4,10 @@ package prework.databaseservice.dao;
 import java.sql.SQLException;
 import java.util.Set;
 
-import prework.data.Department;
-import prework.data.Subject;
-import prework.data.Teacher;
-import prework.data.UserInfo;
+import prework.entities.Department;
+import prework.entities.Subject;
+import prework.entities.Teacher;
+import prework.entities.UserInfo;
 
 /**
  * This class define CRUD operation for teachers table.
@@ -29,7 +29,7 @@ public interface DAOTeacher {
     void add(String name, String familyName, Subject subject, Department department, UserInfo userInfo) throws SQLException;
 
     /**
-     * This method update data into teachers table.
+     * This method update entities into teachers table.
      *
      * @param teacherID     ID of teacher
      * @param newName       New name of teacher

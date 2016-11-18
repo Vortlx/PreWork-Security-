@@ -4,9 +4,9 @@ package prework.databaseservice.dao;
 import java.sql.SQLException;
 import java.util.Set;
 
-import prework.data.Group;
-import prework.data.Student;
-import prework.data.UserInfo;
+import prework.entities.Group;
+import prework.entities.Student;
+import prework.entities.UserInfo;
 
 /**
  * This class define CRUD operation for students table.
@@ -28,7 +28,7 @@ public interface DAOStudent {
     void add(String name, String familyName, int groupID, UserInfo userInfo) throws SQLException;
 
     /**
-     * This method update data in students table.
+     * This method update entities in students table.
      *
      * @param studentID     ID of student
      * @param newName       New name of student

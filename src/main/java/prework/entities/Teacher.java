@@ -1,8 +1,5 @@
-package prework.data;
+package prework.entities;
 
-
-import java.util.Set;
-import java.util.Arrays;
 
 import javax.persistence.*;
 

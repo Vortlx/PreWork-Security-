@@ -1,9 +1,5 @@
 package prework;
 
-import java.sql.SQLException;
-import java.util.List;
-
-import prework.data.*;
 import prework.databaseservice.dao.DAOTeacher;
 
 import prework.databaseservice.dao.DAOGroup;

@@ -1,7 +1,7 @@
 package prework.databaseservice.dao;
 
-import prework.data.Role;
-import prework.data.UserInfo;
+import prework.entities.Role;
+import prework.entities.UserInfo;
 
 public interface DAOUserInfo {
 
