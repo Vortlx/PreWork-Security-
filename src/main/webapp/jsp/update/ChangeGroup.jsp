@@ -18,6 +18,7 @@
         </select>
         <br>
         <input name="studentID" type="hidden" value="${studentID}">
+        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
         <input name="add" type="submit" value="Change">
     </form>
     <br>

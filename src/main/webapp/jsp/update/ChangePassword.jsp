@@ -11,13 +11,14 @@
     <title>ChangePassword</title>
 </head>
 <body>
-    <a href="../welcome" name="Back">Back</a>
+    <a href="./welcome" name="Back">Back</a>
     <form action="./ChangePassword" method="POST">
         Enter your old password <input name="oldPassword" type="password"/>
         <br>
         Enter your new password <input name="newPassword" type="password"/>
         <br>
         <input name="userId" type="hidden" value="${param.userId}"/>
+        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
         <input name="change" type="submit" value="Change"/>
     </form>
     <br>

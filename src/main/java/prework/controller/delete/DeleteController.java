@@ -3,7 +3,6 @@ package prework.controller.delete;
 import org.springframework.security.access.prepost.PreAuthorize;
 import prework.data.Group;
 import prework.data.Student;
-import prework.data.Subject;
 import prework.data.Teacher;
 import prework.databaseservice.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;

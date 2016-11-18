@@ -29,7 +29,21 @@ public class UpdateController {
     @Autowired
     private DAODepartment daoDepartment;
 
-    @RequestMapping(value = "/update/ChangePassword", method = RequestMethod.POST)
+    @RequestMapping(value="/ChangePassword", method=RequestMethod.GET)
+    public String toChangePasswordPage(@RequestParam("userId") int userId,
+                                       Model model){
+        model.addAttribute("userId", userId);
+        return "./update/ChangePassword.jsp";
+    }
+
+    @RequestMapping(value="/ChangeUsername", method=RequestMethod.GET)
+    public String toChangeUsernamePage(@RequestParam("userId") int userId,
+                                       Model model){
+        model.addAttribute("userId", userId);
+        return "./update/ChangeUsername.jsp";
+    }
+
+    @RequestMapping(value = "/ChangePassword", method = RequestMethod.POST)
     public String changePasswor(@RequestParam("userId") String userId, @RequestParam("oldPassword") String oldPassword,
                                 @RequestParam("newPassword") String newPassword, Model model) {
 
@@ -42,24 +56,23 @@ public class UpdateController {
         } else {
             String message = "Passwords don't match";
             model.addAttribute("message", message);
-            return "./ChangePassword.jsp";
+            return "./update/ChangePassword.jsp";
         }
 
-        return "../welcome";
+        return "./welcome";
     }
 
-    @RequestMapping(value = "/update/ChangeUsername", method = RequestMethod.POST)
-    public String changeUsername(@RequestParam("userId") String userId, @RequestParam("password") String password,
+    @RequestMapping(value = "/ChangeUsername", method = RequestMethod.POST)
+    public String changeUsername(@RequestParam("userId") int userId, @RequestParam("password") String password,
                                  @RequestParam("username") String username, Model model) {
 
-        int userIdInt = Integer.parseInt(userId);
-        UserInfo userInfo = daoUserInfo.getByID(userIdInt);
+        UserInfo userInfo = daoUserInfo.getByID(userId);
         String message = null;
 
         try {
             if (userInfo.getPassword().equals(password)) {
-                daoUserInfo.changeUsername(userIdInt, username);
-                model.addAttribute("userInfo", userInfo);
+                daoUserInfo.changeUsername(userId, username);
+                model.addAttribute("userInfo", daoUserInfo.getByID(userId));
             } else {
                 message = "Wrong password";
                 model.addAttribute("message", message);
@@ -68,10 +81,10 @@ public class UpdateController {
         } catch (Exception e) {
             message = "User with that username exist";
             model.addAttribute("message", message);
-            return "./ChangeUsername.jsp";
+            return "./update/ChangeUsername.jsp";
         }
 
-        return "../welcome";
+        return "./welcome";
     }
 
     @RequestMapping(value = "/ChangeGroup", method = RequestMethod.POST)

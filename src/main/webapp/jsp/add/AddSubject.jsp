@@ -22,6 +22,7 @@
     <br>
     <input name="groupId" type="hidden" value="${groupId}"/>
     <input name="userId" type="hidden" value="${userId}"/>
+    <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
     <input name="add" type="submit" value="Add">
 </form>
 <br>

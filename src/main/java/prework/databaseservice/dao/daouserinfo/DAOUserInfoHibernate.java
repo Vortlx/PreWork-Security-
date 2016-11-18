@@ -59,7 +59,6 @@ public class DAOUserInfoHibernate implements DAOUserInfo {
         UserInfo userInfo = session.get(UserInfo.class, userInfoID);
         userInfo.setPassword(newPassword);
         session.update(userInfo);
-
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
@@ -69,7 +68,6 @@ public class DAOUserInfoHibernate implements DAOUserInfo {
         UserInfo userInfo = session.get(UserInfo.class, userInfoID);
         userInfo.setUsername(newUsername);
         session.update(userInfo);
-
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)

@@ -1,11 +1,7 @@
 package prework.data;
 
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 
 /**
@@ -27,7 +23,7 @@ public abstract class Person {
     @Column(name = "family_name")
     private String familyName;
 
-    @ManyToOne()
+    @OneToOne()
     @JoinColumn(name = "id_user_info")
     private UserInfo userInfo;
 

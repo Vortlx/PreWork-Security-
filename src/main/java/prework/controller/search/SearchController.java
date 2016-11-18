@@ -45,8 +45,7 @@ public class SearchController {
 
             } else {
                 UserInfo userInfo = daoUserInfo.getByID(Integer.parseInt(userId));
-                Iterator<Student> iterator = userInfo.getStudents().iterator();
-                Student student = iterator.next();
+                Student student = userInfo.getStudent();
 
                 model.addAttribute("group", student.getGroup());
             }
@@ -72,8 +71,7 @@ public class SearchController {
                 model.addAttribute("groupId", groupId);
             } else {
                 UserInfo userInfo = daoUserInfo.getByID(userId);
-                Iterator<Student> iterator = userInfo.getStudents().iterator();
-                Student student = iterator.next();
+                Student student = userInfo.getStudent();
 
                 model.addAttribute("subjects", student.getGroup().getSubjects());
             }
@@ -97,13 +95,11 @@ public class SearchController {
         try {
             UserInfo userInfo = daoUserInfo.getByID(userInfoIdInt);
 
-            if (userInfo.getDepartments().size() > 0) {
-                Iterator<Department> iterator = userInfo.getDepartments().iterator();
-                department = iterator.next();
+            if (userInfo.getDepartment() != null) {
+                department = userInfo.getDepartment();
                 groups = department.getGroups();
             } else {
-                Iterator<Teacher> iterator = userInfo.getTeachers().iterator();
-                teacher = iterator.next();
+                teacher = userInfo.getTeacher();
                 groups = teacher.getSubject().getGroups();
             }
 
@@ -130,8 +126,7 @@ public class SearchController {
         try {
 
             UserInfo userInfo = daoUserInfo.getByID(userIdInt);
-            Iterator<Department> iterator = userInfo.getDepartments().iterator();
-            department = iterator.next();
+            department = userInfo.getDepartment();
 
             students = new HashSet<Student>();
             for (Group group : department.getGroups()) {
@@ -192,8 +187,7 @@ public class SearchController {
 
         try {
             UserInfo userInfo = daoUserInfo.getByID(userIdInt);
-            Iterator<Department> iterator = userInfo.getDepartments().iterator();
-            department = iterator.next();
+            department = userInfo.getDepartment();
 
             teachers = department.getTeachers();
 

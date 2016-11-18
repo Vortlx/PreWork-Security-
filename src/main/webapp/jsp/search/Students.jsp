@@ -14,6 +14,7 @@
         <br>
         Family name: <input name="familyName" type="text">
         <br>
+        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
         <input name="send" type="submit" value="Find">
     </form>
     <table border="1">

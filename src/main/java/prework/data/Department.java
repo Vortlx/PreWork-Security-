@@ -21,7 +21,7 @@ public class Department {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "department")
     private Set<Teacher> teachers;
 
-    @ManyToOne()
+    @OneToOne()
     @JoinColumn(name = "id_user_info")
     private UserInfo userInfo;
 

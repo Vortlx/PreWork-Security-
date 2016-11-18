@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Iterator;
 import java.util.Set;
 
 
@@ -49,8 +48,7 @@ public class AddController {
 
         UserInfo userInfo = daoUserInfo.getByID(Integer.parseInt(userId));
 
-        Iterator<Department> iterator = userInfo.getDepartments().iterator();
-        Department department = iterator.next();
+        Department department = userInfo.getDepartment();
 
         if ("GROUP".equals(whatAdd)) {
             model.addAttribute("departmentId", department.getId());

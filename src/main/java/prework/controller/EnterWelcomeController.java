@@ -6,6 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import prework.data.UserInfo;
 import prework.databaseservice.dao.DAOUserInfo;
 
@@ -22,10 +23,13 @@ public class EnterWelcomeController {
     }
 
     @RequestMapping(value = "/jsp/welcome")
-    public String welcome(Model model) {
+    public String welcome(@RequestParam(name = "userInfo", required = false) UserInfo userInfo,
+                          Model model) {
+        if(userInfo == null){
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            userInfo = daoUserInfo.getByUsername(auth.getName());
+        }
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        UserInfo userInfo = daoUserInfo.getByUsername(auth.getName());
         model.addAttribute("userInfo", userInfo);
 
         return "./welcome.jsp";

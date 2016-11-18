@@ -11,20 +11,14 @@
 <body>
     <!-- Greeting user (Department, Teacher ot Student) -->
     <div>
-        <c:if test="${userInfo.departments.size() > 0}">
-            <c:forEach items="${userInfo.departments}" var="department">
-                <h3>${department.name}</h3>
-            </c:forEach>
+        <c:if test="${userInfo.department != null}">
+            <h3>${userInfo.department.name}</h3>
         </c:if>
-        <c:if test="${userInfo.teachers.size() > 0}">
-            <c:forEach items="${userInfo.teachers}" var="teacher">
-                <h3>Hello ${teacher.name} ${teacher.familyName}</h3>
-            </c:forEach>
+        <c:if test="${userInfo.teacher != null}">
+            <h3>Hello ${userInfo.teacher.name} ${userInfo.teacher.familyName}</h3>
         </c:if>
-        <c:if test="${userInfo.students.size() > 0}">
-            <c:forEach items="${userInfo.students}" var="studnet">
-                <h3>Hello ${studnet.name} ${studnet.familyName}</h3>
-            </c:forEach>
+        <c:if test="${userInfo.student != null}">
+            <h3>Hello ${userInfo.student.name} ${userInfo.student.familyName}</h3>
         </c:if>
     </div>
 
@@ -55,6 +49,7 @@
                     <option value="TEACHER">Teacher</option>
                 </select>
                 <input name="userId" type="hidden" value="${userInfo.id}">
+                <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
                 <input name="add" type="submit" value="Add"/>
             </form>
         </div>
@@ -62,14 +57,14 @@
 
     <div>
         <br>
-        <a href="./update/ChangeUsername.jsp?userId=${userInfo.id}" name="changeLogin">Change login</a>
+        <a href="./ChangeUsername?userId=${userInfo.id}" name="changeLogin">Change login</a>
         <br>
-        <a href="./update/ChangePassword.jsp?userId=${userInfo.id}" name="changePassword">Change password</a>
+        <a href="./ChangePassword?userId=${userInfo.id}" name="changePassword">Change password</a>
     </div>
     <div>
         <br>
         <!--a href="../logout" name="logout">Logout</a-->
-        <form action="../j_spring_security_logout" method="POST">
+        <form action="./j_spring_security_logout" method="POST">
             <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
             <input name="logout" type="submit" value="Logout"/>
         </form>

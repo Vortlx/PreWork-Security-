@@ -1,7 +1,5 @@
 package prework.data;
 
-import java.util.Set;
-
 import javax.persistence.*;
 
 @Entity
@@ -25,14 +23,14 @@ public class UserInfo {
     @JoinColumn(name = "id_role")
     private Role role;
 
-    @OneToMany(mappedBy = "userInfo", fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
-    private Set<Department> departments;
+    @OneToOne(mappedBy = "userInfo", fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
+    private Department department;
 
-    @OneToMany(mappedBy = "userInfo", fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
-    private Set<Teacher> teachers;
+    @OneToOne(mappedBy = "userInfo", fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
+    private Teacher teacher;
 
-    @OneToMany(mappedBy = "userInfo", fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
-    private Set<Student> students;
+    @OneToOne(mappedBy = "userInfo", fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
+    private Student student;
 
     public int getId() {
         return id;
@@ -74,27 +72,27 @@ public class UserInfo {
         this.role = role;
     }
 
-    public Set<Department> getDepartments() {
-        return departments;
+    public Department getDepartment() {
+        return department;
     }
 
-    public void setDepartments(Set<Department> departments) {
-        this.departments = departments;
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
-    public Set<Teacher> getTeachers() {
-        return teachers;
+    public Teacher getTeacher() {
+        return teacher;
     }
 
-    public void setTeachers(Set<Teacher> teachers) {
-        this.teachers = teachers;
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 
-    public Set<Student> getStudents() {
-        return students;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setStudents(Set<Student> students) {
-        this.students = students;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }
