@@ -8,6 +8,7 @@ import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import prework.entities.Department;
@@ -16,22 +17,18 @@ import prework.entities.Subject;
 import prework.dao.DAOGroup;
 import prework.entities.Group;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 
-@Component("daoGroupHibernate")
+@Repository
 public class DAOGroupImpl implements DAOGroup {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void add(String name, Department department) {
+    public void add(Group group) {
         Session session = sessionFactory.getCurrentSession();
 
-        Group group = new Group();
-        group.setName(name);
-        group.setDepartment(department);
         session.save(group);
     }
 
@@ -88,9 +85,9 @@ public class DAOGroupImpl implements DAOGroup {
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Group getByID(int groupID) {
+    public Group getById(int groupId) {
         Session session = sessionFactory.getCurrentSession();
-        return session.get(Group.class, groupID);
+        return session.get(Group.class, groupId);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)

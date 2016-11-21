@@ -10,23 +10,21 @@ public interface DAODepartment {
 
     void add(Department department);
 
-    void changeName(int depID, String newName);
+    void addGroup(int depId, Group group);
 
-    void changeLogin(int depID, String newLogin);
+    void changeName(int depId, String newName);
 
-    void changePassword(int depID, String newPassword);
+    void delete(int depId);
 
-    void delete(int depID);
-
-    Department getByID(int depID);
+    Department getById(int depId);
 
     Department getByName(String name);
 
-    List<Group> getGroups(int depID);
+    List<Group> getGroups(int depId);
 
-    Group getGroup(int depID, String groupName);
+    Group getGroup(int depId, String groupName);
 
-    List<Teacher> getTeachers(int depID);
+    List<Teacher> getTeachers(int depId);
 
-    Teacher getTeacher(int depID, String teacherName, String teacherFamilyName);
+    Teacher getTeacher(int depId, String teacherName, String teacherFamilyName);
 }

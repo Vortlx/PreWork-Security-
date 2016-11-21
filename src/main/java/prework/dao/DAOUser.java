@@ -7,7 +7,7 @@ public interface DAOUser {
 
     void add(User user) throws Exception;
 
-    void deleteByID(int userID);
+    void deleteById(int userId);
 
     void delelteByUsername(String username);
 
@@ -19,7 +19,7 @@ public interface DAOUser {
 
     void changeRole(int userID, Role newRole);
 
-    User getByID(int userID);
+    User getById(int userId);
 
     User getByUsername(String username);
 

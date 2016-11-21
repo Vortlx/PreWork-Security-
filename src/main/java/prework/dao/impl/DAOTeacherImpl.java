@@ -26,37 +26,28 @@ public class DAOTeacherImpl implements DAOTeacher {
     private SessionFactory sessionFactory;
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void add(String name, String familyName,
-                    Subject subject, Department department, User user) throws SQLException {
+    public void add(Teacher teacher) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
-
-        Teacher teacher = new Teacher();
-        teacher.setName(name);
-        teacher.setFamilyName(familyName);
-        teacher.setSubject(subject);
-        teacher.setDepartment(department);
-        teacher.setUser(user);
-
         session.save(teacher);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void changeFullName(int teacherID, String newName, String newFamilyName) throws SQLException {
+    public void changeFullName(int teacherId, String newName, String newFamilyName) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
 
         String queryString = "update Teacher set name = :newName, familyName = :newFamilyName where id = :id";
         Query query = session.createQuery(queryString);
-        query.setParameter("id", teacherID);
+        query.setParameter("id", teacherId);
         query.setParameter("newName", newName);
         query.setParameter("newFamilyName", newFamilyName);
         query.executeUpdate();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void deleteByID(int teacherID) {
+    public void deleteById(int teacherId) {
         Session session = sessionFactory.getCurrentSession();
 
-        Teacher teacher = session.get(Teacher.class, teacherID);
+        Teacher teacher = session.get(Teacher.class, teacherId);
 
         session.delete(teacher);
     }
@@ -74,19 +65,19 @@ public class DAOTeacherImpl implements DAOTeacher {
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Subject getSubject(int teacherID) {
+    public Subject getSubject(int teacherId) {
         Session session = sessionFactory.getCurrentSession();
 
-        Teacher teacher = session.get(Teacher.class, teacherID);
+        Teacher teacher = session.get(Teacher.class, teacherId);
 
         return teacher.getSubject();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Teacher getById(int teacherID) {
+    public Teacher getById(int teacherId) {
         Session session = sessionFactory.getCurrentSession();
 
-        return session.get(Teacher.class, teacherID);
+        return session.get(Teacher.class, teacherId);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)

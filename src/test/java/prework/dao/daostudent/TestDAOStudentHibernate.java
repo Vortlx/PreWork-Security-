@@ -50,7 +50,7 @@ public class TestDAOStudentHibernate {
     public static void deleteDataFromTable(){
         try{
 
-            daoStudent.deleteByID(testStudent.getId());
+            daoStudent.deleteById(testStudent.getId());
 
             daoGroup.deleteByID(testGroup1.getId());
             daoGroup.deleteByID(testGroup2.getId());

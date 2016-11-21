@@ -25,30 +25,30 @@ public interface DAOStudent {
      * @return Nothing.
      * @throws SQLException
      */
-    void add(String name, String familyName, int groupID, User user) throws SQLException;
+    void add(Student student) throws SQLException;
 
     /**
      * This method update entities in students table.
      *
-     * @param studentID     ID of student
+     * @param studentId     Id of student
      * @param newName       New name of student
      * @param newFamilyName New family name of student
      * @return Nothing.
      * @throws SQLException
      */
-    void changeFullName(int studentID, String newName, String newFamilyName) throws SQLException;
+    void changeFullName(int studentId, String newName, String newFamilyName) throws SQLException;
 
     /**
      * Method change current group of student on new group
      *
-     * @param studentID    ID of student
+     * @param studentId    Id of student
      * @param newGroupName Name of new group
      * @return Nothing
      * @throws SQLException
      */
-    void changeGroup(int studentID, int newGroupId) throws SQLException;
+    void changeGroup(int studentId, int newGroupId) throws SQLException;
 
-    void deleteByID(int studentID);
+    void deleteById(int studentId);
 
     /**
      * This method delete student with specific name and family name from students table.
@@ -60,7 +60,7 @@ public interface DAOStudent {
      */
     void deleteByFullName(String name, String familyName) throws SQLException;
 
-    Group getGroup(int studentID);
+    Group getGroup(int studentId);
 
     Student getById(int studentId);
 

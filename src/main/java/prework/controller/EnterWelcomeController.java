@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import prework.entities.User;
-import prework.dao.DAOUser;
+import prework.service.UserService;
 
 @Controller
 public class EnterWelcomeController {
 
     @Autowired
-    DAOUser daoUser;
+    private UserService userService;
 
     @RequestMapping(value = "login")
     public String login() {
@@ -28,7 +28,7 @@ public class EnterWelcomeController {
                           Model model) {
         if(user == null){
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            user = daoUser.getByUsername(auth.getName());
+            user = userService.getByUsername(auth.getName());
         }
 
         model.addAttribute("user", user);

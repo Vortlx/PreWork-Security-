@@ -7,10 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import prework.dao.*;
 import prework.entities.*;
+import prework.service.*;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -19,49 +18,30 @@ import java.util.Set;
 public class StudentController {
 
     @Autowired
-    private DAOStudent daoStudent;
+    private StudentService studentService;
 
     @Autowired
-    private DAOUser daoUser;
+    private UserService userService;
 
     @Autowired
-    private DAODepartment daoDepartment;
+    private DepartmentService departmentService;
 
     @Autowired
-    private DAOGroup daoGroup;
-
-    @Autowired
-    private DAORole daoRole;
+    private GroupService groupService;
 
     @RequestMapping(value = "AddStudent", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String addStudent(@RequestParam("name") String name, @RequestParam("familyName") String familyName,
                              @RequestParam("groupID") int groupId,
                              Model model) {
-
-        int groupIdInt = groupId;
-
         try {
-            Role role = daoRole.getByName("ROLE_STUDENT");
-
-            User newUser = new User();
-            newUser.setUsername(familyName + name);
-            newUser.setPassword("test");
-            newUser.setEnabled(1);
-            newUser.setRole(role);
-
-            daoUser.add(newUser);
-
-            Group group = daoGroup.getByID(groupId);
-            daoStudent.add(name, familyName, group.getId(), daoUser.getByUsername(familyName + name));
-
-            model.addAttribute("user", group.getDepartment().getUser());
+            studentService.add(name, familyName, groupId);
         } catch (Exception e) {
             e.printStackTrace();
-            String message = "Can't do this operation.";
 
+            String message = "Can't do this operation.";
             model.addAttribute("message", message);
-            model.addAttribute("groupID", daoGroup.getAll());
+            model.addAttribute("groupID", groupService.getAll());
 
             return "add/AddStudent.jsp";
         }
@@ -71,13 +51,10 @@ public class StudentController {
 
     @RequestMapping(value = "DeleteStudent", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
-    public String deleteStudent(@RequestParam("studentId") int studentId, Model model) {
+    public String deleteStudent(@RequestParam("studentId") int studentId) {
 
         try {
-            Student student = daoStudent.getById(studentId);
-
-            daoUser.deleteByID(student.getUser().getId());
-            daoStudent.deleteByID(studentId);
+            studentService.deleteById(studentId);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -92,10 +69,10 @@ public class StudentController {
                                   Model model) {
 
         try {
-            Department department = daoDepartment.getByID(depId);
+            Department department = departmentService.getById(depId);
 
             model.addAttribute("groups", department.getGroups());
-            model.addAttribute("studentID", studentId);
+            model.addAttribute("studentId", studentId);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -106,13 +83,13 @@ public class StudentController {
 
     @RequestMapping(value = "ChangeGroup", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
-    public String changeGroupForStudent(@RequestParam("studentID") String studentId,
-                                        @RequestParam("newGroupId") String newGroupId,
+    public String changeGroupForStudent(@RequestParam("studentId") String studentId,
+                                        @RequestParam("newGroupId") int newGroupId,
                                         Model model) {
         try {
-            Student student = daoStudent.getById(Integer.parseInt(studentId));
+            Student student = studentService.getById(Integer.parseInt(studentId));
             Department department = student.getGroup().getDepartment();
-            daoStudent.changeGroup(student.getId(), Integer.parseInt(newGroupId));
+            studentService.changeGroup(student.getId(), newGroupId);
 
             model.addAttribute("userId", department.getId());
         } catch (Exception e) {
@@ -123,18 +100,16 @@ public class StudentController {
     }
 
     @RequestMapping(value = "MyGroup", method = RequestMethod.GET)
-    public String findMyGroup(@RequestParam(name = "userId", required = false) String userId,
-                              @RequestParam(name = "groupId", required = false) String groupId, Model model) {
+    public String findMyGroup(@RequestParam(name = "userId", required = false) Integer userId,
+                              @RequestParam(name = "groupId", required = false) Integer groupId, Model model) {
 
         try {
             if (groupId != null) {
-                Group group = daoGroup.getByID(Integer.parseInt(groupId));
+                Group group = groupService.getById(groupId);
 
                 model.addAttribute("group", group);
-
             } else {
-                User user = daoUser.getByID(Integer.parseInt(userId));
-                Student student = user.getStudent();
+                Student student = userService.getStudent(userId);
 
                 model.addAttribute("group", student.getGroup());
             }
@@ -148,19 +123,18 @@ public class StudentController {
 
     @RequestMapping(value = "MySubjects", method = {RequestMethod.GET, RequestMethod.POST})
     public String findMySubjects(@RequestParam(name = "userId", required = false) int userId,
-                                 @RequestParam(name = "groupId", required = false) String groupId,
+                                 @RequestParam(name = "groupId", required = false) Integer groupId,
                                  Model model) {
 
         try {
             if (groupId != null) {
-                Group group = daoGroup.getByID(Integer.parseInt(groupId));
+                Group group = groupService.getById(groupId);
 
                 model.addAttribute("subjects", group.getSubjects());
                 model.addAttribute("userId", userId);
                 model.addAttribute("groupId", groupId);
             } else {
-                User user = daoUser.getByID(userId);
-                Student student = user.getStudent();
+                Student student = userService.getStudent(userId);
 
                 model.addAttribute("subjects", student.getGroup().getSubjects());
             }
@@ -174,22 +148,12 @@ public class StudentController {
 
     @RequestMapping(value = "Students", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
-    public String findStudents(@RequestParam(name = "userId", required = false) String userId,
+    public String findStudents(@RequestParam(name = "userId", required = false) int userId,
                                Model model) {
 
-        int userIdInt = Integer.parseInt(userId);
-        Set<Student> students;
-        Department department;
-
         try {
-
-            User user = daoUser.getByID(userIdInt);
-            department = user.getDepartment();
-
-            students = new HashSet<Student>();
-            for (Group group : department.getGroups()) {
-                students.addAll(group.getStudents());
-            }
+            Department department = userService.getDepartment(userId);
+            Set<Student> students = studentService.getAll(department);
 
             model.addAttribute("department", department);
             model.addAttribute("students", students);
@@ -208,21 +172,20 @@ public class StudentController {
                                Model model) {
 
         List<Student> students;
-        Department department;
 
         try {
             if (!"".equals(name) && !"".equals(familyName)) {
-                students = daoStudent.getStudent(name, familyName);
+                students = studentService.getStudent(name, familyName);
             } else if (!"".equals(name)) {
-                students = daoStudent.getByName(name);
+                students = studentService.getByName(name);
             } else if (!"".equals(familyName)) {
-                students = daoStudent.getByFamilyName(familyName);
+                students = studentService.getByFamilyName(familyName);
             } else {
-                students = daoStudent.getAll();
+                students = studentService.getAll();
             }
 
             Group group = students.get(0).getGroup();
-            department = group.getDepartment();
+            Department department = group.getDepartment();
 
             model.addAttribute("department", department);
             model.addAttribute("students", students);

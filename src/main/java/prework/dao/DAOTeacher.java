@@ -26,20 +26,20 @@ public interface DAOTeacher {
      * @return Nothing.
      * @throws SQLException
      */
-    void add(String name, String familyName, Subject subject, Department department, User user) throws SQLException;
+    void add(Teacher teacher) throws SQLException;
 
     /**
      * This method update entities into teachers table.
      *
-     * @param teacherID     ID of teacher
+     * @param teacherId     Id of teacher
      * @param newName       New name of teacher
      * @param newFamilyName New family name of teacher
      * @return Nothing.
      * @throws SQLException
      */
-    void changeFullName(int teacherID, String newName, String newFamilyName) throws SQLException;
+    void changeFullName(int teacherId, String newName, String newFamilyName) throws SQLException;
 
-    void deleteByID(int teacherID);
+    void deleteById(int teacherId);
 
     /**
      * This method delete teacher with specific name and family name from teachers table.
@@ -51,7 +51,7 @@ public interface DAOTeacher {
      */
     void deleteByFullName(String name, String familyName) throws SQLException;
 
-    Subject getSubject(int teacherID);
+    Subject getSubject(int teacherId);
 
     Teacher getById(int teacherId);
 

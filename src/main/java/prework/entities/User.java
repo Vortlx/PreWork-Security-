@@ -32,6 +32,17 @@ public class User {
     @OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
     private Student student;
 
+    public User(){
+
+    }
+
+    public User(String name, String familyName, Role role){
+        this.setUsername(familyName + name);
+        this.setPassword("test");
+        this.setEnabled(1);
+        this.setRole(role);
+    }
+
     public int getId() {
         return id;
     }

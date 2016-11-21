@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import prework.entities.User;
@@ -16,58 +17,47 @@ import prework.dao.DAOStudent;
 import prework.entities.Group;
 import prework.entities.Student;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 
-@Component("daoStudentHibernate")
+@Repository
 public class DAOStudentImpl implements DAOStudent {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void add(String name, String familyName, int groupID, User user) throws SQLException {
+    public void add(Student student) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
-
-        Group group = session.get(Group.class, groupID);
-
-        Student student = new Student();
-        student.setName(name);
-        student.setFamilyName(familyName);
-        student.setGroup(group);
-        student.setUser(user);
 
         session.save(student);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void changeFullName(int studentID, String newName, String newFamilyName) throws SQLException {
+    public void changeFullName(int studentId, String newName, String newFamilyName) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
 
-        Student student = session.get(Student.class, studentID);
+        Student student = session.get(Student.class, studentId);
         student.setName(newName);
         student.setFamilyName(newFamilyName);
         session.update(student);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void changeGroup(int studentID, int newGroupId) throws SQLException {
+    public void changeGroup(int studentId, int newGroupId) throws SQLException {
         Session session = sessionFactory.getCurrentSession();
 
         Group newGroup = session.get(Group.class, newGroupId);
-        Student student = session.get(Student.class, studentID);
+        Student student = session.get(Student.class, studentId);
 
-        if (!student.getGroup().equals(newGroup)) {
-            student.setGroup(newGroup);
-            session.update(student);
-        }
+        student.setGroup(newGroup);
+        session.update(student);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void deleteByID(int studentID) {
+    public void deleteById(int studentId) {
         Session session = sessionFactory.getCurrentSession();
 
-        Student student = session.get(Student.class, studentID);
+        Student student = session.get(Student.class, studentId);
         session.delete(student);
     }
 
@@ -84,10 +74,10 @@ public class DAOStudentImpl implements DAOStudent {
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Group getGroup(int studentID) {
+    public Group getGroup(int studentId) {
         Session session = sessionFactory.getCurrentSession();
 
-        Student student = session.get(Student.class, studentID);
+        Student student = session.get(Student.class, studentId);
 
         return student.getGroup();
     }

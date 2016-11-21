@@ -13,9 +13,9 @@ public interface DAOSubject {
 
     void addGroup(int subjectsId, Group group);
 
-    void changeName(int subjectID, String newName);
+    void changeName(int subjectId, String newName);
 
-    void delete(int subjectID);
+    void deleteById(int subjectId);
 
     Subject getById(int subjectId);
 
@@ -23,11 +23,11 @@ public interface DAOSubject {
 
     List<Subject> getAll();
 
-    List<Group> getGroups(int subjectID);
+    List<Group> getGroups(int subjectId);
 
-    Group getGroup(int subjectID, String groupName);
+    Group getGroup(int subjectId, String groupName);
 
-    List<Teacher> getTeachers(int subjectID);
+    List<Teacher> getTeachers(int subjectId);
 
-    Teacher getTeacher(int subjectID, String teacherName, String teacherFamilyName);
+    Teacher getTeacher(int subjectId, String teacherName, String teacherFamilyName);
 }

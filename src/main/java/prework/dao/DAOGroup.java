@@ -23,7 +23,7 @@ public interface DAOGroup {
      * @return Nothing
      * @throw SQLException
      */
-    void add(String name, Department department);
+    void add(Group group);
 
     void addStudent(int groupID, Student student);
 
@@ -48,7 +48,7 @@ public interface DAOGroup {
 
     List<Subject> getSubjects(int groupID);
 
-    Group getByID(int groupID);
+    Group getById(int groupId);
 
     /**
      * Return group which have specific name

@@ -7,8 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import prework.dao.*;
 import prework.entities.*;
+import prework.service.GroupService;
+import prework.service.SubjectService;
 
 import java.util.List;
 import java.util.Set;
@@ -18,16 +19,10 @@ import java.util.Set;
 public class GroupController {
 
     @Autowired
-    private DAOGroup daoGroup;
+    private GroupService groupService;
 
     @Autowired
-    private DAOUser daoUser;
-
-    @Autowired
-    private DAODepartment daoDepartment;
-
-    @Autowired
-    private DAOSubject daoSubject;
+    private SubjectService subjectService;
 
     @RequestMapping(value = "AddGroup", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
@@ -35,10 +30,7 @@ public class GroupController {
                            @RequestParam("departmentId") int depId,
                            Model model) {
         try {
-            Department department = daoDepartment.getByID(depId);
-            daoGroup.add(groupName, department);
-
-            model.addAttribute("user", department.getUser());
+            groupService.add(groupName, depId);
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -57,7 +49,7 @@ public class GroupController {
                                  @RequestParam("userId") int userId,
                                  Model model) {
         try {
-            List<Subject> subjects = daoSubject.getAll();
+            List<Subject> subjects = subjectService.getAll();
 
             model.addAttribute("subjects", subjects);
             model.addAttribute("groupId", groupId);
@@ -77,17 +69,14 @@ public class GroupController {
                              Model model) {
 
         try {
-            Group group = daoGroup.getByID(groupId);
-            Subject subject = daoSubject.getByNameAndType(subjectName, SubjectType.valueOf(subjectType));
-            daoSubject.addGroup(subject.getId(), group);
-
+            subjectService.addGroup(subjectName, subjectType, groupId);
         } catch (Exception e) {
             e.printStackTrace();
 
             String message = "Can't do this operation.";
 
             model.addAttribute("message", message);
-            model.addAttribute("subjects", daoSubject.getAll());
+            model.addAttribute("subjects", subjectService.getAll());
 
             return "add/AddSubject.jsp";
         } finally {
@@ -105,12 +94,8 @@ public class GroupController {
                               Model model) {
 
         try {
-            Group group = daoGroup.getByID(groupId);
-            for (Student student : group.getStudents()) {
-                daoUser.deleteByID(student.getUser().getId());
-            }
+            groupService.deleteById(groupId);
 
-            daoGroup.deleteByID(groupId);
             model.addAttribute("userId", userId);
         } catch (Exception e) {
             e.printStackTrace();
@@ -126,7 +111,7 @@ public class GroupController {
                                          @RequestParam("userId") int userId,
                                          Model model) {
         try {
-            daoGroup.deleteSubject(groupId, subjectId);
+            groupService.deleteSubject(groupId, subjectId);
 
             model.addAttribute("groupId", groupId);
             model.addAttribute("userId", userId);
@@ -141,20 +126,8 @@ public class GroupController {
     @PreAuthorize("hasAnyRole('ROLE_DEPARTMENT', 'ROLE_TEACHER')")
     public String findGroups(@RequestParam("userId") int userId, Model model) {
 
-        Set<Group> groups = null;
-        Department department = null;
-        Teacher teacher = null;
-
         try {
-            User user = daoUser.getByID(userId);
-
-            if (user.getDepartment() != null) {
-                department = user.getDepartment();
-                groups = department.getGroups();
-            } else {
-                teacher = user.getTeacher();
-                groups = teacher.getSubject().getGroups();
-            }
+            Set<Group> groups = groupService.getAll(userId);
 
             model.addAttribute("groups", groups);
         } catch (Exception e) {

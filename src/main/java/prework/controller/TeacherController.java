@@ -7,8 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import prework.dao.*;
 import prework.entities.*;
+import prework.service.*;
 
 import java.util.List;
 import java.util.Set;
@@ -18,48 +18,25 @@ import java.util.Set;
 public class TeacherController {
 
     @Autowired
-    private DAOTeacher daoTeacher;
+    private TeacherService teacherService;
 
     @Autowired
-    private DAOUser daoUser;
+    private UserService userService;
 
     @Autowired
-    private DAODepartment daoDepartment;
+    private SubjectService subjectService;
 
-    @Autowired
-    private DAOSubject daoSubject;
-
-    @Autowired
-    private DAORole daoRole;
 
     @RequestMapping(value = "AddTeacher", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String addTeacher(@RequestParam("name") String name, @RequestParam("familyName") String familyName,
                              @RequestParam("subjectName") String subjectName,
                              @RequestParam("subjectType") String subjectType,
-                             @RequestParam("departmentId") String depId,
+                             @RequestParam("departmentId") int depId,
                              Model model) {
         try {
-            Department department = daoDepartment.getByID(Integer.parseInt(depId));
-
-            Subject newSubject = new Subject();
-            newSubject.setName(subjectName);
-            newSubject.setType(SubjectType.valueOf(subjectType));
-            daoSubject.add(newSubject);
-
-            Role role = daoRole.getByName("ROLE_TEACHER");
-
-            User newUser = new User();
-            newUser.setUsername(familyName + name);
-            newUser.setPassword("test");
-            newUser.setEnabled(1);
-            newUser.setRole(role);
-            daoUser.add(newUser);
-
-            daoTeacher.add(name, familyName, daoSubject.getByNameAndType(newSubject.getName(), newSubject.getType()),
-                    department, daoUser.getByUsername(familyName + name));
-
-            model.addAttribute("user", department.getUser());
+            Subject newSubject = subjectService.add(subjectName, SubjectType.valueOf(subjectType));
+            teacherService.add(name, familyName, newSubject, depId);
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -76,14 +53,10 @@ public class TeacherController {
 
     @RequestMapping(value = "DeleteTeacher", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
-    public String deleteTeacher(@RequestParam("teacherId") int teacherId, Model model) {
+    public String deleteTeacher(@RequestParam("teacherId") int teacherId) {
 
         try {
-            Teacher teacher = daoTeacher.getById(teacherId);
-
-            daoUser.deleteByID(teacher.getUser().getId());
-            daoSubject.delete(teacher.getSubject().getId());
-            daoTeacher.deleteByID(teacher.getId());
+            teacherService.deleteById(teacherId);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -93,18 +66,12 @@ public class TeacherController {
 
     @RequestMapping(value = "Teachers", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
-    public String findTeachers(@RequestParam(name = "userId", required = false) String userId,
+    public String findTeachers(@RequestParam(name = "userId", required = false) int userId,
                                Model model) {
 
-        int userIdInt = Integer.parseInt(userId);
-        Set<Teacher> teachers;
-        Department department;
-
         try {
-            User user = daoUser.getByID(userIdInt);
-            department = user.getDepartment();
-
-            teachers = department.getTeachers();
+            Department department = userService.getDepartment(userId);
+            Set<Teacher> teachers = department.getTeachers();
 
             model.addAttribute("department", department);
             model.addAttribute("teachers", teachers);
@@ -127,13 +94,13 @@ public class TeacherController {
         try {
 
             if (!"".equals(name) && !"".equals(familyName)) {
-                teachers = daoTeacher.getTeacher(name, familyName);
+                teachers = teacherService.getTeacher(name, familyName);
             } else if (!"".equals(name)) {
-                teachers = daoTeacher.getByName(name);
+                teachers = teacherService.getByName(name);
             } else if (!"".equals(familyName)) {
-                teachers = daoTeacher.getByFamilyName(familyName);
+                teachers = teacherService.getByFamilyName(familyName);
             } else {
-                teachers = daoTeacher.getAll();
+                teachers = teacherService.getAll();
             }
 
             department = teachers.get(0).getDepartment();

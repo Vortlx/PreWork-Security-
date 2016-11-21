@@ -3,7 +3,7 @@ package prework.dao.impl;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import prework.entities.Role;
@@ -12,7 +12,7 @@ import prework.dao.DAOUser;
 
 import javax.persistence.Query;
 
-@Component
+@Repository
 public class DAOUserImpl implements DAOUser {
 
     @Autowired
@@ -33,10 +33,10 @@ public class DAOUserImpl implements DAOUser {
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void deleteByID(int userID) {
+    public void deleteById(int userId) {
         Session session = sessionFactory.getCurrentSession();
 
-        User user = session.get(User.class, userID);
+        User user = session.get(User.class, userId);
         session.delete(user);
     }
 
@@ -91,10 +91,10 @@ public class DAOUserImpl implements DAOUser {
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public User getByID(int userID) {
+    public User getById(int userId) {
         Session session = sessionFactory.getCurrentSession();
 
-        return session.get(User.class, userID);
+        return session.get(User.class, userId);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)

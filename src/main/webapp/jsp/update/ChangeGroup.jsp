@@ -17,7 +17,7 @@
             </c:forEach>
         </select>
         <br>
-        <input name="studentID" type="hidden" value="${studentID}">
+        <input name="studentId" type="hidden" value="${studentId}">
         <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
         <input name="add" type="submit" value="Change">
     </form>

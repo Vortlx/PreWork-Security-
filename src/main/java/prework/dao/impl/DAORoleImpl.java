@@ -4,7 +4,7 @@ package prework.dao.impl;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import prework.entities.Role;
@@ -12,7 +12,7 @@ import prework.dao.DAORole;
 
 import javax.persistence.Query;
 
-@Component
+@Repository
 public class DAORoleImpl implements DAORole {
 
     @Autowired

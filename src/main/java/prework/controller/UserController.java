@@ -6,15 +6,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import prework.dao.DAOUser;
 import prework.entities.User;
+import prework.service.UserService;
 
 @Controller
 @RequestMapping(value = "jsp")
 public class UserController {
 
     @Autowired
-    private DAOUser daoUser;
+    private UserService userService;
 
     @RequestMapping(value="ChangePassword", method= RequestMethod.GET)
     public String toChangePasswordPage(@RequestParam("userId") int userId,
@@ -31,16 +31,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "ChangePassword", method = RequestMethod.POST)
-    public String changePassword(@RequestParam("userId") String userId, @RequestParam("oldPassword") String oldPassword,
+    public String changePassword(@RequestParam("userId") int userId, @RequestParam("oldPassword") String oldPassword,
                                 @RequestParam("newPassword") String newPassword, Model model) {
 
-        int userIdInt = Integer.parseInt(userId);
-        User user = daoUser.getByID(userIdInt);
-
-        if (user.getPassword().equals(oldPassword)) {
-            daoUser.changePassword(userIdInt, newPassword);
+        try {
+            User user = userService.changePassword(userId, oldPassword, newPassword);
             model.addAttribute("user", user);
-        } else {
+        } catch(Exception e) {
             String message = "Passwords don't match";
             model.addAttribute("message", message);
             return "update/ChangePassword.jsp";
@@ -53,24 +50,11 @@ public class UserController {
     public String changeUsername(@RequestParam("userId") int userId, @RequestParam("password") String password,
                                  @RequestParam("username") String username, Model model) {
 
-        User user = daoUser.getByID(userId);
-        String message = null;
-
         try {
-            if (user.getPassword().equals(password)) {
-                daoUser.changeUsername(userId, username);
-
-                System.out.println();
-                System.out.println(user);
-                System.out.println();
-                model.addAttribute("user", user);
-            } else {
-                message = "Wrong password";
-                model.addAttribute("message", message);
-                return "update/ChangeUsername.jsp";
-            }
+            User user = userService.changeUsername(userId, password, username);
+            model.addAttribute("user", user);
         } catch (Exception e) {
-            message = "User with that username exist";
+            String message = "User with that username exist";
             model.addAttribute("message", message);
             return "update/ChangeUsername.jsp";
         }

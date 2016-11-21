@@ -3,7 +3,7 @@ package prework.dao.impl;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import prework.entities.Group;
@@ -13,11 +13,9 @@ import prework.entities.Teacher;
 import prework.dao.DAOSubject;
 
 import javax.persistence.Query;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-@Component
+@Repository
 public class DAOSubjectImpl implements DAOSubject {
 
     @Autowired
@@ -42,19 +40,19 @@ public class DAOSubjectImpl implements DAOSubject {
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void changeName(int subjectID, String newName) {
+    public void changeName(int subjectId, String newName) {
         Session session = sessionFactory.getCurrentSession();
 
-        Subject subject = session.get(Subject.class, subjectID);
+        Subject subject = session.get(Subject.class, subjectId);
         subject.setName(newName);
         session.update(subject);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void delete(int subjectID) {
+    public void deleteById(int subjectId) {
         Session session = sessionFactory.getCurrentSession();
 
-        Subject subject = session.get(Subject.class, subjectID);
+        Subject subject = session.get(Subject.class, subjectId);
         session.delete(subject);
     }
 
@@ -88,23 +86,23 @@ public class DAOSubjectImpl implements DAOSubject {
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public List<Group> getGroups(int subjectID) {
+    public List<Group> getGroups(int subjectId) {
         Session session = sessionFactory.getCurrentSession();
 
         String getGroupsQuery = "select groups from Subject where id = :id";
         Query query = session.createQuery(getGroupsQuery);
-        query.setParameter("id", subjectID);
+        query.setParameter("id", subjectId);
 
         return query.getResultList();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Group getGroup(int subjectID, String groupName) {
+    public Group getGroup(int subjectId, String groupName) {
         Session session = sessionFactory.getCurrentSession();
 
         String getGroupsQuery = "select groups from Subject where id = :id";
         Query query = session.createQuery(getGroupsQuery);
-        query.setParameter("id", subjectID);
+        query.setParameter("id", subjectId);
         List<Group> groups = query.getResultList();
 
         for (Group group : groups) {
@@ -117,23 +115,23 @@ public class DAOSubjectImpl implements DAOSubject {
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public List<Teacher> getTeachers(int subjectID) {
+    public List<Teacher> getTeachers(int subjectId) {
         Session session = sessionFactory.getCurrentSession();
 
         String getGroupsQuery = "select teachers from Subject where id = :id";
         Query query = session.createQuery(getGroupsQuery);
-        query.setParameter("id", subjectID);
+        query.setParameter("id", subjectId);
 
         return query.getResultList();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Teacher getTeacher(int subjectID, String teacherName, String teacherFamilyName) {
+    public Teacher getTeacher(int subjectId, String teacherName, String teacherFamilyName) {
         Session session = sessionFactory.getCurrentSession();
 
         String getGroupsQuery = "select teachers from Subject where id = :id";
         Query query = session.createQuery(getGroupsQuery);
-        query.setParameter("id", subjectID);
+        query.setParameter("id", subjectId);
         List<Teacher> teachers = query.getResultList();
 
         for (Teacher teacher : teachers) {
