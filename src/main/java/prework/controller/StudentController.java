@@ -1,37 +1,126 @@
-package prework.controller.search;
-
-
-import org.springframework.security.access.prepost.PreAuthorize;
-import prework.entities.*;
-import prework.dao.DAOGroup;
-import prework.dao.DAOStudent;
-import prework.dao.DAOTeacher;
-import prework.dao.DAOUser;
-
-import java.util.*;
+package prework.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import prework.dao.*;
+import prework.entities.*;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping(value = "jsp")
-public class SearchController {
-
-    @Autowired
-    private DAOGroup daoGroup;
+public class StudentController {
 
     @Autowired
     private DAOStudent daoStudent;
 
     @Autowired
-    private DAOTeacher daoTeacher;
+    private DAOUser daoUser;
 
     @Autowired
-    private DAOUser daoUser;
+    private DAODepartment daoDepartment;
+
+    @Autowired
+    private DAOGroup daoGroup;
+
+    @Autowired
+    private DAORole daoRole;
+
+    @RequestMapping(value = "AddStudent", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
+    public String addStudent(@RequestParam("name") String name, @RequestParam("familyName") String familyName,
+                             @RequestParam("groupID") int groupId,
+                             Model model) {
+
+        int groupIdInt = groupId;
+
+        try {
+            Role role = daoRole.getByName("ROLE_STUDENT");
+
+            User newUser = new User();
+            newUser.setUsername(familyName + name);
+            newUser.setPassword("test");
+            newUser.setEnabled(1);
+            newUser.setRole(role);
+
+            daoUser.add(newUser);
+
+            Group group = daoGroup.getByID(groupId);
+            daoStudent.add(name, familyName, group.getId(), daoUser.getByUsername(familyName + name));
+
+            model.addAttribute("user", group.getDepartment().getUser());
+        } catch (Exception e) {
+            e.printStackTrace();
+            String message = "Can't do this operation.";
+
+            model.addAttribute("message", message);
+            model.addAttribute("groupID", daoGroup.getAll());
+
+            return "add/AddStudent.jsp";
+        }
+
+        return "welcome";
+    }
+
+    @RequestMapping(value = "DeleteStudent", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
+    public String deleteStudent(@RequestParam("studentId") int studentId, Model model) {
+
+        try {
+            Student student = daoStudent.getById(studentId);
+
+            daoUser.deleteByID(student.getUser().getId());
+            daoStudent.deleteByID(studentId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            return "search/Students.jsp";
+        }
+    }
+
+    @RequestMapping(value = "ChangeGroupPage", method = RequestMethod.GET)
+    public String changeGroupPage(@RequestParam("depId") int depId,
+                                  @RequestParam("studentId") String studentId,
+                                  @RequestParam("userId") int userId,
+                                  Model model) {
+
+        try {
+            Department department = daoDepartment.getByID(depId);
+
+            model.addAttribute("groups", department.getGroups());
+            model.addAttribute("studentID", studentId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            model.addAttribute("userId", userId);
+            return "update/ChangeGroup.jsp";
+        }
+    }
+
+    @RequestMapping(value = "ChangeGroup", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
+    public String changeGroupForStudent(@RequestParam("studentID") String studentId,
+                                        @RequestParam("newGroupId") String newGroupId,
+                                        Model model) {
+        try {
+            Student student = daoStudent.getById(Integer.parseInt(studentId));
+            Department department = student.getGroup().getDepartment();
+            daoStudent.changeGroup(student.getId(), Integer.parseInt(newGroupId));
+
+            model.addAttribute("userId", department.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            return "Students";
+        }
+    }
 
     @RequestMapping(value = "MyGroup", method = RequestMethod.GET)
     public String findMyGroup(@RequestParam(name = "userId", required = false) String userId,
@@ -83,35 +172,6 @@ public class SearchController {
         }
     }
 
-    @RequestMapping(value = "Groups", method = RequestMethod.GET)
-    @PreAuthorize("hasAnyRole('ROLE_DEPARTMENT', 'ROLE_TEACHER')")
-    public String findGroups(@RequestParam("userId") int userId, Model model) {
-
-        Set<Group> groups = null;
-        Department department = null;
-        Teacher teacher = null;
-
-        try {
-            User user = daoUser.getByID(userId);
-
-            if (user.getDepartment() != null) {
-                department = user.getDepartment();
-                groups = department.getGroups();
-            } else {
-                teacher = user.getTeacher();
-                groups = teacher.getSubject().getGroups();
-            }
-
-            model.addAttribute("groups", groups);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            model.addAttribute("userId", userId);
-            return "search/Groups.jsp";
-        }
-    }
-
-    // Need rewrite
     @RequestMapping(value = "Students", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String findStudents(@RequestParam(name = "userId", required = false) String userId,
@@ -170,62 +230,6 @@ public class SearchController {
             e.printStackTrace();
         } finally {
             return "search/Students.jsp";
-        }
-    }
-
-    @RequestMapping(value = "Teachers", method = RequestMethod.GET)
-    @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
-    public String findTeachers(@RequestParam(name = "userId", required = false) String userId,
-                               Model model) {
-
-        int userIdInt = Integer.parseInt(userId);
-        Set<Teacher> teachers;
-        Department department;
-
-        try {
-            User user = daoUser.getByID(userIdInt);
-            department = user.getDepartment();
-
-            teachers = department.getTeachers();
-
-            model.addAttribute("department", department);
-            model.addAttribute("teachers", teachers);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            return "search/Teachers.jsp";
-        }
-    }
-
-    @RequestMapping(value = "Teachers", method = RequestMethod.POST)
-    @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
-    public String findTeachers(@RequestParam(name = "name", required = false) String name,
-                               @RequestParam(name = "familyName", required = false) String familyName,
-                               Model model) {
-
-        List<Teacher> teachers;
-        Department department;
-
-        try {
-
-            if (!"".equals(name) && !"".equals(familyName)) {
-                teachers = daoTeacher.getTeacher(name, familyName);
-            } else if (!"".equals(name)) {
-                teachers = daoTeacher.getByName(name);
-            } else if (!"".equals(familyName)) {
-                teachers = daoTeacher.getByFamilyName(familyName);
-            } else {
-                teachers = daoTeacher.getAll();
-            }
-
-            department = teachers.get(0).getDepartment();
-
-            model.addAttribute("department", department);
-            model.addAttribute("teachers", teachers);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            return "search/Teachers.jsp";
         }
     }
 }
