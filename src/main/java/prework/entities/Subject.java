@@ -24,8 +24,8 @@ public class Subject {
             inverseJoinColumns = @JoinColumn(name = "id_group"))
     private Set<Group> groups;
 
-    @OneToMany(mappedBy = "subject", fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
-    private Set<Teacher> teachers;
+    @OneToOne(mappedBy = "subject", fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
+    private Teacher teacher;
 
     public Subject() {
 
@@ -42,14 +42,6 @@ public class Subject {
 
     public void deleteGroup(Group group) {
         groups.remove(group);
-    }
-
-    public void addTeacher(Teacher teacher) {
-        teachers.add(teacher);
-    }
-
-    public void deleteTeacher(Teacher teacher) {
-        teachers.remove(teacher);
     }
 
     public int getId() {
@@ -84,11 +76,11 @@ public class Subject {
         this.groups = groups;
     }
 
-    public Set<Teacher> getTeachers() {
-        return teachers;
+    public Teacher getTeacher() {
+        return teacher;
     }
 
-    public void setTeachers(Set<Teacher> teachers) {
-        this.teachers = teachers;
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 }
