@@ -125,8 +125,9 @@ public class DAOGroupImpl implements DAOGroup {
     public Student getStudent(int groupID, String studentName, String studentFamilyName) {
         Session session = sessionFactory.getCurrentSession();
 
-        String getStudentsQuery = "from Student student where name = :name and familyName = :familyName " +
-                "and student in (select students from Group where id = :id)";
+        String getStudentsQuery = "select student from Student student inner join student.group gr where" +
+                                    " student.name = :name and student.familyName = :familyName " +
+                                    "and gr.id = :id";
         Query query = session.createQuery(getStudentsQuery);
         query.setParameter("name", studentName);
         query.setParameter("familyName", studentFamilyName);

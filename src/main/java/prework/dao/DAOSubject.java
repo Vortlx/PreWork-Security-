@@ -25,9 +25,5 @@ public interface DAOSubject {
 
     List<Group> getGroups(int subjectId);
 
-    Group getGroup(int subjectId, String groupName);
-
-    List<Teacher> getTeachers(int subjectId);
-
-    Teacher getTeacher(int subjectId, String teacherName, String teacherFamilyName);
+    Teacher getTeacher(int subjectId);
 }

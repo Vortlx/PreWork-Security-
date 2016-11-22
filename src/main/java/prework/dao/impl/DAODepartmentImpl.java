@@ -48,6 +48,7 @@ public class DAODepartmentImpl implements DAODepartment {
     public void delete(int depId) {
         Session session = sessionFactory.getCurrentSession();
         Department department = session.get(Department.class, depId);
+        session.delete(department);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
@@ -82,14 +83,13 @@ public class DAODepartmentImpl implements DAODepartment {
     public Group getGroup(int depId, String groupName) {
         Session session = sessionFactory.getCurrentSession();
 
-        String getGroupsQuery = "from Group group where name = :name" +
-                                    " and group in (select groups from Department where id = :id)";
+        String getGroupsQuery = "select gr from Group gr inner join gr.department dep" +
+                                    " where gr.name = :name and dep.id = :id";
         Query query = session.createQuery(getGroupsQuery);
         query.setParameter("name", groupName);
         query.setParameter("id", depId);
-        Group group = (Group) query.getSingleResult();
 
-        return group;
+        return (Group) query.getSingleResult();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
@@ -107,14 +107,14 @@ public class DAODepartmentImpl implements DAODepartment {
     public Teacher getTeacher(int depId, String teacherName, String teacherFamilyName) {
         Session session = sessionFactory.getCurrentSession();
 
-        String getTeacherByNameQuery = "from Teacher teacher where name = :name and familyName = :familyName" +
-                " and teacher in(select teachers from Department where id = :id)";
+        String getTeacherByNameQuery = "select teacher from Teacher teacher inner join teacher.department dep" +
+                                    " where teacher.name = :name and teacher.familyName = :familyName" +
+                                    " and dep.id = :id";
         Query query = session.createQuery(getTeacherByNameQuery);
         query.setParameter("name", teacherName);
         query.setParameter("familyName", teacherFamilyName);
         query.setParameter("id", depId);
-        Teacher teacher = (Teacher) query.getSingleResult();
 
-        return teacher;
+        return (Teacher) query.getSingleResult();
     }
 }

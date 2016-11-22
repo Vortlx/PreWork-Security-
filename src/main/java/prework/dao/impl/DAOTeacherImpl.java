@@ -9,15 +9,15 @@ import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import prework.entities.*;
 import prework.dao.DAOTeacher;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 
-@Component("daoTeacherHibernate")
+@Repository
 public class DAOTeacherImpl implements DAOTeacher {
 
     @Autowired

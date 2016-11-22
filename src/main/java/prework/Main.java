@@ -1,11 +1,19 @@
 package prework;
 
-import prework.dao.DAOTeacher;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import prework.dao.DAODepartment;
 
-import prework.dao.DAOGroup;
-import prework.dao.DAOStudent;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import prework.dao.DAOGroup;
+import prework.dao.DAOSubject;
+import prework.entities.Group;
+import prework.entities.Student;
+import prework.entities.Teacher;
+
+import javax.persistence.EntityManager;
+import java.util.List;
 
 /**
  * This Class using for testing other classes.
@@ -18,9 +26,7 @@ public class Main {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("spring\\Spring.cfg.xml");
 
-        DAOTeacher daoTeacher = (DAOTeacher) context.getBean("daoTeacherHibernate");
-        DAOGroup daoGroup = (DAOGroup) context.getBean("daoGroupHibernate");
-        DAOStudent daoStudent = (DAOStudent) context.getBean("daoStudentHibernate");
+        DAOSubject daoSubject = (DAOSubject)(context.getBean("test"));
 
         try {
 

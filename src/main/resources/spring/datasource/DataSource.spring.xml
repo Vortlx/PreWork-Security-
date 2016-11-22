@@ -8,10 +8,11 @@
         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
     <!--
-    <context:property-placeholder location="spring/datasource/JDBCInfo.properties"/>
+    <context:property-placeholder location="WEB-INF/classes/spring/datasource/JDBCInfo.properties"/>
+
     -->
 
-    <context:property-placeholder location="WEB-INF/classes/spring/datasource/JDBCInfo.properties"/>
+    <context:property-placeholder location="spring/datasource/JDBCInfo.properties"/>
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 

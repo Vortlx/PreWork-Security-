@@ -97,42 +97,13 @@ public class DAOSubjectImpl implements DAOSubject {
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Group getGroup(int subjectId, String groupName) {
+    public Teacher getTeacher(int subjectId) {
         Session session = sessionFactory.getCurrentSession();
 
-        String getGroupsQuery = "from Group group where name = :name " +
-                "and group in (select groups from Subject where id = :id)";
-        Query query = session.createQuery(getGroupsQuery);
-        query.setParameter("name", groupName);
-        query.setParameter("id", subjectId);
-        Group group = (Group) query.getSingleResult();
-
-        return group;
-    }
-
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public List<Teacher> getTeachers(int subjectId) {
-        Session session = sessionFactory.getCurrentSession();
-
-        String getGroupsQuery = "select teachers from Subject where id = :id";
+        String getGroupsQuery = "select subject.teacher from Subject subject where id = :id";
         Query query = session.createQuery(getGroupsQuery);
         query.setParameter("id", subjectId);
 
-        return query.getResultList();
-    }
-
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Teacher getTeacher(int subjectId, String teacherName, String teacherFamilyName) {
-        Session session = sessionFactory.getCurrentSession();
-
-        String getGroupsQuery = "from Teacher teacher where name = :name and familyName = :familyName " +
-                "and teacher in (select teachers from Subject where id = :id)";
-        Query query = session.createQuery(getGroupsQuery);
-        query.setParameter("name", teacherName);
-        query.setParameter("familyName", teacherFamilyName);
-        query.setParameter("id", subjectId);
-        Teacher teacher = (Teacher) query.getSingleResult();
-
-        return teacher;
+        return (Teacher) query.getSingleResult();
     }
 }
