@@ -11,7 +11,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import prework.entities.Department;
 import prework.entities.Student;
 import prework.entities.Subject;
 import prework.dao.DAOGroup;
@@ -126,19 +125,15 @@ public class DAOGroupImpl implements DAOGroup {
     public Student getStudent(int groupID, String studentName, String studentFamilyName) {
         Session session = sessionFactory.getCurrentSession();
 
-        String getStudentsQuery = "select students from Group where id = :id";
+        String getStudentsQuery = "from Student student where name = :name and familyName = :familyName " +
+                "and student in (select students from Group where id = :id)";
         Query query = session.createQuery(getStudentsQuery);
+        query.setParameter("name", studentName);
+        query.setParameter("familyName", studentFamilyName);
         query.setParameter("id", groupID);
-        List<Student> students = (List<Student>) query.getSingleResult();
+        Student student = (Student) query.getSingleResult();
 
-        for (Student student : students) {
-            if (student.getName().equals(studentName) &&
-                    student.getName().equals(studentFamilyName)) {
-                return student;
-            }
-        }
-
-        return new Student();
+        return student;
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)

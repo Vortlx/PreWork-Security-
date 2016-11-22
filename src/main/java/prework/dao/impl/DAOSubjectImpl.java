@@ -100,18 +100,14 @@ public class DAOSubjectImpl implements DAOSubject {
     public Group getGroup(int subjectId, String groupName) {
         Session session = sessionFactory.getCurrentSession();
 
-        String getGroupsQuery = "select groups from Subject where id = :id";
+        String getGroupsQuery = "from Group group where name = :name " +
+                "and group in (select groups from Subject where id = :id)";
         Query query = session.createQuery(getGroupsQuery);
+        query.setParameter("name", groupName);
         query.setParameter("id", subjectId);
-        List<Group> groups = query.getResultList();
+        Group group = (Group) query.getSingleResult();
 
-        for (Group group : groups) {
-            if (group.getName().equals(groupName)) {
-                return group;
-            }
-        }
-
-        return new Group();
+        return group;
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
@@ -129,18 +125,14 @@ public class DAOSubjectImpl implements DAOSubject {
     public Teacher getTeacher(int subjectId, String teacherName, String teacherFamilyName) {
         Session session = sessionFactory.getCurrentSession();
 
-        String getGroupsQuery = "select teachers from Subject where id = :id";
+        String getGroupsQuery = "from Teacher teacher where name = :name and familyName = :familyName " +
+                "and teacher in (select teachers from Subject where id = :id)";
         Query query = session.createQuery(getGroupsQuery);
+        query.setParameter("name", teacherName);
+        query.setParameter("familyName", teacherFamilyName);
         query.setParameter("id", subjectId);
-        List<Teacher> teachers = query.getResultList();
+        Teacher teacher = (Teacher) query.getSingleResult();
 
-        for (Teacher teacher : teachers) {
-            if (teacher.getName().equals(teacherName) &&
-                    teacher.getName().equals(teacherFamilyName)) {
-                return teacher;
-            }
-        }
-
-        return new Teacher();
+        return teacher;
     }
 }
