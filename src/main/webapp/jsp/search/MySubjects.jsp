@@ -32,9 +32,7 @@
                 <td>${subject.name}</td>
                 <td>${subject.type}</td>
                 <td>
-                    <c:forEach items="${subject.teachers}" var="teacher">
-                        ${teacher.name} ${teacher.familyName}
-                    </c:forEach>
+                   ${subject.teacher.name} ${subject.teacher.familyName}
                 </td>
                 <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
                     <td>

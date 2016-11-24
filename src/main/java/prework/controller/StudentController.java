@@ -64,8 +64,7 @@ public class StudentController {
 
     @RequestMapping(value = "ChangeGroupPage", method = RequestMethod.GET)
     public String changeGroupPage(@RequestParam("depId") int depId,
-                                  @RequestParam("studentId") String studentId,
-                                  @RequestParam("userId") int userId,
+                                  @RequestParam("studentId") int studentId,
                                   Model model) {
 
         try {
@@ -76,7 +75,6 @@ public class StudentController {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            model.addAttribute("userId", userId);
             return "update/ChangeGroup.jsp";
         }
     }
