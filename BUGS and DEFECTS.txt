@@ -9,5 +9,3 @@
 5. not handled code 500
 
 6. After changing username can't find user and request return code 500
-
-7. Change Group  404 because studentId = "";
