@@ -14,13 +14,13 @@ public class UserServiceImpl implements UserService{
 
     public User add(String name, String familyName, Role role) throws Exception{
         User newUser = new User(name, familyName, role);
-        daoUser.add(newUser);
+        daoUser.save(newUser);
 
         return daoUser.getByUsername(familyName + name);
     }
 
     public void deleteById(int userId) {
-        daoUser.deleteById(userId);
+        daoUser.delete(userId);
     }
 
     public User changePassword(int userId, String oldPassword, String newPassword) throws Exception {
@@ -41,11 +41,11 @@ public class UserServiceImpl implements UserService{
 
         daoUser.changeUsername(userId, username);
 
-        return daoUser.getById(userId);
+        return getById(userId);
     }
 
     public User getById(int userId) {
-        return daoUser.getById(userId);
+        return daoUser.findOne(userId);
     }
 
     public User getByUsername(String username) {

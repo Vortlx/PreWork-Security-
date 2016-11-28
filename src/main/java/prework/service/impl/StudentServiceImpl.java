@@ -40,14 +40,14 @@ public class StudentServiceImpl implements StudentService{
         student.setGroup(group);
         student.setUser(newUser);
 
-        daoStudent.add(student);
+        daoStudent.save(student);
     }
 
     public void deleteById(int studentId) {
         Student student = getById(studentId);
         userService.deleteById(student.getUser().getId());
 
-        daoStudent.deleteById(studentId);
+        daoStudent.delete(studentId);
     }
 
     public void changeGroup(int studentId, int newGroupId) throws Exception{
@@ -55,7 +55,7 @@ public class StudentServiceImpl implements StudentService{
     }
 
     public Student getById(int studentId) {
-        return daoStudent.getById(studentId);
+        return daoStudent.findOne(studentId);
     }
 
     public List<Student> getStudent(String name, String familyName) throws Exception{
@@ -70,8 +70,8 @@ public class StudentServiceImpl implements StudentService{
         return daoStudent.getByFamilyName(familyName);
     }
 
-    public List<Student> getAll() throws Exception{
-        return daoStudent.getAll();
+    public Iterable<Student> getAll() throws Exception{
+        return daoStudent.findAll();
     }
 
     public Set<Student> getAll(Department department){

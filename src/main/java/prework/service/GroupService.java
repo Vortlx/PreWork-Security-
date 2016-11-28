@@ -15,7 +15,7 @@ public interface GroupService {
 
     Group getById(int groupId);
 
-    List<Group> getAll();
+    Iterable<Group> getAll();
 
     Set<Group> getAll(int userId);
 }

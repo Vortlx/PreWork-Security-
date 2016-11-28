@@ -1,29 +1,10 @@
 package prework.dao;
 
-import prework.entities.Group;
+import prework.dao.custom.DAOSubjectCustom;
 import prework.entities.Subject;
-import prework.entities.SubjectType;
-import prework.entities.Teacher;
+import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
 
-public interface DAOSubject {
-
-    void add(Subject subject);
-
-    void addGroup(int subjectsId, Group group);
-
-    void changeName(int subjectId, String newName);
-
-    void deleteById(int subjectId);
-
-    Subject getById(int subjectId);
-
-    Subject getByNameAndType(String name, SubjectType subjectType);
-
-    List<Subject> getAll();
-
-    List<Group> getGroups(int subjectId);
-
-    Teacher getTeacher(int subjectId);
+public interface DAOSubject extends CrudRepository<Subject, Integer>, DAOSubjectCustom{
+   
 }

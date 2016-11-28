@@ -21,7 +21,7 @@ public class SubjectServiceImpl implements SubjectService{
     private GroupService groupService;
 
     public Subject add(Subject subject) {
-        daoSubject.add(subject);
+        daoSubject.save(subject);
         return daoSubject.getByNameAndType(subject.getName(), subject.getType());
     }
 
@@ -30,7 +30,7 @@ public class SubjectServiceImpl implements SubjectService{
         subject.setName(name);
         subject.setType(type);
 
-        daoSubject.add(subject);
+        daoSubject.save(subject);
         return daoSubject.getByNameAndType(subject.getName(), subject.getType());
     }
 
@@ -41,11 +41,11 @@ public class SubjectServiceImpl implements SubjectService{
     }
 
     public void deleteById(int subjectId) {
-        daoSubject.deleteById(subjectId);
+        daoSubject.delete(subjectId);
     }
 
-    public List<Subject> getAll() {
-        return daoSubject.getAll();
+    public Iterable<Subject> getAll() {
+        return daoSubject.findAll();
     }
 
     public Subject getByNameAndType(String name, SubjectType type) {

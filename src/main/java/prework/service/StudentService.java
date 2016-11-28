@@ -24,7 +24,7 @@ public interface StudentService {
 
     List<Student> getByFamilyName(String familyName) throws Exception;
 
-    List<Student> getAll() throws Exception;
+    Iterable<Student> getAll() throws Exception;
 
     Set<Student> getAll(Department department);
 }

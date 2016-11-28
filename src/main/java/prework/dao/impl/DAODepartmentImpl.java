@@ -1,5 +1,6 @@
 package prework.dao.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,6 +8,7 @@ import prework.entities.Department;
 import prework.entities.Group;
 import prework.entities.Teacher;
 import prework.dao.DAODepartment;
+import prework.dao.custom.DAODepartmentCustom;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,15 +16,13 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Repository
-public class DAODepartmentImpl implements DAODepartment {
+public class DAODepartmentImpl implements DAODepartmentCustom {
 
     @PersistenceContext
     private EntityManager entityManager;
-
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void add(Department department) {
-        entityManager.persist(department);
-    }
+    
+    @Autowired
+    private DAODepartment daoDepartment;
 
     public void addGroup(int depId, Group group) {
         Department department = entityManager.find(Department.class, depId);
@@ -36,17 +36,6 @@ public class DAODepartmentImpl implements DAODepartment {
         Department department = entityManager.find(Department.class, depId);
         department.setName(newName);
         entityManager.merge(department);
-    }
-
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void delete(int depId) {
-        Department department = entityManager.find(Department.class, depId);
-        entityManager.remove(department);
-    }
-
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Department getById(int depId) {
-        return entityManager.find(Department.class, depId);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)

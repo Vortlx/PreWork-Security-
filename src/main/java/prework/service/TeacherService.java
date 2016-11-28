@@ -1,9 +1,7 @@
 package prework.service;
 
-import prework.entities.Department;
 import prework.entities.Subject;
 import prework.entities.Teacher;
-import prework.entities.User;
 
 import java.util.List;
 
@@ -21,5 +19,5 @@ public interface TeacherService {
 
     List<Teacher> getByFamilyName(String familyName) throws Exception;
 
-    List<Teacher> getAll() throws Exception;
+    Iterable<Teacher> getAll() throws Exception;
 }

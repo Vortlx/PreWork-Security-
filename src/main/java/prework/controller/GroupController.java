@@ -49,7 +49,7 @@ public class GroupController {
                                  @RequestParam("userId") int userId,
                                  Model model) {
         try {
-            List<Subject> subjects = subjectService.getAll();
+            Iterable<Subject> subjects = subjectService.getAll();
 
             model.addAttribute("subjects", subjects);
             model.addAttribute("groupId", groupId);

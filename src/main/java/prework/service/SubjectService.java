@@ -15,7 +15,7 @@ public interface SubjectService {
 
     void deleteById(int subjectId);
 
-    List<Subject> getAll();
+    Iterable<Subject> getAll();
 
     Subject getByNameAndType(String name, SubjectType type);
 }

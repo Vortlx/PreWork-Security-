@@ -13,6 +13,6 @@ public class DepartmentServiceImpl implements DepartmentService{
     private DAODepartment daoDepartment;
 
     public Department getById(int depId) {
-        return daoDepartment.getById(depId);
+        return daoDepartment.findOne(depId);
     }
 }

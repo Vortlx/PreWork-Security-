@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import prework.entities.*;
 import prework.service.*;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -169,7 +170,7 @@ public class StudentController {
                                @RequestParam(name = "familyName", required = false) String familyName,
                                Model model) {
 
-        List<Student> students;
+        Iterable<Student> students;
 
         try {
             if (!"".equals(name) && !"".equals(familyName)) {
@@ -182,7 +183,8 @@ public class StudentController {
                 students = studentService.getAll();
             }
 
-            Group group = students.get(0).getGroup();
+            Iterator<Student> iterator = students.iterator();
+            Group group = iterator.next().getGroup();
             Department department = group.getDepartment();
 
             model.addAttribute("department", department);

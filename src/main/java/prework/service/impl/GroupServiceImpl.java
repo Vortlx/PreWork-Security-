@@ -8,7 +8,6 @@ import prework.service.DepartmentService;
 import prework.service.GroupService;
 import prework.service.UserService;
 
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -31,7 +30,7 @@ public class GroupServiceImpl implements GroupService {
         group.setName(groupName);
         group.setDepartment(department);
 
-        daoGroup.add(group);
+        daoGroup.save(group);
     }
 
     public void deleteById(int groupId) {
@@ -40,7 +39,7 @@ public class GroupServiceImpl implements GroupService {
         for (Student student : group.getStudents()) {
             userService.deleteById(student.getUser().getId());
         }
-        daoGroup.deleteByID(groupId);
+        daoGroup.delete(groupId);
     }
 
     public void deleteSubject(int groupId, int subjectId) {
@@ -48,11 +47,11 @@ public class GroupServiceImpl implements GroupService {
     }
 
     public Group getById(int groupId) {
-        return daoGroup.getById(groupId);
+        return daoGroup.findOne(groupId);
     }
 
-    public List<Group> getAll() {
-        return daoGroup.getAll();
+    public Iterable<Group> getAll() {
+        return daoGroup.findAll();
     }
 
     public Set<Group> getAll(int userId){

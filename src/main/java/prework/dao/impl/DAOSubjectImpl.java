@@ -1,5 +1,6 @@
 package prework.dao.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,6 +9,7 @@ import prework.entities.Subject;
 import prework.entities.SubjectType;
 import prework.entities.Teacher;
 import prework.dao.DAOSubject;
+import prework.dao.custom.DAOSubjectCustom;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,15 +17,13 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Repository
-public class DAOSubjectImpl implements DAOSubject {
+public class DAOSubjectImpl implements DAOSubjectCustom {
 
     @PersistenceContext
     private EntityManager entityManager;
-
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void add(Subject subject) {
-        entityManager.persist(subject);
-    }
+    
+    @Autowired
+    private DAOSubject daoSubject;
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public void addGroup(int subjectId, Group group) {
@@ -41,17 +41,6 @@ public class DAOSubjectImpl implements DAOSubject {
         entityManager.merge(subject);
     }
 
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void deleteById(int subjectId) {
-        Subject subject = entityManager.find(Subject.class, subjectId);
-        entityManager.remove(subject);
-    }
-
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Subject getById(int subjectId) {
-        return entityManager.find(Subject.class, subjectId);
-    }
-
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
     public Subject getByNameAndType(String name, SubjectType subjectType) {
         String getSubjectQuery = "from Subject where name = :name and type = :subjectType";
@@ -60,14 +49,6 @@ public class DAOSubjectImpl implements DAOSubject {
         query.setParameter("subjectType", subjectType);
 
         return (Subject) query.getSingleResult();
-    }
-
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public List<Subject> getAll() {
-        String getSubjectQuery = "from Subject";
-        Query query = entityManager.createQuery(getSubjectQuery);
-
-        return query.getResultList();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)

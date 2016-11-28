@@ -41,7 +41,7 @@ public class TeacherServiceImpl implements TeacherService{
         teacher.setDepartment(department);
         teacher.setUser(newUser);
 
-        daoTeacher.add(teacher);
+        daoTeacher.save(teacher);
     }
 
     public void deleteById(int teacherId) {
@@ -50,11 +50,11 @@ public class TeacherServiceImpl implements TeacherService{
         userService.deleteById(teacher.getUser().getId());
         subjectService.deleteById(teacher.getSubject().getId());
 
-        daoTeacher.deleteById(teacherId);
+        daoTeacher.delete(teacherId);
     }
 
     public Teacher getById(int teacherId) {
-        return daoTeacher.getById(teacherId);
+        return daoTeacher.findOne(teacherId);
     }
 
     public List<Teacher> getTeacher(String name, String familyName) throws Exception{
@@ -69,7 +69,7 @@ public class TeacherServiceImpl implements TeacherService{
         return daoTeacher.getByFamilyName(familyName);
     }
 
-    public List<Teacher> getAll() throws Exception{
-        return daoTeacher.getAll();
+    public Iterable<Teacher> getAll() throws Exception{
+        return daoTeacher.findAll();
     }
 }

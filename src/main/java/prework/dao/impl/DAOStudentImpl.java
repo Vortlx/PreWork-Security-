@@ -8,25 +8,25 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import prework.dao.DAOStudent;
+import prework.dao.custom.DAOStudentCustom;
 import prework.entities.Group;
 import prework.entities.Student;
 
 
 @Repository
-public class DAOStudentImpl implements DAOStudent {
+public class DAOStudentImpl implements DAOStudentCustom {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void add(Student student) throws SQLException {
-        entityManager.persist(student);
-    }
-
+    @Autowired
+    private DAOStudent daoStudent;
+    
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public void changeFullName(int studentId, String newName, String newFamilyName) throws SQLException {
         Student student = entityManager.find(Student.class, studentId);
@@ -45,12 +45,6 @@ public class DAOStudentImpl implements DAOStudent {
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void deleteById(int studentId) {
-        Student student = entityManager.find(Student.class, studentId);
-        entityManager.remove(student);
-    }
-
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public void deleteByFullName(String name, String familyName) throws SQLException {
         String queryString = "delete Student where name = :name and familyName = :familyName";
         Query query = entityManager.createQuery(queryString);
@@ -65,21 +59,6 @@ public class DAOStudentImpl implements DAOStudent {
         Student student = entityManager.find(Student.class, studentId);
 
         return student.getGroup();
-    }
-
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public Student getById(int studentId) {
-        Student student = entityManager.find(Student.class, studentId);
-
-        return student;
-    }
-
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public List<Student> getAll() throws SQLException {
-        String queryString = "from Student";
-        Query query = entityManager.createQuery(queryString);
-
-        return query.getResultList();
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)

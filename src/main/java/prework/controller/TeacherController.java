@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import prework.entities.*;
 import prework.service.*;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -88,7 +89,7 @@ public class TeacherController {
                                @RequestParam(name = "familyName", required = false) String familyName,
                                Model model) {
 
-        List<Teacher> teachers;
+        Iterable<Teacher> teachers;
         Department department;
 
         try {
@@ -103,7 +104,8 @@ public class TeacherController {
                 teachers = teacherService.getAll();
             }
 
-            department = teachers.get(0).getDepartment();
+            Iterator<Teacher> iterator = teachers.iterator();
+            department = iterator.next().getDepartment();
 
             model.addAttribute("department", department);
             model.addAttribute("teachers", teachers);

@@ -1,38 +1,26 @@
 package prework.dao.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import prework.entities.Role;
 import prework.entities.User;
 import prework.dao.DAOUser;
+import prework.dao.custom.DAOUserCustom;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 @Repository
-public class DAOUserImpl implements DAOUser {
+public class DAOUserImpl implements DAOUserCustom {
 
     @PersistenceContext
     private EntityManager entityManager;
-
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void add(User user) throws Exception {
-        User existingUser = entityManager.find(User.class, user.getId());
-
-        if (existingUser != null) {
-            throw new Exception();
-        }
-
-        entityManager.persist(user);
-    }
-
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public void deleteById(int userId) {
-        User user = entityManager.find(User.class, userId);
-        entityManager.remove(user);
-    }
+    
+    @Autowired
+    private DAOUser daoUser;
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public void delelteByUsername(String username) {
@@ -69,11 +57,6 @@ public class DAOUserImpl implements DAOUser {
         User user = entityManager.find(User.class, userID);
         user.setRole(newRole);
         entityManager.merge(user);
-    }
-
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public User getById(int userId) {
-        return entityManager.find(User.class, userId);
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
