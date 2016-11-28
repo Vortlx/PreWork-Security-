@@ -57,7 +57,7 @@
 
     <div>
         <br>
-        <a href="ChangeUsername?userId=${user.id}" name="changeLogin">Change login</a>
+        <!-- a href="ChangeUsername?userId=${user.id}" name="changeLogin">Change login</a-->
         <br>
         <a href="ChangePassword?userId=${user.id}" name="changePassword">Change password</a>
     </div>
