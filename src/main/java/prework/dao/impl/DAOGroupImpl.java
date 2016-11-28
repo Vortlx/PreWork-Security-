@@ -13,8 +13,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import prework.entities.Student;
 import prework.entities.Subject;
-import prework.dao.DAOGroup;
-import prework.dao.custom.DAOGroupCustom;
+import prework.dao.crudinterface.DAOGroup;
+import prework.dao.DAOGroupCustom;
 import prework.entities.Group;
 
 

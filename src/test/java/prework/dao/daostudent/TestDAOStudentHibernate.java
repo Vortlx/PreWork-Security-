@@ -6,8 +6,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 
-import prework.dao.DAOGroup;
-import prework.dao.DAOStudent;
+import prework.dao.crudinterface.DAOGroup;
+import prework.dao.crudinterface.DAOStudent;
 import prework.entities.Group;
 import prework.entities.Student;
 import org.springframework.context.ApplicationContext;

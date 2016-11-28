@@ -1,6 +1,6 @@
-package prework.dao;
+package prework.dao.crudinterface;
 
-import prework.dao.custom.DAOSubjectCustom;
+import prework.dao.DAOSubjectCustom;
 import prework.entities.Subject;
 
 import org.springframework.data.jpa.repository.JpaRepository;

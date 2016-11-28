@@ -1,4 +1,4 @@
-package prework.dao.custom;
+package prework.dao;
 
 import prework.entities.Role;
 import prework.entities.User;

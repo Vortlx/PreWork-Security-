@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import prework.entities.Role;
-import prework.dao.DAORole;
-import prework.dao.custom.DAORoleCustom;
+import prework.dao.crudinterface.DAORole;
+import prework.dao.DAORoleCustom;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

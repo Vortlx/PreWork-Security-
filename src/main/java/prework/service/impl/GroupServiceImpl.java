@@ -2,7 +2,7 @@ package prework.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import prework.dao.DAOGroup;
+import prework.dao.crudinterface.DAOGroup;
 import prework.entities.*;
 import prework.service.DepartmentService;
 import prework.service.GroupService;

@@ -2,14 +2,12 @@ package prework.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import prework.dao.DAOSubject;
+import prework.dao.crudinterface.DAOSubject;
 import prework.entities.Group;
 import prework.entities.Subject;
 import prework.entities.SubjectType;
 import prework.service.GroupService;
 import prework.service.SubjectService;
-
-import java.util.List;
 
 @Service
 public class SubjectServiceImpl implements SubjectService{

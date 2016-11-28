@@ -7,8 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import prework.entities.Department;
 import prework.entities.Group;
 import prework.entities.Teacher;
-import prework.dao.DAODepartment;
-import prework.dao.custom.DAODepartmentCustom;
+import prework.dao.crudinterface.DAODepartment;
+import prework.dao.DAODepartmentCustom;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

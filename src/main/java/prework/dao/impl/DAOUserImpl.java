@@ -6,8 +6,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import prework.entities.Role;
 import prework.entities.User;
-import prework.dao.DAOUser;
-import prework.dao.custom.DAOUserCustom;
+import prework.dao.crudinterface.DAOUser;
+import prework.dao.DAOUserCustom;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

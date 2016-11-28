@@ -13,8 +13,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import prework.entities.*;
-import prework.dao.DAOTeacher;
-import prework.dao.custom.DAOTeacherCustom;
+import prework.dao.crudinterface.DAOTeacher;
+import prework.dao.DAOTeacherCustom;
 
 
 @Repository

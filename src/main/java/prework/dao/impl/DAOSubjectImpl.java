@@ -8,8 +8,8 @@ import prework.entities.Group;
 import prework.entities.Subject;
 import prework.entities.SubjectType;
 import prework.entities.Teacher;
-import prework.dao.DAOSubject;
-import prework.dao.custom.DAOSubjectCustom;
+import prework.dao.crudinterface.DAOSubject;
+import prework.dao.DAOSubjectCustom;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

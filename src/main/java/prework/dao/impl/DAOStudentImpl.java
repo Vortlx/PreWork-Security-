@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import prework.dao.DAOStudent;
-import prework.dao.custom.DAOStudentCustom;
+import prework.dao.crudinterface.DAOStudent;
+import prework.dao.DAOStudentCustom;
 import prework.entities.Group;
 import prework.entities.Student;
 
