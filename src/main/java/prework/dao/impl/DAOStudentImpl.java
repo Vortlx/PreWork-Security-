@@ -80,7 +80,7 @@ public class DAOStudentImpl implements DAOStudentCustom {
     }
 
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
-    public List<Student> getStudent(String name, String familyName) throws SQLException {
+    public List<Student> getByNameAndFamilyName(String name, String familyName) throws SQLException {
         String queryString = "from Student where name = :name and familyName = :familyName";
         Query query = entityManager.createQuery(queryString);
         query.setParameter("name", name);

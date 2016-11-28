@@ -38,7 +38,7 @@ public class TestDAOStudentHibernate {
             testGroup2 = daoGroup.getByName(testGroupName2);
 
             //daoStudent.add(studentName, studentFamilyName, testGroup1.getId());
-            testStudent = daoStudent.getStudent(studentName, studentFamilyName).iterator().next();
+            testStudent = daoStudent.getByNameAndFamilyName(studentName, studentFamilyName).iterator().next();
 
 
         }catch(SQLException e){

@@ -59,7 +59,7 @@ public class StudentServiceImpl implements StudentService{
     }
 
     public List<Student> getStudent(String name, String familyName) throws Exception{
-        return daoStudent.getStudent(name, familyName);
+        return daoStudent.getByNameAndFamilyName(name, familyName);
     }
 
     public List<Student> getByName(String name) throws Exception{

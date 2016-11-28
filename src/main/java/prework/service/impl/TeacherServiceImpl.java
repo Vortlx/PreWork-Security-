@@ -58,7 +58,7 @@ public class TeacherServiceImpl implements TeacherService{
     }
 
     public List<Teacher> getTeacher(String name, String familyName) throws Exception{
-        return daoTeacher.getTeacher(name, familyName);
+        return daoTeacher.getByNameAndFamilyName(name, familyName);
     }
 
     public List<Teacher> getByName(String name) throws Exception{

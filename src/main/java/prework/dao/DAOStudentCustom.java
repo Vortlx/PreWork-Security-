@@ -20,5 +20,5 @@ public interface DAOStudentCustom {
 
     List<Student> getByFamilyName(String familyName) throws SQLException;
 
-    List<Student> getStudent(String name, String familyName) throws SQLException;
+    List<Student> getByNameAndFamilyName(String name, String familyName) throws SQLException;
 }

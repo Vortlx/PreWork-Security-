@@ -18,5 +18,5 @@ public interface DAOTeacherCustom {
 
     List<Teacher> getByFamilyName(String familyName) throws SQLException;
 
-    List<Teacher> getTeacher(String name, String familyName) throws SQLException;
+    List<Teacher> getByNameAndFamilyName(String name, String familyName) throws SQLException;
 }
