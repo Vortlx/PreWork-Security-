@@ -184,8 +184,7 @@ public class StudentController {
             }
 
             Iterator<Student> iterator = students.iterator();
-            Group group = iterator.next().getGroup();
-            Department department = group.getDepartment();
+            Department department = iterator.next().getDepartment();
 
             model.addAttribute("department", department);
             model.addAttribute("students", students);

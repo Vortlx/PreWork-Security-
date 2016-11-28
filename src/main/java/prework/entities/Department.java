@@ -15,10 +15,10 @@ public class Department {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "department")
+    @OneToMany(mappedBy = "department", fetch = FetchType.EAGER)
     private Set<Group> groups;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "department")
+    @OneToMany(mappedBy = "department", fetch = FetchType.EAGER)
     private Set<Teacher> teachers;
 
     @OneToOne()

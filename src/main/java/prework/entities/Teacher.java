@@ -18,7 +18,7 @@ public class Teacher extends Person {
     @JoinColumn(name = "id_subject")
     private Subject subject;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "id_department")
     private Department department;
 
@@ -38,6 +38,7 @@ public class Teacher extends Person {
         this.subject = subject;
     }
 
+    @Override
     public Department getDepartment() {
         return department;
     }

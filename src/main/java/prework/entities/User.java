@@ -23,13 +23,13 @@ public class User {
     @JoinColumn(name = "id_role")
     private Role role;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
+    @OneToOne(mappedBy = "user", cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
     private Department department;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
+    @OneToOne(mappedBy = "user", cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
     private Teacher teacher;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
+    @OneToOne(mappedBy = "user", cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
     private Student student;
 
     public User(){

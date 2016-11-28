@@ -95,4 +95,6 @@ public abstract class Person {
             return false;
         return true;
     }
+
+    public abstract Department getDepartment();
 }
