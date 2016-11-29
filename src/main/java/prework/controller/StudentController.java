@@ -73,6 +73,7 @@ public class StudentController {
 
             model.addAttribute("groups", department.getGroups());
             model.addAttribute("studentId", studentId);
+            model.addAttribute("userId", department.getUser().getId());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -82,12 +83,12 @@ public class StudentController {
 
     @RequestMapping(value = "ChangeGroup", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
-    public String changeGroupForStudent(@RequestParam("studentId") String studentId,
+    public String changeGroupForStudent(@RequestParam("studentId") int studentId,
                                         @RequestParam("newGroupId") int newGroupId,
                                         Model model) {
         try {
-            Student student = studentService.getById(Integer.parseInt(studentId));
-            Department department = student.getGroup().getDepartment();
+            Student student = studentService.getById(studentId);
+            Department department = student.getDepartment();
             studentService.changeGroup(student.getId(), newGroupId);
 
             model.addAttribute("userId", department.getId());

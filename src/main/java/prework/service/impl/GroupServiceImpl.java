@@ -36,9 +36,6 @@ public class GroupServiceImpl implements GroupService {
     public void deleteById(int groupId) {
 
         Group group = getById(groupId);
-        for (Student student : group.getStudents()) {
-            userService.deleteById(student.getUser().getId());
-        }
         daoGroup.delete(groupId);
     }
 

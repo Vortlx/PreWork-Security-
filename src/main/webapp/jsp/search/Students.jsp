@@ -31,7 +31,7 @@
                <td>
                    ${student.group.name}
                    <br>
-                   <a href="ChangeGroupPage?depId=${department.id}&studentId=${student.id}"
+                   <a href="ChangeGroupPage?userId=${userId}&depId=${department.id}&studentId=${student.id}"
                       name="changeGroup">Change group</a>
                </td>
                <td>

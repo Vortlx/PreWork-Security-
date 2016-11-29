@@ -2,6 +2,7 @@ package prework.entities;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -83,5 +84,13 @@ public class Department {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<Student> getStudents(){
+        Set<Student> students = new HashSet<Student>();
+        for (Group group : groups) {
+            students.addAll(group.getStudents());
+        }
+        return students;
     }
 }

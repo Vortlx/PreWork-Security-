@@ -75,11 +75,6 @@ public class StudentServiceImpl implements StudentService{
     }
 
     public Set<Student> getAll(Department department){
-        Set<Student> students = new HashSet<Student>();
-        for (Group group : department.getGroups()) {
-            students.addAll(group.getStudents());
-        }
-
-        return students;
+        return department.getStudents();
     }
 }

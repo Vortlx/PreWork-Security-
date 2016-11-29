@@ -24,7 +24,7 @@ public class Group {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "group", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "group", fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
     private Set<Student> students;
 
     @ManyToMany(mappedBy = "groups", fetch = FetchType.EAGER)

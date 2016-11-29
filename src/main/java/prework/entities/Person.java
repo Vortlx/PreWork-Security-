@@ -23,7 +23,7 @@ public abstract class Person {
     @Column(name = "family_name")
     private String familyName;
 
-    @OneToOne()
+    @OneToOne(cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
     @JoinColumn(name = "id_user_info")
     private User user;
 

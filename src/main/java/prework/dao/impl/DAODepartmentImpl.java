@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import prework.entities.Department;
 import prework.entities.Group;
+import prework.entities.Student;
 import prework.entities.Teacher;
 import prework.dao.crudinterface.DAODepartment;
 import prework.dao.DAODepartmentCustom;
@@ -14,6 +15,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class DAODepartmentImpl implements DAODepartmentCustom {

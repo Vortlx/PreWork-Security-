@@ -17,19 +17,17 @@ public class EnterWelcomeController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "login")
-    public String login() {
-
-        return "login.jsp";
-    }
+//    @RequestMapping(value = "login")
+//    public String login() {
+//
+//        return "login.jsp";
+//    }
 
     @RequestMapping(value = "jsp/welcome", method={RequestMethod.GET, RequestMethod.POST})
-    public String welcome(@RequestParam(name = "user", required = false) User user,
-                          Model model) {
-        if(user == null){
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            user = userService.getByUsername(auth.getName());
-        }
+    public String welcome(Model model) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.getByUsername(auth.getName());
 
         model.addAttribute("user", user);
 

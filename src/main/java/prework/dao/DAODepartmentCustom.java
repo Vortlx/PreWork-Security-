@@ -1,9 +1,11 @@
 package prework.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import prework.entities.Department;
 import prework.entities.Group;
+import prework.entities.Student;
 import prework.entities.Teacher;
 
 public interface DAODepartmentCustom {
