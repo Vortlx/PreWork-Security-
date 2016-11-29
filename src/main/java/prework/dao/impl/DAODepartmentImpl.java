@@ -2,11 +2,8 @@ package prework.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import prework.entities.Department;
 import prework.entities.Group;
-import prework.entities.Student;
 import prework.entities.Teacher;
 import prework.dao.crudinterface.DAODepartment;
 import prework.dao.DAODepartmentCustom;
@@ -15,7 +12,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
-import java.util.Set;
 
 @Repository
 public class DAODepartmentImpl implements DAODepartmentCustom {
@@ -33,14 +29,12 @@ public class DAODepartmentImpl implements DAODepartmentCustom {
         entityManager.merge(department);
     }
 
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public void changeName(int depId, String newName) {
         Department department = entityManager.find(Department.class, depId);
         department.setName(newName);
         entityManager.merge(department);
     }
 
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
     public Department getByName(String depName) {
         String getDepByNameQuery = "from Department where name = :name";
         Query query = entityManager.createQuery(getDepByNameQuery);
@@ -49,7 +43,6 @@ public class DAODepartmentImpl implements DAODepartmentCustom {
         return (Department) query.getSingleResult();
     }
 
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Group> getGroups(int depId) {
         String getGroupsQuery = "select groups from Department where id = :id";
         Query query = entityManager.createQuery(getGroupsQuery);
@@ -58,7 +51,6 @@ public class DAODepartmentImpl implements DAODepartmentCustom {
         return query.getResultList();
     }
 
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
     public Group getGroup(int depId, String groupName) {
         String getGroupsQuery = "select gr from Group gr inner join gr.department dep" +
                                     " where gr.name = :name and dep.id = :id";
@@ -69,7 +61,6 @@ public class DAODepartmentImpl implements DAODepartmentCustom {
         return (Group) query.getSingleResult();
     }
 
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Teacher> getTeachers(int depId) {
         String getTeachersQuery = "select teachers from Department where id = :id";
         Query query = entityManager.createQuery(getTeachersQuery);
@@ -78,7 +69,6 @@ public class DAODepartmentImpl implements DAODepartmentCustom {
         return query.getResultList();
     }
 
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
     public Teacher getTeacher(int depId, String teacherName, String teacherFamilyName) {
         String getTeacherByNameQuery = "select teacher from Teacher teacher inner join teacher.department dep" +
                                     " where teacher.name = :name and teacher.familyName = :familyName" +

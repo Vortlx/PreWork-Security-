@@ -2,6 +2,8 @@ package prework.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import prework.dao.crudinterface.DAOGroup;
 import prework.entities.*;
 import prework.service.DepartmentService;
@@ -22,6 +24,7 @@ public class GroupServiceImpl implements GroupService {
     @Autowired
     private DAOGroup daoGroup;
 
+    @Transactional(rollbackFor = Exception.class)
     public void add(String groupName, int depId) {
 
         Department department = departmentService.getById(depId);
@@ -33,24 +36,27 @@ public class GroupServiceImpl implements GroupService {
         daoGroup.save(group);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public void deleteById(int groupId) {
-
-        Group group = getById(groupId);
         daoGroup.delete(groupId);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public void deleteSubject(int groupId, int subjectId) {
         daoGroup.deleteSubject(groupId, subjectId);
     }
 
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
     public Group getById(int groupId) {
         return daoGroup.findOne(groupId);
     }
 
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
     public Iterable<Group> getAll() {
         return daoGroup.findAll();
     }
 
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
     public Set<Group> getAll(int userId){
         User user = userService.getById(userId);
         Set<Group> groups;

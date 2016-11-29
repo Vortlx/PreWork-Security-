@@ -3,6 +3,8 @@ package prework.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import prework.dao.crudinterface.DAOTeacher;
 import prework.entities.*;
 import prework.service.*;
@@ -27,6 +29,7 @@ public class TeacherServiceImpl implements TeacherService{
     @Autowired
     private DAOTeacher daoTeacher;
 
+    @Transactional(rollbackFor = Exception.class)
     public void add(String name, String familyName, Subject subject, int depId) throws Exception{
 
         Role role = roleService.getByName("ROLE_TEACHER");
@@ -44,6 +47,7 @@ public class TeacherServiceImpl implements TeacherService{
         daoTeacher.save(teacher);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public void deleteById(int teacherId) {
         Teacher teacher = getById(teacherId);
 
@@ -53,22 +57,27 @@ public class TeacherServiceImpl implements TeacherService{
         daoTeacher.delete(teacherId);
     }
 
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
     public Teacher getById(int teacherId) {
         return daoTeacher.findOne(teacherId);
     }
 
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
     public List<Teacher> getTeacher(String name, String familyName) throws Exception{
         return daoTeacher.getByNameAndFamilyName(name, familyName);
     }
 
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
     public List<Teacher> getByName(String name) throws Exception{
         return daoTeacher.getByName(name);
     }
 
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
     public List<Teacher> getByFamilyName(String familyName) throws Exception{
         return daoTeacher.getByFamilyName(familyName);
     }
 
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
     public Iterable<Teacher> getAll() throws Exception{
         return daoTeacher.findAll();
     }

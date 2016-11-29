@@ -2,6 +2,8 @@ package prework.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import prework.dao.crudinterface.DAOSubject;
 import prework.entities.Group;
 import prework.entities.Subject;
@@ -18,11 +20,13 @@ public class SubjectServiceImpl implements SubjectService{
     @Autowired
     private GroupService groupService;
 
+    @Transactional(rollbackFor = Exception.class)
     public Subject add(Subject subject) {
         daoSubject.save(subject);
         return daoSubject.getByNameAndType(subject.getName(), subject.getType());
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public Subject add(String name, SubjectType type){
         Subject subject = new Subject();
         subject.setName(name);
@@ -32,20 +36,24 @@ public class SubjectServiceImpl implements SubjectService{
         return daoSubject.getByNameAndType(subject.getName(), subject.getType());
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public void addGroup(String subjectName, String type, int groupId) {
         Group group = groupService.getById(groupId);
         Subject subject = getByNameAndType(subjectName, SubjectType.valueOf(type));
         daoSubject.addGroup(subject.getId(), group);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public void deleteById(int subjectId) {
         daoSubject.delete(subjectId);
     }
 
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
     public Iterable<Subject> getAll() {
         return daoSubject.findAll();
     }
 
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
     public Subject getByNameAndType(String name, SubjectType type) {
         return daoSubject.getByNameAndType(name, type);
     }

@@ -10,8 +10,6 @@ import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import prework.entities.*;
 import prework.dao.crudinterface.DAOTeacher;
 import prework.dao.DAOTeacherCustom;
@@ -26,7 +24,6 @@ public class DAOTeacherImpl implements DAOTeacherCustom {
     @Autowired
     private DAOTeacher daoteacher;
 
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public void changeFullName(int teacherId, String newName, String newFamilyName) throws SQLException {
         String queryString = "update Teacher set name = :newName, familyName = :newFamilyName where id = :id";
         Query query = entityManager.createQuery(queryString);
@@ -36,7 +33,6 @@ public class DAOTeacherImpl implements DAOTeacherCustom {
         query.executeUpdate();
     }
 
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public void deleteByFullName(String name, String familyName) throws SQLException {
         String queryString = "delete Teacher where name = :name and familyName = :familyName";
         Query query = entityManager.createQuery(queryString);
@@ -46,14 +42,12 @@ public class DAOTeacherImpl implements DAOTeacherCustom {
         query.executeUpdate();
     }
 
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
     public Subject getSubject(int teacherId) {
         Teacher teacher = entityManager.find(Teacher.class, teacherId);
 
         return teacher.getSubject();
     }
 
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Teacher> getByName(String name) throws SQLException {
         String queryString = "from Teacher where name = :name";
         Query query = entityManager.createQuery(queryString);
@@ -62,7 +56,6 @@ public class DAOTeacherImpl implements DAOTeacherCustom {
         return query.getResultList();
     }
 
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Teacher> getByFamilyName(String familyName) throws SQLException {
         String queryString = "from Teacher where familyName = :familyName";
         Query query = entityManager.createQuery(queryString);
@@ -71,7 +64,6 @@ public class DAOTeacherImpl implements DAOTeacherCustom {
         return query.getResultList();
     }
 
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Teacher> getByNameAndFamilyName(String name, String familyName) throws SQLException {
         String queryString = "from Teacher where name = :name and familyName = :familyName";
         Query query = entityManager.createQuery(queryString);

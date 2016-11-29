@@ -2,6 +2,8 @@ package prework.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import prework.dao.crudinterface.DAOStudent;
 import prework.entities.*;
 import prework.service.GroupService;
@@ -28,6 +30,7 @@ public class StudentServiceImpl implements StudentService{
     @Autowired
     private DAOStudent daoStudent;
 
+    @Transactional(rollbackFor = Exception.class)
     public void add(String name, String familyName, int groupId) throws Exception{
 
         Role role = roleService.getByName("ROLE_STUDENT");
@@ -43,6 +46,7 @@ public class StudentServiceImpl implements StudentService{
         daoStudent.save(student);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public void deleteById(int studentId) {
         Student student = getById(studentId);
         userService.deleteById(student.getUser().getId());
@@ -50,30 +54,37 @@ public class StudentServiceImpl implements StudentService{
         daoStudent.delete(studentId);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public void changeGroup(int studentId, int newGroupId) throws Exception{
         daoStudent.changeGroup(studentId, newGroupId);
     }
 
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
     public Student getById(int studentId) {
         return daoStudent.findOne(studentId);
     }
 
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
     public List<Student> getStudent(String name, String familyName) throws Exception{
         return daoStudent.getByNameAndFamilyName(name, familyName);
     }
 
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
     public List<Student> getByName(String name) throws Exception{
         return daoStudent.getByName(name);
     }
 
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
     public List<Student> getByFamilyName(String familyName) throws Exception {
         return daoStudent.getByFamilyName(familyName);
     }
 
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
     public Iterable<Student> getAll() throws Exception{
         return daoStudent.findAll();
     }
 
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
     public Set<Student> getAll(Department department){
         return department.getStudents();
     }

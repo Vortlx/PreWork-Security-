@@ -1,5 +1,8 @@
 package prework.entities;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -18,7 +21,7 @@ public class Subject {
     @Enumerated(EnumType.STRING)
     private SubjectType type;
 
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany()
     @JoinTable(name = "group_subject",
             joinColumns = @JoinColumn(name = "id_subject"),
             inverseJoinColumns = @JoinColumn(name = "id_group"))

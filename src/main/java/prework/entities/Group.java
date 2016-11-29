@@ -1,6 +1,9 @@
 package prework.entities;
 
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import java.util.Set;
 import java.util.HashSet;
 
@@ -24,10 +27,10 @@ public class Group {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "group", fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "group", cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
     private Set<Student> students;
 
-    @ManyToMany(mappedBy = "groups", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "groups")
     private Set<Subject> subjects;
 
     @ManyToOne()

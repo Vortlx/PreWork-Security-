@@ -3,8 +3,6 @@ package prework.dao.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import prework.entities.Role;
 import prework.dao.crudinterface.DAORole;
 import prework.dao.DAORoleCustom;
@@ -22,7 +20,7 @@ public class DAORoleImpl implements DAORoleCustom {
     @Autowired
     private DAORole daoRole;
     
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
+
     public Role getByName(String name) {
         String getRoleByNameQuery = "from Role where name = :name";
         Query query = entityManager.createQuery(getRoleByNameQuery);

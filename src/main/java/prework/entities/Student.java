@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Table(name = "students")
 public class Student extends Person {
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "id_group")
     private Group group;
 

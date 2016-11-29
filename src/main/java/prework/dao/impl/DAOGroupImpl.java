@@ -9,8 +9,6 @@ import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import prework.entities.Student;
 import prework.entities.Subject;
 import prework.dao.crudinterface.DAOGroup;
@@ -27,14 +25,12 @@ public class DAOGroupImpl implements DAOGroupCustom {
     @Autowired
     private DAOGroup daoGroup;
 
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public void addStudent(int groupID, Student student) {
         Group group = entityManager.find(Group.class, groupID);
         group.addStudent(student);
         entityManager.merge(group);
     }
 
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public void addSubject(int groupID, Subject subject) {
         Group group = entityManager.find(Group.class, groupID);
         group.addSubject(subject);
@@ -43,7 +39,7 @@ public class DAOGroupImpl implements DAOGroupCustom {
         entityManager.merge(group);
     }
 
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
+
     public void deleteByName(String groupName) {
         String getGroupByNameQuery = "from Group where name = :name";
         Query query = entityManager.createQuery(getGroupByNameQuery);
@@ -52,7 +48,6 @@ public class DAOGroupImpl implements DAOGroupCustom {
         entityManager.remove(group);
     }
 
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public void deleteSubject(int groupId, int subjectId) {
         Subject subject = entityManager.find(Subject.class, subjectId);
         Group group = entityManager.find(Group.class, groupId);
@@ -63,7 +58,6 @@ public class DAOGroupImpl implements DAOGroupCustom {
         entityManager.merge(group);
     }
 
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
     public Group getByName(String name) {
         String queryString = "from Group where name=:name";
         Query query = entityManager.createQuery(queryString);
@@ -72,7 +66,6 @@ public class DAOGroupImpl implements DAOGroupCustom {
         return (Group) query.getSingleResult();
     }
 
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Student> getStudents(int groupID) {
         String getStudentsQuery = "select students from Group where id = :id";
         Query query = entityManager.createQuery(getStudentsQuery);
@@ -81,7 +74,6 @@ public class DAOGroupImpl implements DAOGroupCustom {
         return query.getResultList();
     }
 
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
     public Student getStudent(int groupID, String studentName, String studentFamilyName) {
         String getStudentsQuery = "select student from Student student inner join student.group gr where" +
                                     " student.name = :name and student.familyName = :familyName " +
@@ -95,7 +87,6 @@ public class DAOGroupImpl implements DAOGroupCustom {
         return student;
     }
 
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Subject> getSubjects(int groupID) {
         String getSubjectsQuery = "select subjects from Group where id = :id";
         Query query = entityManager.createQuery(getSubjectsQuery);

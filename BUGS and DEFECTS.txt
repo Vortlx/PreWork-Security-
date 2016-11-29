@@ -2,10 +2,6 @@
 
 2. For search not used regular expression.
 
-3. In DAO sources not perform DRY. For example in DAOTeacher.deleteCurator method.
+3. not handled code 500
 
-4. Hibernate n + 1 problem
-
-5. not handled code 500
-
-6. After changing username can't find user and request return code 500
+4. After changing username can't find user and request return code 500
