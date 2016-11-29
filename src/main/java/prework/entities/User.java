@@ -43,6 +43,10 @@ public class User {
         this.setRole(role);
     }
 
+    public boolean checkPassword(String testPassword){
+        return password.equals(testPassword);
+    }
+
     public int getId() {
         return id;
     }

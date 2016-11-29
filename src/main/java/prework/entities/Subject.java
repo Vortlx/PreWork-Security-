@@ -18,7 +18,7 @@ public class Subject {
     @Enumerated(EnumType.STRING)
     private SubjectType type;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "group_subject",
             joinColumns = @JoinColumn(name = "id_subject"),
             inverseJoinColumns = @JoinColumn(name = "id_group"))

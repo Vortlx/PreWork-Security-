@@ -17,12 +17,6 @@ public class EnterWelcomeController {
     @Autowired
     private UserService userService;
 
-//    @RequestMapping(value = "login")
-//    public String login() {
-//
-//        return "login.jsp";
-//    }
-
     @RequestMapping(value = "jsp/welcome", method={RequestMethod.GET, RequestMethod.POST})
     public String welcome(Model model) {
 

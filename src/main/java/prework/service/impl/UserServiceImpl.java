@@ -23,25 +23,12 @@ public class UserServiceImpl implements UserService{
         daoUser.delete(userId);
     }
 
-    public User changePassword(int userId, String oldPassword, String newPassword) throws Exception {
-        User user = getById(userId);
-
-        if(!user.getPassword().equals(oldPassword))
-            throw new Exception();
-
-        daoUser.changePassword(userId, newPassword);
-        return getById(userId);
+    public void changePassword(User user, String newPassword){
+        daoUser.changePassword(user.getId(), newPassword);
     }
 
-    public User changeUsername(int userId, String password, String username) throws Exception{
-        User user = getById(userId);
-
-        if(!user.getPassword().equals(password))
-            return null;
-
-        daoUser.changeUsername(userId, username);
-
-        return getById(userId);
+    public void changeUsername(User user, String username) throws Exception{
+        daoUser.changeUsername(user.getId(), username);
     }
 
     public User getById(int userId) {

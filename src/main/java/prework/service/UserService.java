@@ -9,9 +9,9 @@ public interface UserService {
 
     void deleteById(int userId);
 
-    User changePassword(int userId, String oldPassword, String newPassword) throws Exception;
+    void changePassword(User user, String newPassword);
 
-    User changeUsername(int userId, String password, String username) throws Exception;
+    void changeUsername(User user, String username) throws Exception;
 
     User getById(int userId);
 

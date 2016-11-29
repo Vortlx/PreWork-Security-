@@ -86,7 +86,7 @@ public class Department {
         this.user = user;
     }
 
-    public Set<Student> getStudents(){
+    public Set<Student> getStudents() {
         Set<Student> students = new HashSet<Student>();
         for (Group group : groups) {
             students.addAll(group.getStudents());

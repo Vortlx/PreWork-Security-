@@ -1,10 +1,7 @@
 package prework.entities;
 
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 /**
@@ -17,7 +14,7 @@ import javax.persistence.Table;
 @Table(name = "students")
 public class Student extends Person {
 
-    @ManyToOne()
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "id_group")
     private Group group;
 

@@ -34,16 +34,16 @@ public class UserController {
     public String changePassword(@RequestParam("userId") int userId, @RequestParam("oldPassword") String oldPassword,
                                 @RequestParam("newPassword") String newPassword, Model model) {
 
-        try {
-            User user = userService.changePassword(userId, oldPassword, newPassword);
-            model.addAttribute("user", user);
-        } catch(Exception e) {
+        User user = userService.getById(userId);
+
+        if(user.checkPassword(oldPassword)) {
+            userService.changePassword(user, newPassword);
+            return "welcome";
+        }else{
             String message = "Passwords don't match";
             model.addAttribute("message", message);
             return "update/ChangePassword.jsp";
         }
-
-        return "welcome";
     }
 
     @RequestMapping(value = "ChangeUsername", method = RequestMethod.POST)
@@ -51,10 +51,15 @@ public class UserController {
                                  @RequestParam("username") String username, Model model) {
 
         try {
-            User user = userService.changeUsername(userId, password, username);
-            model.addAttribute("user", user);
+            User user = userService.getById(userId);
+
+            if(user.checkPassword(password)){
+                userService.changeUsername(user, username);
+            }else{
+                throw new Exception();
+            }
         } catch (Exception e) {
-            String message = "User with that username exist";
+            String message = "This user exist or Wrong password";
             model.addAttribute("message", message);
             return "update/ChangeUsername.jsp";
         }
