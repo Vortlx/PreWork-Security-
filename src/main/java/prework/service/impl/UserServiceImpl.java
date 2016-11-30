@@ -36,27 +36,27 @@ public class UserServiceImpl implements UserService{
         daoUser.changeUsername(user.getId(), username);
     }
 
-    @Transactional(rollbackFor = Exception.class, readOnly = true)
+    @Transactional(readOnly = true)
     public User getById(int userId) {
         return daoUser.findOne(userId);
     }
 
-    @Transactional(rollbackFor = Exception.class, readOnly = true)
+    @Transactional(readOnly = true)
     public User getByUsername(String username) {
         return daoUser.getByUsername(username);
     }
 
-    @Transactional(rollbackFor = Exception.class, readOnly = true)
+    @Transactional(readOnly = true)
     public Student getStudent(int userId) {
         return getById(userId).getStudent();
     }
 
-    @Transactional(rollbackFor = Exception.class, readOnly = true)
+    @Transactional(readOnly = true)
     public Teacher getTeacher(int userId) {
         return getById(userId).getTeacher();
     }
 
-    @Transactional(rollbackFor = Exception.class, readOnly = true)
+    @Transactional(readOnly = true)
     public Department getDepartment(int userId) {
         return getById(userId).getDepartment();
     }

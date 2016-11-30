@@ -40,10 +40,11 @@ public class StudentController {
         } catch (Exception e) {
             e.printStackTrace();
 
+            Group group = groupService.getById(groupId);
+
             String message = "Can't do this operation.";
             model.addAttribute("message", message);
-            model.addAttribute("groupID", groupService.getAll());
-
+            model.addAttribute("groups", group.getDepartment().getGroups());
             return "add/AddStudent.jsp";
         }
 

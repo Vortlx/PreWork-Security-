@@ -2,7 +2,6 @@ package prework.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import prework.dao.crudinterface.DAOSubject;
 import prework.entities.Group;
@@ -48,12 +47,12 @@ public class SubjectServiceImpl implements SubjectService{
         daoSubject.delete(subjectId);
     }
 
-    @Transactional(rollbackFor = Exception.class, readOnly = true)
+    @Transactional(readOnly = true)
     public Iterable<Subject> getAll() {
         return daoSubject.findAll();
     }
 
-    @Transactional(rollbackFor = Exception.class, readOnly = true)
+    @Transactional(readOnly = true)
     public Subject getByNameAndType(String name, SubjectType type) {
         return daoSubject.getByNameAndType(name, type);
     }

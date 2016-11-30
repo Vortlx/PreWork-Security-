@@ -3,7 +3,6 @@ package prework.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import prework.dao.crudinterface.DAOTeacher;
 import prework.entities.*;
@@ -19,9 +18,6 @@ public class TeacherServiceImpl implements TeacherService{
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private SubjectService subjectService;
 
     @Autowired
     private DepartmentService departmentService;
@@ -49,35 +45,30 @@ public class TeacherServiceImpl implements TeacherService{
 
     @Transactional(rollbackFor = Exception.class)
     public void deleteById(int teacherId) {
-        Teacher teacher = getById(teacherId);
-
-        userService.deleteById(teacher.getUser().getId());
-        subjectService.deleteById(teacher.getSubject().getId());
-
         daoTeacher.delete(teacherId);
     }
 
-    @Transactional(rollbackFor = Exception.class, readOnly = true)
+    @Transactional(readOnly = true)
     public Teacher getById(int teacherId) {
         return daoTeacher.findOne(teacherId);
     }
 
-    @Transactional(rollbackFor = Exception.class, readOnly = true)
+    @Transactional(readOnly = true)
     public List<Teacher> getTeacher(String name, String familyName) throws Exception{
         return daoTeacher.getByNameAndFamilyName(name, familyName);
     }
 
-    @Transactional(rollbackFor = Exception.class, readOnly = true)
+    @Transactional(readOnly = true)
     public List<Teacher> getByName(String name) throws Exception{
         return daoTeacher.getByName(name);
     }
 
-    @Transactional(rollbackFor = Exception.class, readOnly = true)
+    @Transactional(readOnly = true)
     public List<Teacher> getByFamilyName(String familyName) throws Exception{
         return daoTeacher.getByFamilyName(familyName);
     }
 
-    @Transactional(rollbackFor = Exception.class, readOnly = true)
+    @Transactional(readOnly = true)
     public Iterable<Teacher> getAll() throws Exception{
         return daoTeacher.findAll();
     }

@@ -16,7 +16,7 @@ public class RoleServiceImpl implements RoleService{
     @Autowired
     private DAORole daoRole;
 
-    @Transactional(rollbackFor = Exception.class, readOnly = true)
+    @Transactional(readOnly = true)
     public Role getByName(String roleName) {
         return daoRole.getByName(roleName);
     }

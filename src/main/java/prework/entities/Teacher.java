@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Table(name = "teachers")
 public class Teacher extends Person {
 
-    @OneToOne()
+    @OneToOne(cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
     @JoinColumn(name = "id_subject")
     private Subject subject;
 
