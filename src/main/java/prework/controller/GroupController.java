@@ -24,7 +24,7 @@ public class GroupController {
     @Autowired
     private SubjectService subjectService;
 
-    @RequestMapping(value = "AddGroup", method = RequestMethod.POST)
+    @RequestMapping(value = "/add/AddGroup", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String addGroup(@RequestParam("name") String groupName,
                            @RequestParam("departmentId") int depId,
@@ -38,10 +38,10 @@ public class GroupController {
             model.addAttribute("message", message);
             model.addAttribute("departmentId", depId);
 
-            return "add/AddGroup.jsp";
+            return "AddGroup.jsp";
         }
 
-        return "welcome";
+        return "../welcome";
     }
 
     @RequestMapping(value = "AddSubjectPage", method = RequestMethod.GET)

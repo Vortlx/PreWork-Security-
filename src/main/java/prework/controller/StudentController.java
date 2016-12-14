@@ -48,7 +48,7 @@ public class StudentController {
             return "add/AddStudent.jsp";
         }
 
-        return "welcome";
+        return "../welcome";
     }
 
     @RequestMapping(value = "DeleteStudent", method = RequestMethod.GET)

@@ -5,8 +5,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Welcome</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Welcome</title>
+    <script src="../javascript/GROG.js"></script>
 </head>
 <body>
     <!-- Greeting user (Department, Teacher ot Student) -->
@@ -42,15 +43,15 @@
         </div>
         <div>
             <br>
-            <form action="Add" method="POST">
-                <select name="whatAdd">
+            <form action="/" method="POST" name="add" onsubmit="addSwitcher()">
+                <select name="whatAdd" id="whatAdd">
                     <option value="GROUP">Group</option>
                     <option value="STUDENT">Student</option>
                     <option value="TEACHER">Teacher</option>
                 </select>
                 <input name="userId" type="hidden" value="${user.id}">
                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
-                <input name="add" type="submit" value="Add"/>
+                <input name="addButton" type="submit" value="Add"/>
             </form>
         </div>
     </sec:authorize>

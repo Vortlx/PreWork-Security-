@@ -11,7 +11,6 @@ import prework.entities.*;
 import prework.service.*;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -49,7 +48,7 @@ public class TeacherController {
             return "add/AddTeacher.jsp";
         }
 
-        return "welcome";
+        return "../welcome";
     }
 
     @RequestMapping(value = "DeleteTeacher", method = RequestMethod.GET)

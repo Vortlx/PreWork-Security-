@@ -8,7 +8,7 @@
 <title>Add Group</title>
 </head>
 <body>
-    <a href="welcome" name="back">Back</a>
+    <a href="../welcome" name="back">Back</a>
     <form action="AddGroup" method="POST">
         Name: <input name="name" type="text" required>
         <br>

@@ -8,7 +8,7 @@
 <title>Add Subject</title>
 </head>
 <body>
-    <a href="welcome" name="back">Back</a>
+    <a href="../welcome" name="back">Back</a>
     <form action="AddTeacher" method="POST">
         Name: <input name="name" type="text" required/>
         <br>
