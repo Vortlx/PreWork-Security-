@@ -9,13 +9,22 @@
 <html>
 <head>
     <title>ChangePassword</title>
+    <style>
+        .error{
+            color: RED;
+        }
+    </style>
+
+    <script src="../javascript/validationPassword.js"></script>
 </head>
 <body>
     <a href="welcome" name="Back">Back</a>
-    <form action="ChangePassword" method="POST">
-        Enter your old password <input name="oldPassword" type="password"/>
+    <form action="ChangePassword" method="POST" name="newPassword" onsubmit="return validPassword()">
+        Enter your old password <input name="oldPassword" id="oldPassword" type="password"/>
+        <span class="error" id="incorrOldPass"></span>
         <br>
-        Enter your new password <input name="newPassword" type="password"/>
+        Enter your new password <input name="newPassword" id="newPassword" type="password"/>
+        <span class="error" id="incorrNewPass"></span>
         <br>
         <input name="userId" type="hidden" value="${param.userId}"/>
         <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
