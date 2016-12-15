@@ -6,7 +6,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Welcome</title>
-    <script src="/javascript/GROG.js"></script>
 </head>
 <body>
     <form action="j_spring_security_check" method="POST">

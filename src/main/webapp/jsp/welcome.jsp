@@ -7,7 +7,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Welcome</title>
-    <script src="../javascript/GROG.js"></script>
+    <script src="../javascript/addSwitcher.js"></script>
 </head>
 <body>
     <!-- Greeting user (Department, Teacher ot Student) -->
