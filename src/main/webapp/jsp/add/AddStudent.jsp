@@ -6,7 +6,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf8">
     <title>Add Student</title>
-    <script src="../../javascript/personValidation.js"></script>
+    <script src="../../javascript/personNameValidation.js"></script>
     <style>
         .error{
             color: RED;
