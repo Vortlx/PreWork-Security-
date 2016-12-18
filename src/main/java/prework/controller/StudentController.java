@@ -104,6 +104,9 @@ public class StudentController {
     public String findMyGroup(@RequestParam(name = "userId", required = false) Integer userId,
                               @RequestParam(name = "groupId", required = false) Integer groupId, Model model) {
 
+        System.out.println();
+        System.out.println(userId + "   " + groupId);
+        System.out.println();
         try {
             if (groupId != null) {
                 Group group = groupService.getById(groupId);
