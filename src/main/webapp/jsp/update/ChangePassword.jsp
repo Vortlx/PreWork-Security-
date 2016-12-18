@@ -9,13 +9,13 @@
 <html>
 <head>
     <title>ChangePassword</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="../javascript/changePasswordValidation.js"></script>
     <style>
         .error{
             color: RED;
         }
     </style>
-
-    <script src="../javascript/validationPassword.js"></script>
 </head>
 <body>
     <a href="welcome" name="Back">Back</a>
