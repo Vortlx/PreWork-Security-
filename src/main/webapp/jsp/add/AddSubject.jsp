@@ -8,7 +8,7 @@
     <title>Add Subject</title>
 </head>
 <body>
-    <a href="MySubjects?groupId=${groupId}&userId=${userId}" name="back">Back</a>
+    <a href="/" name="back" onclick="return hideAddSubject()">Hide</a>
 
     <form action="AddSubject" method="POST">
         Subject: <select name="subjectName">

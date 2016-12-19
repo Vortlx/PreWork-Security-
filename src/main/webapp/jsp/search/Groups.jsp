@@ -8,7 +8,7 @@
     <script src="../javascript/showGroup.js"></script>
 </head>
 <body>
-    <div style="float: left">
+    <div style="float: left; margin-right: 50px">
 	    <a href="welcome" name="back">Back</a>
 	    <table border="1">
 	        <tr>
@@ -21,7 +21,8 @@
 	            <c:forEach items="${groups}" var="group">
 	                <tr>
 	                    <td>
-	                        <a href="MyGroup?groupId=${group.id}&userId=${param.userId}" name="toGroups" onclick="return showGroup()">${group.name}</a>
+	                        <a href="/" name="toGroups"
+							   onclick="return showGroup(${group.id}, ${param.userId})">${group.name}</a>
 	                    </td>
 	                    <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
 	                        <td>

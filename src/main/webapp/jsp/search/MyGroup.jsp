@@ -6,14 +6,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8">
-<title>My Group</title>
+    <title>My Group</title>
 </head>
 <body>
     <sec:authorize access="hasRole('ROLE_STUDENT')">
         <a href="welcome" name="Back">Back</a>
     </sec:authorize>
     <sec:authorize access="hasAnyRole('ROLE_TEACHER', 'ROLE_DEPARTMENT')">
-        <a href="Groups?userId=${param.userId}" name="Back">Back</a>
+        <a href="/" name="Back" onclick="return hideGroup(this)">Hide</a>
     </sec:authorize>
 
     <table border="1">
