@@ -6,7 +6,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf8">
     <title>Students</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
     <script src="../javascript/personValidation.js"></script>
     <style>
         .error{
@@ -26,28 +28,37 @@
         <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
         <input name="send" type="submit" value="Find">
     </form>
-    <table border="1">
-        <tr>
-            <th>Name</th>
-            <th>Family Name</th>
-            <th>Group</th>
-            <th> </th>
-        </tr>
-        <c:forEach items="${students}" var="student">
-           <tr>      
-               <td>${student.name}</td>
-               <td>${student.familyName}</td>
-               <td>
-                   ${student.group.name}
-                   <br>
-                   <a href="ChangeGroupPage?userId=${userId}&depId=${department.id}&studentId=${student.id}"
-                      name="changeGroup">Change group</a>
-               </td>
-               <td>
-                   <a href="DeleteStudent?studentId=${student.id}" name="deleteStudent">Delete</a>
-               </td>
-           </tr>
-        </c:forEach>
+    <table id="studentsList" border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Family Name</th>
+                <th>Group</th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach items="${students}" var="student">
+                <tr>
+                    <td>${student.name}</td>
+                    <td>${student.familyName}</td>
+                    <td>
+                            ${student.group.name}
+                        <br>
+                        <a href="ChangeGroupPage?userId=${userId}&depId=${department.id}&studentId=${student.id}"
+                           name="changeGroup">Change group</a>
+                    </td>
+                    <td>
+                        <a href="DeleteStudent?studentId=${student.id}" name="deleteStudent">Delete</a>
+                    </td>
+                </tr>
+            </c:forEach>
+        </tbody>
     </table>
+    <script>
+        $(function(){
+            $("#studentsList").dataTable();
+        })
+    </script>
 </body>
 </html>

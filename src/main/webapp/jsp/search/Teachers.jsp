@@ -6,7 +6,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf8">
     <title>Teachers</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
     <script src="../javascript/personValidation.js"></script>
     <style>
         .error{
@@ -26,23 +28,32 @@
         <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
         <input name="send" type="submit" value="Find">
     </form>
-    <table border="1">
-        <tr>
-            <th>Name</th>
-            <th>Family Name</th>
-            <th>Subjects</th>
-            <th> </th>
-        </tr>
-        <c:forEach items="${teachers}" var="teacher">
+    <table id="teachersList" border="1">
+        <thead>
             <tr>
-                <td>${teacher.name}</td>
-                <td>${teacher.familyName}</td>
-                <td>${teacher.subject.name}:    ${teacher.subject.type}</td>
-                <td>
-                    <a href="DeleteTeacher?teacherId=${teacher.id}" name="deleteTeacher">Delete</a>
-                </td>
+                <th>Name</th>
+                <th>Family Name</th>
+                <th>Subjects</th>
+                <th> </th>
             </tr>
-        </c:forEach>
+        </thead>
+        <tbody>
+            <c:forEach items="${teachers}" var="teacher">
+                <tr>
+                    <td>${teacher.name}</td>
+                    <td>${teacher.familyName}</td>
+                    <td>${teacher.subject.name}:    ${teacher.subject.type}</td>
+                    <td>
+                        <a href="DeleteTeacher?teacherId=${teacher.id}" name="deleteTeacher">Delete</a>
+                    </td>
+                </tr>
+            </c:forEach>
+        </tbody>
     </table>
+    <script>
+        $(function(){
+            $("#teachersList").dataTable();
+        })
+    </script>
 </body>
 </html>
