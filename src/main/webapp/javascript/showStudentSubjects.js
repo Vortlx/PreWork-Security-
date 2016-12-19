@@ -1,23 +1,22 @@
 /**
  * Created by lebedevas on 19.12.2016.
  */
-function showSubjects(groupId, userId){
+function showStudentSubjects(userId){
     $.ajax({
-        url: "AddSubjectPage",
+        url: "MySubjects",
         type: "GET",
         data: {
-            groupId: groupId,
             userId: userId
         },
         success: function(data){
-            $("#newSubject").html(data);
+            $("#specifyGroup").html(data);
         }
     });
 
     return false;
 };
 
-function hideAddSubject(){
-    $("#newSubject").html("");
+function hideInfo(){
+    $("#specifyGroup").html("");
     return false;
 }

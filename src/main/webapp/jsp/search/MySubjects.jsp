@@ -13,7 +13,7 @@
 <body>
     <div style="margin-bottom: 50px">
         <sec:authorize access="hasRole('ROLE_STUDENT')">
-            <a href="welcome" name="Back">Back</a>
+            <a href="/" name="Back" onclick="return hideInfo()">Hide</a>
         </sec:authorize>
         <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
             <a href="Groups?userId=${userId}" name="Back">Back</a>

@@ -5,7 +5,6 @@ function showGroup(groupId, userId){
 	$.ajax({
 		url: "MyGroup",
 		type: "GET",
-		async: true,
 		data: {
 			groupId: groupId,
 			userId: userId
@@ -18,7 +17,7 @@ function showGroup(groupId, userId){
 	return false;
 };
 
-function hideGroup(){
+function hideInfo(){
     $("#specifyGroup").html("");
     return false;
 }
