@@ -10,7 +10,7 @@
     <script src="../javascript/showGroup.js"></script>
 </head>
 <body>
-    <div style="float: left; margin-right: 50px">
+    <div id="tableParent" style="float: left; margin-right: 50px">
 	    <a href="welcome" name="back">Back</a>
 	    <table id="tableGroups" border="1">
 			<thead>
@@ -42,8 +42,15 @@
 			</tbody>
 	    </table>
 		<script>
-            $(function(){
-                $("#tableGroups").dataTable();
+            $(document).ready(function(){
+                $("#tableGroups").dataTable({
+                    "columnDefs": [{
+                        "targets": [1, 2],
+						"searcheable": false,
+						"orderable": false
+					}]
+				});
+                $('#groupList').dataTable();
             })
 		</script>
     </div>

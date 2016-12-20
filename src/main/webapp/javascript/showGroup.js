@@ -10,7 +10,8 @@ function showGroup(groupId, userId){
 			userId: userId
 		},
 		success: function(data){
-			$("#specifyGroup").html(data);
+			//alert(data);
+			$("#specifyGroup").html(JSON.parse(data));
 		}
 	});
 	

@@ -28,16 +28,17 @@
         <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
         <input name="send" type="submit" value="Find">
     </form>
-    <table id="studentsList" border="1">
-        <thead>
+    <div id="tableParent">
+        <table id="studentsList" border="1">
+            <thead>
             <tr>
                 <th>Name</th>
                 <th>Family Name</th>
                 <th>Group</th>
                 <th> </th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             <c:forEach items="${students}" var="student">
                 <tr>
                     <td>${student.name}</td>
@@ -53,11 +54,21 @@
                     </td>
                 </tr>
             </c:forEach>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
     <script>
-        $(function(){
-            $("#studentsList").dataTable();
+        $(document).ready(function(){
+            $("#studentsList").dataTable({
+                "columnDefs": [{
+                    "targets": 3,
+                    "searchable": false,
+                    "orderable": false
+                }, {
+                    "targets": 2,
+                    "searchable": false
+                }]
+            });
         })
     </script>
 </body>

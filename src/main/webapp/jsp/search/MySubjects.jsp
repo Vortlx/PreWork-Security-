@@ -13,14 +13,14 @@
     <script src="../javascript/showSubjects.js"></script>
 </head>
 <body>
-    <div id="subjectList" style="margin-bottom: 50px">
+    <div id="tableParent" style="margin-bottom: 50px">
         <sec:authorize access="hasRole('ROLE_STUDENT')">
             <a href="/" name="Back" onclick="return hideInfo()">Hide</a>
         </sec:authorize>
         <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
             <a href="Groups?userId=${userId}" name="Back">Back</a>
         </sec:authorize>
-        <table border="1">
+        <table id="subjectList" border="1">
             <thead>
                 <tr>
                     <th colspan="4">Subjects</th>
@@ -61,7 +61,7 @@
             </tbody>
         </table>
         <script>
-            $(function(){
+            $(document).ready(function(){
                 $("#subjectList").dataTable();
             })
         </script>

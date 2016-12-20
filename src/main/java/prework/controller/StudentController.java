@@ -1,12 +1,17 @@
 package prework.controller;
 
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import prework.entities.*;
 import prework.service.*;
 
@@ -100,24 +105,36 @@ public class StudentController {
         }
     }
 
-    @RequestMapping(value = "MyGroup", method = RequestMethod.GET)
+    @RequestMapping(value = "MyGroup", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public String findMyGroup(@RequestParam(name = "userId", required = false) Integer userId,
-                              @RequestParam(name = "groupId", required = false) Integer groupId, Model model) {
+                              @RequestParam(name = "groupId", required = false) Integer groupId) {
+
+        Gson gson = new Gson();
         try {
             if (groupId != null) {
                 Group group = groupService.getById(groupId);
 
-                model.addAttribute("group", group);
+                System.out.println();
+                System.out.println("test" + gson.toJson(group));
+                System.out.println();
+
+                //model.addAttribute("group", group);
+                return gson.toJson(group);
             } else {
                 Student student = userService.getStudent(userId);
 
-                model.addAttribute("group", student.getGroup());
+                System.out.println();
+                System.out.println("test" + gson.toJson(student.getGroup()));
+                System.out.println();
+
+                //model.addAttribute("group", student.getGroup());
+                return gson.toJson(student.getGroup());
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            return "search/MyGroup.jsp";
+            return null;
         }
     }
 

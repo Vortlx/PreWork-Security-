@@ -7,7 +7,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Welcome</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
     <script src="../javascript/addSwitcher.js"></script>
     <script src="../javascript/showGroup.js"></script>
     <script src="../javascript/showStudentSubjects.js"></script>
@@ -59,7 +61,6 @@
                 </form>
             </div>
         </sec:authorize>
-
         <div>
             <br>
             <!-- a href="ChangeUsername?userId=${user.id}" name="changeLogin">Change login</a-->
