@@ -1,6 +1,8 @@
 package prework.entities;
 
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 
 
@@ -13,16 +15,20 @@ import javax.persistence.*;
 @MappedSuperclass
 public abstract class Person {
 
+    @Expose
     @Id
     @Column(name = "id")
     private int id;
 
+    @Expose
     @Column(name = "name")
     private String name;
 
+    @Expose
     @Column(name = "family_name")
     private String familyName;
 
+    @Expose
     @OneToOne(cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
     @JoinColumn(name = "id_user_info")
     private User user;

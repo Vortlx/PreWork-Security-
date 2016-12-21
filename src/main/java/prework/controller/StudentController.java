@@ -1,6 +1,7 @@
 package prework.controller;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -110,28 +111,21 @@ public class StudentController {
     public String findMyGroup(@RequestParam(name = "userId", required = false) Integer userId,
                               @RequestParam(name = "groupId", required = false) Integer groupId) {
 
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        String answer = null;
         try {
             if (groupId != null) {
                 Group group = groupService.getById(groupId);
 
-                System.out.println();
-                System.out.println("test" + gson.toJson(group));
-                System.out.println();
-
+                answer = gson.toJson(group);
                 //model.addAttribute("group", group);
-                return gson.toJson(group);
             } else {
                 Student student = userService.getStudent(userId);
 
-                System.out.println();
-                System.out.println("test" + gson.toJson(student.getGroup()));
-                System.out.println();
-
+                answer = gson.toJson(student.getGroup());
                 //model.addAttribute("group", student.getGroup());
-                return gson.toJson(student.getGroup());
             }
-
+            return answer;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

@@ -1,8 +1,6 @@
 package prework.entities;
 
-
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import com.google.gson.annotations.Expose;
 
 import java.util.Set;
 import java.util.HashSet;
@@ -20,19 +18,24 @@ import javax.persistence.*;
 @Table(name = "groups")
 public class Group {
 
+    @Expose
     @Id
     @Column(name = "id")
     int id;
 
+    @Expose
     @Column(name = "name")
     private String name;
 
+    @Expose
     @OneToMany(mappedBy = "group", cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
     private Set<Student> students;
 
+    @Expose
     @ManyToMany(mappedBy = "groups")
     private Set<Subject> subjects;
 
+    @Expose
     @ManyToOne()
     @JoinColumn(name = "id_department")
     private Department department;

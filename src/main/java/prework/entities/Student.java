@@ -1,6 +1,8 @@
 package prework.entities;
 
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 
 
@@ -14,6 +16,7 @@ import javax.persistence.*;
 @Table(name = "students")
 public class Student extends Person {
 
+    //@Expose
     @ManyToOne()
     @JoinColumn(name = "id_group")
     private Group group;

@@ -77,6 +77,8 @@
         </div>
     </div>
     <div id="specifyGroup">
+            <table id="groupInfo" border="1">
+            </table>
     </div>
 </body>
 </html>
