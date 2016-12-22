@@ -116,20 +116,15 @@ public class StudentController {
         try {
             if (groupId != null) {
                 Group group = groupService.getById(groupId);
-
                 answer = gson.toJson(group);
-                //model.addAttribute("group", group);
             } else {
                 Student student = userService.getStudent(userId);
-
                 answer = gson.toJson(student.getGroup());
-                //model.addAttribute("group", student.getGroup());
             }
-            return answer;
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
         }
+        return answer;
     }
 
     @RequestMapping(value = "MySubjects", method = {RequestMethod.GET, RequestMethod.POST})
@@ -137,7 +132,6 @@ public class StudentController {
                                  @RequestParam(name = "groupId", required = false) Integer groupId,
                                  Model model) {
 
-        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         try {
             if (groupId != null) {
                 Group group = groupService.getById(groupId);
