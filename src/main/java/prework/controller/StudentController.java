@@ -137,6 +137,7 @@ public class StudentController {
                                  @RequestParam(name = "groupId", required = false) Integer groupId,
                                  Model model) {
 
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         try {
             if (groupId != null) {
                 Group group = groupService.getById(groupId);
