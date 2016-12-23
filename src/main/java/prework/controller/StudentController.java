@@ -107,7 +107,7 @@ public class StudentController {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            return "search/Students.jsp";
+            return "welcome";
         }
     }
 

@@ -1,7 +1,7 @@
 /**
  * Created by lebedevas on 19.12.2016.
  */
-function showSubjects(groupId, userId){
+function showAddSubjects(groupId, userId){
     $.ajax({
         url: "AddSubjectPage",
         type: "GET",

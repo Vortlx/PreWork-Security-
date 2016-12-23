@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script src="../../javascript/showChangeGroup.js"></script>
 </head>
 <body>
     <a href="../welcome" name="back">Back</a>
@@ -54,8 +55,9 @@
                         data: "group.name",
                         render: function(data, type, row){
                             return  data + "<br>" +
-                                    "<a href=\"../ChangeGroupPage?userId=" + userId +
-                                    "&studentId=" + row.id + "\"name=\"changeGroup\">Change group</a>";
+                                    "<a href=\"/\" name=\"changeGroup\"" +
+                                    " onclick=\"return showChangeGroup(" + userId +
+                                    ", " + row.id + ")\">Change group</a>";
                         }
                     },
                     {
@@ -71,5 +73,7 @@
             });
         })
     </script>
+    <div id="changeGroupForm">
+    </div>
 </body>
 </html>

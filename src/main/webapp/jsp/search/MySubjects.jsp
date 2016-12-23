@@ -54,7 +54,7 @@
                     <tr>
                         <td colspan="3">
                             <a href="/" name="addSubject"
-                               onclick="return showSubjects(${groupId}, ${userId})">Add</a>
+                               onclick="return showAddSubjects(${groupId}, ${userId})">Add</a>
                         </td>
                     </tr>
                 </sec:authorize>
