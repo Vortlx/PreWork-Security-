@@ -9,25 +9,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-    <script src="../javascript/personValidation.js"></script>
-    <style>
-        .error{
-            color: RED;
-        }
-    </style>
 </head>
 <body>
-    <a href="welcome" name="back">Back</a>
-    <form action="Teachers" method="POST" onsubmit="return personIncorrectNameValidation()">
-        Name: <input name="name" id="personName" type="text">
-        <span class="error" id="incorrName"></span>
-        <br>
-        Family name: <input name="familyName" id="personFamilyName" type="text">
-        <span class="error" id="incorrFamilyName"></span>
-        <br>
-        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
-        <input name="send" type="submit" value="Find">
-    </form>
+    <a href="../welcome" name="back">Back</a>
     <div id="tableParent">
         <table id="teachersList" border="1">
             <thead>
@@ -54,12 +38,42 @@
     </div>
     <script>
         $(document).ready(function(){
+            // get userId from url
+            // +2 in formula because exist characters "?" and "="
+            var userId = window.location.search.substr("userId".length + 2);
+
             $("#teachersList").dataTable({
-                "columnDefs": [{
-                    "targets": 3,
-                    "searchable": false,
-                    "orderable": false
-                }]
+                ajax:{
+                    url: "../Teachers",
+                    type: "GET",
+                    data: {userId: userId},
+                    dataSrc: ""
+                },
+                "columnDefs": [
+                    {
+                        targets: 0,
+                        data: "name"
+                    },
+                    {
+                        targets: 1,
+                        data: "familyName"
+                    },
+                    {
+                        targets: 2,
+                        data:function(row){
+                            return row.subject.name + ": " + row.subject.type;
+                        }
+                    },
+                    {
+                        targets: 3,
+                        searchable: false,
+                        orderable: false,
+                        render: function(data, type, row){
+                            return "<a href=\"DeleteTeacher?teacherId=" + row.id +
+                                "\" name=\"deleteTeacher\">Delete</a>";
+                        }
+                    }
+                ]
             });
         })
     </script>

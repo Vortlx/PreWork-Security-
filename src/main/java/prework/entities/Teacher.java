@@ -1,6 +1,8 @@
 package prework.entities;
 
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 
 
@@ -14,6 +16,7 @@ import javax.persistence.*;
 @Table(name = "teachers")
 public class Teacher extends Person {
 
+    @Expose
     @OneToOne(cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
     @JoinColumn(name = "id_subject")
     private Subject subject;

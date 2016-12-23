@@ -45,7 +45,7 @@
             <div>
                 <a href="search/Students.jsp?userId=${user.id}" name="toStudents">Students</a>
                 <br>
-                <a href="Teachers?userId=${user.id}" name="toTeachers">Teachers</a>
+                <a href="search/Teachers.jsp?userId=${user.id}" name="toTeachers">Teachers</a>
             </div>
             <div>
                 <br>

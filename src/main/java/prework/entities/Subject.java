@@ -1,5 +1,6 @@
 package prework.entities;
 
+import com.google.gson.annotations.Expose;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -10,13 +11,16 @@ import java.util.Set;
 @Table(name = "subject")
 public class Subject {
 
+    @Expose
     @Id
     @Column(name = "id")
     private int id;
 
+    @Expose
     @Column(name = "name")
     private String name;
 
+    @Expose
     @Column(name = "subject_type")
     @Enumerated(EnumType.STRING)
     private SubjectType type;

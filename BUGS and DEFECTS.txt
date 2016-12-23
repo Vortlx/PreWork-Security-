@@ -1,7 +1,7 @@
 1. Unsuported character encoding utf-8 for database.
 
-2. For search not used regular expression.
+2. not handled code 500
 
-3. not handled code 500
+3. After changing username can't find user and request return code 500
 
-4. After changing username can't find user and request return code 500
+4. Reconfigure url mapping
