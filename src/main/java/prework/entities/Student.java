@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Table(name = "students")
 public class Student extends Person {
 
-    //@Expose
+    @Expose
     @ManyToOne()
     @JoinColumn(name = "id_group")
     private Group group;

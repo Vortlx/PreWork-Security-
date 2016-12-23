@@ -24,7 +24,7 @@ function showGroup(groupId, userId){
                 groupId: groupId,
                 userId: userId
             },
-			dataSrc: "students"
+            dataSrc: ""
 		},
         columns: [
 			{data: "name"},

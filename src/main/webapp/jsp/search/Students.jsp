@@ -9,25 +9,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-    <script src="../javascript/personValidation.js"></script>
-    <style>
-        .error{
-            color: RED;
-        }
-    </style>
 </head>
 <body>
-    <a href="welcome" name="back">Back</a>
-    <form action="Students" method="POST" onsubmit="return personIncorrectNameValidation()">
-        Name: <input name="name" id="personName" type="text">
-        <span class="error" id="incorrName"></span>
-        <br>
-        Family name: <input name="familyName" id="personFamilyName" type="text">
-        <span class="error" id="incorrFamilyName"></span>
-        <br>
-        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
-        <input name="send" type="submit" value="Find">
-    </form>
+    <a href="../welcome" name="back">Back</a>
     <div id="tableParent">
         <table id="studentsList" border="1">
             <thead>
@@ -39,21 +23,6 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${students}" var="student">
-                <tr>
-                    <td>${student.name}</td>
-                    <td>${student.familyName}</td>
-                    <td>
-                            ${student.group.name}
-                        <br>
-                        <a href="ChangeGroupPage?userId=${userId}&depId=${department.id}&studentId=${student.id}"
-                           name="changeGroup">Change group</a>
-                    </td>
-                    <td>
-                        <a href="DeleteStudent?studentId=${student.id}" name="deleteStudent">Delete</a>
-                    </td>
-                </tr>
-            </c:forEach>
             </tbody>
         </table>
     </div>
@@ -64,14 +33,41 @@
             var userId = window.location.search.substr("userId".length + 2);
 
             $("#studentsList").dataTable({
-                "columnDefs": [{
-                    "targets": 3,
-                    "searchable": false,
-                    "orderable": false
-                }, {
-                    "targets": 2,
-                    "searchable": false
-                }]
+                ajax:{
+                    url: "../Students",
+                    type:"GET",
+                    data: {userId: userId},
+                    dataSrc: ""
+                },
+                "columnDefs": [
+                    {
+                        targets: 0,
+                        data:"name"
+                    },
+                    {
+                        targets: 1,
+                        data: "familyName"
+                    },
+                    {
+                        targets: 2,
+                        searchable: false,
+                        data: "group.name",
+                        render: function(data, type, row){
+                            return  data + "<br>" +
+                                    "<a href=\"../ChangeGroupPage?userId=" + userId +
+                                    "&studentId=" + row.id + "\"name=\"changeGroup\">Change group</a>";
+                        }
+                    },
+                    {
+                        targets: 3,
+                        searchable: false,
+                        orderable: false,
+                        render: function(data, type, row){
+                            return "<a href=\"../DeleteStudent?studentId=" + row.id +
+                                "\" name=\"deleteStudent\">Delete</a>";
+                        }
+                    }
+                ]
             });
         })
     </script>

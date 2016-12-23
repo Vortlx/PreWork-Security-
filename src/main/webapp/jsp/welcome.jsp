@@ -43,7 +43,7 @@
         </sec:authorize>
         <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
             <div>
-                <a href="Students?userId=${user.id}" name="toStudents">Students</a>
+                <a href="search/Students.jsp?userId=${user.id}" name="toStudents">Students</a>
                 <br>
                 <a href="Teachers?userId=${user.id}" name="toTeachers">Teachers</a>
             </div>

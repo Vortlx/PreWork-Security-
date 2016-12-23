@@ -59,24 +59,29 @@ public class StudentController {
 
     @RequestMapping(value = "DeleteStudent", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
-    public String deleteStudent(@RequestParam("studentId") int studentId) {
+    public String deleteStudent(@RequestParam("studentId") int studentId, Model model) {
 
         try {
             studentService.deleteById(studentId);
+            Student student = studentService.getById(studentId);
+            Department department = student.getDepartment();
+
+            model.addAttribute("userId", department.getUser().getId());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            return "search/Students.jsp";
+            return "Students.jsp";
         }
     }
 
     @RequestMapping(value = "ChangeGroupPage", method = RequestMethod.GET)
-    public String changeGroupPage(@RequestParam("depId") int depId,
+    public String changeGroupPage(@RequestParam("userId") int userId,
                                   @RequestParam("studentId") int studentId,
                                   Model model) {
 
         try {
-            Department department = departmentService.getById(depId);
+            User user = userService.getById(userId);
+            Department department = user.getDepartment();
 
             model.addAttribute("groups", department.getGroups());
             model.addAttribute("studentId", studentId);
@@ -98,11 +103,11 @@ public class StudentController {
             Department department = student.getDepartment();
             studentService.changeGroup(student.getId(), newGroupId);
 
-            model.addAttribute("userId", department.getId());
+            model.addAttribute("userId", department.getUser().getId());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            return "Students";
+            return "search/Students.jsp";
         }
     }
 
@@ -112,14 +117,14 @@ public class StudentController {
                               @RequestParam(name = "groupId", required = false) Integer groupId) {
 
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-        String answer = null;
+        String answer = "";
         try {
             if (groupId != null) {
                 Group group = groupService.getById(groupId);
-                answer = gson.toJson(group);
+                answer = gson.toJson(group.getStudents());
             } else {
                 Student student = userService.getStudent(userId);
-                answer = gson.toJson(student.getGroup());
+                answer = gson.toJson(student.getGroup().getStudents());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -131,7 +136,6 @@ public class StudentController {
     public String findMySubjects(@RequestParam(name = "userId", required = false) int userId,
                                  @RequestParam(name = "groupId", required = false) Integer groupId,
                                  Model model) {
-
         try {
             if (groupId != null) {
                 Group group = groupService.getById(groupId);
@@ -152,53 +156,21 @@ public class StudentController {
         }
     }
 
-    @RequestMapping(value = "Students", method = RequestMethod.GET)
+    @RequestMapping(value = "Students", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
-    public String findStudents(@RequestParam(name = "userId", required = false) int userId,
-                               Model model) {
+    @ResponseBody
+    public String findStudents(@RequestParam(name = "userId", required = false) int userId) {
 
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        String answer = "";
         try {
             Department department = userService.getDepartment(userId);
             Set<Student> students = studentService.getAll(department);
 
-            model.addAttribute("department", department);
-            model.addAttribute("students", students);
+            answer = gson.toJson(students);
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            model.addAttribute("userId", userId);
-            return "search/Students.jsp";
         }
-    }
-
-    @RequestMapping(value = "Students", method = RequestMethod.POST)
-    @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
-    public String findStudents(@RequestParam(name = "name", required = false) String name,
-                               @RequestParam(name = "familyName", required = false) String familyName,
-                               Model model) {
-
-        Iterable<Student> students;
-
-        try {
-            if (!"".equals(name) && !"".equals(familyName)) {
-                students = studentService.getStudent(name, familyName);
-            } else if (!"".equals(name)) {
-                students = studentService.getByName(name);
-            } else if (!"".equals(familyName)) {
-                students = studentService.getByFamilyName(familyName);
-            } else {
-                students = studentService.getAll();
-            }
-
-            Iterator<Student> iterator = students.iterator();
-            Department department = iterator.next().getDepartment();
-
-            model.addAttribute("department", department);
-            model.addAttribute("students", students);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            return "search/Students.jsp";
-        }
+        return answer;
     }
 }

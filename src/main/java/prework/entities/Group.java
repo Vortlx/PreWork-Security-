@@ -27,7 +27,6 @@ public class Group {
     @Column(name = "name")
     private String name;
 
-    @Expose
     @OneToMany(mappedBy = "group", cascade = {CascadeType.REFRESH, CascadeType.REMOVE})
     private Set<Student> students;
 
