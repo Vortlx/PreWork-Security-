@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import prework.entities.*;
 import prework.service.*;
 
-import java.util.Iterator;
 import java.util.Set;
 
 @Controller
@@ -71,8 +70,7 @@ public class TeacherController {
     @RequestMapping(value = "Teachers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     @ResponseBody
-    public String findTeachers(@RequestParam(name = "userId", required = false) int userId,
-                               Model model) {
+    public String findTeachers(@RequestParam(name = "userId", required = false) int userId) {
 
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         String answer = "";

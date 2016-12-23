@@ -11,7 +11,6 @@ import prework.entities.*;
 import prework.service.GroupService;
 import prework.service.SubjectService;
 
-import java.util.List;
 import java.util.Set;
 
 @Controller

@@ -3,9 +3,7 @@ package prework.controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import prework.entities.*;
 import prework.service.*;
 
-import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -29,9 +25,6 @@ public class StudentController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private DepartmentService departmentService;
 
     @Autowired
     private GroupService groupService;
