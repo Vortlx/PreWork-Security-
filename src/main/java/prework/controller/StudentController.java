@@ -29,7 +29,7 @@ public class StudentController {
     @Autowired
     private GroupService groupService;
 
-    @RequestMapping(value = "AddStudent", method = RequestMethod.POST)
+    @RequestMapping(value = "add/AddStudent", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String addStudent(@RequestParam("name") String name, @RequestParam("familyName") String familyName,
                              @RequestParam("groupID") int groupId,

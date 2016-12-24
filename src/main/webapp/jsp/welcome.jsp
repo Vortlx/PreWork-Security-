@@ -49,7 +49,7 @@
             </div>
             <div>
                 <br>
-                <form action="/" method="POST" name="add" onsubmit="addSwitcher()">
+                <form action="/" method="POST" name="add" onsubmit="addSwitcher(${user.id})">
                     <select name="whatAdd" id="whatAdd">
                         <option value="GROUP">Group</option>
                         <option value="STUDENT">Student</option>

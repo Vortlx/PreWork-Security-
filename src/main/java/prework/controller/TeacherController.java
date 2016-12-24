@@ -30,41 +30,47 @@ public class TeacherController {
     private SubjectService subjectService;
 
 
-    @RequestMapping(value = "AddTeacher", method = RequestMethod.POST)
+    @RequestMapping(value = "add/AddTeacher", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String addTeacher(@RequestParam("name") String name, @RequestParam("familyName") String familyName,
                              @RequestParam("subjectName") String subjectName,
                              @RequestParam("subjectType") String subjectType,
-                             @RequestParam("departmentId") int depId,
+                             @RequestParam("userId") int userId,
                              Model model) {
+        
+        User user = userService.getById(userId);
+        Department dep = user.getDepartment();
+        String message = "";
         try {
             Subject newSubject = subjectService.add(subjectName, SubjectType.valueOf(subjectType));
-            teacherService.add(name, familyName, newSubject, depId);
+            teacherService.add(name, familyName, newSubject, dep.getId());
+            
+            message = "Operation was success!";
         } catch (Exception e) {
-
             e.printStackTrace();
-            String message = "Can't do this operation.";
+            message = "That user already exist!";
 
+        } finally {
             model.addAttribute("message", message);
-            model.addAttribute("departmentId", depId);
-
-            return "add/AddTeacher.jsp";
+            model.addAttribute("userId", userId);
         }
 
-        return "../welcome";
+        return "AddTeacher.jsp";
     }
 
-    @RequestMapping(value = "DeleteTeacher", method = RequestMethod.GET)
+    @RequestMapping(value = "delete/DeleteTeacher", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
-    public String deleteTeacher(@RequestParam("teacherId") int teacherId) {
+    public String deleteTeacher(@RequestParam("teacherId") int teacherId,
+                                @RequestParam("userId") int userId, Model model ) {
 
         try {
             teacherService.deleteById(teacherId);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            return "search/Teachers.jsp";
+            model.addAttribute("userId", userId);
         }
+        return "../search/Teachers.jsp";
     }
 
     @RequestMapping(value = "Teachers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

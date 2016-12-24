@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import prework.entities.*;
+import prework.service.DepartmentService;
 import prework.service.GroupService;
 import prework.service.SubjectService;
+import prework.service.UserService;
 
 import java.util.Set;
 
@@ -22,25 +24,34 @@ public class GroupController {
 
     @Autowired
     private SubjectService subjectService;
+    
+    @Autowired
+    private UserService userService;
+    
+    @Autowired
+    private DepartmentService departmentService;
 
     @RequestMapping(value = "/add/AddGroup", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String addGroup(@RequestParam("name") String groupName,
-                           @RequestParam("departmentId") int depId,
+                           @RequestParam("userId") int userId,
                            Model model) {
+        User user = userService.getById(userId);
+        Department dep = user.getDepartment();
+        String message = "";
+        
         try {
-            groupService.add(groupName, depId);
+            groupService.add(groupName, dep.getId());
+            message = "Operation was success!";
         } catch (Exception e) {
             e.printStackTrace();
-
-            String message = "Can't do this operation.";
+            message = "Group with specified name already exist!";
+        } finally {
             model.addAttribute("message", message);
-            model.addAttribute("departmentId", depId);
-
-            return "AddGroup.jsp";
+            model.addAttribute("userId", userId);
         }
 
-        return "../welcome";
+        return "AddGroup.jsp";
     }
 
     @RequestMapping(value = "AddSubjectPage", method = RequestMethod.GET)

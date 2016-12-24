@@ -30,8 +30,8 @@
     <script>
         $(document).ready(function(){
             // get userId from url
-            // +2 in formula because exist characters "?" and "="
-            var userId = window.location.search.substr("userId".length + 2);
+            var parameters = window.location.search.substr(1);
+            var userId = parameters.substr(parameters.indexOf("userId") + "userId".length + 1);
 
             $("#studentsList").dataTable({
                 ajax:{

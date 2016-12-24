@@ -29,21 +29,9 @@ public class AddController {
 
         User user = userService.getById(userId);
         Department department = user.getDepartment();
-
-        if ("GROUP".equals(whatAdd)) {
-            model.addAttribute("departmentId", department.getId());
-            return "add/AddGroup.jsp";
-
-        } else if ("STUDENT".equals(whatAdd)) {
+ 
             model.addAttribute("groups", department.getGroups());
             return "add/AddStudent.jsp";
 
-        } else if ("TEACHER".equals(whatAdd)) {
-            model.addAttribute("departmentId", department.getId());
-            return "add/AddTeacher.jsp";
-
-        } else {
-            return "welcome";
-        }
     }
 }

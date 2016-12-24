@@ -44,13 +44,12 @@
 		<script>
             $(document).ready(function(){
                 $("#tableGroups").dataTable({
-                    "columnDefs": [{
-                        "targets": [1, 2],
-						"searcheable": false,
-						"orderable": false
+                    columnDefs: [{
+                        targets: [1, 2],
+						searcheable: false,
+						orderable: false
 					}]
 				});
-                $('#groupList').dataTable();
             })
 		</script>
     </div>

@@ -39,8 +39,8 @@
     <script>
         $(document).ready(function(){
             // get userId from url
-            // +2 in formula because exist characters "?" and "="
-            var userId = window.location.search.substr("userId".length + 2);
+            var parameters = window.location.search.substr(1);
+            var userId = parameters.substr(parameters.indexOf("userId") + "userId".length + 1);
 
             $("#teachersList").dataTable({
                 ajax:{
@@ -69,8 +69,8 @@
                         searchable: false,
                         orderable: false,
                         render: function(data, type, row){
-                            return "<a href=\"DeleteTeacher?teacherId=" + row.id +
-                                "\" name=\"deleteTeacher\">Delete</a>";
+                            return "<a href=\"../delete/DeleteTeacher?teacherId=" + row.id +
+                                "&userId=" + userId + "\" name=\"deleteTeacher\">Delete</a>";
                         }
                     }
                 ]

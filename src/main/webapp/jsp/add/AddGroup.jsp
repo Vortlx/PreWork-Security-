@@ -20,11 +20,13 @@
         Name: <input name="name" id="groupName" type="text" />
         <span class="error" id="incorrGroupName"></span>
         <br>
-        <input name="departmentId" type="hidden" value="${departmentId}"/>
+        <input name="userId" type="hidden" value="${param.userId}"/>
         <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
         <input name="add" type="submit" value="Add">
     </form>
     <br>
-    ${message}
+    <span class="error">
+        ${message}
+    </span>
 </body>
 </html>
