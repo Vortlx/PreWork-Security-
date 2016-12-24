@@ -10,6 +10,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
         
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
@@ -19,11 +21,25 @@
     <script src="../staticresources/javascript/addSwitcher.js"></script>
     <script src="../staticresources/javascript/showGroup.js"></script>
     <script src="../staticresources/javascript/showStudentSubjects.js"></script>
+    
+    <style>
+        div .link{
+            margin-bottom: 5px;
+        }
+        
+        #logout{
+            margin-top: 25px;
+        }
+        
+        span{
+            font-weight: 600;            
+        }
+    </style>
 </head>
 <body>
-    <div style="float: left; margin-right: 50px">
+    <div style="float: left; margin-left: 30px">
         <!-- Greeting user (Department, Teacher ot Student) -->
-        <div>
+        <div class="alert alert-info" role="alert">
             <c:if test="${user.department != null}">
                 <h3>${user.department.name}</h3>
             </c:if>
@@ -34,47 +50,33 @@
                 <h3>Hello ${user.student.name} ${user.student.familyName}</h3>
             </c:if>
         </div>
-
-        <sec:authorize access="hasRole('ROLE_STUDENT')">
-            <div>
-                <a href="#" class="btn btn-warning" name="toMyGroup" onclick="return showGroup(null, ${user.id})">My Group</a>
-                <br>
-                <a href="#" class="btn btn-warning" name="toMySubjects" onclick="return showStudentSubjects(${user.id})">My Subjects</a>
-            </div>
-        </sec:authorize>
-        <sec:authorize access="hasAnyRole('ROLE_TEACHER', 'ROLE_DEPARTMENT')">
-            <div>
-                <a href="Groups?userId=${user.id}" class="btn btn-warning" name="toGroups">Groups</a>
-            </div>
-        </sec:authorize>
-        <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
-            <div>
-                <a href="search/Students.jsp?userId=${user.id}" class="btn btn-warning" name="toStudents">Students</a>
-                <br>
-                <a href="search/Teachers.jsp?userId=${user.id}" class="btn btn-warning" name="toTeachers">Teachers</a>
-            </div>
-            <div>
-                <br>
-                <form action="#" method="POST" name="add" onsubmit="addSwitcher(${user.id})">
-                    <select name="whatAdd" id="whatAdd">
-                        <option value="GROUP">Group</option>
-                        <option value="STUDENT">Student</option>
-                        <option value="TEACHER">Teacher</option>
-                    </select>
-                    <input name="userId" type="hidden" value="${user.id}">
-                    <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
-                    <input name="addButton" type="submit" value="Add"/>
-                </form>
-            </div>
-        </sec:authorize>
-        <div>
-            <br>
-            <!-- a href="ChangeUsername?userId=${user.id}" name="changeLogin">Change login</a-->
-            <br>
-            <a href="ChangePassword?userId=${user.id}" class="btn btn-warning" name="changePassword">Change password</a>
+        <div id="content">
+            <sec:authorize access="hasRole('ROLE_STUDENT')">
+                <div class="link"><a href="#" class="btn btn-default" name="toMyGroup" onclick="return showGroup(null, ${user.id})">My Group</a></div>
+                <div class="link"><a href="#" class="btn btn-default" name="toMySubjects" onclick="return showStudentSubjects(${user.id})">My Subjects</a></div>
+            </sec:authorize>
+            <sec:authorize access="hasAnyRole('ROLE_TEACHER', 'ROLE_DEPARTMENT')">
+                <div class="link"><a href="Groups?userId=${user.id}" class="btn btn-default" name="toGroups"><span>Groups</span></a></div>
+            </sec:authorize>
+            <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
+                <div class="link"><a href="search/Students.jsp?userId=${user.id}" class="btn btn-default" name="toStudents"><span>Students</span></a></div>
+                <div class="link"><a href="search/Teachers.jsp?userId=${user.id}" class="btn btn-default" name="toTeachers"><span>Teachers</span></a></div>
+                <div class="dropdown link">
+	              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+	                <span>Add</span>
+	                <div class="caret"></div>
+	              </button>
+	              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+	                <li><a href="add/AddGroup.jsp?userId=${user.id}"><span>Group</span></a></li>
+	                <li><a href="add/AddStudent.jsp?userId=${user.id}"><span>Student</span></a></li>
+	                <li><a href="add/AddTeacher.jsp?userId=${user.id}"><span>Teacher</span></a></li>
+	              </ul>
+	            </div>
+            </sec:authorize>
+            <!--div class="link"><a href="ChangeUsername?userId=${user.id}" name="changeLogin"><span>Change login</span></a></div-->
+            <div class="link"><a href="ChangePassword?userId=${user.id}" class="btn btn-default" name="changePassword"><span>Change password</span></a></div>
         </div>
-        <div>
-            <br>
+        <div id="logout">
             <!--a href="../logout" name="logout">Logout</a-->
             <form action="j_spring_security_logout" method="POST">
                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
