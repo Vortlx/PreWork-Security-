@@ -3,8 +3,10 @@
  */
 function showGroup(groupId, userId){
 	// Create table
-	$("#specifyGroup").html("<a href=\"/\" name=\"Back\" onclick=\"return hideInfo()\">Hide</a>" +
-							"<table id=\"groupInfo\" border=\"1\">" +
+	$("#specifyGroup").html("<div class=\"link\">"+
+							"<a href=\"/\" name=\"Back\" class=\"btn btn-default\" onclick=\"return hideInfo()\">Hide</a>" +
+							"</div>" + 
+							"<table id=\"groupInfo\" class=\"table-bordered\">" +
 								"<thead>" +
 									 // "<tr>" +
 									 // 	"<th colspan=\"2\">${group.name}</th>" +
@@ -37,4 +39,4 @@ function showGroup(groupId, userId){
 function hideInfo(){
     $("#specifyGroup").html("");
     return false;
-}
+};

@@ -19,4 +19,4 @@ function showStudentSubjects(userId){
 function hideInfo(){
     $("#specifyGroup").html("");
     return false;
-}
+};

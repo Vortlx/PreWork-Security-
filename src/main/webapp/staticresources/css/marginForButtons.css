@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+div .link{
+    margin-bottom: 5px;
+}
+
+#logout{
+    margin-top: 25px;
+}
+
+span{
+    font-weight: 600;            
+}

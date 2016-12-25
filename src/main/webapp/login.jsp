@@ -19,7 +19,7 @@
 	</head>
 	<body>
         <div class="container upMargin">
-           <form action="j_spring_security_check" class="form-horizontal" method="POST">
+           <form action="j_spring_security_check" method="POST" class="form-horizontal">
                 <div class="row">
 	                <div class="form-group">
 	                    <label for="username" class="col-sm-2 control-label">Login: </label>
