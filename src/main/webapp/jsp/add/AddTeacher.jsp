@@ -48,8 +48,8 @@
 		                <div class="col-sm-7">
 		                  <input name="subjectName" id="subjectName" class="form-control" type="text"/>
 		                </div>
-		                <div class="col-sm-3">
-		                    <select name="subjectType">
+		                <div class="col-sm-2">
+		                    <select name="subjectType" class="form-control">
 		                        <option value="LECTURE">Lecture</option>
 		                        <option value="PRACTICE">Practice</option>
 		                    </select>

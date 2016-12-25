@@ -27,7 +27,7 @@
         <div class="container">
 	        <div class="row">
 	            <!-- Greeting user (Department, Teacher ot Student) -->
-	            <div class="col-sm-4 alert alert-info" role="alert">
+	            <div class="col-sm-12 alert alert-info" role="alert">
 	                <c:if test="${user.department != null}">
 	                    <h3>${user.department.name}</h3>
 	                </c:if>
