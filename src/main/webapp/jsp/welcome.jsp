@@ -54,8 +54,16 @@
             </div>
             <div id="content">
                 <sec:authorize access="hasRole('ROLE_STUDENT')">
-                    <div class="link"><a href="#" class="btn btn-default" name="toMyGroup" onclick="return showGroup(null, ${user.id})">My Group</a></div>
-                    <div class="link"><a href="#" class="btn btn-default" name="toMySubjects" onclick="return showStudentSubjects(${user.id})">My Subjects</a></div>
+                    <div class="link">
+                        <a href="#" class="btn btn-default" name="toMyGroup" onclick="return showGroup(null, ${user.id})">
+                            <span>My Group</span>
+                        </a>
+                    </div>
+                    <div class="link">
+                        <a href="#" class="btn btn-default" name="toMySubjects" onclick="return showStudentSubjects(${user.id})">
+                            <span>My Subjects</span>
+                        </a>
+                    </div>
                 </sec:authorize>
                 <sec:authorize access="hasAnyRole('ROLE_TEACHER', 'ROLE_DEPARTMENT')">
                     <div class="link"><a href="Groups?userId=${user.id}" class="btn btn-default" name="toGroups"><span>Groups</span></a></div>
@@ -75,8 +83,7 @@
                       </ul>
                     </div>
                 </sec:authorize>
-                <!--div class="link"><a href="ChangeUsername?userId=${user.id}" name="changeLogin"><span>Change login</span></a></div-->
-                <div class="link"><a href="ChangePassword?userId=${user.id}" class="btn btn-default" name="changePassword"><span>Change password</span></a></div>
+                <div class="link"><a href="update/ChangePassword.jsp?userId=${user.id}" class="btn btn-default" name="changePassword"><span>Change password</span></a></div>
             </div>
             <div id="logout">
                 <!--a href="../logout" name="logout">Logout</a-->
