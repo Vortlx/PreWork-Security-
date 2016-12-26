@@ -80,7 +80,7 @@
 				        </script>
 				    </div>
 	            </div>
-	            <div class="col-sm-3">
+	            <div class="col-sm-4">
 		            <div id="newSubject">
 		            </div>
 	            </div>

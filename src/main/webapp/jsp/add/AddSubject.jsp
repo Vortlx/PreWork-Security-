@@ -19,7 +19,7 @@
 	            <div class="row">
 	                <div class="form-group">
 	                    <label for="subjectName" class="col-sm-2 control-label">Subject:</label>
-	                    <div class="col-sm-2">
+	                    <div class="col-sm-3">
 		                    <select name="subjectName" id="subjectName" class="form-control">
 				                <c:forEach items="${subjects}" var="subject">
 				                    <option value="${subject.name}">${subject.name}</option>

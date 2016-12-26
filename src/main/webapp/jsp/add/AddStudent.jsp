@@ -44,7 +44,7 @@
 	            </div>
 	            <div class="form-group">
 		            <div class="row">
-	                    <div class="col-sm-offset-2 col-sm-1">
+	                    <div class="col-sm-offset-2 col-sm-2">
 	                        <select name="groupId" class="form-control">
 	                            <c:forEach items="${groups}" var="group">
 	                                <option value="${group.id}">
