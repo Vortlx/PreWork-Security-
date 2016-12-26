@@ -79,7 +79,7 @@
 		                      </button>
 		                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 		                        <li><a href="add/AddGroup.jsp?userId=${user.id}"><span>Group</span></a></li>
-		                        <li><a href="add/AddStudent.jsp?userId=${user.id}"><span>Student</span></a></li>
+		                        <li><a href="add/AddStudentPage?userId=${user.id}"><span>Student</span></a></li>
 		                        <li><a href="add/AddTeacher.jsp?userId=${user.id}"><span>Teacher</span></a></li>
 		                      </ul>
 		                    </div>

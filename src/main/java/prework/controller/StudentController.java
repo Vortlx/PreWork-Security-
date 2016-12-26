@@ -29,42 +29,56 @@ public class StudentController {
     @Autowired
     private GroupService groupService;
 
+    @RequestMapping(value = "add/AddStudentPage", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
+    public String addStudentPage(@RequestParam("userId") int userId,
+                                Model model) {
+
+        User user = userService.getById(userId);
+        Department department = user.getDepartment();
+
+        model.addAttribute("groups", department.getGroups());
+        model.addAttribute("userId", userId);
+        return "AddStudent.jsp";
+    }
+
     @RequestMapping(value = "add/AddStudent", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String addStudent(@RequestParam("name") String name, @RequestParam("familyName") String familyName,
-                             @RequestParam("groupID") int groupId,
+                             @RequestParam("groupId") int groupId,
                              Model model) {
+
+        String message = "";
         try {
             studentService.add(name, familyName, groupId);
+            message = "Operation was success!";
         } catch (Exception e) {
             e.printStackTrace();
+            message = "Can't do this operation.";
 
+        } finally{
             Group group = groupService.getById(groupId);
 
-            String message = "Can't do this operation.";
             model.addAttribute("message", message);
             model.addAttribute("groups", group.getDepartment().getGroups());
-            return "add/AddStudent.jsp";
         }
 
-        return "../welcome";
+        return "AddStudent.jsp";
     }
 
-    @RequestMapping(value = "DeleteStudent", method = RequestMethod.GET)
+    @RequestMapping(value = "delete/DeleteStudent", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
-    public String deleteStudent(@RequestParam("studentId") int studentId, Model model) {
+    public String deleteStudent(@RequestParam("studentId") int studentId,
+                                @RequestParam("userId") int userId, Model model) {
 
         try {
             studentService.deleteById(studentId);
-            Student student = studentService.getById(studentId);
-            Department department = student.getDepartment();
-
-            model.addAttribute("userId", department.getUser().getId());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            return "Students.jsp";
+            model.addAttribute("userId", userId);
         }
+        return "../search/Students.jsp";
     }
 
     @RequestMapping(value = "ChangeGroupPage", method = RequestMethod.GET)

@@ -22,7 +22,7 @@
 	<body>
 	    <div class="container upMargin">
 	        <div class="row">
-	            <div class="col-sm-9">
+	            <div class="col-sm-7">
 		            <div id="tableParent">
 				        <sec:authorize access="hasRole('ROLE_STUDENT')">
 				            <div class="link">

@@ -21,7 +21,7 @@
 	<body>
 	    <div class="container upMargin">
 	        <div class="row">
-	            <div class="col-sm-9">
+	            <div class="col-sm-8">
 		            <div class="link">
 				        <a href="../welcome" class="btn btn-default" name="back">Back</a>
 				    </div>
@@ -77,8 +77,8 @@
 				                        searchable: false,
 				                        orderable: false,
 				                        render: function(data, type, row){
-				                            return "<a href=\"../DeleteStudent?studentId=" + row.id +
-				                                "\" name=\"deleteStudent\">Delete</a>";
+				                            return "<a href=\"../delete/DeleteStudent?studentId=" + row.id +
+				                                "&userId=" + userId + "\" name=\"deleteStudent\">Delete</a>";
 				                        }
 				                    }
 				                ]

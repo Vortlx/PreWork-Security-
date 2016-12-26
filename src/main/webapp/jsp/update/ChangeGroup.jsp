@@ -19,7 +19,7 @@
 		        <div class="row">
 		            <div class="form-group">
 		                <label for="newGroupId" class="col-sm-2 control-label">Group Name:</label>
-		                <div class="col-sm-1">
+		                <div class="col-sm-2">
 		                    <select name="newGroupId" id="newGroupId" class="form-control">
 		                        <c:forEach items="${groups}" var="group">
 		                            <option value="${group.id}">${group.name}</option>
