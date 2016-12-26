@@ -2,8 +2,4 @@
 
 2. not handled code 500
 
-3. After changing username can't find user and request return code 500
-
-4. Reconfigure url mapping
-
-5. Incorrect css style for add pages forms
+3. Reconfigure url mapping
