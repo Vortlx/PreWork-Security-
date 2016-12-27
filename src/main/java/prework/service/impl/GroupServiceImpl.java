@@ -59,6 +59,10 @@ public class GroupServiceImpl implements GroupService {
         return daoGroup.findByDepartmentId(depId, new PageRequest(page - 1, COUNT_PAGES, Sort.Direction.ASC, "name"));
     }
 
+    public Page<Group> getBySubjectsTeacherId(int teacherId, int page) {
+        return daoGroup.findBySubjectsTeacherId(teacherId, new PageRequest(page - 1, COUNT_PAGES, Sort.Direction.ASC, "name"));
+    }
+
     @Transactional(readOnly = true)
     public Iterable<Group> getAll() {
         return daoGroup.findAll();

@@ -96,12 +96,21 @@
 	            </div>
 	        </div>
 	        <div class="row">
-	           <div class="col-sm-offset-2 col-sm-1">
-	               <a href="Teachers.jsp?userId=1&page=${param.page - 1}">prev</a>
-	           </div>
-	           <div class="col-sm-offset-2 col-sm-1">
-	           <a href="Teachers.jsp?userId=1&page=${param.page + 1}">next</a>
-               </div>
+				<div class="btn-toolbar">
+					<div class="btn-group">
+						<div class=" col-sm-1">
+							<a href="Teachers.jsp?userId=${param.userId}&page=${param.page - 1}" class="btn btn-default">&lt;</a>
+						</div>
+					</div>
+					<div class="btn-group">
+						<a href="#" class="btn btn-default">...</a>
+					</div>
+					<div class="btn-group">
+						<div class="col-sm-1">
+							<a href="Teachers.jsp?userId=${param.userId}&page=${param.page + 1}" class="btn btn-default">&gt;</a>
+						</div>
+					</div>
+				</div>
 	        </div>
 	    </div>
 	</body>

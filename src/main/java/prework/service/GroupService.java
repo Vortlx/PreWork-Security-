@@ -5,6 +5,7 @@ import prework.entities.Group;
 import java.util.Set;
 
 import org.springframework.data.domain.Page;
+import prework.entities.Subject;
 
 public interface GroupService {
 
@@ -17,6 +18,8 @@ public interface GroupService {
     Group getById(int groupId);
     
     Page<Group> getByDepartmentId(int depId, int page);
+
+    Page<Group> getBySubjectsTeacherId(int teacherId, int page);
 
     Iterable<Group> getAll();
 

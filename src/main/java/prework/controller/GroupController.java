@@ -140,8 +140,14 @@ public class GroupController {
 
         try {
             User user = userService.getById(userId);
-            Department department = user.getDepartment();
-            Page<Group> groups = groupService.getByDepartmentId(department.getId(), page);
+            Page<Group> groups = null;
+            if(user.getDepartment() != null){
+                Department department = user.getDepartment();
+                groups = groupService.getByDepartmentId(department.getId(), page);
+            } else{
+                Teacher teacher = user.getTeacher();
+                groups = groupService.getBySubjectsTeacherId(teacher.getId(), page);
+            }
 
             model.addAttribute("groups", groups.getContent());
         } catch (Exception e) {
