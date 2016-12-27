@@ -3,6 +3,10 @@
     margin-top: 40px;
 }
 
+.paging{
+    margin-top: 10px;
+}
+
 .error{
 	color: RED;
 }

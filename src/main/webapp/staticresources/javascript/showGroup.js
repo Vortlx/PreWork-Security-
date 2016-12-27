@@ -29,6 +29,10 @@ function showGroup(groupId, userId, page){
             },
             dataSrc: ""
 		},
+        bFilter : false,
+        bLengthChange: false,
+        paging: false,
+        info: false,
         columns: [
 			{data: "name"},
 			{data: "familyName"}

@@ -42,7 +42,7 @@
 			                        </td>
 			                        <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
 			                            <td>
-			                                <a href="MySubjects?userId=${userId}&groupId=${group.id}" name="subjects">Subjects</a>
+			                                <a href="MySubjects?userId=${userId}&groupId=${group.id}&page=1" name="subjects">Subjects</a>
 			                            </td>
 			                            <td>
 			                                <a href="DeleteGroup?userId=${userId}&groupId=${group.id}" name="deleteGroup">Delete</a>
@@ -55,7 +55,11 @@
 			        <script>
 			            $(document).ready(function(){
 			                $("#tableGroups").dataTable({
-			                    columnDefs: [{
+                                bFilter : false,
+                                bLengthChange: false,
+                                paging: false,
+                                info: false,
+                                columnDefs: [{
 			                        targets: [1, 2],
 			                        searcheable: false,
 			                        orderable: false
@@ -69,7 +73,7 @@
 		            </div>
 		        </div>
 		    </div>
-		    <div class="row">
+		    <div class="row paging">
 				<div class="btn-toolbar">
 					<div class="btn-group">
 						<div class="col-sm-1">

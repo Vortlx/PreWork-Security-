@@ -56,7 +56,11 @@
 				                    },
 				                    dataSrc: ""
 				                },
-				                "columnDefs": [
+                                bFilter : false,
+                                bLengthChange: false,
+                                paging: false,
+                                info: false,
+				                columnDefs: [
 				                    {
 				                        targets: 0,
 				                        data:"name"
@@ -95,7 +99,7 @@
 		            </div>
 	            </div>
 	        </div>
-	        <div class="row">
+	        <div class="row paging">
 				<div class="btn-toolbar">
 					<div class="btn-group">
 						<div class="col-sm-1">

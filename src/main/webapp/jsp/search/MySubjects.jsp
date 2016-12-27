@@ -31,7 +31,7 @@
 				        </sec:authorize>
 				        <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
 				            <div class="link">
-				                <a href="Groups?userId=${userId}" class="btn btn-default" name="Back">Back</a>
+				                <a href="Groups?userId=${param.userId}&page=1" class="btn btn-default" name="Back">Back</a>
 				            </div>
 				        </sec:authorize>
 				        <table id="subjectList" class="table-bordered">
@@ -75,7 +75,12 @@
 				        </table>
 				        <script>
 				            $(document).ready(function(){
-				                $("#subjectList").dataTable();
+				                $("#subjectList").dataTable({
+                                    bFilter : false,
+                                    bLengthChange: false,
+                                    paging: false,
+                                    info: false
+								});
 				            })
 				        </script>
 				    </div>
@@ -85,12 +90,21 @@
 		            </div>
 	            </div>
 	        </div>
-	        <div class="row">
-	            <div class="col-sm-offset-2 col-sm-1">
-                    <a href="Teachers.jsp?userId=1&page=${param.page - 1}">prev</a>
-				</div>
-				<div class="col-sm-offset-2 col-sm-1">
-                    <a href="Teachers.jsp?userId=1&page=${param.page + 1}">next</a>
+	        <div class="row paging">
+				<div class="btn-toolbar">
+					<div class="btn-group">
+						<div class="col-sm-1">
+							<a href="MySubjects?userId=1&page=${param.page - 1}" class="btn btn-default">&lt;</a>
+						</div>
+					</div>
+					<div class="btn-group">
+						<a href="#" class="btn btn-default">...</a>
+					</div>
+					<div class="btn-group">
+						<div class="col-sm-1">
+							<a href="MySubjects?userId=1&page=${param.page + 1}" class="btn btn-default">&gt;</a>
+						</div>
+					</div>
 				</div>
 	        </div>
 	    </div>
