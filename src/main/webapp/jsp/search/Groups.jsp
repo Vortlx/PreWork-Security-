@@ -69,6 +69,14 @@
 		            </div>
 		        </div>
 		    </div>
+		    <div class="row">
+                <div class="col-sm-offset-2 col-sm-1">
+                    <a href="Groups?userId=1&page=${param.page - 1}">prev</a>
+                </div>
+                <div class="col-sm-offset-2 col-sm-1">
+                    <a href="Groups?userId=1&page=${param.page + 1}">next</a>
+                </div>
+		    </div>
 	    </div>
 	</body>
 </html>

@@ -58,7 +58,7 @@ public class TeacherServiceImpl implements TeacherService{
         return daoTeacher.findOne(teacherId);
     }
 
-    public Page<Teacher> gettByDepartmentId(int depId, int page) {
+    public Page<Teacher> getByDepartmentId(int depId, int page) {
         return daoTeacher.findByDepartmentId(depId, new PageRequest(page - 1, COUNT_PAGES, Sort.Direction.ASC, "name"));
     }
 

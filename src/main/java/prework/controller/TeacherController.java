@@ -82,7 +82,7 @@ public class TeacherController {
         String answer = "";
         try {
             Department department = userService.getDepartment(userId);
-            Page<Teacher> teachers = teacherService.gettByDepartmentId(department.getId(), page);
+            Page<Teacher> teachers = teacherService.getByDepartmentId(department.getId(), page);
 
             answer = gson.toJson(teachers.getContent());
         } catch (Exception e) {

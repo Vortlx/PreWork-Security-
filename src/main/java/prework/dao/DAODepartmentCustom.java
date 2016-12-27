@@ -16,8 +16,6 @@ public interface DAODepartmentCustom {
 
     Department getByName(String name);
 
-    List<Group> getGroups(int depId);
-
     Group getGroup(int depId, String groupName);
 
     Teacher getTeacher(int depId, String teacherName, String teacherFamilyName);

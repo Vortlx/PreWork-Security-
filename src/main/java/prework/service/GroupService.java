@@ -2,8 +2,9 @@ package prework.service;
 
 import prework.entities.Group;
 
-import java.util.List;
 import java.util.Set;
+
+import org.springframework.data.domain.Page;
 
 public interface GroupService {
 
@@ -14,6 +15,8 @@ public interface GroupService {
     void deleteSubject(int groupId, int subjectId);
 
     Group getById(int groupId);
+    
+    Page<Group> getByDepartmentId(int depId, int page);
 
     Iterable<Group> getAll();
 

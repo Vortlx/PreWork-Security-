@@ -15,7 +15,7 @@ public interface TeacherService {
 
     Teacher getById(int teacherId);
     
-    Page<Teacher> gettByDepartmentId(int depId, int page);
+    Page<Teacher> getByDepartmentId(int depId, int page);
 
     List<Teacher> getTeacher(String name, String familyName) throws Exception;
 

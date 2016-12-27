@@ -4,4 +4,5 @@
 
 3. Reconfigure url mapping
 
-4. KASTILI in Teachers.jsp (js, next pages)
+4. KASTILI in Teachers.jsp (js, next pages),
+				Group.jsp (next pages)

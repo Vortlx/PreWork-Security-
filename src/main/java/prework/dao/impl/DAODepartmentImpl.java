@@ -43,14 +43,6 @@ public class DAODepartmentImpl implements DAODepartmentCustom {
         return (Department) query.getSingleResult();
     }
 
-    public List<Group> getGroups(int depId) {
-        String getGroupsQuery = "select groups from Department where id = :id";
-        Query query = entityManager.createQuery(getGroupsQuery);
-        query.setParameter("id", depId);
-
-        return query.getResultList();
-    }
-
     public Group getGroup(int depId, String groupName) {
         String getGroupsQuery = "select gr from Group gr inner join gr.department dep" +
                                     " where gr.name = :name and dep.id = :id";
@@ -59,14 +51,6 @@ public class DAODepartmentImpl implements DAODepartmentCustom {
         query.setParameter("id", depId);
 
         return (Group) query.getSingleResult();
-    }
-
-    public List<Teacher> getTeachers(int depId) {
-        String getTeachersQuery = "select teachers from Department where id = :id";
-        Query query = entityManager.createQuery(getTeachersQuery);
-        query.setParameter("id", depId);
-
-        return query.getResultList();
     }
 
     public Teacher getTeacher(int depId, String teacherName, String teacherFamilyName) {

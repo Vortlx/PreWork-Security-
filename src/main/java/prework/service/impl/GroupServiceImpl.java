@@ -1,6 +1,9 @@
 package prework.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import prework.dao.crudinterface.DAOGroup;
@@ -22,6 +25,8 @@ public class GroupServiceImpl implements GroupService {
 
     @Autowired
     private DAOGroup daoGroup;
+    
+    private static final int COUNT_PAGES = 10;
 
     @Transactional(rollbackFor = Exception.class)
     public void add(String groupName, int depId) {
@@ -48,6 +53,10 @@ public class GroupServiceImpl implements GroupService {
     @Transactional(readOnly = true)
     public Group getById(int groupId) {
         return daoGroup.findOne(groupId);
+    }
+
+    public Page<Group> getByDepartmentId(int depId, int page) {
+        return daoGroup.findByDepartmentId(depId, new PageRequest(page - 1, COUNT_PAGES, Sort.Direction.ASC, "name"));
     }
 
     @Transactional(readOnly = true)

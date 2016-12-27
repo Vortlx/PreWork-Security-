@@ -1,6 +1,7 @@
 package prework.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -134,17 +135,20 @@ public class GroupController {
 
     @RequestMapping(value = "Groups", method = RequestMethod.GET)
     @PreAuthorize("hasAnyRole('ROLE_DEPARTMENT', 'ROLE_TEACHER')")
-    public String findGroups(@RequestParam("userId") int userId, Model model) {
+    public String findGroups(@RequestParam("userId") int userId,
+                             @RequestParam("page") int page, Model model) {
 
         try {
-            Set<Group> groups = groupService.getAll(userId);
+            User user = userService.getById(userId);
+            Department department = user.getDepartment();
+            Page<Group> groups = groupService.getByDepartmentId(department.getId(), page);
 
-            model.addAttribute("groups", groups);
+            model.addAttribute("groups", groups.getContent());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             model.addAttribute("userId", userId);
-            return "search/Groups.jsp";
         }
+        return "search/Groups.jsp";
     }
 }

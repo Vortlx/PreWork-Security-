@@ -56,7 +56,7 @@
 		                </sec:authorize>
 		                <sec:authorize access="hasAnyRole('ROLE_TEACHER', 'ROLE_DEPARTMENT')">
 		                    <div class="link">
-		                        <a href="Groups?userId=${user.id}" class="btn btn-default" name="toGroups">
+		                        <a href="Groups?userId=${user.id}&page=1" class="btn btn-default" name="toGroups">
 		                            <span>Groups</span>
 		                        </a>
 		                    </div>
