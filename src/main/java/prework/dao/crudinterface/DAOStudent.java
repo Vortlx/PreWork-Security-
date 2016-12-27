@@ -11,4 +11,5 @@ public interface DAOStudent extends JpaRepository<Student, Integer>, DAOStudentC
 
     Page<Student> findByGroupDepartmentId(int id, Pageable pageable);
     
+    Page<Student> findByGroupId(int id, Pageable pageable);
 }

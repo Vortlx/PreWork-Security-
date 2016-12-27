@@ -88,4 +88,8 @@ public class StudentServiceImpl implements StudentService{
     public Page<Student> getByGroupDepartmentId(int depId, int page){
         return daoStudent.findByGroupDepartmentId(depId, new PageRequest(page - 1, COUNT_PAGES, Sort.Direction.ASC, "name"));
     }
+
+    public Page<Student> getByGroupId(int groupId, int page) {
+        return daoStudent.findByGroupId(groupId, new PageRequest(page - 1, COUNT_PAGES, Sort.Direction.ASC, "name"));
+    }
 }

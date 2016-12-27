@@ -6,6 +6,7 @@ import prework.entities.Student;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 
 public interface StudentService {
@@ -27,4 +28,6 @@ public interface StudentService {
     Iterable<Student> getAll() throws Exception;
 
     Page<Student> getByGroupDepartmentId(int depId, int page);
+    
+    Page<Student> getByGroupId(int groupId, int page);
 }

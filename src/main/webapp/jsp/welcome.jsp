@@ -26,7 +26,7 @@
 	<body>
         <div class="container">
 	        <div class="row">
-	            <!-- Greeting user (Department, Teacher ot Student) -->
+	            <!-- Greeting user (Department, Teacher or Student) -->
 	            <div class="col-sm-12 alert alert-info" role="alert">
 	                <c:if test="${user.department != null}">
 	                    <h3>${user.department.name}</h3>
@@ -44,12 +44,12 @@
 		            <div id="content">
 		                <sec:authorize access="hasRole('ROLE_STUDENT')">
 		                    <div class="link">
-		                        <a href="#" class="btn btn-default" name="toMyGroup" onclick="return showGroup(null, ${user.id})">
+		                        <a href="#" class="btn btn-default" name="toMyGroup" onclick="return showGroup(null, ${user.id}, 1)">
 		                            <span>My Group</span>
 		                        </a>
 		                    </div>
 		                    <div class="link">
-		                        <a href="#" class="btn btn-default" name="toMySubjects" onclick="return showStudentSubjects(${user.id})">
+		                        <a href="#" class="btn btn-default" name="toMySubjects" onclick="return showStudentSubjects(${user.id}, 1)">
 		                            <span>My Subjects</span>
 		                        </a>
 		                    </div>

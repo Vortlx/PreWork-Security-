@@ -1,12 +1,13 @@
 /**
  * Created by lebedevas on 19.12.2016.
  */
-function showStudentSubjects(userId){
+function showStudentSubjects(userId, page){
     $.ajax({
         url: "MySubjects",
         type: "GET",
         data: {
-            userId: userId
+            userId: userId,
+            page: page
         },
         success: function(data){
             $("#specifyGroup").html(data);

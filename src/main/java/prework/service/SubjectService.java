@@ -5,6 +5,9 @@ import prework.entities.SubjectType;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 public interface SubjectService {
 
     Subject add(Subject subject);
@@ -18,4 +21,6 @@ public interface SubjectService {
     Iterable<Subject> getAll();
 
     Subject getByNameAndType(String name, SubjectType type);
+    
+    Page<Subject> getByGroupId(int groupId, int page);
 }

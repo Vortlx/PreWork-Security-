@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import prework.entities.*;
 import prework.service.*;
 
-import java.util.Set;
 
 @Controller
 @RequestMapping(value = "jsp")
@@ -29,6 +28,9 @@ public class StudentController {
 
     @Autowired
     private GroupService groupService;
+    
+    @Autowired
+    private SubjectService subjectService;
 
     @RequestMapping(value = "add/AddStudentPage", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
@@ -122,17 +124,17 @@ public class StudentController {
     @RequestMapping(value = "MyGroup", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String findMyGroup(@RequestParam(name = "userId", required = false) Integer userId,
-                              @RequestParam(name = "groupId", required = false) Integer groupId) {
+                              @RequestParam(name = "groupId", required = false) Integer groupId,
+                              @RequestParam("page") int page) {
 
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         String answer = "";
         try {
             if (groupId != null) {
-                Group group = groupService.getById(groupId);
-                answer = gson.toJson(group.getStudents());
+                answer = gson.toJson(studentService.getByGroupId(groupId, page).getContent());
             } else {
                 Student student = userService.getStudent(userId);
-                answer = gson.toJson(student.getGroup().getStudents());
+                answer = gson.toJson(studentService.getByGroupId(student.getGroup().getId(), page).getContent());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -143,20 +145,18 @@ public class StudentController {
     @RequestMapping(value = "MySubjects", method = {RequestMethod.GET, RequestMethod.POST})
     public String findMySubjects(@RequestParam(name = "userId", required = false) int userId,
                                  @RequestParam(name = "groupId", required = false) Integer groupId,
+                                 @RequestParam("page") int page,
                                  Model model) {
         try {
             if (groupId != null) {
-                Group group = groupService.getById(groupId);
-
-                model.addAttribute("subjects", group.getSubjects());
+                model.addAttribute("subjects", subjectService.getByGroupId(groupId, page).getContent());
                 model.addAttribute("userId", userId);
                 model.addAttribute("groupId", groupId);
             } else {
                 Student student = userService.getStudent(userId);
 
-                model.addAttribute("subjects", student.getGroup().getSubjects());
+                model.addAttribute("subjects", subjectService.getByGroupId(student.getGroup().getId(), page).getContent());
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

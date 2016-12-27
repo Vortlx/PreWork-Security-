@@ -7,3 +7,5 @@
 4. KASTILI in Teachers.jsp (jsp: js, next pages),
 				Group.jsp (jsp: next pages),
 				Students.jsp (jsp: js, next pages),
+				MyGroups,
+				MySubjects

@@ -1,6 +1,9 @@
 package prework.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import prework.dao.crudinterface.DAOSubject;
@@ -18,6 +21,8 @@ public class SubjectServiceImpl implements SubjectService{
 
     @Autowired
     private GroupService groupService;
+    
+    private static final int COUNT_PAGES = 10;
 
     @Transactional(rollbackFor = Exception.class)
     public Subject add(Subject subject) {
@@ -55,5 +60,9 @@ public class SubjectServiceImpl implements SubjectService{
     @Transactional(readOnly = true)
     public Subject getByNameAndType(String name, SubjectType type) {
         return daoSubject.getByNameAndType(name, type);
+    }
+
+    public Page<Subject> getByGroupId(int groupId, int page) {
+        return daoSubject.findByGroupsId(groupId, new PageRequest(page, COUNT_PAGES, Sort.Direction.ASC, "name"));
     }
 }

@@ -1,7 +1,7 @@
 /**
  * Created by lebedevas on 15.12.2016.
  */
-function showGroup(groupId, userId){
+function showGroup(groupId, userId, page){
 	// Create table
 	$("#specifyGroup").html("<div class=\"link\">"+
 							"<a href=\"/\" name=\"Back\" class=\"btn btn-default\" onclick=\"return hideInfo()\">Hide</a>" +
@@ -24,7 +24,8 @@ function showGroup(groupId, userId){
             type: "GET",
             data: {
                 groupId: groupId,
-                userId: userId
+                userId: userId,
+                page: page
             },
             dataSrc: ""
 		},
