@@ -3,3 +3,5 @@
 2. not handled code 500
 
 3. Reconfigure url mapping
+
+4. KASTILI in Teachers.jsp (js, next pages)

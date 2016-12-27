@@ -63,12 +63,12 @@
 		                </sec:authorize>
 		                <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
 		                    <div class="link">
-		                        <a href="search/Students.jsp?userId=${user.id}" class="btn btn-default" name="toStudents">
+		                        <a href="search/Students.jsp?userId=${user.id}&page=1" class="btn btn-default" name="toStudents">
 		                           <span>Students</span>
 		                        </a>
 		                    </div>
 		                    <div class="link">
-		                        <a href="search/Teachers.jsp?userId=${user.id}" class="btn btn-default" name="toTeachers">
+		                        <a href="search/Teachers.jsp?userId=${user.id}&page=1" class="btn btn-default" name="toTeachers">
 		                           <span>Teachers</span>
 		                        </a>
 		                    </div>

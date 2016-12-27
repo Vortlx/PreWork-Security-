@@ -3,6 +3,7 @@ package prework.controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -13,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import prework.entities.*;
 import prework.service.*;
-
-import java.util.Set;
 
 @Controller
 @RequestMapping(value = "jsp")
@@ -76,15 +75,16 @@ public class TeacherController {
     @RequestMapping(value = "Teachers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     @ResponseBody
-    public String findTeachers(@RequestParam(name = "userId", required = false) int userId) {
+    public String findTeachers(@RequestParam(name = "userId", required = false) int userId,
+                                @RequestParam("page") int page) {
 
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         String answer = "";
         try {
             Department department = userService.getDepartment(userId);
-            Set<Teacher> teachers = department.getTeachers();
+            Page<Teacher> teachers = teacherService.gettByDepartmentId(department.getId(), page);
 
-            answer = gson.toJson(teachers);
+            answer = gson.toJson(teachers.getContent());
         } catch (Exception e) {
             e.printStackTrace();
         }

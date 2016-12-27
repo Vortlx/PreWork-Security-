@@ -5,6 +5,8 @@ import prework.entities.Teacher;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 public interface TeacherService {
 
     void add(String name, String familyName, Subject subject, int depId) throws Exception;
@@ -12,6 +14,8 @@ public interface TeacherService {
     void deleteById(int teacherId);
 
     Teacher getById(int teacherId);
+    
+    Page<Teacher> gettByDepartmentId(int depId, int page);
 
     List<Teacher> getTeacher(String name, String familyName) throws Exception;
 

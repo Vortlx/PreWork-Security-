@@ -20,7 +20,5 @@ public interface DAODepartmentCustom {
 
     Group getGroup(int depId, String groupName);
 
-    List<Teacher> getTeachers(int depId);
-
     Teacher getTeacher(int depId, String teacherName, String teacherFamilyName);
 }
