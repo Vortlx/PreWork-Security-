@@ -22,5 +22,5 @@ public interface SubjectService {
 
     Subject getByNameAndType(String name, SubjectType type);
     
-    Page<Subject> getByGroupId(int groupId, int page);
+    Page<Subject> getByGroupsId(int id, int page);
 }

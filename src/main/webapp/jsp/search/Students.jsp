@@ -39,60 +39,6 @@
 				            </tbody>
 				        </table>
 				    </div>
-				    <script>
-				        $(document).ready(function(){
-				            // get userId from url
-				            var parameters = window.location.search.substr(1);
-				            var userId = 1// parameters.substr(parameters.indexOf("userId") + "userId".length + 1);
-				            var page = parameters.substr(parameters.indexOf("page") + "page".length + 1);
-				
-				            $("#studentsList").dataTable({
-				                ajax:{
-				                    url: "../Students",
-				                    type:"GET",
-				                    data: {
-				                    	userId: userId,
-				                    	page: page
-				                    },
-				                    dataSrc: ""
-				                },
-                                bFilter : false,
-                                bLengthChange: false,
-                                paging: false,
-                                info: false,
-				                columnDefs: [
-				                    {
-				                        targets: 0,
-				                        data:"name"
-				                    },
-				                    {
-				                        targets: 1,
-				                        data: "familyName"
-				                    },
-				                    {
-				                        targets: 2,
-				                        searchable: false,
-				                        data: "group.name",
-				                        render: function(data, type, row){
-				                            return  data + "<br>" +
-				                                    "<a href=\"#\" name=\"changeGroup\"" +
-				                                    " onclick=\"return showChangeGroup(" + userId +
-				                                    ", " + row.id + ")\">Change group</a>";
-				                        }
-				                    },
-				                    {
-				                        targets: 3,
-				                        searchable: false,
-				                        orderable: false,
-				                        render: function(data, type, row){
-				                            return "<a href=\"../delete/DeleteStudent?studentId=" + row.id +
-				                                "&userId=" + userId + "\" name=\"deleteStudent\">Delete</a>";
-				                        }
-				                    }
-				                ]
-				            });
-				        })
-				    </script>
 	            </div>
 	            <div class="col-sm-3">
 		            <div id="changeGroupForm">
@@ -117,5 +63,59 @@
 				</div>
             </div>
 	    </div>
+		<script>
+            $(document).ready(function(){
+                // get userId from url
+                var parameters = window.location.search.substr(1);
+                var userId = 1// parameters.substr(parameters.indexOf("userId") + "userId".length + 1);
+                var page = parameters.substr(parameters.indexOf("page") + "page".length + 1);
+
+                $("#studentsList").dataTable({
+                    ajax:{
+                        url: "../Students",
+                        type:"GET",
+                        data: {
+                            userId: userId,
+                            page: page
+                        },
+                        dataSrc: ""
+                    },
+                    bFilter : false,
+                    bLengthChange: false,
+                    paging: false,
+                    info: false,
+                    columnDefs: [
+                        {
+                            targets: 0,
+                            data:"name"
+                        },
+                        {
+                            targets: 1,
+                            data: "familyName"
+                        },
+                        {
+                            targets: 2,
+                            searchable: false,
+                            data: "group.name",
+                            render: function(data, type, row){
+                                return  data + "<br>" +
+                                    "<a href=\"#\" name=\"changeGroup\"" +
+                                    " onclick=\"return showChangeGroup(" + userId +
+                                    ", " + row.id + ")\">Change group</a>";
+                            }
+                        },
+                        {
+                            targets: 3,
+                            searchable: false,
+                            orderable: false,
+                            render: function(data, type, row){
+                                return "<a href=\"../delete/DeleteStudent?studentId=" + row.id +
+                                    "&userId=" + userId + "\" name=\"deleteStudent\">Delete</a>";
+                            }
+                        }
+                    ]
+                });
+            })
+		</script>
 	</body>
 </html>

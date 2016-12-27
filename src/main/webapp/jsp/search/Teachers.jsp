@@ -48,55 +48,6 @@
 				            </tbody>
 				        </table>
 				    </div>
-				    <script>
-				        $(document).ready(function(){
-				            // get userId from url
-				            var parameters = window.location.search.substr(1);
-				            var userId = 1; //parameters.substr(parameters.indexOf("userId") + "userId".length + 1);
-				            var page = parameters.substr(parameters.indexOf("page") + "page".length + 1);
-				
-				            $("#teachersList").dataTable({
-				                ajax:{
-				                    url: "../Teachers",
-				                    type: "GET",
-				                    data: {
-				                        userId: userId,
-				                        page: page
-				                    },
-				                    dataSrc: ""
-				                },
-                                bFilter : false,
-                                bLengthChange: false,
-                                paging: false,
-                                info: false,
-				                columnDefs: [
-				                    {
-				                        targets: 0,
-				                        data: "name"
-				                    },
-				                    {
-				                        targets: 1,
-				                        data: "familyName"
-				                    },
-				                    {
-				                        targets: 2,
-				                        data:function(row){
-				                            return row.subject.name + ": " + row.subject.type;
-				                        }
-				                    },
-				                    {
-				                        targets: 3,
-				                        searchable: false,
-				                        orderable: false,
-				                        render: function(data, type, row){
-				                            return "<a href=\"../delete/DeleteTeacher?teacherId=" + row.id +
-				                                "&userId=" + userId + "\" name=\"deleteTeacher\">Delete</a>";
-				                        }
-				                    }
-				                ]
-				            });
-				        })
-				    </script>
 	            </div>
 	        </div>
 	        <div class="row paging">
@@ -117,5 +68,54 @@
 				</div>
 	        </div>
 	    </div>
+		<script>
+            $(document).ready(function(){
+                // get userId from url
+                var parameters = window.location.search.substr(1);
+                var userId = 1; //parameters.substr(parameters.indexOf("userId") + "userId".length + 1);
+                var page = parameters.substr(parameters.indexOf("page") + "page".length + 1);
+
+                $("#teachersList").dataTable({
+                    ajax:{
+                        url: "../Teachers",
+                        type: "GET",
+                        data: {
+                            userId: userId,
+                            page: page
+                        },
+                        dataSrc: ""
+                    },
+                    bFilter : false,
+                    bLengthChange: false,
+                    paging: false,
+                    info: false,
+                    columnDefs: [
+                        {
+                            targets: 0,
+                            data: "name"
+                        },
+                        {
+                            targets: 1,
+                            data: "familyName"
+                        },
+                        {
+                            targets: 2,
+                            data:function(row){
+                                return row.subject.name + ": " + row.subject.type;
+                            }
+                        },
+                        {
+                            targets: 3,
+                            searchable: false,
+                            orderable: false,
+                            render: function(data, type, row){
+                                return "<a href=\"../delete/DeleteTeacher?teacherId=" + row.id +
+                                    "&userId=" + userId + "\" name=\"deleteTeacher\">Delete</a>";
+                            }
+                        }
+                    ]
+                });
+            })
+		</script>
 	</body>
 </html>

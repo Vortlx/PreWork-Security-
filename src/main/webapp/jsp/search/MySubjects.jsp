@@ -73,16 +73,6 @@
 				                </sec:authorize>
 				            </tbody>
 				        </table>
-				        <script>
-				            $(document).ready(function(){
-				                $("#subjectList").dataTable({
-                                    bFilter : false,
-                                    bLengthChange: false,
-                                    paging: false,
-                                    info: false
-								});
-				            })
-				        </script>
 				    </div>
 	            </div>
 	            <div class="col-sm-4">
@@ -108,5 +98,15 @@
 				</div>
 	        </div>
 	    </div>
+		<script>
+            $(document).ready(function(){
+                $("#subjectList").dataTable({
+                    bFilter : false,
+                    bLengthChange: false,
+                    paging: false,
+                    info: false
+                });
+            })
+		</script>
 	</body>
 </html>

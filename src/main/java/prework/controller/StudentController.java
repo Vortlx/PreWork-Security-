@@ -149,13 +149,12 @@ public class StudentController {
                                  Model model) {
         try {
             if (groupId != null) {
-                model.addAttribute("subjects", subjectService.getByGroupId(groupId, page).getContent());
+                model.addAttribute("subjects", subjectService.getByGroupsId(groupId, page).getContent());
                 model.addAttribute("userId", userId);
                 model.addAttribute("groupId", groupId);
             } else {
                 Student student = userService.getStudent(userId);
-
-                model.addAttribute("subjects", subjectService.getByGroupId(student.getGroup().getId(), page).getContent());
+                model.addAttribute("subjects", subjectService.getByGroupsId(student.getGroup().getId(), page).getContent());
             }
         } catch (Exception e) {
             e.printStackTrace();

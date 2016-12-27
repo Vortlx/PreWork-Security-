@@ -52,21 +52,6 @@
 			                </c:forEach>
 			            </tbody>
 			        </table>
-			        <script>
-			            $(document).ready(function(){
-			                $("#tableGroups").dataTable({
-                                bFilter : false,
-                                bLengthChange: false,
-                                paging: false,
-                                info: false,
-                                columnDefs: [{
-			                        targets: [1, 2],
-			                        searcheable: false,
-			                        orderable: false
-			                    }]
-			                });
-			            })
-			        </script>
 		        </div>
 		        <div class="col-sm-6">
 		            <div id="specifyGroup">
@@ -91,5 +76,20 @@
 				</div>
 		    </div>
 	    </div>
+        <script>
+            $(document).ready(function(){
+                $("#tableGroups").dataTable({
+                    bFilter : false,
+                    bLengthChange: false,
+                    paging: false,
+                    info: false,
+                    columnDefs: [{
+                        targets: [1, 2],
+                        searcheable: false,
+                        orderable: false
+                    }]
+                });
+            })
+        </script>
 	</body>
 </html>

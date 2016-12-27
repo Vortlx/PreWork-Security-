@@ -62,7 +62,7 @@ public class SubjectServiceImpl implements SubjectService{
         return daoSubject.getByNameAndType(name, type);
     }
 
-    public Page<Subject> getByGroupId(int groupId, int page) {
-        return daoSubject.findByGroupsId(groupId, new PageRequest(page, COUNT_PAGES, Sort.Direction.ASC, "name"));
+    public Page<Subject> getByGroupsId(int id, int page) {
+        return daoSubject.findByGroupsId(id, new PageRequest(page - 1, COUNT_PAGES, Sort.Direction.ASC, "name"));
     }
 }
