@@ -3,9 +3,3 @@
 2. not handled code 500
 
 3. Reconfigure url mapping
-
-4. KASTILI in Teachers.jsp (jsp: js, next pages),
-				Group.jsp (jsp: next pages),
-				Students.jsp (jsp: js, next pages),
-				MyGroups,
-				MySubjects

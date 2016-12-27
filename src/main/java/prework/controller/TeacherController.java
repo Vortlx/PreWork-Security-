@@ -60,7 +60,8 @@ public class TeacherController {
     @RequestMapping(value = "delete/DeleteTeacher", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String deleteTeacher(@RequestParam("teacherId") int teacherId,
-                                @RequestParam("userId") int userId, Model model ) {
+                                @RequestParam("userId") int userId,
+                                @RequestParam("page") int page, Model model ) {
 
         try {
             teacherService.deleteById(teacherId);
@@ -68,6 +69,7 @@ public class TeacherController {
             e.printStackTrace();
         } finally {
             model.addAttribute("userId", userId);
+            model.addAttribute("page", page);
         }
         return "../search/Teachers.jsp";
     }

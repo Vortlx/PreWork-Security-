@@ -17,6 +17,7 @@
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 	    <script src="../../staticresources/javascript/showChangeGroup.js"></script>
+		<script src="../../staticresources/javascript/getUrlParameters.js"></script>
 	</head>
 	<body>
 	    <div class="container upMargin">
@@ -65,18 +66,16 @@
 	    </div>
 		<script>
             $(document).ready(function(){
-                // get userId from url
-                var parameters = window.location.search.substr(1);
-                var userId = 1// parameters.substr(parameters.indexOf("userId") + "userId".length + 1);
-                var page = parameters.substr(parameters.indexOf("page") + "page".length + 1);
+				// Function return object with url parameters
+                var pars = getUrlParameters(window.location);
 
                 $("#studentsList").dataTable({
                     ajax:{
                         url: "../Students",
                         type:"GET",
                         data: {
-                            userId: userId,
-                            page: page
+                            userId: pars["userId"],
+                            page: pars["page"]
                         },
                         dataSrc: ""
                     },
@@ -100,7 +99,7 @@
                             render: function(data, type, row){
                                 return  data + "<br>" +
                                     "<a href=\"#\" name=\"changeGroup\"" +
-                                    " onclick=\"return showChangeGroup(" + userId +
+                                    " onclick=\"return showChangeGroup(" + pars["userId"] +
                                     ", " + row.id + ")\">Change group</a>";
                             }
                         },
@@ -110,7 +109,7 @@
                             orderable: false,
                             render: function(data, type, row){
                                 return "<a href=\"../delete/DeleteStudent?studentId=" + row.id +
-                                    "&userId=" + userId + "\" name=\"deleteStudent\">Delete</a>";
+                                    "&userId=" + pars["userId"] + "&page=" + pars["page"] + "\" name=\"deleteStudent\">Delete</a>";
                             }
                         }
                     ]

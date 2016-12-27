@@ -58,7 +58,7 @@
 				                        </td>
 				                        <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
 				                            <td>
-				                                <a href="DeleteSubject?groupId=${groupId}&subjectId=${subject.id}&userId=${userId}"
+				                                <a href="DeleteSubject?groupId=${groupId}&subjectId=${subject.id}&userId=${userId}&page=${param.page}"
 				                                   name="deleteSubject">Delete</a>
 				                            </td>
 				                        </sec:authorize>
@@ -67,7 +67,7 @@
 				                <sec:authorize  access="hasRole('ROLE_DEPARTMENT')">
 				                    <tr>
 				                        <td colspan="3">
-				                            <a href="/" name="addSubject" onclick="return showAddSubjects(${groupId}, ${userId})">Add</a>
+				                            <a href="/" name="addSubject" onclick="return showAddSubjects(${groupId}, ${userId}, ${param.page})">Add</a>
 				                        </td>
 				                    </tr>
 				                </sec:authorize>

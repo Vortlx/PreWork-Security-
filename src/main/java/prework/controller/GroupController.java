@@ -9,12 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import prework.entities.*;
-import prework.service.DepartmentService;
 import prework.service.GroupService;
 import prework.service.SubjectService;
 import prework.service.UserService;
-
-import java.util.Set;
 
 @Controller
 @RequestMapping(value = "jsp")
@@ -28,9 +25,6 @@ public class GroupController {
     
     @Autowired
     private UserService userService;
-    
-    @Autowired
-    private DepartmentService departmentService;
 
     @RequestMapping(value = "/add/AddGroup", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
@@ -58,6 +52,7 @@ public class GroupController {
     @RequestMapping(value = "AddSubjectPage", method = RequestMethod.GET)
     public String addSubjectPage(@RequestParam("groupId") int groupId,
                                  @RequestParam("userId") int userId,
+                                 @RequestParam("page") int page,
                                  Model model) {
         try {
             Iterable<Subject> subjects = subjectService.getAll();
@@ -65,6 +60,7 @@ public class GroupController {
             model.addAttribute("subjects", subjects);
             model.addAttribute("groupId", groupId);
             model.addAttribute("userId", userId);
+            model.addAttribute("page", page);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -77,6 +73,7 @@ public class GroupController {
                              @RequestParam("subjectType") String subjectType,
                              @RequestParam("groupId") int groupId,
                              @RequestParam("userId") int userId,
+                             @RequestParam("page") int page,
                              Model model) {
 
         try {
@@ -93,6 +90,7 @@ public class GroupController {
         } finally {
             model.addAttribute("groupId", groupId);
             model.addAttribute("userId", userId);
+            model.addAttribute("page", page);
         }
 
         return "MySubjects";
@@ -102,12 +100,14 @@ public class GroupController {
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String deleteGroup(@RequestParam("groupId") int groupId,
                               @RequestParam("userId") int userId,
+                              @RequestParam("page") int page,
                               Model model) {
 
         try {
             groupService.deleteById(groupId);
 
             model.addAttribute("userId", userId);
+            model.addAttribute("page", page);
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -120,12 +120,14 @@ public class GroupController {
     public String deleteSubjectFromGroup(@RequestParam("groupId") int groupId,
                                          @RequestParam("subjectId") int subjectId,
                                          @RequestParam("userId") int userId,
+                                         @RequestParam("page") int page,
                                          Model model) {
         try {
             groupService.deleteSubject(groupId, subjectId);
 
             model.addAttribute("groupId", groupId);
             model.addAttribute("userId", userId);
+            model.addAttribute("page", page);
         } catch (Exception e) {
             e.printStackTrace();
         }

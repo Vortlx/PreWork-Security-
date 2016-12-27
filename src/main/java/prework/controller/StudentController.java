@@ -72,7 +72,8 @@ public class StudentController {
     @RequestMapping(value = "delete/DeleteStudent", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String deleteStudent(@RequestParam("studentId") int studentId,
-                                @RequestParam("userId") int userId, Model model) {
+                                @RequestParam("userId") int userId,
+                                @RequestParam("page") int page, Model model) {
 
         try {
             studentService.deleteById(studentId);
@@ -80,6 +81,7 @@ public class StudentController {
             e.printStackTrace();
         } finally {
             model.addAttribute("userId", userId);
+            model.addAttribute("page", page);
         }
         return "../search/Students.jsp";
     }

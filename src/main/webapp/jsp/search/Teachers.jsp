@@ -16,6 +16,7 @@
 	        
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+		<script src="../../staticresources/javascript/getUrlParameters.js"></script>
 	</head>
 	<body>
 	    <div class="container upMargin">
@@ -70,18 +71,16 @@
 	    </div>
 		<script>
             $(document).ready(function(){
-                // get userId from url
-                var parameters = window.location.search.substr(1);
-                var userId = 1; //parameters.substr(parameters.indexOf("userId") + "userId".length + 1);
-                var page = parameters.substr(parameters.indexOf("page") + "page".length + 1);
+                // Function return object with url parameters
+                var pars = getUrlParameters(window.location);
 
                 $("#teachersList").dataTable({
                     ajax:{
                         url: "../Teachers",
                         type: "GET",
                         data: {
-                            userId: userId,
-                            page: page
+                            userId: pars["userId"],
+                            page: pars["page"]
                         },
                         dataSrc: ""
                     },
@@ -110,7 +109,7 @@
                             orderable: false,
                             render: function(data, type, row){
                                 return "<a href=\"../delete/DeleteTeacher?teacherId=" + row.id +
-                                    "&userId=" + userId + "\" name=\"deleteTeacher\">Delete</a>";
+                                    "&userId=" + pars["userId"] + "&page=" + pars["page"] + "\" name=\"deleteTeacher\">Delete</a>";
                             }
                         }
                     ]
