@@ -1,6 +1,9 @@
 package prework.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import prework.dao.crudinterface.DAOStudent;
@@ -27,6 +30,8 @@ public class StudentServiceImpl implements StudentService{
 
     @Autowired
     private DAOStudent daoStudent;
+    
+    private static final int COUNT_PAGES = 10; 
 
     @Transactional(rollbackFor = Exception.class)
     public void add(String name, String familyName, int groupId) throws Exception{
@@ -80,7 +85,7 @@ public class StudentServiceImpl implements StudentService{
     }
 
     @Transactional(readOnly = true)
-    public Set<Student> getAll(Department department){
-        return department.getStudents();
+    public Page<Student> getByGroupDepartmentId(int depId, int page){
+        return daoStudent.findByGroupDepartmentId(depId, new PageRequest(page - 1, COUNT_PAGES, Sort.Direction.ASC, "name"));
     }
 }

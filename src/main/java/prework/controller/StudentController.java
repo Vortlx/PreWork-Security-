@@ -3,6 +3,7 @@ package prework.controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -166,15 +167,16 @@ public class StudentController {
     @RequestMapping(value = "Students", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     @ResponseBody
-    public String findStudents(@RequestParam(name = "userId", required = false) int userId) {
+    public String findStudents(@RequestParam(name = "userId", required = false) int userId,
+                                @RequestParam("page") int page) {
 
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         String answer = "";
         try {
             Department department = userService.getDepartment(userId);
-            Set<Student> students = studentService.getAll(department);
+            Page<Student> students = studentService.getByGroupDepartmentId(department.getId(), page);
 
-            answer = gson.toJson(students);
+            answer = gson.toJson(students.getContent());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,11 +1,11 @@
 package prework.service;
 
 
-import prework.entities.Department;
 import prework.entities.Student;
 
 import java.util.List;
-import java.util.Set;
+
+import org.springframework.data.domain.Page;
 
 
 public interface StudentService {
@@ -26,5 +26,5 @@ public interface StudentService {
 
     Iterable<Student> getAll() throws Exception;
 
-    Set<Student> getAll(Department department);
+    Page<Student> getByGroupDepartmentId(int depId, int page);
 }
