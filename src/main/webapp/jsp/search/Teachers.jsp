@@ -36,16 +36,6 @@
 				            </tr>
 				            </thead>
 				            <tbody>
-				            <c:forEach items="${teachers}" var="teacher">
-				                <tr>
-				                    <td>${teacher.name}</td>
-				                    <td>${teacher.familyName}</td>
-				                    <td>${teacher.subject.name}:    ${teacher.subject.type}</td>
-				                    <td>
-				                        <a href="DeleteTeacher?teacherId=${teacher.id}" name="deleteTeacher">Delete</a>
-				                    </td>
-				                </tr>
-				            </c:forEach>
 				            </tbody>
 				        </table>
 				    </div>
@@ -86,6 +76,7 @@
                     },
                     bFilter : false,
                     bLengthChange: false,
+                    processing: false,
                     paging: false,
                     info: false,
                     columnDefs: [

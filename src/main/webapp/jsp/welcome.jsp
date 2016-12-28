@@ -92,8 +92,10 @@
 					</li>
 					<li>
 						<form action="j_spring_security_logout" method="POST">
-							<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
-							<input name="logout" class="btn btn-danger navbar-btn" type="submit" value="Logout"/>
+							<div class="form-group">
+								<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+								<input name="logout" class="btn btn-danger navbar-btn" type="submit" value="Logout"/>
+							</div>
 						</form>
 					</li>
 				</ul>

@@ -140,6 +140,7 @@ public class GroupController {
     public String findGroups(@RequestParam("userId") int userId,
                              @RequestParam("page") int page, Model model) {
 
+
         try {
             User user = userService.getById(userId);
             Page<Group> groups = null;
@@ -152,6 +153,9 @@ public class GroupController {
             }
 
             model.addAttribute("groups", groups.getContent());
+
+            System.out.println("\n" + "Total Elements:" +  groups.getTotalElements());
+            System.out.println("\n" + "Total Pages:" +  groups.getTotalPages());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
