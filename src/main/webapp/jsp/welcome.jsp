@@ -19,90 +19,97 @@
 	        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
         
-        <link rel="stylesheet" type="text/css" href="../staticresources/css/marginForButtons.css"/>	        
+        <link rel="stylesheet" type="text/css" href="../staticresources/css/marginForButtons.css"/>
+		<link rel="stylesheet" type="text/css" href="../staticresources/css/marginForButtons.css"/>
 	    <script src="../staticresources/javascript/showGroup.js"></script>
 	    <script src="../staticresources/javascript/showStudentSubjects.js"></script>
 	</head>
 	<body>
-        <div class="container">
-	        <div class="row">
-	            <!-- Greeting user (Department, Teacher or Student) -->
-	            <div class="col-sm-12 alert alert-info" role="alert">
-	                <c:if test="${user.department != null}">
-	                    <h3>${user.department.name}</h3>
-	                </c:if>
-	                <c:if test="${user.teacher != null}">
-	                    <h3>Hello ${user.teacher.name} ${user.teacher.familyName}</h3>
-	                </c:if>
-	                <c:if test="${user.student != null}">
-	                    <h3>Hello ${user.student.name} ${user.student.familyName}</h3>
-	                </c:if>
-	            </div>
-            </div>
-            <div class="row">
-	            <div class="col-sm-3">
-		            <div id="content">
-		                <sec:authorize access="hasRole('ROLE_STUDENT')">
-		                    <div class="link">
-		                        <a href="#" class="btn btn-default" name="toMyGroup" onclick="return showGroup(null, ${user.id}, 1)">
-		                            <span>My Group</span>
-		                        </a>
-		                    </div>
-		                    <div class="link">
-		                        <a href="#" class="btn btn-default" name="toMySubjects" onclick="return showStudentSubjects(${user.id}, 1)">
-		                            <span>My Subjects</span>
-		                        </a>
-		                    </div>
-		                </sec:authorize>
-		                <sec:authorize access="hasAnyRole('ROLE_TEACHER', 'ROLE_DEPARTMENT')">
-		                    <div class="link">
-		                        <a href="Groups?userId=${user.id}&page=1" class="btn btn-default" name="toGroups">
-		                            <span>Groups</span>
-		                        </a>
-		                    </div>
-		                </sec:authorize>
-		                <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
-		                    <div class="link">
-		                        <a href="search/Students.jsp?userId=${user.id}&page=1" class="btn btn-default" name="toStudents">
-		                           <span>Students</span>
-		                        </a>
-		                    </div>
-		                    <div class="link">
-		                        <a href="search/Teachers.jsp?userId=${user.id}&page=1" class="btn btn-default" name="toTeachers">
-		                           <span>Teachers</span>
-		                        </a>
-		                    </div>
-		                    <div class="dropdown link">
-		                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-		                        <span>Add</span>
-		                        <div class="caret"></div>
-		                      </button>
-		                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-		                        <li><a href="add/AddGroup.jsp?userId=${user.id}"><span>Group</span></a></li>
-		                        <li><a href="add/AddStudentPage?userId=${user.id}"><span>Student</span></a></li>
-		                        <li><a href="add/AddTeacher.jsp?userId=${user.id}"><span>Teacher</span></a></li>
-		                      </ul>
-		                    </div>
-		                </sec:authorize>
-		                <div class="link">
-		                    <a href="update/ChangePassword.jsp?userId=${user.id}" class="btn btn-default" name="changePassword">
-		                       <span>Change password</span>
-		                    </a>
-		                </div>
-		            </div>
-		            <div id="logout">
-		                <!--a href="../logout" name="logout">Logout</a-->
-		                <form action="j_spring_security_logout" method="POST">
-		                    <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
-		                    <input name="logout" class="btn btn-danger" type="submit" value="Logout"/>
-		                </form>
-		            </div>
-	            </div>
-	            <div class="col-sm-9">
-		            <div id="specifyGroup">
-	                </div>
-	            </div>
-            </div>
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<ul class="nav navbar-nav">
+					<sec:authorize access="hasRole('ROLE_STUDENT')">
+						<li>
+							<a href="#" name="toMyGroup" onclick="return showGroup(null, ${user.id}, 1)">
+								<span>My Group</span>
+							</a>
+						</li>
+						<li>
+							<a href="#" name="toMySubjects" onclick="return showStudentSubjects(${user.id}, 1)">
+								<span>My Subjects</span>
+							</a>
+						</li>
+					</sec:authorize>
+					<sec:authorize access="hasAnyRole('ROLE_TEACHER', 'ROLE_DEPARTMENT')">
+						<li>
+							<a href="Groups?userId=${user.id}&page=1" name="toGroups">
+								<span>Groups</span>
+							</a>
+						</li>
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_DEPARTMENT')">
+						<li>
+							<a href="search/Students.jsp?userId=${user.id}&page=1" name="toStudents">
+								<span>Students</span>
+							</a>
+						</li>
+						<li>
+							<a href="search/Teachers.jsp?userId=${user.id}&page=1" name="toTeachers">
+								<span>Teachers</span>
+							</a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+							   aria-haspopup="true" aria-expanded="false"><span>Add </span><span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="add/AddGroup.jsp?userId=${user.id}"><span>Group</span></a></li>
+								<li><a href="add/AddStudentPage?userId=${user.id}"><span>Student</span></a></li>
+								<li><a href="add/AddTeacher.jsp?userId=${user.id}"><span>Teacher</span></a></li>
+							</ul>
+						</li>
+					</sec:authorize>
+					<li>
+						<a href="update/ChangePassword.jsp?userId=${user.id}" name="changePassword">
+							<span>Change password</span>
+						</a>
+					</li>
+					<%--<li>--%>
+						<%--<a href="../logout" name="logout">Logout</a>--%>
+					<%--</li>--%>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li style="margin-left: 20px">
+						<!-- Greeting user (Department, Teacher or Student) -->
+						<c:if test="${user.department != null}">
+							<h3 class="navbar-text">${user.department.name}</h3>
+						</c:if>
+						<c:if test="${user.teacher != null}">
+							<h3 class="navbar-text">Hello ${user.teacher.name} ${user.teacher.familyName}</h3>
+						</c:if>
+						<c:if test="${user.student != null}">
+							<h3 class="navbar-text">Hello ${user.student.name} ${user.student.familyName}</h3>
+						</c:if>
+					</li>
+					<li>
+						<form action="j_spring_security_logout" method="POST">
+							<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+							<input name="logout" class="btn btn-danger navbar-btn" type="submit" value="Logout"/>
+						</form>
+					</li>
+				</ul>
+			</div>
+		</nav>
+            <%--<div class="row">--%>
+	            <%--<div class="col-sm-3">--%>
+		            <%----%>
+	            <%--</div>--%>
+            <%--</div>--%>
+			<div class="row">
+				<div class="col-sm-9">
+					<div id="specifyGroup">
+					</div>
+				</div>
+			</div>
         </div>
 	</body>
 </html>
