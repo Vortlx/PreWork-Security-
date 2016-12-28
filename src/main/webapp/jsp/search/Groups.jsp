@@ -37,7 +37,7 @@
 			                <c:forEach items="${groups}" var="group">
 			                    <tr>
 			                        <td>
-			                            <a href="/" name="toGroups"
+			                            <a href="#" name="toGroups"
 			                               onclick="return showGroup(${group.id}, ${param.userId}, 1)">${group.name}</a>
 			                        </td>
 			                        <sec:authorize access="hasRole('ROLE_DEPARTMENT')">

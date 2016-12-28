@@ -59,7 +59,7 @@
                 </div>
             </form>
             <div class="row">
-                <div class="col-sm-10">
+                <div class="col-sm-offset-1 col-sm-11">
                     <span class="error">${message}</span>
                 </div>
             </div>

@@ -67,7 +67,7 @@
 				                <sec:authorize  access="hasRole('ROLE_DEPARTMENT')">
 				                    <tr>
 				                        <td colspan="3">
-				                            <a href="/" name="addSubject" onclick="return showAddSubjects(${groupId}, ${userId}, ${param.page})">Add</a>
+				                            <a href="/" name="addSubject" onclick="return showAddSubjects(${param.groupId}, ${param.userId}, ${param.page})">Add</a>
 				                        </td>
 				                    </tr>
 				                </sec:authorize>
@@ -84,7 +84,7 @@
 				<div class="btn-toolbar">
 					<div class="btn-group">
 						<div class="col-sm-1">
-							<a href="MySubjects?userId=1&page=${param.page - 1}" class="btn btn-default">&lt;</a>
+							<a href="#" class="btn btn-default" onclick="return nextTablePage(${param.groupId} ${param.userId},${param.page - 1})">&lt;</a>
 						</div>
 					</div>
 					<div class="btn-group">
@@ -92,7 +92,7 @@
 					</div>
 					<div class="btn-group">
 						<div class="col-sm-1">
-							<a href="MySubjects?userId=1&page=${param.page + 1}" class="btn btn-default">&gt;</a>
+							<a href="#" class="btn btn-default" onclick="return nextTablePage(${param.groupId}, ${param.userId}, ${param.page + 1})">&gt;</a>
 						</div>
 					</div>
 				</div>
@@ -101,12 +101,47 @@
 		<script>
             $(document).ready(function(){
                 $("#subjectList").dataTable({
+                    destroy: true,
                     bFilter : false,
                     bLengthChange: false,
                     paging: false,
                     info: false
                 });
             })
+
+            function nextTablePage(groupId, userId, page){
+                $("#subjectList").dataTable({
+                    ajax:{
+                        url: "MySubjects",
+                        type: "GET",
+                        data: {
+                            groupId: groupId,
+                            userId: userId,
+                            page: page
+                        },
+                        dataSrc: ""
+                    },
+                    destroy: true,
+                    bFilter : false,
+                    bLengthChange: false,
+                    paging: false,
+                    info: false,
+					columns:[
+					    {data: "name"},
+						{data: "type"},
+						{
+						    data: function(row){
+						        return row.teacher.name + " " + row.teacher.familyName;
+							}
+						},
+						{
+						    data: null
+						}
+					    ]
+                });
+
+                return false;
+            }
 		</script>
 	</body>
 </html>
