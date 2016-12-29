@@ -62,7 +62,9 @@
 				<div class="btn-toolbar">
 					<div class="btn-group">
 						<div class="col-sm-1">
-							<a href="Groups?userId=${param.userId}&page=${param.page - 1}" class="btn btn-default">&lt;</a>
+							<c:if test="${param.page != 1}">
+								<a href="Groups?userId=${param.userId}&page=${param.page - 1}" class="btn btn-default">&lt;</a>
+							</c:if>
 						</div>
 					</div>
 					<div class="btn-group">
@@ -72,7 +74,9 @@
 					</div>
 					<div class="btn-group">
 						<div class="col-sm-1">
-							<a href="Groups?userId=${param.userId}&page=${param.page + 1}" class="btn btn-default">&gt;</a>
+							<c:if test="${param.page!= maxPage}">
+								<a href="Groups?userId=${param.userId}&page=${param.page + 1}" class="btn btn-default">&gt;</a>
+							</c:if>
 						</div>
 					</div>
 				</div>
