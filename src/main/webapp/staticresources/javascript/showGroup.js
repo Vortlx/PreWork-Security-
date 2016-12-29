@@ -6,8 +6,8 @@ function showGroup(groupId, userId, page){
         url: "search/MyGroup.jsp",
         type: "GET",
         data: {
-            userId: userId,
             groupId: groupId,
+            userId: userId,
             page: page
         },
 		success: function(data){

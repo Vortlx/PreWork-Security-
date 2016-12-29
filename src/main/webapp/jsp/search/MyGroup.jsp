@@ -32,9 +32,9 @@
                 </div>
                 <table id="groupInfo" class="table-bordered">
                     <thead>
-                        <%--<tr>--%>
-                            <%--<th colspan="2">${param.groupId}</th>--%>
-                        <%--</tr>--%>
+                        <tr>
+                            <th colspan="2">${param.groupId}</th>
+                        </tr>
                         <tr>
                             <th>Name</th>
                             <th>Family Name</th>
@@ -66,15 +66,15 @@
         </div>
     </div>
     <script>
-        $(document).ready(nextTablePage(${param.groupId}, ${param.userId}, ${param.page}));
+        $(document).ready(nextTablePage(${param.userId}, ${param.page}));
 
-        function nextTablePage(groupId, userId, page){
+        function nextTablePage(userId, page){
             $("#groupInfo").dataTable({
                 ajax:{
                     url: "MyGroup",
                     type: "GET",
                     data: {
-                        groupId: groupId,
+                        //groupId: groupId,
                         userId: userId,
                         page: page
                     },
