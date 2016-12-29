@@ -78,6 +78,7 @@
                     processing: false,
                     paging: false,
                     info: false,
+                    serverSide: true,
                     columnDefs: [
                         {
                             targets: 0,
@@ -107,16 +108,24 @@
                         $("#pageButtons").html(function(){
                             var buttons = "";
 
-                            if(pars["page"] == 1){
+                            if(pars["page"] <= 1){
                                 $("#pageLeft").hide();
-                            } else if(pars["page"] == json.maxPage){
+                            } else if(pars["page"] >= json.maxPage){
                                 $("#pageRight").hide();
                             }
 
                             for(var i = 1; i <= json.maxPage; i++){
-                                buttons += "<a href=\"Teachers.jsp?userId=" +
-                                 				${param.userId} + "&page=" + i +
-												"\" class=\"btn btn-default\">" + i + "</a>"
+
+                                if(i == pars["page"]){
+                                    buttons += "<a href=\"Teachers.jsp?userId=" +
+                                        ${param.userId} + "&page=" + i +
+                                        "\" class=\"btn btn-default active\">" + i + "</a>"
+								} else{
+                                    buttons += "<a href=\"Teachers.jsp?userId=" +
+                                        ${param.userId} + "&page=" + i +
+                                        "\" class=\"btn btn-default\">" + i + "</a>";
+								}
+
                             }
 
                             return buttons;

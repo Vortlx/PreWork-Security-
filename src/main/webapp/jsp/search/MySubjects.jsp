@@ -84,20 +84,25 @@
 				<div class="btn-toolbar">
 					<div class="btn-group">
 						<div class="col-sm-1">
-							<c:if test="${param.page != 1}">
-								<a href="#" class="btn btn-default" onclick="return nextTablePage(${param.groupId}, ${param.userId}, ${param.page - 1})">&lt;</a>
+							<c:if test="${param.page > 1}">
+								<a href="MySubjects?userId=${param.userId}&groupId=${param.groupId}&page=${param.page - 1}" class="btn btn-default">&lt;</a>
 							</c:if>
 						</div>
 					</div>
 					<div class="btn-group">
 						<c:forEach var="i" begin="1" end="${maxPage}">
-							<a href="MySubjects?groupId=${param.groupId}&userId=${param.userId}&page=${i}" class="btn btn-default">${i}</a>
+							<c:if test="${param.page == i}">
+								<a href="MySubjects?groupId=${param.groupId}&userId=${param.userId}&page=${i}" class="btn btn-default active">${i}</a>
+							</c:if>
+							<c:if test="${param.page != i}">
+								<a href="MySubjects?groupId=${param.groupId}&userId=${param.userId}&page=${i}" class="btn btn-default">${i}</a>
+							</c:if>
 						</c:forEach>
 					</div>
 					<div class="btn-group">
 						<div class="col-sm-1">
-							<c:if test="${param.page!= maxPage}">
-								<a href="#" class="btn btn-default" onclick="return nextTablePage(${param.groupId}, ${param.userId}, ${param.page + 1})">&gt;</a>
+							<c:if test="${param.page < maxPage}">
+								<a href="MySubjects?userId=${param.userId}&groupId=${param.groupId}&page=${param.page + 1}" class="btn btn-default">&gt;</a>
 							</c:if>
 						</div>
 					</div>
@@ -115,39 +120,40 @@
                 });
             })
 
-            function nextTablePage(groupId, userId, page){
-                $("#subjectList").dataTable({
-                    ajax:{
-                        url: "MySubjects",
-                        type: "GET",
-                        data: {
-                            groupId: groupId,
-                            userId: userId,
-                            page: page
-                        },
-                        dataSrc: ""
-                    },
-                    destroy: true,
-                    bFilter : false,
-                    bLengthChange: false,
-                    paging: false,
-                    info: false,
-					columns:[
-					    {data: "name"},
-						{data: "type"},
-						{
-						    data: function(row){
-						        return row.teacher.name + " " + row.teacher.familyName;
-							}
-						},
-						{
-						    data: null
-						}
-					    ]
-                });
+            <%--function nextTablePage(groupId, userId, page){--%>
+                <%--$("#subjectList").dataTable({--%>
+                    <%--ajax:{--%>
+                        <%--url: "MySubjects",--%>
+                        <%--type: "GET",--%>
+                        <%--data: {--%>
+                            <%--groupId: groupId,--%>
+                            <%--userId: userId,--%>
+                            <%--page: page--%>
+                        <%--},--%>
+                        <%--dataSrc: ""--%>
+                    <%--},--%>
+                    <%--destroy: true,--%>
+                    <%--bFilter : false,--%>
+                    <%--bLengthChange: false,--%>
+                    <%--paging: false,--%>
+                    <%--info: false,--%>
+                    <%--serverSide: true,--%>
+					<%--columns:[--%>
+					    <%--{data: "name"},--%>
+						<%--{data: "type"},--%>
+						<%--{--%>
+						    <%--data: function(row){--%>
+						        <%--return row.teacher.name + " " + row.teacher.familyName;--%>
+							<%--}--%>
+						<%--},--%>
+						<%--{--%>
+						    <%--data: null--%>
+						<%--}--%>
+					    <%--]--%>
+                <%--});--%>
 
-                return false;
-            }
+                <%--return false;--%>
+            <%--}--%>
 		</script>
 	</body>
 </html>

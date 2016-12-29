@@ -136,9 +136,11 @@ public class StudentController {
         try {
             if (groupId != null) {
                 answer = gson.toJson(studentService.getByGroupId(groupId, page).getContent());
+
             } else {
                 Student student = userService.getStudent(userId);
                 answer = gson.toJson(studentService.getByGroupId(student.getGroup().getId(), page).getContent());
+
             }
         } catch (Exception e) {
             e.printStackTrace();
