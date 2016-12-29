@@ -119,41 +119,6 @@
                     info: false
                 });
             })
-
-            <%--function nextTablePage(groupId, userId, page){--%>
-                <%--$("#subjectList").dataTable({--%>
-                    <%--ajax:{--%>
-                        <%--url: "MySubjects",--%>
-                        <%--type: "GET",--%>
-                        <%--data: {--%>
-                            <%--groupId: groupId,--%>
-                            <%--userId: userId,--%>
-                            <%--page: page--%>
-                        <%--},--%>
-                        <%--dataSrc: ""--%>
-                    <%--},--%>
-                    <%--destroy: true,--%>
-                    <%--bFilter : false,--%>
-                    <%--bLengthChange: false,--%>
-                    <%--paging: false,--%>
-                    <%--info: false,--%>
-                    <%--serverSide: true,--%>
-					<%--columns:[--%>
-					    <%--{data: "name"},--%>
-						<%--{data: "type"},--%>
-						<%--{--%>
-						    <%--data: function(row){--%>
-						        <%--return row.teacher.name + " " + row.teacher.familyName;--%>
-							<%--}--%>
-						<%--},--%>
-						<%--{--%>
-						    <%--data: null--%>
-						<%--}--%>
-					    <%--]--%>
-                <%--});--%>
-
-                <%--return false;--%>
-            <%--}--%>
 		</script>
 	</body>
 </html>

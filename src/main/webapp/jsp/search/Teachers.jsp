@@ -115,7 +115,6 @@
                             }
 
                             for(var i = 1; i <= json.maxPage; i++){
-
                                 if(i == pars["page"]){
                                     buttons += "<a href=\"Teachers.jsp?userId=" +
                                         ${param.userId} + "&page=" + i +
@@ -125,7 +124,6 @@
                                         ${param.userId} + "&page=" + i +
                                         "\" class=\"btn btn-default\">" + i + "</a>";
 								}
-
                             }
 
                             return buttons;

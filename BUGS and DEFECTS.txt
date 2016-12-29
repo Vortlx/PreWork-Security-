@@ -3,3 +3,5 @@
 2. not handled code 500
 
 3. Reconfigure url mapping
+
+4. Exist problem with get parameters from myGroup.jsp because another context.
