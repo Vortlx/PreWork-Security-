@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import prework.entities.*;
 import prework.service.*;
 
+import java.util.List;
+
 
 @Controller
 @RequestMapping(value = "jsp")
@@ -149,18 +151,24 @@ public class StudentController {
                                  @RequestParam(name = "groupId", required = false) Integer groupId,
                                  @RequestParam("page") int page,
                                  Model model) {
+
+        Page<Subject> subjects = null;
         try {
             if (groupId != null) {
-                model.addAttribute("subjects", subjectService.getByGroupsId(groupId, page).getContent());
+
+                subjects = subjectService.getByGroupsId(groupId, page);
+                model.addAttribute("subjects", subjects.getContent());
                 model.addAttribute("userId", userId);
                 model.addAttribute("groupId", groupId);
             } else {
                 Student student = userService.getStudent(userId);
-                model.addAttribute("subjects", subjectService.getByGroupsId(student.getGroup().getId(), page).getContent());
+                subjects = subjectService.getByGroupsId(student.getGroup().getId(), page);
+                model.addAttribute("subjects", subjects.getContent());
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            model.addAttribute("maxPage", subjects.getTotalPages());
             return "search/MySubjects.jsp";
         }
     }

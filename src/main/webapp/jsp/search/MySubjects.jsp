@@ -84,11 +84,13 @@
 				<div class="btn-toolbar">
 					<div class="btn-group">
 						<div class="col-sm-1">
-							<a href="#" class="btn btn-default" onclick="return nextTablePage(${param.groupId} ${param.userId},${param.page - 1})">&lt;</a>
+							<a href="#" class="btn btn-default" onclick="return nextTablePage(${param.groupId}, ${param.userId}, ${param.page - 1})">&lt;</a>
 						</div>
 					</div>
 					<div class="btn-group">
-						<a href="#" class="btn btn-default">...</a>
+						<c:forEach var="i" begin="1" end="${maxPage}">
+							<a href="MySubjects?groupId=${param.groupId}&userId=${param.userId}&page=${i}" class="btn btn-default">${i}</a>
+						</c:forEach>
 					</div>
 					<div class="btn-group">
 						<div class="col-sm-1">
