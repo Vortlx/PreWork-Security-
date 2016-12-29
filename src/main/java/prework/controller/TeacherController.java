@@ -87,6 +87,7 @@ public class TeacherController {
             Page<Teacher> teachers = teacherService.getByDepartmentId(department.getId(), page);
 
             answer = gson.toJson(teachers.getContent());
+            answer = "{\"teachers\":" + answer + ", \"maxPage\":" + teachers.getTotalPages() + "}";
         } catch (Exception e) {
             e.printStackTrace();
         }
