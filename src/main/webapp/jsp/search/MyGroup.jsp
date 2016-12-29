@@ -27,14 +27,14 @@
     <div class="container upMargin">
         <div  class="row">
             <div class="col-sm-8">
-                <div class=\"link\">
+                <div class="link">
                     <a href="#" name="Back" class="btn btn-default" onclick="return hideInfo()">Hide</a>
                 </div>
                 <table id="groupInfo" class="table-bordered">
                     <thead>
-                        <tr>
-                            <th colspan="2">${group.name}</th>
-                        </tr>
+                        <%--<tr>--%>
+                            <%--<th colspan="2">${param.groupId}</th>--%>
+                        <%--</tr>--%>
                         <tr>
                             <th>Name</th>
                             <th>Family Name</th>
@@ -66,11 +66,9 @@
         </div>
     </div>
     <script>
-        var params = getUrlParameters(this.url);
-        $(document).ready(nextTablePage(params["groupId"], params["userId"], params["page"]));
+        $(document).ready(nextTablePage(${param.groupId}, ${param.userId}, ${param.page}));
 
         function nextTablePage(groupId, userId, page){
-            alert(params["groupId"]);
             $("#groupInfo").dataTable({
                 ajax:{
                     url: "MyGroup",
@@ -80,14 +78,14 @@
                         userId: userId,
                         page: page
                     },
-                    dataSrc: ""
+                    dataSrc: "students"
                 },
                 bFilter : false,
                 bLengthChange: false,
                 paging: false,
                 info: false,
                 serverSide: true,
-                columnsDef:[
+                columns:[
                     {data: "name"},
                     {data: "familyName"}
                 ]

@@ -140,8 +140,9 @@ public class StudentController {
             } else {
                 Student student = userService.getStudent(userId);
                 answer = gson.toJson(studentService.getByGroupId(student.getGroup().getId(), page).getContent());
-
             }
+
+            answer = "{\"students\":" + answer + "}";
         } catch (Exception e) {
             e.printStackTrace();
         }

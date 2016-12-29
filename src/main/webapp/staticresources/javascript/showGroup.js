@@ -2,7 +2,6 @@
  * Created by lebedevas on 15.12.2016.
  */
 function showGroup(groupId, userId, page){
-    alert(groupId);
 	$.ajax({
         url: "search/MyGroup.jsp",
         type: "GET",
