@@ -53,7 +53,7 @@
 							<a href="Students.jsp?userId=${param.userId}&page=${param.page - 1}" class="btn btn-default">&lt;</a>
 						</div>
 					</div>
-					<div class="btn-group">
+					<div id="pageButtons" class="btn-group">
 						<a href="#" class="btn btn-default">...</a>
 					</div>
 					<div class="btn-group">
@@ -77,7 +77,7 @@
                             userId: pars["userId"],
                             page: pars["page"]
                         },
-                        dataSrc: ""
+                        dataSrc: "students"
                     },
                     bFilter : false,
                     bLengthChange: false,
@@ -112,7 +112,19 @@
                                     "&userId=" + pars["userId"] + "&page=" + pars["page"] + "\" name=\"deleteStudent\">Delete</a>";
                             }
                         }
-                    ]
+                    ],
+                    fnInitComplete: function(setting, json){
+						$("#pageButtons").html(function(){
+						    var buttons = "";
+						    for(var i = 1; i <= json.maxPage; i++){
+						        buttons += "<a href=\"Students.jsp?userId=" +
+						        			${param.userId} + "&page=" + i +
+											"\" class=\"btn btn-default\">" + i + "</a>"
+							}
+
+							return buttons;
+						})
+					}
                 });
             })
 		</script>

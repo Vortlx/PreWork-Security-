@@ -178,6 +178,7 @@ public class StudentController {
             Page<Student> students = studentService.getByGroupDepartmentId(department.getId(), page);
 
             answer = gson.toJson(students.getContent());
+            answer = "{\"students\":" + answer + ", \"maxPage\":" + students.getTotalPages() + "}";
         } catch (Exception e) {
             e.printStackTrace();
         }
