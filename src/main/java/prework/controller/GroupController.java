@@ -153,9 +153,7 @@ public class GroupController {
             }
 
             model.addAttribute("groups", groups.getContent());
-
-            System.out.println("\n" + "Total Elements:" +  groups.getTotalElements());
-            System.out.println("\n" + "Total Pages:" +  groups.getTotalPages());
+            model.addAttribute("maxPage", groups.getTotalPages());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

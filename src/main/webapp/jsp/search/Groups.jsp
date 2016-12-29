@@ -66,7 +66,9 @@
 						</div>
 					</div>
 					<div class="btn-group">
-						<a href="#" class="btn btn-default">...</a>
+                        <c:forEach var="i" begin="1" end="${maxPage}">
+                            <a href="Groups?userId=${param.userId}&page=${i}" class="btn btn-default">${i}</a>
+                        </c:forEach>
 					</div>
 					<div class="btn-group">
 						<div class="col-sm-1">
