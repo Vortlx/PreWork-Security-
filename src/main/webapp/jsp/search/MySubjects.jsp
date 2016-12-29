@@ -84,7 +84,9 @@
 				<div class="btn-toolbar">
 					<div class="btn-group">
 						<div class="col-sm-1">
-							<a href="#" class="btn btn-default" onclick="return nextTablePage(${param.groupId}, ${param.userId}, ${param.page - 1})">&lt;</a>
+							<c:if test="${param.page != 1}">
+								<a href="#" class="btn btn-default" onclick="return nextTablePage(${param.groupId}, ${param.userId}, ${param.page - 1})">&lt;</a>
+							</c:if>
 						</div>
 					</div>
 					<div class="btn-group">
@@ -94,7 +96,9 @@
 					</div>
 					<div class="btn-group">
 						<div class="col-sm-1">
-							<a href="#" class="btn btn-default" onclick="return nextTablePage(${param.groupId}, ${param.userId}, ${param.page + 1})">&gt;</a>
+							<c:if test="${param.page!= maxPage}">
+								<a href="#" class="btn btn-default" onclick="return nextTablePage(${param.groupId}, ${param.userId}, ${param.page + 1})">&gt;</a>
+							</c:if>
 						</div>
 					</div>
 				</div>
