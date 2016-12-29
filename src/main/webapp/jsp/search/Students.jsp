@@ -50,15 +50,14 @@
 				<div class="btn-toolbar">
 					<div class="btn-group">
 						<div class="col-sm-1">
-							<a href="Students.jsp?userId=${param.userId}&page=${param.page - 1}" class="btn btn-default">&lt;</a>
+							<a href="Students.jsp?userId=${param.userId}&page=${param.page - 1}" class="btn btn-default" id="pageLeft">&lt;</a>
 						</div>
 					</div>
 					<div id="pageButtons" class="btn-group">
-						<a href="#" class="btn btn-default">...</a>
 					</div>
 					<div class="btn-group">
 						<div class="col-sm-1">
-							<a href="Students.jsp?userId=${param.userId}&page=${param.page + 1}" class="btn btn-default">&gt;</a>
+							<a href="Students.jsp?userId=${param.userId}&page=${param.page + 1}" class="btn btn-default" id="pageRight">&gt;</a>
 						</div>
 					</div>
 				</div>
@@ -116,9 +115,16 @@
                     fnInitComplete: function(setting, json){
 						$("#pageButtons").html(function(){
 						    var buttons = "";
+
+                            if(pars["page"] == 1){
+                                $("#pageLeft").hide();
+							} else if(pars["page"] == json.maxPage){
+                                $("#pageRight").hide();
+							}
+
 						    for(var i = 1; i <= json.maxPage; i++){
 						        buttons += "<a href=\"Students.jsp?userId=" +
-						        			${param.userId} + "&page=" + i +
+						        			pars["userId"] + "&page=" + i +
 											"\" class=\"btn btn-default\">" + i + "</a>"
 							}
 
