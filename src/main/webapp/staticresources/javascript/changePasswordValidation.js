@@ -23,5 +23,5 @@ $(document).ready(function(){
                 minlength: "Password must be not less then 3 character"
             }
         }
-    })
-})
+    });
+});

@@ -15,11 +15,12 @@
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	        
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
 	    <script src="../../staticresources/javascript/personNameValidation.js"></script>
 	</head>
 	<body>
         <div class="container upMargin">
-	        <form action="AddStudent" method="POST" class="form-horizontal" onsubmit="return allPersonValidation()">
+	        <form id="addPerson" action="AddStudent" method="POST" class="form-horizontal">
 	            <div class="form-group">
 	                <div class="row">
 		                <label for="personName" class="col-sm-2 control-label">Name:</label>
