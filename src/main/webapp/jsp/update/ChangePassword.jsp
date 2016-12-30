@@ -17,11 +17,12 @@
         <link rel="stylesheet" type="text/css" href="../../staticresources/css/formStyle.css"/>
             
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
         <script src="../../staticresources/javascript/changePasswordValidation.js"></script>
     </head>
     <body>
         <div class="container upMargin">
-            <form action="ChangePassword" method="POST" name="newPassword" class="form-horizontal" onsubmit="return validPassword()">
+            <form id="changePassword" action="ChangePassword" method="POST" name="newPassword" class="form-horizontal">
                 <div class="form-group">
                     <div class="row">
                         <label for="oldPassword" class="col-sm-2 control-label">Enter your old password:</label>

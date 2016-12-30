@@ -1,27 +1,27 @@
 /**
  * Created by lebedevas on 15.12.2016.
  */
-function validPassword(){
-    var oldPassword = $("#oldPassword");
-    var newPassword = $("#newPassword");
-
-    clearErrorMessage();
-    if(oldPassword.val() == ""){
-    	$("#incorrOldPass").html("Please enter the old password");
-        return false;
-    }else if(oldPassword.val().length < 3){
-    	$("#incorrOldPass").html("Password must be not less then 3 character");
-        return false;
-    }else if(newPassword.val() == ""){
-    	$("#incorrNewPass").html("Password not be empty");
-        return false;
-    }else if(newPassword.val().length < 3){
-    	$("#incorrNewPass").html("Password must be not less then 3 character");
-        return false;
-    }
-
-    function clearErrorMessage(){
-        $("#incorrOldPass").html("");
-        $("#incorrNewPass").html("");
-    };
-};
+$(document).ready(function(){
+    $("#changePassword").validate({
+        rules:{
+            oldPassword: {
+                required: true,
+                minlength: 3
+            },
+            newPassword: {
+                required: true,
+                minlength: 3
+            }
+        },
+        messages:{
+            oldPassword: {
+                required: "Please enter the old password",
+                minlength: "Password must be not less then 3 character"
+            },
+            newPassword: {
+                required: "Password not be empty",
+                minlength: "Password must be not less then 3 character"
+            }
+        }
+    })
+})

@@ -66,15 +66,15 @@
         </div>
     </div>
     <script>
-        $(document).ready(nextTablePage(${param.userId}, ${param.page}));
+        $(document).ready(nextTablePage(${param.groupId}, ${param.userId}, ${param.page}));
 
-        function nextTablePage(userId, page){
+        function nextTablePage(groupId, userId, page){
             $("#groupInfo").dataTable({
                 ajax:{
                     url: "MyGroup",
                     type: "GET",
                     data: {
-                        //groupId: groupId,
+                        groupId: groupId,
                         userId: userId,
                         page: page
                     },

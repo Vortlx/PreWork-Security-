@@ -43,14 +43,14 @@
 	        </div>
 	        <div class="row paging">
 				<div class="btn-toolbar">
-					<div class="btn-group">
+					<div id="prevPage" class="btn-group">
 						<div class=" col-sm-1">
 							<a href="Teachers.jsp?userId=${param.userId}&page=${param.page - 1}" class="btn btn-default" id="pageLeft">&lt;</a>
 						</div>
 					</div>
 					<div id="pageButtons" class="btn-group">
 					</div>
-					<div class="btn-group">
+					<div id="nextPage" class="btn-group">
 						<div class="col-sm-1">
 							<a href="Teachers.jsp?userId=${param.userId}&page=${param.page + 1}" class="btn btn-default" id="pageRight">&gt;</a>
 						</div>
@@ -108,14 +108,14 @@
                         $("#pageButtons").html(function(){
                             var buttons = "";
 
-                            if(pars["page"] <= 1){
+                            if(json.page <= 1){
                                 $("#pageLeft").hide();
-                            } else if(pars["page"] >= json.maxPage){
+                            } else if(json.page >= json.maxPage){
                                 $("#pageRight").hide();
                             }
 
                             for(var i = 1; i <= json.maxPage; i++){
-                                if(i == pars["page"]){
+                                if(i == json.page){
                                     buttons += "<a href=\"Teachers.jsp?userId=" +
                                         ${param.userId} + "&page=" + i +
                                         "\" class=\"btn btn-default active\">" + i + "</a>"

@@ -61,7 +61,11 @@ public class TeacherController {
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String deleteTeacher(@RequestParam("teacherId") int teacherId,
                                 @RequestParam("userId") int userId,
-                                @RequestParam("page") int page, Model model ) {
+                                @RequestParam(name="page", required = false) Integer page, Model model ) {
+
+        if(page == null){
+            page = 1;
+        }
 
         try {
             teacherService.deleteById(teacherId);
@@ -78,7 +82,11 @@ public class TeacherController {
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     @ResponseBody
     public String findTeachers(@RequestParam(name = "userId", required = false) int userId,
-                                @RequestParam("page") int page) {
+                                @RequestParam(name="page", required = false) Integer page) {
+
+        if(page == null){
+            page = 1;
+        }
 
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         String answer = "";
@@ -87,7 +95,8 @@ public class TeacherController {
             Page<Teacher> teachers = teacherService.getByDepartmentId(department.getId(), page);
 
             answer = gson.toJson(teachers.getContent());
-            answer = "{\"teachers\":" + answer + ", \"maxPage\":" + teachers.getTotalPages() + "}";
+            answer = "{\"teachers\":" + answer + ", \"maxPage\":" +
+                        teachers.getTotalPages() + ", \"page\":" + page + "}";
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -42,7 +42,6 @@
 	                <div class="form-group">
 		                <input name="groupId" type="hidden" value="${param.groupId}"/>
 			            <input name="userId" type="hidden" value="${param.userId}"/>
-						<input name="page" type="hidden" value="${param.page}"/>
 			            <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 			            <div class="col-sm-offset-2 col-sm-1">
 	                        <input name="add" type="submit" class="btn btn-warning" value="Add">

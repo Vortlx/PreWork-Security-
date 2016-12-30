@@ -42,19 +42,19 @@
 					</sec:authorize>
 					<sec:authorize access="hasAnyRole('ROLE_TEACHER', 'ROLE_DEPARTMENT')">
 						<li>
-							<a href="Groups?userId=${user.id}&page=1" name="toGroups">
+							<a href="Groups?userId=${user.id}" name="toGroups">
 								<span>Groups</span>
 							</a>
 						</li>
 					</sec:authorize>
 					<sec:authorize access="hasRole('ROLE_DEPARTMENT')">
 						<li>
-							<a href="search/Students.jsp?userId=${user.id}&page=1" name="toStudents">
+							<a href="search/Students.jsp?userId=${user.id}" name="toStudents">
 								<span>Students</span>
 							</a>
 						</li>
 						<li>
-							<a href="search/Teachers.jsp?userId=${user.id}&page=1" name="toTeachers">
+							<a href="search/Teachers.jsp?userId=${user.id}" name="toTeachers">
 								<span>Teachers</span>
 							</a>
 						</li>

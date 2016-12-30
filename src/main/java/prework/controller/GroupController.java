@@ -52,8 +52,12 @@ public class GroupController {
     @RequestMapping(value = "AddSubjectPage", method = RequestMethod.GET)
     public String addSubjectPage(@RequestParam("groupId") int groupId,
                                  @RequestParam("userId") int userId,
-                                 @RequestParam("page") int page,
+                                 @RequestParam(name = "page", required = false) Integer page,
                                  Model model) {
+        if(page == null){
+            page = 1;
+        }
+
         try {
             Iterable<Subject> subjects = subjectService.getAll();
 
@@ -73,8 +77,12 @@ public class GroupController {
                              @RequestParam("subjectType") String subjectType,
                              @RequestParam("groupId") int groupId,
                              @RequestParam("userId") int userId,
-                             @RequestParam("page") int page,
+                             @RequestParam(name = "page", required = false) Integer page,
                              Model model) {
+
+        if(page == null){
+            page = 1;
+        }
 
         try {
             subjectService.addGroup(subjectName, subjectType, groupId);
@@ -100,8 +108,12 @@ public class GroupController {
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String deleteGroup(@RequestParam("groupId") int groupId,
                               @RequestParam("userId") int userId,
-                              @RequestParam("page") int page,
+                              @RequestParam(name = "page", required = false) Integer page,
                               Model model) {
+
+        if(page == null){
+            page = 1;
+        }
 
         try {
             groupService.deleteById(groupId);
@@ -120,8 +132,12 @@ public class GroupController {
     public String deleteSubjectFromGroup(@RequestParam("groupId") int groupId,
                                          @RequestParam("subjectId") int subjectId,
                                          @RequestParam("userId") int userId,
-                                         @RequestParam("page") int page,
+                                         @RequestParam(name = "page", required = false) Integer page,
                                          Model model) {
+        if(page == null){
+            page = 1;
+        }
+
         try {
             groupService.deleteSubject(groupId, subjectId);
 
@@ -138,8 +154,11 @@ public class GroupController {
     @RequestMapping(value = "Groups", method = RequestMethod.GET)
     @PreAuthorize("hasAnyRole('ROLE_DEPARTMENT', 'ROLE_TEACHER')")
     public String findGroups(@RequestParam("userId") int userId,
-                             @RequestParam("page") int page, Model model) {
+                             @RequestParam(name = "page", required = false) Integer page, Model model) {
 
+        if(page == null){
+            page = 1;
+        }
 
         try {
             User user = userService.getById(userId);
@@ -153,6 +172,7 @@ public class GroupController {
             }
 
             model.addAttribute("groups", groups.getContent());
+            model.addAttribute("page", page);
             model.addAttribute("maxPage", groups.getTotalPages());
         } catch (Exception e) {
             e.printStackTrace();

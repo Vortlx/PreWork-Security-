@@ -75,7 +75,11 @@ public class StudentController {
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String deleteStudent(@RequestParam("studentId") int studentId,
                                 @RequestParam("userId") int userId,
-                                @RequestParam("page") int page, Model model) {
+                                @RequestParam(name="page", required = false) Integer page, Model model) {
+
+        if(page == null){
+            page = 1;
+        }
 
         try {
             studentService.deleteById(studentId);
@@ -129,7 +133,11 @@ public class StudentController {
     @ResponseBody
     public String findMyGroup(@RequestParam(name = "userId", required = false) Integer userId,
                               @RequestParam(name = "groupId", required = false) Integer groupId,
-                              @RequestParam("page") int page) {
+                              @RequestParam(name="page", required = false) Integer page) {
+
+        if(page == null){
+            page = 1;
+        }
 
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         String answer = "";
@@ -152,8 +160,11 @@ public class StudentController {
     @RequestMapping(value = "MySubjects", method = {RequestMethod.GET, RequestMethod.POST})
     public String findMySubjects(@RequestParam(name = "userId", required = false) int userId,
                                  @RequestParam(name = "groupId", required = false) Integer groupId,
-                                 @RequestParam("page") int page,
+                                 @RequestParam(name = "page", required = false) Integer page,
                                  Model model) {
+        if(page == null){
+            page = 1;
+        }
 
         Page<Subject> subjects = null;
         try {
@@ -172,6 +183,7 @@ public class StudentController {
             e.printStackTrace();
         } finally {
             model.addAttribute("maxPage", subjects.getTotalPages());
+            model.addAttribute("page", page);
             return "search/MySubjects.jsp";
         }
     }
@@ -180,7 +192,11 @@ public class StudentController {
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     @ResponseBody
     public String findStudents(@RequestParam(name = "userId", required = false) int userId,
-                                @RequestParam("page") int page) {
+                                @RequestParam(name = "page", required = false) Integer page) {
+
+        if(page == null){
+            page = 1;
+        }
 
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         String answer = "";
@@ -189,7 +205,8 @@ public class StudentController {
             Page<Student> students = studentService.getByGroupDepartmentId(department.getId(), page);
 
             answer = gson.toJson(students.getContent());
-            answer = "{\"students\":" + answer + ", \"maxPage\":" + students.getTotalPages() + "}";
+            answer = "{\"students\":" + answer + ", \"maxPage\":" +
+                        students.getTotalPages() + ", \"page\":" + page + "}";
         } catch (Exception e) {
             e.printStackTrace();
         }

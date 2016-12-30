@@ -42,10 +42,10 @@
 			                        </td>
 			                        <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
 			                            <td>
-			                                <a href="MySubjects?userId=${userId}&groupId=${group.id}&page=1" name="subjects">Subjects</a>
+			                                <a href="MySubjects?userId=${userId}&groupId=${group.id}" name="subjects">Subjects</a>
 			                            </td>
 			                            <td>
-			                                <a href="DeleteGroup?userId=${userId}&groupId=${group.id}&page=${param.page}" name="deleteGroup">Delete</a>
+			                                <a href="DeleteGroup?userId=${userId}&groupId=${group.id}&page=${page}" name="deleteGroup">Delete</a>
 			                            </td>
 			                        </sec:authorize>
 			                    </tr>
@@ -62,25 +62,25 @@
 				<div class="btn-toolbar">
 					<div class="btn-group">
 						<div class="col-sm-1">
-							<c:if test="${param.page > 1}">
-								<a href="Groups?userId=${param.userId}&page=${param.page - 1}" class="btn btn-default">&lt;</a>
+							<c:if test="${page > 1}">
+								<a href="Groups?userId=${param.userId}&page=${page - 1}" class="btn btn-default">&lt;</a>
 							</c:if>
 						</div>
 					</div>
 					<div class="btn-group">
                         <c:forEach var="i" begin="1" end="${maxPage}">
-							<c:if test="${param.page == i}">
+							<c:if test="${page == i}">
 								<a href="Groups?userId=${param.userId}&page=${i}" class="btn btn-default active">${i}</a>
 							</c:if>
-							<c:if test="${param.page != i}">
+							<c:if test="${page != i}">
 								<a href="Groups?userId=${param.userId}&page=${i}" class="btn btn-default">${i}</a>
 							</c:if>
                         </c:forEach>
 					</div>
 					<div class="btn-group">
 						<div class="col-sm-1">
-							<c:if test="${param.page < maxPage}">
-								<a href="Groups?userId=${param.userId}&page=${param.page + 1}" class="btn btn-default">&gt;</a>
+							<c:if test="${page < maxPage}">
+								<a href="Groups?userId=${param.userId}&page=${page + 1}" class="btn btn-default">&gt;</a>
 							</c:if>
 						</div>
 					</div>
