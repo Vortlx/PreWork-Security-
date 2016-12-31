@@ -3,7 +3,7 @@
  */
 function showGroup(groupId, userId, page){
 	$.ajax({
-        url: "search/MyGroup.jsp",
+        url: "MyGroup.jsp",
         type: "GET",
         data: {
             groupId: groupId,

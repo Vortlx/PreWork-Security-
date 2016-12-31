@@ -3,7 +3,7 @@
  */
 function showChangeGroup(userId, studentId){
     $.ajax({
-        url: "../ChangeGroupPage",
+        url: "ChangeGroupPage",
         type: "GET",
         data:{
             userId: userId,
