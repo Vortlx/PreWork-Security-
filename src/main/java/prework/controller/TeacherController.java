@@ -29,7 +29,7 @@ public class TeacherController {
     private SubjectService subjectService;
 
 
-    @RequestMapping(value = "add/AddTeacher", method = RequestMethod.POST)
+    @RequestMapping(value = "AddTeacher", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String addTeacher(@RequestParam("personName") String name, @RequestParam("personFamilyName") String familyName,
                              @RequestParam("subjectName") String subjectName,

@@ -32,7 +32,7 @@ public class StudentController {
     @Autowired
     private SubjectService subjectService;
 
-    @RequestMapping(value = "add/AddStudentPage", method = RequestMethod.GET)
+    @RequestMapping(value = "AddStudentPage", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String addStudentPage(@RequestParam("userId") int userId,
                                 Model model) {
@@ -45,7 +45,7 @@ public class StudentController {
         return "AddStudent.jsp";
     }
 
-    @RequestMapping(value = "add/AddStudent", method = RequestMethod.POST)
+    @RequestMapping(value = "AddStudent", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String addStudent(@RequestParam("personName") String name, @RequestParam("personFamilyName") String familyName,
                              @RequestParam("groupId") int groupId,

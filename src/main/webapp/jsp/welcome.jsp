@@ -62,9 +62,9 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
 							   aria-haspopup="true" aria-expanded="false"><span>Add </span><span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="add/AddGroup.jsp?userId=${user.id}"><span>Group</span></a></li>
-								<li><a href="add/AddStudentPage?userId=${user.id}"><span>Student</span></a></li>
-								<li><a href="add/AddTeacher.jsp?userId=${user.id}"><span>Teacher</span></a></li>
+								<li><a href="AddGroup.jsp?userId=${user.id}"><span>Group</span></a></li>
+								<li><a href="AddStudentPage?userId=${user.id}"><span>Student</span></a></li>
+								<li><a href="AddTeacher.jsp?userId=${user.id}"><span>Teacher</span></a></li>
 							</ul>
 						</li>
 					</sec:authorize>

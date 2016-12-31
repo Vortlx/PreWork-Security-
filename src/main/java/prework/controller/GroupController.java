@@ -26,7 +26,7 @@ public class GroupController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/add/AddGroup", method = RequestMethod.POST)
+    @RequestMapping(value = "AddGroup", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String addGroup(@RequestParam("groupName") String groupName,
                            @RequestParam("userId") int userId,
