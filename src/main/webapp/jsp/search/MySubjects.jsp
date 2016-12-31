@@ -20,6 +20,7 @@
 	    <script src="../staticresources/javascript/showSubjects.js"></script>
 	</head>
 	<body>
+        <div id="header"></div>
 	    <div class="container upMargin">
 	        <div class="row">
 	            <div class="col-sm-7">
@@ -111,6 +112,8 @@
 	    </div>
 		<script>
             $(document).ready(function(){
+            	$("#header").load("welcome nav");
+            	
                 $("#subjectList").dataTable({
                     destroy: true,
                     bFilter : false,

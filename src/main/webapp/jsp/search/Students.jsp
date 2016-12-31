@@ -20,6 +20,7 @@
 		<script src="../../staticresources/javascript/getUrlParameters.js"></script>
 	</head>
 	<body>
+        <div id="header"></div>
 	    <div class="container upMargin">
 	        <div class="row">
 	            <div class="col-sm-8">
@@ -65,6 +66,8 @@
 	    </div>
 		<script>
             $(document).ready(function(){
+            	$("#header").load("../welcome nav");
+            	
 				// Function return object with url parameters
                 var pars = getUrlParameters(window.location);
 

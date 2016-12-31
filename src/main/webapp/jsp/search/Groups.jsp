@@ -4,6 +4,9 @@
 <html>
 	<head>
 	    <title>Groups</title>
+
+        <%--<link ref="import" href="../welcome.jsp">--%>
+	    
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"/>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -17,6 +20,7 @@
 	    <script src="../staticresources/javascript/showGroup.js"></script>
 	</head>
 	<body>
+        <div id="header"></div>
 	    <div id="tableParent" class="container upMargin">
 		    <div class="row">
 		        <div class="col-sm-6">
@@ -89,6 +93,8 @@
 	    </div>
         <script>
             $(document).ready(function(){
+            	$("#header").load("welcome nav");
+            	
                 $("#tableGroups").dataTable({
                     bFilter : false,
                     bLengthChange: false,
