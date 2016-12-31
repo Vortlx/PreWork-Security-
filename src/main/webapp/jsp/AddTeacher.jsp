@@ -20,6 +20,7 @@
     <script src="../staticresources/javascript/personNameValidation.js"></script>
 </head>
 <body>
+<div id="header"></div>
 <div class="container upMargin">
     <form id="addPerson" action="AddTeacher" method="POST" class="form-horizontal">
         <div class="form-group">
@@ -77,5 +78,10 @@
         </div>
     </div>
 </div>
+<script>
+       $(document).ready(function(){
+           $("#header").load("welcome nav");
+       });
+</script>
 </body>
 </html>

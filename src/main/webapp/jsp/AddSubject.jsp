@@ -17,6 +17,7 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	</head>
 	<body>
+        <div id="header"></div>
 		<div class="container upMargin">
 			<form action="AddSubject" method="POST" class="form-horizontal">
 	            <div class="row">
@@ -62,4 +63,9 @@
 		    </div>
 	    </div>
 	</body>
+	<script>
+	   $(document).ready(function(){
+		   $("#header").load("welcome nav");
+	   });
+	</script>
 </html>

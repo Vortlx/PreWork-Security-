@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "update/ChangePassword", method = RequestMethod.POST)
+    @RequestMapping(value = "ChangePassword", method = RequestMethod.POST)
     public String changePassword(@RequestParam("userId") int userId, @RequestParam("oldPassword") String oldPassword,
                                 @RequestParam("newPassword") String newPassword, Model model) {
 

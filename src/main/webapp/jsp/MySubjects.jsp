@@ -24,7 +24,9 @@
 	    <script src="../staticresources/javascript/showSubjects.js"></script>
 	</head>
 	<body>
-        <div id="header"></div>
+        <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
+            <div id="header"></div>
+        </sec:authorize>
 	    <div class="container upMargin">
 	        <div class="row">
 	            <div class="col-sm-7">

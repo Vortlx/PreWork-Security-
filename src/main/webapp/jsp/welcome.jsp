@@ -49,12 +49,12 @@
 					</sec:authorize>
 					<sec:authorize access="hasRole('ROLE_DEPARTMENT')">
 						<li>
-							<a href="search/Students.jsp?userId=${user.id}" name="toStudents">
+							<a href="Students.jsp?userId=${user.id}" name="toStudents">
 								<span>Students</span>
 							</a>
 						</li>
 						<li>
-							<a href="search/Teachers.jsp?userId=${user.id}" name="toTeachers">
+							<a href="Teachers.jsp?userId=${user.id}" name="toTeachers">
 								<span>Teachers</span>
 							</a>
 						</li>
@@ -69,7 +69,7 @@
 						</li>
 					</sec:authorize>
 					<li>
-						<a href="update/ChangePassword.jsp?userId=${user.id}" name="changePassword">
+						<a href="ChangePassword.jsp?userId=${user.id}" name="changePassword">
 							<span>Change password</span>
 						</a>
 					</li>

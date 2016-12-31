@@ -109,7 +109,7 @@
                         orderable: false
                     }]
                 });
-            })
+            });
         </script>
 	</body>
 </html>

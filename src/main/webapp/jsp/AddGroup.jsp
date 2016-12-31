@@ -20,6 +20,7 @@
     <script src="../staticresources/javascript/groupNameValidation.js"></script>
 </head>
 <body>
+<div id="header"></div>
 <div class="container upMargin">
     <form id="addGroup" name="addGroup" action="AddGroup" method="POST" class="form-horizontal">
         <div class="form-group">
@@ -52,5 +53,10 @@
         </div>
     </div>
 </div>
+<script>
+	$(document).ready(function(){
+	    $("#header").load("welcome nav");
+	});
+</script>
 </body>
 </html>
