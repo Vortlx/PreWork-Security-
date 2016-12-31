@@ -69,14 +69,12 @@ public class StudentController {
         return "AddStudent.jsp";
     }
 
-    @RequestMapping(value = "delete/DeleteStudent", method = RequestMethod.GET)
+    @RequestMapping(value = "DeleteStudent", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String deleteStudent(@RequestParam("studentId") int studentId,
                                 @RequestParam("userId") int userId,
                                 @RequestParam(name="page", required = false) Integer page, Model model) {
 
-        System.out.println("\n Page: " + page + "\n");
-        
         if(page == null){
             page = 1;
         }
@@ -89,7 +87,7 @@ public class StudentController {
             model.addAttribute("userId", userId);
             model.addAttribute("page", page);
         }
-        return "../search/Students.jsp";
+        return "Students.jsp";
     }
 
     @RequestMapping(value = "ChangeGroupPage", method = RequestMethod.GET)
@@ -107,7 +105,7 @@ public class StudentController {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            return "update/ChangeGroup.jsp";
+            return "ChangeGroup.jsp";
         }
     }
 
@@ -125,7 +123,7 @@ public class StudentController {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            return "welcome";
+            return "Students.jsp";
         }
     }
 
@@ -184,7 +182,7 @@ public class StudentController {
         } finally {
             model.addAttribute("maxPage", subjects.getTotalPages());
             model.addAttribute("page", page);
-            return "search/MySubjects.jsp";
+            return "MySubjects.jsp";
         }
     }
 

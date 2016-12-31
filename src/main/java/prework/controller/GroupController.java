@@ -69,7 +69,7 @@ public class GroupController {
             e.printStackTrace();
         }
 
-        return "add/AddSubject.jsp";
+        return "AddSubject.jsp";
     }
 
     @RequestMapping(value = "AddSubject", method = RequestMethod.POST)
@@ -179,6 +179,6 @@ public class GroupController {
         } finally {
             model.addAttribute("userId", userId);
         }
-        return "search/Groups.jsp";
+        return "Groups.jsp";
     }
 }

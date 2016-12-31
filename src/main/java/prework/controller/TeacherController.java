@@ -57,7 +57,7 @@ public class TeacherController {
         return "AddTeacher.jsp";
     }
 
-    @RequestMapping(value = "delete/DeleteTeacher", method = RequestMethod.GET)
+    @RequestMapping(value = "DeleteTeacher", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String deleteTeacher(@RequestParam("teacherId") int teacherId,
                                 @RequestParam("userId") int userId,
@@ -75,7 +75,7 @@ public class TeacherController {
             model.addAttribute("userId", userId);
             model.addAttribute("page", page);
         }
-        return "../search/Teachers.jsp";
+        return "Teachers.jsp";
     }
 
     @RequestMapping(value = "Teachers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

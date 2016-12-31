@@ -11,13 +11,17 @@
             integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
             integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="../../staticresources/css/formStyle.css"/>
-        <link rel="stylesheet" type="text/css" href="../../staticresources/css/marginForButtons.css"/>
+            
+        <link rel="stylesheet" type="text/css" href="../staticresources/css/formStyle.css"/>
+        <link rel="stylesheet" type="text/css" href="../staticresources/css/marginForButtons.css"/>
         
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-	    <script src="../../staticresources/javascript/showChangeGroup.js"></script>
-		<script src="../../staticresources/javascript/getUrlParameters.js"></script>
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+            
+	    <script src="../staticresources/javascript/showChangeGroup.js"></script>
+		<script src="../staticresources/javascript/getUrlParameters.js"></script>
 	</head>
 	<body>
         <div id="header"></div>
@@ -25,7 +29,7 @@
 	        <div class="row">
 	            <div class="col-sm-8">
 		            <div class="link">
-				        <a href="../welcome" class="btn btn-default" name="back">Back</a>
+				        <a href="welcome" class="btn btn-default" name="back">Back</a>
 				    </div>
 				    <div id="tableParent">
 				        <table id="studentsList" class="table-bordered">
@@ -51,14 +55,14 @@
 				<div class="btn-toolbar">
 					<div id="prevPage" class="btn-group">
 						<div class="col-sm-1">
-							<a href="../search/Students.jsp?userId=${param.userId}&page=${param.page - 1}" class="btn btn-default" id="pageLeft">&lt;</a>
+							<a href="Students.jsp?userId=${param.userId}&page=${param.page - 1}" class="btn btn-default" id="pageLeft">&lt;</a>
 						</div>
 					</div>
 					<div id="pageButtons" class="btn-group">
 					</div>
 					<div id="nextPage" class="btn-group">
 						<div class="col-sm-1">
-							<a href="../search/Students.jsp?userId=${param.userId}&page=${param.page + 1}" class="btn btn-default" id="pageRight">&gt;</a>
+							<a href="Students.jsp?userId=${param.userId}&page=${param.page + 1}" class="btn btn-default" id="pageRight">&gt;</a>
 						</div>
 					</div>
 				</div>
@@ -66,14 +70,14 @@
 	    </div>
 		<script>
             $(document).ready(function(){
-            	$("#header").load("../welcome nav");
+            	$("#header").load("welcome nav");
             	
 				// Function return object with url parameters
                 var pars = getUrlParameters(window.location);
 
                 $("#studentsList").dataTable({
                     ajax:{
-                        url: "../Students",
+                        url: "Students",
                         type:"GET",
                         data: {
                             userId: pars["userId"],
@@ -112,10 +116,10 @@
                             orderable: false,
                             render: function(data, type, row){
                             	if(pars["page"] == undefined){
-                            		return "<a href=\"../delete/DeleteStudent?studentId=" + row.id +
+                            		return "<a href=\"DeleteStudent?studentId=" + row.id +
                             	    "&userId=" + pars["userId"] + "\" name=\"deleteStudent\">Delete</a>";	
                             	}else{
-                            		return "<a href=\"../delete/DeleteStudent?studentId=" + row.id +
+                            		return "<a href=\"DeleteStudent?studentId=" + row.id +
                             	    "&userId=" + pars["userId"] + "&page=" + pars["page"] + "\" name=\"deleteStudent\">Delete</a>";
                             	}
                                 
@@ -134,11 +138,11 @@
 
 						    for(var i = 1; i <= json.maxPage; i++){
                                 if(i == json.page){
-                                    buttons += "<a href=\"../search/Students.jsp?userId=" +
+                                    buttons += "<a href=\"Students.jsp?userId=" +
                                         pars["userId"] + "&page=" + i +
                                         "\" class=\"btn btn-default active\">" + i + "</a>"
                                 } else{
-                                    buttons += "<a href=\"../search/Students.jsp?userId=" +
+                                    buttons += "<a href=\"Students.jsp?userId=" +
                                         pars["userId"] + "&page=" + i +
                                         "\" class=\"btn btn-default\">" + i + "</a>"
 								}
