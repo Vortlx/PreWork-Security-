@@ -28,7 +28,7 @@ public class GroupController {
 
     @RequestMapping(value = "/add/AddGroup", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
-    public String addGroup(@RequestParam("name") String groupName,
+    public String addGroup(@RequestParam("groupName") String groupName,
                            @RequestParam("userId") int userId,
                            Model model) {
         User user = userService.getById(userId);

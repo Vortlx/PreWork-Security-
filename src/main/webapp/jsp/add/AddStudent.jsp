@@ -25,7 +25,7 @@
 	                <div class="row">
 		                <label for="personName" class="col-sm-2 control-label">Name:</label>
 		                <div class="col-sm-7">
-		                    <input name="name" id="personName" class="form-control" type="text"/>
+		                    <input name="personName" id="personName" class="form-control" type="text"/>
 		                </div>
 		                <div class="col-sm-3">
 		                   <span class="error" id="incorrName"></span>
@@ -36,7 +36,7 @@
 	                <div class="row">
 		                <label for="personFamilyName" class="col-sm-2 control-label">Family Name:</label>
 		                <div class="col-sm-7">
-		                   <input name="familyName" id="personFamilyName" class="form-control" type="text"/>
+		                   <input name="personFamilyName" id="personFamilyName" class="form-control" type="text"/>
 		                </div>
 		                <div class="col-sm-3">
 		                   <span class="error" id="incorrFamilyName"></span>

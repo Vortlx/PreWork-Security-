@@ -18,12 +18,12 @@
 </head>
 <body>
 <div class="container upMargin">
-    <form id="addGroup" action="AddGroup" method="POST" class="form-horizontal">
+    <form id="addGroup" name="addGroup" action="AddGroup" method="POST" class="form-horizontal">
         <div class="form-group">
             <div class="row">
-                <label for="groupName" class="col-sm-2 control-label">Name: </label>
+                <label for="groupName" class="col-sm-2 control-label">Name:</label>
                 <div class="col-sm-7">
-                    <input name="name" id="groupName" class="form-control" type="text"/>
+                    <input name="groupName" id="groupName" class="form-control" type="text"/>
                 </div>
                 <div class="col-sm-3">
                     <span class="error" id="incorrGroupName"></span>

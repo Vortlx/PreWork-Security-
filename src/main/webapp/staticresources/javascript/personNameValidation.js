@@ -1,44 +1,32 @@
 /**
  * Created by lebedevas on 15.12.2016.
  */
-function personIncorrectNameValidation(){
-    var personName = $("#personName");
-    var personFamilyName = $("#personFamilyName");
-
-    var regExpr = /.*[0-9]+.*/i;
-
-    clearErrorMessage();
-
-    if(regExpr.test(personName.val())){
-        $("#incorrName").html("Was entered incorrect name");
-        return false;
-    }else if(regExpr.test(personFamilyName.val())){
-        $("#incorrFamilyName").html("Was entered incorrect family name");
-        return false;
-    }
-    return true;
-};
-
-/**
- * Created by lebedevas on 15.12.2016.
- */
 $(document).ready(function(){
     $("#addPerson").validate({
-        riles:{
+        rules:{
             personName:{
-                required: true
+                required: true,
+                pattern: true
             },
             personFamilyName:{
-                required: true
+                required: true,
+                pattern: true
             }
         },
         messages:{
             personName:{
-                required: "Please enter name"
+                required: "Please enter name",
+                pattern: "Name should have only letters in name"
             },
             personFamilyName:{
-                required: "Please enter family name"
+                required: "Please enter family name",
+                pattern: "Family name should have only letters in name"
             }
         }
     });
+});
+
+$.validator.addMethod("pattern", function(val){
+	var regExp = /[0-9]/;
+	return !regExp.test(val);
 });

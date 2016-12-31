@@ -4,16 +4,21 @@
 $(document).ready(function () {
     $("#addGroup").validate({
         rules: {
-            groupName: {
+        	groupName: {
                 required: true,
-                minlength: 3
+                pattern: true
             }
         },
         messages: {
             groupName: {
                 required: "Please enter group name",
-                minlength: "I don't know"
+                pattern: "Group name should have only numbers in name"
             }
         }
     });
+});
+
+$.validator.addMethod("pattern", function(val){
+	var regExp = /[a-zA-Z]/;
+	return !regExp.test(val); 
 });

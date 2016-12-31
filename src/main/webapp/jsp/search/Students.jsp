@@ -50,14 +50,14 @@
 				<div class="btn-toolbar">
 					<div id="prevPage" class="btn-group">
 						<div class="col-sm-1">
-							<a href="Students.jsp?userId=${param.userId}&page=${param.page - 1}" class="btn btn-default" id="pageLeft">&lt;</a>
+							<a href="../search/Students.jsp?userId=${param.userId}&page=${param.page - 1}" class="btn btn-default" id="pageLeft">&lt;</a>
 						</div>
 					</div>
 					<div id="pageButtons" class="btn-group">
 					</div>
 					<div id="nextPage" class="btn-group">
 						<div class="col-sm-1">
-							<a href="Students.jsp?userId=${param.userId}&page=${param.page + 1}" class="btn btn-default" id="pageRight">&gt;</a>
+							<a href="../search/Students.jsp?userId=${param.userId}&page=${param.page + 1}" class="btn btn-default" id="pageRight">&gt;</a>
 						</div>
 					</div>
 				</div>
@@ -108,8 +108,14 @@
                             searchable: false,
                             orderable: false,
                             render: function(data, type, row){
-                                return "<a href=\"../delete/DeleteStudent?studentId=" + row.id +
-                                    "&userId=" + pars["userId"] + "&page=" + pars["page"] + "\" name=\"deleteStudent\">Delete</a>";
+                            	if(pars["page"] == undefined){
+                            		return "<a href=\"../delete/DeleteStudent?studentId=" + row.id +
+                            	    "&userId=" + pars["userId"] + "\" name=\"deleteStudent\">Delete</a>";	
+                            	}else{
+                            		return "<a href=\"../delete/DeleteStudent?studentId=" + row.id +
+                            	    "&userId=" + pars["userId"] + "&page=" + pars["page"] + "\" name=\"deleteStudent\">Delete</a>";
+                            	}
+                                
                             }
                         }
                     ],
@@ -125,11 +131,11 @@
 
 						    for(var i = 1; i <= json.maxPage; i++){
                                 if(i == json.page){
-                                    buttons += "<a href=\"Students.jsp?userId=" +
+                                    buttons += "<a href=\"../search/Students.jsp?userId=" +
                                         pars["userId"] + "&page=" + i +
                                         "\" class=\"btn btn-default active\">" + i + "</a>"
                                 } else{
-                                    buttons += "<a href=\"Students.jsp?userId=" +
+                                    buttons += "<a href=\"../search/Students.jsp?userId=" +
                                         pars["userId"] + "&page=" + i +
                                         "\" class=\"btn btn-default\">" + i + "</a>"
 								}

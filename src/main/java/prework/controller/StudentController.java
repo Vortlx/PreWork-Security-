@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import prework.entities.*;
 import prework.service.*;
 
-import java.util.List;
-
 
 @Controller
 @RequestMapping(value = "jsp")
@@ -49,7 +47,7 @@ public class StudentController {
 
     @RequestMapping(value = "add/AddStudent", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
-    public String addStudent(@RequestParam("name") String name, @RequestParam("familyName") String familyName,
+    public String addStudent(@RequestParam("personName") String name, @RequestParam("personFamilyName") String familyName,
                              @RequestParam("groupId") int groupId,
                              Model model) {
 
@@ -77,6 +75,8 @@ public class StudentController {
                                 @RequestParam("userId") int userId,
                                 @RequestParam(name="page", required = false) Integer page, Model model) {
 
+        System.out.println("\n Page: " + page + "\n");
+        
         if(page == null){
             page = 1;
         }
