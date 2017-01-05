@@ -15,6 +15,7 @@
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    
     <link rel="stylesheet" type="text/css" href="../staticresources/css/formStyle.css"/>
     <link rel="stylesheet" type="text/css" href="../staticresources/css/marginForButtons.css"/>
 
@@ -25,6 +26,12 @@
             
     <script src="../staticresources/javascript/showChangeGroup.js"></script>
     <script src="../staticresources/javascript/getUrlParameters.js"></script>
+    
+    <script>
+        $(document).ready(function(){
+            $("#header").load("welcome nav");
+        });
+    </script>
 </head>
 <body>
     <div class="container upMargin">
@@ -70,7 +77,6 @@
     </div>
     <script>
         $(document).ready(
-        		$("#header").load("welcome nav");
         		nextTablePage(${param.groupId}, ${param.userId}, ${param.page})
         );
 

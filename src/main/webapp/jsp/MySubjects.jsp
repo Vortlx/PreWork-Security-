@@ -22,6 +22,12 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
             
 	    <script src="../staticresources/javascript/showSubjects.js"></script>
+	    
+	    <script>
+	        $(document).ready(function(){
+	            $("#header").load("welcome nav");
+	        });
+        </script>
 	</head>
 	<body>
         <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
@@ -74,7 +80,7 @@
 				                <sec:authorize  access="hasRole('ROLE_DEPARTMENT')">
 				                    <tr>
 				                        <td colspan="3">
-				                            <a href="/" name="addSubject" onclick="return showAddSubjects(${param.groupId}, ${param.userId}, ${param.page})">Add</a>
+				                            <a href="#" name="addSubject" onclick="return showAddSubjects(${param.groupId}, ${param.userId}, ${param.page})">Add</a>
 				                        </td>
 				                    </tr>
 				                </sec:authorize>
@@ -118,8 +124,6 @@
 	    </div>
 		<script>
             $(document).ready(function(){
-            	$("#header").load("welcome nav");
-            	
                 $("#subjectList").dataTable({
                     destroy: true,
                     bFilter : false,
@@ -127,7 +131,7 @@
                     paging: false,
                     info: false
                 });
-            })
+            });
 		</script>
 	</body>
 </html>

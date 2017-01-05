@@ -20,7 +20,6 @@
 
         
         <link rel="stylesheet" type="text/css" href="../staticresources/css/marginForButtons.css"/>
-		<link rel="stylesheet" type="text/css" href="../staticresources/css/marginForButtons.css"/>
 	    <script src="../staticresources/javascript/showGroup.js"></script>
 	    <script src="../staticresources/javascript/showStudentSubjects.js"></script>
 	</head>
@@ -31,46 +30,46 @@
 					<sec:authorize access="hasRole('ROLE_STUDENT')">
 						<li>
 							<a href="#" name="toMyGroup" onclick="return showGroup(null, ${user.id}, 1)">
-								<span>My Group</span>
+								<span class="header">My Group</span>
 							</a>
 						</li>
 						<li>
 							<a href="#" name="toMySubjects" onclick="return showStudentSubjects(${user.id}, 1)">
-								<span>My Subjects</span>
+								<span class="header">My Subjects</span>
 							</a>
 						</li>
 					</sec:authorize>
 					<sec:authorize access="hasAnyRole('ROLE_TEACHER', 'ROLE_DEPARTMENT')">
 						<li>
 							<a href="Groups?userId=${user.id}" name="toGroups">
-								<span>Groups</span>
+								<span class="header">Groups</span>
 							</a>
 						</li>
 					</sec:authorize>
 					<sec:authorize access="hasRole('ROLE_DEPARTMENT')">
 						<li>
 							<a href="Students.jsp?userId=${user.id}" name="toStudents">
-								<span>Students</span>
+								<span class="header">Students</span>
 							</a>
 						</li>
 						<li>
 							<a href="Teachers.jsp?userId=${user.id}" name="toTeachers">
-								<span>Teachers</span>
+								<span class="header">Teachers</span>
 							</a>
 						</li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-							   aria-haspopup="true" aria-expanded="false"><span>Add </span><span class="caret"></span></a>
+							   aria-haspopup="true" aria-expanded="false"><span class="header">Add </span><span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="AddGroup.jsp?userId=${user.id}"><span>Group</span></a></li>
-								<li><a href="AddStudentPage?userId=${user.id}"><span>Student</span></a></li>
-								<li><a href="AddTeacher.jsp?userId=${user.id}"><span>Teacher</span></a></li>
+								<li><a href="AddGroup.jsp?userId=${user.id}"><span class="header">Group</span></a></li>
+								<li><a href="AddStudentPage?userId=${user.id}"><span class="header">Student</span></a></li>
+								<li><a href="AddTeacher.jsp?userId=${user.id}"><span class="header">Teacher</span></a></li>
 							</ul>
 						</li>
 					</sec:authorize>
 					<li>
 						<a href="ChangePassword.jsp?userId=${user.id}" name="changePassword">
-							<span>Change password</span>
+							<span class="header">Change password</span>
 						</a>
 					</li>
 					<%--<li>--%>

@@ -22,15 +22,18 @@
             
 	    <script src="../staticresources/javascript/showChangeGroup.js"></script>
 		<script src="../staticresources/javascript/getUrlParameters.js"></script>
+		
+		<script>
+            $(document).ready(function(){
+                $("#header").load("welcome nav");
+            });
+        </script>
 	</head>
 	<body>
         <div id="header"></div>
 	    <div class="container upMargin">
 	        <div class="row">
 	            <div class="col-sm-8">
-		            <div class="link">
-				        <a href="welcome" class="btn btn-default" name="back">Back</a>
-				    </div>
 				    <div id="tableParent">
 				        <table id="studentsList" class="table-bordered">
 				            <thead>
@@ -70,8 +73,6 @@
 	    </div>
 		<script>
             $(document).ready(function(){
-            	$("#header").load("welcome nav");
-            	
 				// Function return object with url parameters
                 var pars = getUrlParameters(window.location);
 

@@ -12,6 +12,7 @@
 	        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
 	        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	    
 	    <link rel="stylesheet" type="text/css" href="../staticresources/css/formStyle.css"/>
 	    <link rel="stylesheet" type="text/css" href="../staticresources/css/marginForButtons.css"/>
 	    
@@ -21,15 +22,18 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
             
 	    <script src="../staticresources/javascript/showGroup.js"></script>
+	    
+	    <script>
+	        $(document).ready(function(){
+	            $("#header").load("welcome nav");
+	        });
+        </script>
 	</head>
 	<body>
         <div id="header"></div>
 	    <div id="tableParent" class="container upMargin">
 		    <div class="row">
 		        <div class="col-sm-6">
-			        <div class="link">
-			            <a href="welcome" class="btn btn-default" name="back">Back</a>
-			        </div>
 			        <table id="tableGroups" class="table-bordered">
 			            <thead>
 			                <tr>
@@ -96,8 +100,6 @@
 	    </div>
         <script>
             $(document).ready(function(){
-            	$("#header").load("welcome nav");
-            	
                 $("#tableGroups").dataTable({
                     bFilter : false,
                     bLengthChange: false,
