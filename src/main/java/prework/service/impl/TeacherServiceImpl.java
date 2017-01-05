@@ -59,7 +59,9 @@ public class TeacherServiceImpl implements TeacherService{
     }
 
     public Page<Teacher> getByDepartmentId(int depId, int page) {
-        return daoTeacher.findByDepartmentId(depId, new PageRequest(page - 1, COUNT_PAGES, Sort.Direction.ASC, "name"));
+        
+        int zeroIndexingPage = page - 1;
+        return daoTeacher.findByDepartmentId(depId, new PageRequest(zeroIndexingPage, COUNT_PAGES, Sort.Direction.ASC, "name"));
     }
 
     @Transactional(readOnly = true)

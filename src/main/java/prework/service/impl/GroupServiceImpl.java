@@ -56,11 +56,15 @@ public class GroupServiceImpl implements GroupService {
     }
 
     public Page<Group> getByDepartmentId(int depId, int page) {
-        return daoGroup.findByDepartmentId(depId, new PageRequest(page - 1, COUNT_PAGES, Sort.Direction.ASC, "name"));
+        
+        int zeroIndexingPage = page - 1;
+        return daoGroup.findByDepartmentId(depId, new PageRequest(zeroIndexingPage, COUNT_PAGES, Sort.Direction.ASC, "name"));
     }
 
     public Page<Group> getBySubjectsTeacherId(int teacherId, int page) {
-        return daoGroup.findBySubjectsTeacherId(teacherId, new PageRequest(page - 1, COUNT_PAGES, Sort.Direction.ASC, "name"));
+        
+        int zeroIndexingPage = page - 1;
+        return daoGroup.findBySubjectsTeacherId(teacherId, new PageRequest(zeroIndexingPage, COUNT_PAGES, Sort.Direction.ASC, "name"));
     }
 
     @Transactional(readOnly = true)

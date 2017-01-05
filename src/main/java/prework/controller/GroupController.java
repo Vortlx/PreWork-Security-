@@ -88,9 +88,7 @@ public class GroupController {
             subjectService.addGroup(subjectName, subjectType, groupId);
         } catch (Exception e) {
             e.printStackTrace();
-
             String message = "Can't do this operation.";
-
             model.addAttribute("message", message);
 
         } finally {

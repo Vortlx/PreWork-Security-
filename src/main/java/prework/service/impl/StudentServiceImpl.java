@@ -14,7 +14,6 @@ import prework.service.StudentService;
 import prework.service.UserService;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class StudentServiceImpl implements StudentService{
@@ -86,10 +85,14 @@ public class StudentServiceImpl implements StudentService{
 
     @Transactional(readOnly = true)
     public Page<Student> getByGroupDepartmentId(int depId, int page){
-        return daoStudent.findByGroupDepartmentId(depId, new PageRequest(page - 1, COUNT_PAGES, Sort.Direction.ASC, "name"));
+        
+        int zeroIndexingPage = page - 1;
+        return daoStudent.findByGroupDepartmentId(depId, new PageRequest(zeroIndexingPage, COUNT_PAGES, Sort.Direction.ASC, "name"));
     }
 
     public Page<Student> getByGroupId(int groupId, int page) {
-        return daoStudent.findByGroupId(groupId, new PageRequest(page - 1, COUNT_PAGES, Sort.Direction.ASC, "name"));
+        
+        int zeroIndexingPage = page - 1;
+        return daoStudent.findByGroupId(groupId, new PageRequest(zeroIndexingPage, COUNT_PAGES, Sort.Direction.ASC, "name"));
     }
 }
