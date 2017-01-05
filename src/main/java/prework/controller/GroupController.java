@@ -92,16 +92,14 @@ public class GroupController {
             String message = "Can't do this operation.";
 
             model.addAttribute("message", message);
-            model.addAttribute("subjects", subjectService.getAll());
 
-            return "add/AddSubject.jsp";
         } finally {
             model.addAttribute("groupId", groupId);
             model.addAttribute("userId", userId);
             model.addAttribute("page", page);
+            
+            return "MySubjects";
         }
-
-        return "MySubjects";
     }
 
     @RequestMapping(value = "DeleteGroup", method = RequestMethod.GET)

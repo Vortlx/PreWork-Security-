@@ -90,6 +90,7 @@
 	            </div>
 	            <div class="col-sm-4">
 		            <div id="newSubject">
+                        <span class="error">${message}</span>
 		            </div>
 	            </div>
 	        </div>
