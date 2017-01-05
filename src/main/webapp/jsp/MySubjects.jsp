@@ -80,7 +80,7 @@
 				                <sec:authorize  access="hasRole('ROLE_DEPARTMENT')">
 				                    <tr>
 				                        <td colspan="3">
-				                            <a href="#" name="addSubject" onclick="return showAddSubjects(${param.groupId}, ${param.userId}, ${param.page})">Add</a>
+				                            <a href="#" name="addSubject" onclick="return showAddSubjects(${param.groupId}, ${param.userId}, 1)">Add</a>
 				                        </td>
 				                    </tr>
 				                </sec:authorize>
