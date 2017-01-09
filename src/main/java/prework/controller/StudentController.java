@@ -51,6 +51,7 @@ public class StudentController {
                              @RequestParam("groupId") int groupId,
                              Model model) {
 
+
         String message = "";
         try {
             studentService.add(name, familyName, groupId);

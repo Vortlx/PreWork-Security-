@@ -1,12 +1,14 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+		 pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<jsp:include page="header.jsp">
+	<jsp:param name="user.id" value="${param.userId}"/>
+</jsp:include>
 <html>
 	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf8">
 	    <title>Groups</title>
-
-        <%--<link ref="import" href="../welcome.jsp">--%>
-	    
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"/>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -22,12 +24,6 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
             
 	    <script src="../staticresources/javascript/showGroup.js"></script>
-	    
-	    <script>
-	        $(document).ready(function(){
-	            $("#header").load("welcome nav");
-	        });
-        </script>
 	</head>
 	<body>
         <div id="header"></div>

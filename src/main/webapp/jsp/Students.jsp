@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=utf8"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+		 pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ include file="header.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -22,12 +23,7 @@
             
 	    <script src="../staticresources/javascript/showChangeGroup.js"></script>
 		<script src="../staticresources/javascript/getUrlParameters.js"></script>
-		
-		<script>
-            $(document).ready(function(){
-                $("#header").load("welcome nav");
-            });
-        </script>
+
 	</head>
 	<body>
         <div id="header"></div>
@@ -75,7 +71,11 @@
             $(document).ready(function(){
 				// Function return object with url parameters
                 var pars = getUrlParameters(window.location);
+				drowTable(pars);
 
+            });
+
+            function drowTable(pars){
                 $("#studentsList").dataTable({
                     ajax:{
                         url: "Students",
@@ -86,11 +86,12 @@
                         },
                         dataSrc: "students"
                     },
+                    destroy: true,
                     bFilter : false,
                     bLengthChange: false,
                     paging: false,
                     info: false,
-					serverSide: true,
+                    serverSide: true,
                     columnDefs: [
                         {
                             targets: 0,
@@ -116,28 +117,28 @@
                             searchable: false,
                             orderable: false,
                             render: function(data, type, row){
-                            	if(pars["page"] == undefined){
-                            		return "<a href=\"DeleteStudent?studentId=" + row.id +
-                            	    "&userId=" + pars["userId"] + "\" name=\"deleteStudent\">Delete</a>";	
-                            	}else{
-                            		return "<a href=\"DeleteStudent?studentId=" + row.id +
-                            	    "&userId=" + pars["userId"] + "&page=" + pars["page"] + "\" name=\"deleteStudent\">Delete</a>";
-                            	}
-                                
+                                if(pars["page"] == undefined){
+                                    return "<a href=\"DeleteStudent?studentId=" + row.id +
+                                        "&userId=" + pars["userId"] + "\" name=\"deleteStudent\">Delete</a>";
+                                }else{
+                                    return "<a href=\"DeleteStudent?studentId=" + row.id +
+                                        "&userId=" + pars["userId"] + "&page=" + pars["page"] + "\" name=\"deleteStudent\">Delete</a>";
+                                }
+
                             }
                         }
                     ],
                     fnInitComplete: function(setting, json){
-						$("#pageButtons").html(function(){
-						    var buttons = "";
+                        $("#pageButtons").html(function(){
+                            var buttons = "";
 
                             if(json.page <= 1){
                                 $("#pageLeft").hide();
-							} else if(json.page >= json.maxPage){
+                            } else if(json.page >= json.maxPage){
                                 $("#pageRight").hide();
-							}
+                            }
 
-						    for(var i = 1; i <= json.maxPage; i++){
+                            for(var i = 1; i <= json.maxPage; i++){
                                 if(i == json.page){
                                     buttons += "<a href=\"Students.jsp?userId=" +
                                         pars["userId"] + "&page=" + i +
@@ -146,15 +147,13 @@
                                     buttons += "<a href=\"Students.jsp?userId=" +
                                         pars["userId"] + "&page=" + i +
                                         "\" class=\"btn btn-default\">" + i + "</a>"
-								}
-
-							}
-
-							return buttons;
-						})
-					}
+                                }
+                            }
+                            return buttons;
+                        })
+                    }
                 });
-            });
+			}
 		</script>
 	</body>
 </html>

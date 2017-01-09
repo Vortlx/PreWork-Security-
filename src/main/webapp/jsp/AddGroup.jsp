@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=utf8"
-         pageEncoding="utf8" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+         pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ include file="header.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -20,12 +21,6 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
             
     <script src="../staticresources/javascript/groupNameValidation.js"></script>
-    
-    <script>
-	    $(document).ready(function(){
-	        $("#header").load("welcome nav");
-	    });
-    </script>
 </head>
 <body>
 <div id="header"></div>
