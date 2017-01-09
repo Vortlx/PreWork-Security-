@@ -2,6 +2,7 @@
  * Created by lebedevas on 15.12.2016.
  */
 function showGroup(groupId, userId, page){
+
 	$.ajax({
         url: "MyGroup.jsp",
         type: "GET",
@@ -16,6 +17,24 @@ function showGroup(groupId, userId, page){
 	});
 
 	return false;
+};
+
+function showGroupForStudent(userId, page){
+
+    $.ajax({
+        url: "MyGroupForStudent.jsp",
+        type: "GET",
+        data: {
+            groupId: null,
+            userId: userId,
+            page: page
+        },
+        success: function(data){
+            $("#specifyGroup").html(data);
+        }
+    });
+
+    return false;
 };
 
 function hideInfo(){

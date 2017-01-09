@@ -29,7 +29,7 @@
 				<ul class="nav navbar-nav">
 					<sec:authorize access="hasRole('ROLE_STUDENT')">
 						<li>
-							<a href="#" name="toMyGroup" onclick="return showGroup(null, ${user.id}, 1)">
+							<a href="#" name="toMyGroup" onclick="return showGroupForStudent(${user.id}, 1)">
 								<span class="header">My Group</span>
 							</a>
 						</li>
