@@ -60,12 +60,11 @@
             </div>
 	    </div>
 		<script>
+            // Function return object with url parameters
             var pars = getUrlParameters(window.location);
 
             $(document).ready(function(){
-				// Function return object with url parameters
 				drawTable(pars["userId"], pars["page"]);
-
             });
 
             function drawTable(userId, page){
@@ -133,14 +132,10 @@
 
                             for(var i = 1; i <= json.maxPage; i++){
                                 if(i == json.page){
-                                    buttons += "<a href=\"Students.jsp?userId=" +
-                                        userId + "&page=" + i +
-                                        "\" class=\"btn btn-default active\" onclick=\"return drawTable(" +
+                                    buttons += "<a href=\"#\" class=\"btn btn-default active\" onclick=\"return drawTable(" +
                                         userId + ", " + i + ")\">" + i + "</a>"
                                 } else{
-                                    buttons += "<a href=\"Students.jsp?userId=" +
-                                        userId + "&page=" + i +
-                                        "\" class=\"btn btn-default\" onclick=\"return drawTable(" +
+                                    buttons += "<a href=\"#\" class=\"btn btn-default\" onclick=\"return drawTable(" +
                                         userId + ", " + i + ")\">" + i + "</a>"
                                 }
                             }
