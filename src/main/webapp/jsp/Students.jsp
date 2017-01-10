@@ -64,11 +64,11 @@
 
             $(document).ready(function(){
 				// Function return object with url parameters
-				drowTable(pars);
+				drawTable(pars);
 
             });
 
-            function drowTable(pars){
+            function drawTable(pars){
                 $("#studentsList").dataTable({
                     ajax:{
                         url: "Students",
