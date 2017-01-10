@@ -94,7 +94,6 @@
                             targets: 1,
 							data: null,
                             render: function(row){
-                                alert(row.id);
 								return "<a href=\"MySubjects?userId=" +
 								 		pars["userId"] + "&groupId=" + row.id +
 										"\" name=\"subjects\">Subjects</a>";
