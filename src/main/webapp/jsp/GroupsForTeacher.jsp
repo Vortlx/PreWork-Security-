@@ -43,17 +43,13 @@
     <div class="row paging">
         <div class="btn-toolbar">
             <div class="btn-group">
-                <div class="col-sm-1">
-                    <a href="Groups.jsp?userId=${param.userId}&page=${param.page - 1}" class="btn btn-default"
-                       id="pageLeft">&lt;</a>
+                <div id="pageLeft" class="col-sm-1">
                 </div>
             </div>
             <div id="pageButtons" class="btn-group">
             </div>
             <div class="btn-group">
-                <div class="col-sm-1">
-                    <a href="Groups.jsp?userId=${param.userId}&page=${param.page + 1}" class="btn btn-default"
-                       id="pageRight">&gt;</a>
+                <div id="pageRight" class="col-sm-1">
                 </div>
             </div>
         </div>
@@ -62,7 +58,7 @@
 <script>
     var pars = getUrlParameters(window.location);
     $(document).ready(function () {
-        drawTable(pars["userId"], pars["page"]);
+        drawTable(pars["userId"], 1);
     });
 
     function drawTable(userId, page) {
@@ -94,10 +90,16 @@
                 }
             ],
             fnInitComplete: function (setting, json) {
-                if (json.page <= 1) {
-                    $("#pageLeft").hide();
-                } else if (json.page >= json.maxPage) {
-                    $("#pageRight").hide();
+                if (json.page > 1) {
+                    $("#pageLeft").html("<a href=\"#\" class=\"btn btn-default\" onclick=\"return drawTable(" + userId + ", " + (page - 1) + ")\">&lt;</a>");
+                }else{
+                    $("#pageLeft").html("");
+                }
+
+                if (json.page < json.maxPage) {
+                    $("#pageRight").html("<a href=\"#\" class=\"btn btn-default\" onclick=\"return drawTable(" + userId + ", " + (page + 1) + ")\">&gt;</a>");
+                } else{
+                    $("#pageRight").html("");
                 }
 
                 $("#pageButtons").html(function () {
