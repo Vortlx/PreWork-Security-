@@ -64,18 +64,18 @@
 
             $(document).ready(function(){
 				// Function return object with url parameters
-				drawTable(pars);
+				drawTable(pars["userId"], pars["page"]);
 
             });
 
-            function drawTable(pars){
+            function drawTable(userId, page){
                 $("#studentsList").dataTable({
                     ajax:{
                         url: "Students",
                         type:"GET",
                         data: {
-                            userId: pars["userId"],
-                            page: pars["page"]
+                            userId: userId,
+                            page: page
                         },
                         dataSrc: "students"
                     },
@@ -101,7 +101,7 @@
                             render: function(data, type, row){
                                 return  data + "<br>" +
                                     "<a href=\"#\" name=\"changeGroup\"" +
-                                    " onclick=\"return showChangeGroup(" + pars["userId"] +
+                                    " onclick=\"return showChangeGroup(" + userId +
                                     ", " + row.id + ")\">Change group</a>";
                             }
                         },
@@ -110,12 +110,12 @@
                             searchable: false,
                             orderable: false,
                             render: function(data, type, row){
-                                if(pars["page"] == undefined){
+                                if(page == undefined){
                                     return "<a href=\"DeleteStudent?studentId=" + row.id +
-                                        "&userId=" + pars["userId"] + "\" name=\"deleteStudent\">Delete</a>";
+                                        "&userId=" + userId + "\" name=\"deleteStudent\">Delete</a>";
                                 }else{
                                     return "<a href=\"DeleteStudent?studentId=" + row.id +
-                                        "&userId=" + pars["userId"] + "&page=" + pars["page"] + "\" name=\"deleteStudent\">Delete</a>";
+                                        "&userId=" + userId + "&page=" + page + "\" name=\"deleteStudent\">Delete</a>";
                                 }
 
                             }
@@ -134,18 +134,22 @@
                             for(var i = 1; i <= json.maxPage; i++){
                                 if(i == json.page){
                                     buttons += "<a href=\"Students.jsp?userId=" +
-                                        pars["userId"] + "&page=" + i +
-                                        "\" class=\"btn btn-default active\">" + i + "</a>"
+                                        userId + "&page=" + i +
+                                        "\" class=\"btn btn-default active\" onclick=\"return drawTable(" +
+                                        userId + ", " + i + ")\">" + i + "</a>"
                                 } else{
                                     buttons += "<a href=\"Students.jsp?userId=" +
-                                        pars["userId"] + "&page=" + i +
-                                        "\" class=\"btn btn-default\">" + i + "</a>"
+                                        userId + "&page=" + i +
+                                        "\" class=\"btn btn-default\" onclick=\"return drawTable(" +
+                                        userId + ", " + i + ")\">" + i + "</a>"
                                 }
                             }
                             return buttons;
                         })
                     }
                 });
+
+                return false;
 			};
 		</script>
 	</body>
