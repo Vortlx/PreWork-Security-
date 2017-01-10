@@ -7,7 +7,9 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="ISO-8859-1"%>
-<%@ include file="header.jsp" %>
+<jsp:include page="header.jsp">
+    <jsp:param name="userId" value="${param.userId}"/>
+</jsp:include>
 <html>
 <head>
     <title>MyGroup</title>

@@ -25,7 +25,9 @@
 	</head>
 	<body>
         <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
-			<%@ include file="header.jsp" %>
+			<jsp:include page="header.jsp">
+				<jsp:param name="userId" value="${param.userId}"/>
+			</jsp:include>
         </sec:authorize>
 	    <div class="container upMargin">
 	        <div class="row">

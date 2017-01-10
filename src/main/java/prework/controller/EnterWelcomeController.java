@@ -22,7 +22,7 @@ public class EnterWelcomeController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.getByUsername(auth.getName());
 
-        model.addAttribute("user", user);
+        model.addAttribute("userId", user.getId());
 
         return "welcome.jsp";
     }

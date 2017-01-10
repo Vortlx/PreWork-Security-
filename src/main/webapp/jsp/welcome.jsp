@@ -10,7 +10,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <jsp:include page="header.jsp">
-    <jsp:param name="userId" value="${user.id}"/>
+    <jsp:param name="userId" value="${userId}"/>
 </jsp:include>
 <html>
 <head>
