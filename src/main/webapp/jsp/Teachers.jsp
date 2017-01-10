@@ -110,20 +110,20 @@
                 }
             ],
             fnInitComplete: function (setting, json) {
+                if (json.page > 1) {
+                    $("#pageLeft").html("<a href=\"#\" class=\"btn btn-default\" onclick=\"return drawTable(" + userId + ", " + (page - 1) + ")\">&lt;</a>");
+                }else{
+                    $("#pageLeft").html("");
+                }
+
+                if (json.page < json.maxPage) {
+                    $("#pageRight").html("<a href=\"#\" class=\"btn btn-default\" onclick=\"return drawTable(" + userId + ", " + (page + 1) + ")\">&gt;</a>");
+                } else{
+                    $("#pageRight").html("");
+                }
+
                 $("#pageButtons").html(function () {
                     var buttons = "";
-
-                    if (json.page > 1) {
-                        $("#pageLeft").html("<a href=\"#\" class=\"btn btn-default\" onclick=\"return drawTable(" + userId + ", " + (page - 1) + ")\">&lt;</a>");
-                    }else{
-                        $("#pageLeft").html("");
-                    }
-
-                    if (json.page < json.maxPage) {
-                        $("#pageRight").html("<a href=\"#\" class=\"btn btn-default\" onclick=\"return drawTable(" + userId + ", " + (page + 1) + ")\">&gt;</a>");
-                    } else{
-                        $("#pageRight").html("");
-                    }
 
                     for (var i = 1; i <= json.maxPage; i++) {
                         if (i == json.page) {
