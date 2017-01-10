@@ -114,13 +114,20 @@ public class StudentController {
     @PreAuthorize("hasRole('ROLE_DEPARTMENT')")
     public String changeGroupForStudent(@RequestParam("studentId") int studentId,
                                         @RequestParam("newGroupId") int newGroupId,
+                                        @RequestParam(name = "page", required = false) Integer page,
                                         Model model) {
+
+        if(page == null){
+            page = 1;
+        }
+
         try {
             Student student = studentService.getById(studentId);
             Department department = student.getDepartment();
             studentService.changeGroup(student.getId(), newGroupId);
 
             model.addAttribute("userId", department.getUser().getId());
+            model.addAttribute("page", page);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
