@@ -1,13 +1,17 @@
 package prework.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import prework.entities.*;
 import prework.service.GroupService;
 import prework.service.SubjectService;
@@ -120,7 +124,7 @@ public class GroupController {
             e.printStackTrace();
 
         } finally {
-            return "Groups";
+            return "Groups.jsp";
         }
     }
 
@@ -147,8 +151,9 @@ public class GroupController {
         return "MySubjects";
     }
 
-    @RequestMapping(value = "Groups", method = RequestMethod.GET)
+    @RequestMapping(value = "Groups", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('ROLE_DEPARTMENT', 'ROLE_TEACHER')")
+    @ResponseBody
     public String findGroups(@RequestParam("userId") int userId,
                              @RequestParam(name = "page", required = false) Integer page, Model model) {
 
@@ -156,9 +161,12 @@ public class GroupController {
             page = 1;
         }
 
+        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        Page<Group> groups = null;
+        String answer = "";
         try {
             User user = userService.getById(userId);
-            Page<Group> groups = null;
+
             if(user.getDepartment() != null){
                 Department department = user.getDepartment();
                 groups = groupService.getByDepartmentId(department.getId(), page);
@@ -167,14 +175,15 @@ public class GroupController {
                 groups = groupService.getBySubjectsTeacherId(teacher.getId(), page);
             }
 
-            model.addAttribute("groups", groups.getContent());
-            model.addAttribute("page", page);
-            model.addAttribute("maxPage", groups.getTotalPages());
+            answer = gson.toJson(groups.getContent());
+
+            answer = "{\"groups\":" + answer + ", \"maxPage\":" +
+                    groups.getTotalPages() + ", \"page\":" + page + "}";
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             model.addAttribute("userId", userId);
         }
-        return "Groups.jsp";
+        return answer;
     }
 }

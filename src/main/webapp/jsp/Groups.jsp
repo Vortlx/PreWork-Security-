@@ -14,6 +14,7 @@
 	    <link rel="stylesheet" type="text/css" href="../staticresources/css/marginForButtons.css"/>
 
 	    <script src="../staticresources/javascript/showGroup.js"></script>
+		<script src="../staticresources/javascript/getUrlParameters.js"></script>
 	</head>
 	<body>
         <div id="header"></div>
@@ -31,22 +32,6 @@
 			                </tr>
 			            </thead>
 			            <tbody>
-			                <c:forEach items="${groups}" var="group">
-			                    <tr>
-			                        <td>
-			                            <a href="#" name="toGroups"
-			                               onclick="return showGroup(${group.id}, ${param.userId}, 1)">${group.name}</a>
-			                        </td>
-			                        <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
-			                            <td>
-			                                <a href="MySubjects?userId=${userId}&groupId=${group.id}" name="subjects">Subjects</a>
-			                            </td>
-			                            <td>
-			                                <a href="DeleteGroup?userId=${userId}&groupId=${group.id}&page=${page}" name="deleteGroup">Delete</a>
-			                            </td>
-			                        </sec:authorize>
-			                    </tr>
-			                </c:forEach>
 			            </tbody>
 			        </table>
 		        </div>
@@ -59,45 +44,106 @@
 				<div class="btn-toolbar">
 					<div class="btn-group">
 						<div class="col-sm-1">
-							<c:if test="${page > 1}">
-								<a href="Groups?userId=${param.userId}&page=${page - 1}" class="btn btn-default">&lt;</a>
-							</c:if>
+							<a href="Groups.jsp?userId=${param.userId}&page=${page - 1}" class="btn btn-default" id="pageLeft">&lt;</a>
 						</div>
 					</div>
-					<div class="btn-group">
-                        <c:forEach var="i" begin="1" end="${maxPage}">
-							<c:if test="${page == i}">
-								<a href="Groups?userId=${param.userId}&page=${i}" class="btn btn-default active">${i}</a>
-							</c:if>
-							<c:if test="${page != i}">
-								<a href="Groups?userId=${param.userId}&page=${i}" class="btn btn-default">${i}</a>
-							</c:if>
-                        </c:forEach>
+					<div id="pageButtons" class="btn-group">
 					</div>
 					<div class="btn-group">
 						<div class="col-sm-1">
-							<c:if test="${page < maxPage}">
-								<a href="Groups?userId=${param.userId}&page=${page + 1}" class="btn btn-default">&gt;</a>
-							</c:if>
+							<a href="Groups.jsp?userId=${param.userId}&page=${page + 1}" class="btn btn-default" id="pageRight">&gt;</a>
 						</div>
 					</div>
 				</div>
 		    </div>
 	    </div>
         <script>
+			var pars = getUrlParameters(window.location);
             $(document).ready(function(){
+                drowTable(pars);
+            });
+
+            function drowTable(pars){
                 $("#tableGroups").dataTable({
+                    ajax:{
+                        url: "Groups",
+                        type:"GET",
+                        data: {
+                            userId: pars["userId"],
+                            page: pars["page"]
+                        },
+                        dataSrc: "groups"
+                    },
+                    destroy: true,
                     bFilter : false,
                     bLengthChange: false,
                     paging: false,
                     info: false,
-                    columnDefs: [{
-                        targets: [1, 2],
-                        searcheable: false,
-                        orderable: false
-                    }]
-                });
-            });
+                    serverSide: true,
+                    columnDefs: [
+                        {
+                            targets: 0,
+                            data: function(row){
+                                return "<a href=\"#\" name=\"toGroups\"" +
+                                		"onclick=\"return showGroup(" +
+                                		row.id + ", " + pars["userId"] +
+										", 1)\">" + row.name + "</a>";
+							}
+                        },
+                        {
+                            targets: 1,
+							data: null,
+                            render: function(row){
+                                alert(row.id);
+								return "<a href=\"MySubjects?userId=" +
+								 		pars["userId"] + "&groupId=" + row.id +
+										"\" name=\"subjects\">Subjects</a>";
+							}
+                        },
+                        {
+                            targets: 2,
+							data: null,
+                            render: function(row){
+                                if(pars["page"] == undefined){
+                                    return "<a href=\"DeleteGroup?userId=" +
+                                     		pars["userId"] + "&groupId=" + row.id +
+											"\" name=\"deleteGroup\">Delete</a>";
+                                }else{
+                                    return "<a href=\"DeleteGroup?userId=" +
+                                        pars["userId"] + "&groupId=" +
+                                        row.id + "&page=" + pars["page"] +
+										"\" name=\"deleteGroup\">Delete</a>";
+                                }
+
+                            }
+                        }
+                    ],
+                    fnInitComplete: function(setting, json){
+                        if(json.page <= 1){
+                            $("#pageLeft").hide();
+                        } else if(json.page >= json.maxPage){
+                            $("#pageRight").hide();
+                        }
+
+                        $("#pageButtons").html(function(){
+                            var buttons = "";
+
+                            for(var i = 1; i <= json.maxPage; i++){
+                                if(i == json.page){
+                                    buttons += "<a href=\"Groups.jsp?userId=" +
+                                        pars["userId"] + "&page=" + i +
+                                        "\" class=\"btn btn-default active\">" + i + "</a>"
+                                } else{
+                                    buttons += "<a href=\"Groups.jsp?userId=" +
+                                        pars["userId"] + "&page=" + i +
+                                        "\" class=\"btn btn-default\">" + i + "</a>"
+                                }
+                            }
+                            return buttons;
+                        })
+                    }
+				});
+			};
         </script>
 	</body>
 </html>

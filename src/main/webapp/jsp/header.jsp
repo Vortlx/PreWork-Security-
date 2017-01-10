@@ -44,7 +44,7 @@
 					</sec:authorize>
 					<sec:authorize access="hasAnyRole('ROLE_TEACHER', 'ROLE_DEPARTMENT')">
 						<li>
-							<a href="Groups?userId=${param.userId}" name="toGroups">
+							<a href="Groups.jsp?userId=${param.userId}" name="toGroups">
 								<span class="header">Groups</span>
 							</a>
 						</li>

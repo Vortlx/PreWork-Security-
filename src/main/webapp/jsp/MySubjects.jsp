@@ -30,7 +30,7 @@
 				        </sec:authorize>
 				        <sec:authorize access="hasRole('ROLE_DEPARTMENT')">
 				            <div class="link">
-				                <a href="Groups?userId=${param.userId}" class="btn btn-default" name="Back">Back</a>
+				                <a href="Groups.jsp?userId=${param.userId}" class="btn btn-default" name="Back">Back</a>
 				            </div>
 				        </sec:authorize>
 				        <table id="subjectList" class="table-bordered">

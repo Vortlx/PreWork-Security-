@@ -60,9 +60,10 @@
             </div>
 	    </div>
 		<script>
+            var pars = getUrlParameters(window.location);
+
             $(document).ready(function(){
 				// Function return object with url parameters
-                var pars = getUrlParameters(window.location);
 				drowTable(pars);
 
             });
@@ -121,14 +122,14 @@
                         }
                     ],
                     fnInitComplete: function(setting, json){
+                        if(json.page <= 1){
+                            $("#pageLeft").hide();
+                        } else if(json.page >= json.maxPage){
+                            $("#pageRight").hide();
+                        }
+
                         $("#pageButtons").html(function(){
                             var buttons = "";
-
-                            if(json.page <= 1){
-                                $("#pageLeft").hide();
-                            } else if(json.page >= json.maxPage){
-                                $("#pageRight").hide();
-                            }
 
                             for(var i = 1; i <= json.maxPage; i++){
                                 if(i == json.page){
@@ -145,7 +146,7 @@
                         })
                     }
                 });
-			}
+			};
 		</script>
 	</body>
 </html>
