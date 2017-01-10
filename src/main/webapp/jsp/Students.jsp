@@ -62,7 +62,11 @@
             var pars = getUrlParameters(window.location);
 
             $(document).ready(function(){
-				drawTable(pars["userId"], 1);
+                if(pars["userId"]){
+                    drawTable(pars["userId"], 1);
+				} else{
+                    drawTable(${userId});
+				}
             });
 
             function drawTable(userId, page){
