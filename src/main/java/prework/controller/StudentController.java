@@ -126,12 +126,12 @@ public class StudentController {
             Department department = student.getDepartment();
             studentService.changeGroup(student.getId(), newGroupId);
 
-            model.addAttribute("param.userId", department.getUser().getId());
+            model.addAttribute("userId", department.getUser().getId());
             model.addAttribute("page", page);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            return "Students.jsp";
+            return "StudentsAfterChangeGroup.jsp";
         }
     }
 
